@@ -1,0 +1,35 @@
+@import '../../../styles/variables.scss';
+
+.background {
+    background: $darker;
+}
+
+.footer {
+    &__links {
+        margin-bottom: 2rem;
+    }
+
+    &__subtitle {
+        text-transform: uppercase;
+        font-size: 28px;
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+    }
+
+    &__item {
+        a {
+            color: $light;
+            white-space: nowrap;
+            text-decoration: none;
+                border-bottom: 2px solid transparent;
+                transition: .1s;
+
+            &:hover {
+                border-bottom: 2px solid $primary;
+            }
+        }
+    }
+}

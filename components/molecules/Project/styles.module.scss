@@ -1,0 +1,42 @@
+@import '../../../styles/variables.scss';
+
+.project {
+    width: 100%;
+    background: $white;
+    overflow: hidden;
+    border-radius: 6px;
+
+    &__header {
+        overflow: hidden;
+        border-radius: 6px;
+    }
+
+    &__info {
+        padding: .5rem 1rem 1rem 1rem;
+        max-height: 8rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__title {
+        color: $darker;
+        font-weight: normal;
+        font-size: 28px;
+
+        span {
+            color: $gray;
+            font-size: 16px;
+            font-weight: 300;
+        }
+    }
+
+    &__description {
+        color: $gray;
+        font-weight: 300;
+        
+    }
+
+    @media (max-width: 992px) {
+        margin: 1rem auto;
+    }
+}

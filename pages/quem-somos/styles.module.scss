@@ -1,0 +1,29 @@
+@import '../../styles/variables.scss';
+
+.background {
+    background: url(../../assets/img/background.webp);
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+    background-position-x: left;
+    background-size: cover;
+}
+
+.gradient {
+    background: linear-gradient(to bottom, $black, rgba($color: #167A51, $alpha: .2), $black);
+}
+
+.lighten {
+    background: linear-gradient(to bottom, $black, $black, rgba($color: #0C3726, $alpha: 1));
+}
+
+.bright {
+    background: $off-white;
+}
+
+.discord {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-bottom: 2rem;
+}

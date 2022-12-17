@@ -1,0 +1,9 @@
+.social {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    &__link {
+        padding: 0 .4rem;
+    }
+}

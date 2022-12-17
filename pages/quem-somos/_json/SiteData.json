@@ -1,0 +1,30 @@
+{
+    "banner": {
+        "title": "O seu acesso a nova economia digital",
+        "description": "Invista em ativos financeiros de alta performance, através da tecnologia Blockchain."
+    },
+    "about": {
+        "paragraph": "A CoinLivre chegou para revolucionar o acesso as multi modalidades de investimento em ativos de alta performance existentes, do investidor iniciante ao experiente, aqui todos terão acesso aos benefícios que a nova Economia Digital proporciona.\n\nPor meio da tokenização de ativos reais conectamos as oportunidades do mercado financeiro tradicional a nova era digital da WEB3, tornando-os mais rentáveis devido a redução de intermediários e conveniências que a tecnologia Blockchain nos proporciona."
+    },
+    "discord": {
+        "paragraph": "Fique por dentro de todas as novidades e saia na frente"
+    },
+    "faq": [
+        {
+            "ask": "O que a CoinLivre faz?",
+            "answer": "Transformamos ativos reais em ativos digitais, através da tecnologia Blockchain aproximamos os investidores aos donos dos Ativos, somos o meio, o Marketplace que possibilita distribuir ativos fracionados digitalmente, os chamados tokens."
+        },
+        {
+            "ask": "Como fazemos?",
+            "answer": "Através de uma estruturação jurídica, definimos as regras para a emissão dos Tokens, após transferimos essa informação e são criados os Smart Contracts, espelhos digitais dos contratos reais, dessa maneira forma-se um vínculo jurídico entre o ativo e o token, tudo isso de forma automática, sem interferência humana, após o Smart Contract é registrado na Blockchain tornando-se imutável, auditável e público, por fim é listado e distribuído no Marketplace da CoinLivre ganhando mercados globais 24x7 que não fecham nunca e mercado secundário através do P2P (peer to peer)."
+        },
+        {
+            "ask": "Por que fazemos?",
+            "answer": "Somos a conexão para a nova economia, para o dono do ativo tokenizado, esse processo possibilita captar recursos muito mais rápido e com custos muito menores comparado aos processos tradicionais como Bancos e ou Mercado de Capitais, com maior liquidez gerando novas oportunidades de negócios. Além de possibilitar apoio financeiro a projetos com grande potencial e a expansão de novos negócios. Para o investidor abre-se novas oportunidades para diversificar seu portifólio em ativos de alta performance com segurança jurídica e tecnológica. Alcançando produtos que até então eram restritos a investidores qualificados e ou profissionais."
+        }
+    ],
+    "projects": {
+        "title": "ACOMPANHE NOSSOS PRIMEIROS LANCAMENTOS AQUI",
+        "description": "A CoinLivre viabiliza, através da sua plataforma de negociação de ativos digitais o livre acesso as mais variadas modalidades de investimentos com excelentes resultados financeiros, segurança e transparência."
+    }
+}

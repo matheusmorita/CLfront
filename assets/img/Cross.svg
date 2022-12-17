@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34">
+  <g id="Cross" transform="translate(2 2)">
+    <line id="Linha_10" data-name="Linha 10" y2="30" transform="translate(15)" fill="none" stroke="#0effb0" stroke-linecap="round" stroke-width="4"/>
+    <line id="Linha_11" data-name="Linha 11" y2="30" transform="translate(30 15) rotate(90)" fill="none" stroke="#0effb0" stroke-linecap="round" stroke-width="4"/>
+  </g>
+</svg>
