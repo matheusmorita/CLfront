@@ -7,7 +7,7 @@ type Props = {
   hidden: boolean,
   text: string,
   onClick: any,
-  disabled: boolean,
+  disabled?: boolean,
   className?: string
 }
 

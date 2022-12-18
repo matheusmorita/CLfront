@@ -18,4 +18,14 @@
         color: $primary;
         background: rgba($color: $primary, $alpha: .5);
     }
+
+    &[disabled] {
+        opacity: .4;
+        cursor: default;
+
+        &:hover {
+            background: $primary;
+            color: $darker;
+        }
+    }
 }
