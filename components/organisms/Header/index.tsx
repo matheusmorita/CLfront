@@ -31,7 +31,7 @@ const Header = () => {
             hidden={false}
             disabled={false}
             onClick={() => {
-              console.log("Teste")
+              window.scrollTo(0, 0)
             }}
           />
         </div>

@@ -38,7 +38,7 @@ const QuemSomos = () => {
         desc='introducao-description'
         justify='center'
         hidden={false}
-        className={`${Styles.background} min-vh-100 d-flex align-items-center pb-5`}
+        className={`${Styles.background} min-vh-100 pt-5 pt-lg-0 d-flex align-items-center pb-5`}
       >
         <Column
           media='lg'
