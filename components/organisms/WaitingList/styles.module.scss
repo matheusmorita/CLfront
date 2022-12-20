@@ -4,6 +4,16 @@
     position: relative;
     margin-bottom: .5rem;
 
+    &[data-error="true"] {
+        .input {
+            border-bottom: 2px solid $error !important;
+        }
+
+        .label {
+            color: $error !important;
+        }
+    }
+
     &:focus-within {
         .label {
             font-size: 12px;
@@ -14,25 +24,6 @@
         .input {
             padding-top: 1.5rem;
             padding-bottom: .5rem;
-        }
-
-        &[data-error="true"] {
-            .input {
-                border-bottom: 2px solid $error;
-            }
-    
-            .label {
-                color: $error !important;
-            }
-        }
-    }
-
-    &[data-waiting="true"] {
-        ****** {
-            opacity: .3;
-            cursor: default;
-            pointer-events: none;
-            touch-action: none;
         }
     }
 }
@@ -64,7 +55,13 @@
         padding-bottom: .5rem;
     }
 
-    
+    &[disabled],
+    &[disabled]~.label {
+        opacity: .3 !important;
+        cursor: default !important;
+        pointer-events: none !important;
+        touch-action: none !important;
+    }
 }
 
 .label {

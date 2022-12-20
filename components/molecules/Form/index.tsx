@@ -14,7 +14,7 @@ const Form = ({ id, children, onSubmit, className, label }: Props) => {
     <form
       id={`form-${id}`}
       className={`${Styles.form} ${className}`}
-      aia-label={label}
+      aria-label={label}
       onSubmit={(e) => {
         e.preventDefault()
         onSubmit()

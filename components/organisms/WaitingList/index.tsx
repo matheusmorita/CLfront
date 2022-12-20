@@ -8,19 +8,22 @@ import Styles from './styles.module.scss'
 import Check from '../../../assets/img/Check.webp'
 
 const WaitingList = () => {
+  const [name, setName] = React.useState(null)
   const [email, setEmail] = React.useState(null)
-  const [feedback, setFeedback] = React.useState("Sucesso!")
   const [mktPolicy, setMktPolicy] = React.useState(false)
   const [dataPolicy, setDataPolicy] = React.useState(false)
+  const [feedback, setFeedback] = React.useState("Sucesso!")
 
   const [finish, setFinish] = React.useState(false)
   const [waiting, setWaiting] = React.useState(false)
   const [validation, setValidation] = React.useState(false)
-  const [isEmailValid, setIsEmailValid] = React.useState(false)
+  const [isNameValid, setIsNameValid] = React.useState<any>([])
+  const [isEmailValid, setIsEmailValid] = React.useState<any>([])
 
 
   const sendData = async (email: string | undefined | null) => {
     var data = JSON.stringify({
+      "name": name,
       "email": email
     });
 
@@ -41,11 +44,14 @@ const WaitingList = () => {
         .then(json => {
           if (json.result) {
             setFeedback(json.result)
-            setFinish(true)
+            setTimeout(() => {
+              setFinish(true)
+            }, 3000);
           }
         })
         .catch(error => {
           setWaiting(false)
+          setIsNameValid(false)
           setIsEmailValid(false)
           throw error
         })
@@ -61,47 +67,62 @@ const WaitingList = () => {
       setEmail(email)
       setIsEmailValid(true)
     } else {
-      setValidation(false)
+      setEmail(null)
       setIsEmailValid(false)
     }
   }
 
+  const captureName = (e: any) => {
+    const name = e.target.value
+    if (name.length > 6) {
+      setName(name)
+      setIsNameValid(true)
+    } else {
+      setName(null)
+      setIsNameValid(false)
+    }
+  }
+
   React.useEffect(() => {
-    if (email && dataPolicy && mktPolicy) {
+    if (name && email && dataPolicy && mktPolicy) {
       setValidation(true)
     } else {
       setValidation(false)
     }
-  }, [email, dataPolicy, mktPolicy])
+  }, [name, email, dataPolicy, mktPolicy])
 
   return (
     <Form
       id='waiting-list'
       onSubmit={() => { }}
-      label="Formulário de Lista VIP"
+      label="Formulário de Waiting List"
     >
       <Title
         id='waiting-list-title'
         className='text-center fw-normal'
-        text='Lista VIP'
+        text='Waiting List'
         size={24}
         hidden={false}
       />
       {!finish && (
         <div
+          aria-disabled={waiting}
           className={Styles.form}
         >
           <div
             className={Styles.group}
-            data-waiting={waiting}
+            data-error={!isNameValid}
           >
             <input
               id='name'
               name='name'
               type="text"
+              disabled={waiting}
               className={Styles.input}
+              onInput={captureName}
               placeholder=' '
               minLength={6}
+              required
             />
             <label
               htmlFor="name"
@@ -119,6 +140,7 @@ const WaitingList = () => {
               id='email'
               name='email'
               type="email"
+              disabled={waiting}
               className={Styles.input}
               onInput={captureEmail}
               placeholder=' '
@@ -138,6 +160,7 @@ const WaitingList = () => {
               type="checkbox"
               onChange={() => setDataPolicy(!dataPolicy)}
               id="flexCheckDefault"
+              disabled={waiting}
             />
             <label
               className="form-check-label"
@@ -153,6 +176,7 @@ const WaitingList = () => {
               type="checkbox"
               onChange={() => setMktPolicy(!mktPolicy)}
               id="flexCheckDefaultTwo"
+              disabled={waiting}
             />
             <label
               className="form-check-label"
@@ -165,7 +189,7 @@ const WaitingList = () => {
           <Button
             id="submit-button"
             text="Cadastre-se"
-            label="Clique e cadastre-se na Lista VIP"
+            label="Clique e cadastre-se na Waiting List"
             className="w-100 py-2 fs-5"
             hidden={false}
             disabled={!validation || waiting}
@@ -174,7 +198,7 @@ const WaitingList = () => {
         </div>
       )}
 
-      {finish &&(
+      {finish && (
         <div className={Styles.finish}>
           <Paragraph
             id='thank-you-desc'
@@ -182,7 +206,7 @@ const WaitingList = () => {
             text={feedback}
             size={16}
           />
-          <Image 
+          <Image
             src={Check}
             width={60}
             height={60}

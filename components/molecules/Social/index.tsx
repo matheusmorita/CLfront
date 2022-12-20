@@ -29,7 +29,9 @@ const Social = ({ width, className, label }: Props) => {
         hidden={false}
       />
       <a
-        href="#"
+        href="https://discord.gg/Xx9U4j74Aa"
+        target="_blank"
+        rel="noopener noreferrer"
         className={Styles.social__link}
       >
         <Image
@@ -40,7 +42,9 @@ const Social = ({ width, className, label }: Props) => {
         />
       </a>
       <a
-        href="#"
+        href="https://www.instagram.com/coinlivre_/"
+        target="_blank"
+        rel="noopener noreferrer"
         className={Styles.social__link}
       >
         <Image
@@ -51,7 +55,9 @@ const Social = ({ width, className, label }: Props) => {
         />
       </a>
       <a
-        href="#"
+        href="https://www.linkedin.com/company/coinlivre/"
+        target="_blank"
+        rel="noopener noreferrer"
         className={Styles.social__link}
       >
         <Image
@@ -62,18 +68,9 @@ const Social = ({ width, className, label }: Props) => {
         />
       </a>
       <a
-        href="#"
-        className={Styles.social__link}
-      >
-        <Image
-          src={Facebook}
-          width={width}
-          height={undefined}
-          alt="Logo do Facebook"
-        />
-      </a>
-      <a
-        href="#"
+        href="https://www.youtube.com/@metacast9068"
+        target="_blank"
+        rel="noopener noreferrer"
         className={Styles.social__link}
       >
         <Image

@@ -17,16 +17,16 @@ const Header = () => {
           <span className={Styles.disabled}>
             Tokens
           </span>
-          <span className={Styles.disabled}>
+          {/* <span className={Styles.disabled}>
             Invista
-          </span>
+          </span> */}
           <span className={Styles.disabled}>
             News
           </span>
           <Button
             id="header-cta"
-            text="Lista VIP"
-            label="Clique e cadastre-se na Lista VIP"
+            text="Waiting List"
+            label="Clique e cadastre-se na Waiting List"
             className="ms-3"
             hidden={false}
             disabled={false}

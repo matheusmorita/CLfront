@@ -9,7 +9,7 @@ const Faq = ({ data }: Props) => {
   return (
     <div
       id='faq-cards'
-      aria-label='Ficou com alguma dúvida?'
+      aria-label='Ficou alguma dúvida?'
     >
       {
         data &&

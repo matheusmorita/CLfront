@@ -125,13 +125,13 @@ const QuemSomos = () => {
           id='projetos-title'
           text={Data.projects.title}
           className='fw-normal'
-          color='#00ba70'
+          color='#1d3315'
           hidden={false}
         />
         <Paragrah
           id='projetos-description'
           text={Data.projects.description}
-          className="py-2"
+          className="pt-3 pb-5"
           color='#606060'
           hidden={false}
           width={43}
@@ -150,7 +150,7 @@ const QuemSomos = () => {
       >
         <Title
           id='faq-title'
-          text="Ficou com alguma dúvida?"
+          text="Ficou alguma dúvida?"
           className='fw-bold'
           color='#00ee8d'
           hidden={false}
@@ -205,7 +205,7 @@ const QuemSomos = () => {
             hidden={false}
             disabled={false}
             onClick={() => {
-              console.log('Teste')
+              window.open('https://discord.gg/Xx9U4j74Aa')
             }}
           />
         </Column>

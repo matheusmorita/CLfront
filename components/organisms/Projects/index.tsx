@@ -24,7 +24,6 @@ const Projects = () => {
     await fetch('https://parseapi.back4app.com/functions/return-projects', config)
       .then(resp => resp.json())
       .then(json => {
-        console.log(json)
         setProjects(Object.values(json.result))
       })
       .catch(error => {
@@ -42,7 +41,7 @@ const Projects = () => {
         projects &&
         projects.map((item: any, index: number) => (
           <Project
-            id={item.objectId}
+            id={item.acronym}
             name={item.name}
             src={item.image.url}
             desc={item.description}

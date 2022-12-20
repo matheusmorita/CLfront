@@ -12,8 +12,9 @@
     }
 
     &__info {
-        padding: .5rem 1rem 1rem 1rem;
-        max-height: 8rem;
+        padding: 0 1rem;
+        padding-top: .5rem;
+        max-height: max-content;
         overflow: hidden;
         text-overflow: ellipsis;
     }
@@ -21,6 +22,8 @@
     &__title {
         color: $darker;
         font-weight: normal;
+        line-height: 1em;
+        min-height: 2em;
         font-size: 28px;
 
         span {
@@ -33,7 +36,32 @@
     &__description {
         color: $gray;
         font-weight: 300;
-        
+        background: $light-blue;
+        border-radius: 8px;
+        padding: .8rem;
+        max-height: 8rem;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: .5rem;
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: rgba($color: $darker, $alpha: .1);
+            border-radius: 8px;
+            display: none;
+
+            &:hover {
+                background: rgba($color: $darker, $alpha: .3);
+            }
+        }
+
+        &:hover {
+            &::-webkit-scrollbar-thumb {
+                display: block;
+            }
+        }
     }
 
     @media (max-width: 992px) {

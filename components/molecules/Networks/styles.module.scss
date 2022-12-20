@@ -1,0 +1,9 @@
+@import '../../../styles/variables.scss';
+
+.networks {
+    background: $light-blue;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

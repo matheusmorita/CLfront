@@ -10,6 +10,8 @@ import Image from 'next/image'
 // Static
 import Styles from './styles.module.scss'
 import Logo from '../../../assets/img/logo-white.webp'
+import Metacast from '../../../assets/img/metacast.webp'
+import Networks from '../../molecules/Networks'
 
 const Footer = () => {
   return (
@@ -48,10 +50,10 @@ const Footer = () => {
                 <a href="#">Quem somos</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#">Nossos Projetos</a>
+                <a href="#projetos">Nossos Projetos</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#">Assessoria de imprensa</a>
+                <a href="mailto:imprensa@coinlivre.com.br">Assessoria de imprensa</a>
               </li>
             </ul>
           </div>
@@ -63,10 +65,10 @@ const Footer = () => {
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="#">Termo de uso</a>
+                <a href="POLITICA_DE_PRIVACIDADE.pdf" download>Termo de uso</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#">Política de privacidade</a>
+                <a href="TERMO_DE_USO.pdf" download>Política de privacidade</a>
               </li>
             </ul>
           </div>
@@ -82,10 +84,10 @@ const Footer = () => {
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="#">Fale conosco</a>
+                <a href="mailto:faleconosco@coinlivre.com.br">Fale conosco</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#">Perguntas Frequentes</a>
+                <a href="#faq">Perguntas Frequentes</a>
               </li>
               <li className={Styles.footer__item}>
                 <a href="#">Aprenda sobre Tokenização</a>
@@ -100,7 +102,7 @@ const Footer = () => {
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="#">Ouvidoria</a>
+                <a href="mailto:faleconosco@coinlivre.com.br">Ouvidoria</a>
               </li>
             </ul>
           </div>
@@ -110,12 +112,21 @@ const Footer = () => {
           size={8}
           className='vh-lg-50 d-flex flex-wrap align-content-between justify-content-center justify-content-lg-end'
         >
-          <Image
-            src={Logo}
-            alt='Logomarca da CoinLivre'
-            width={200}
-            height={undefined}
-          />
+
+          <div style={{maxWidth: '200px'}} className="d-flex flex-wrap justify-content-center justify-content-lg-end">
+            <Image
+              src={Logo}
+              alt='Logomarca da CoinLivre'
+              width={200}
+              height={undefined}
+            />
+            <Image
+              src={Metacast}
+              alt='Logomarca da MetaCast'
+              width={150}
+              height={undefined}
+            />
+          </div>
           <Social
             className='w-100 justify-content-center justify-content-lg-end pt-lg-0 pt-3'
             label='Área de redes sociais'
@@ -124,6 +135,7 @@ const Footer = () => {
         </Column>
         <Copyright />
       </Section>
+      <Networks />
     </footer>
   )
 }
