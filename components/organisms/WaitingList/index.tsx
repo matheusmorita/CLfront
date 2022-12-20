@@ -44,9 +44,7 @@ const WaitingList = () => {
         .then(json => {
           if (json.result) {
             setFeedback(json.result)
-            setTimeout(() => {
-              setFinish(true)
-            }, 3000);
+            setFinish(true)
           }
         })
         .catch(error => {

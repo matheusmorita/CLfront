@@ -43,6 +43,7 @@ const QuemSomos = () => {
         <Column
           media='lg'
           size={5}
+          className="pt-5"
         >
           <Separator
             color='#00ee8d'
