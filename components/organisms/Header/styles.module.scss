@@ -3,14 +3,25 @@
 .navbar {
     width: 100%;
     height: auto;
-    background: $white;
+    background: transparent;
     position: fixed;
     z-index: 1031;
+    transition: .4s;
+    padding: .7rem 0;
 
     &__wrapper {
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+
+    &.white {
+        background: $white;
+        padding: .2rem 0;
+
+        .disabled {
+            color: $gray;
+        }
     }
 }
 
@@ -33,7 +44,7 @@
     cursor: default;
     pointer-events: none;
     font-weight: 500;
-    color: $gray;
+    color: $light;
     padding: 0 .4rem;
 
     @media (max-width: 992px) {
