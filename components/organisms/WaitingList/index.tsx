@@ -127,7 +127,7 @@ const WaitingList = () => {
               aria-label='Campo para digitar seu nome'
               className={Styles.label}
             >
-              Digite seu nome
+              Digite seu nome completo
             </label>
           </div>
           <div
@@ -149,7 +149,7 @@ const WaitingList = () => {
               aria-label='Campo para digitar seu e-mail'
               className={Styles.label}
             >
-              Digite seu E-mail
+              Digite seu melhor E-mail
             </label>
           </div>
           <div className="form-check my-3">
