@@ -93,12 +93,12 @@ const WaitingList = () => {
     <Form
       id='waiting-list'
       onSubmit={() => { }}
-      label="Formulário de Waiting List"
+      label="Formulário de Lista VIP"
     >
       <Title
         id='waiting-list-title'
         className='text-center fw-normal'
-        text='Waiting List'
+        text='Lista VIP'
         size={24}
         hidden={false}
       />
@@ -187,7 +187,7 @@ const WaitingList = () => {
           <Button
             id="submit-button"
             text="Cadastre-se"
-            label="Clique e cadastre-se na Waiting List"
+            label="Clique e cadastre-se na Lista VIP"
             className="w-100 py-2 fs-5"
             hidden={false}
             disabled={!validation || waiting}

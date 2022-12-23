@@ -37,8 +37,8 @@ const Header = () => {
           </span>
           <Button
             id="header-cta"
-            text="Waiting List"
-            label="Clique e cadastre-se na Waiting List"
+            text="Lista VIP"
+            label="Clique e cadastre-se na Lista VIP"
             className="ms-3"
             hidden={false}
             disabled={false}
