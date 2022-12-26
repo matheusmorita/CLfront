@@ -102,6 +102,13 @@ const WaitingList = () => {
         size={24}
         hidden={false}
       />
+      <Paragraph 
+        id='waiting-list-desc'
+        color='#D1D1D1'
+        text='Inscreva-se em nossa Lista Vip e receba, em primeira mão, as novidades e vantagens especiais que a CoinLivre preparou para você.'
+        className='text-center px-4'
+        size={16}
+      />
       {!finish && (
         <div
           aria-disabled={waiting}
