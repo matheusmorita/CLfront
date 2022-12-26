@@ -106,7 +106,7 @@ const WaitingList = () => {
         id='waiting-list-desc'
         color='#D1D1D1'
         text='Inscreva-se em nossa Lista Vip e receba, em primeira mão, as novidades e vantagens especiais que a CoinLivre preparou para você.'
-        className='text-center px-4'
+        className='text-center px-1'
         size={16}
       />
       {!finish && (
