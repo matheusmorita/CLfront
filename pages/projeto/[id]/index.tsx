@@ -93,6 +93,17 @@ const ProjectPage = () => {
           />
         </Column>
       </Section>
+
+      <Section
+        id='sobre'
+        label='sobre-title'
+        desc='sobre-description'
+        justify='center'
+        hidden={false}
+        className={`${Styles.sobre} pt-5 pt-lg-0 d-flex align-items-center pb-5`}
+      >
+
+      </Section>
     </Frame>
   )
 }

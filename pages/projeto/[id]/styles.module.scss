@@ -1,3 +1,5 @@
+@import '../../../styles/variables.scss';
+
 .background {
     background: url(../../../assets/img/BG.webp);
     background-attachment: fixed;
@@ -14,4 +16,9 @@
             line-height: 60px !important;
         }
     }
+}
+
+.sobre {
+    min-height: 100vh;
+    background: $white;
 }

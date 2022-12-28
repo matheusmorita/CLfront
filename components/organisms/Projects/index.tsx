@@ -21,7 +21,7 @@ const Projects = () => {
       body: data
     };
 
-    await fetch('https://parseapi.back4app.com/functions/return-projects', config)
+    await fetch('https://parseapi.back4app.com/functions/retornar-projeto', config)
       .then(resp => resp.json())
       .then(json => {
         setProjects(Object.values(json.result))

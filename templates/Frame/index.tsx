@@ -8,10 +8,11 @@ type Props = {
   label: string,
   desc?: string,
   className?: string,
+  hideHeaderLinks?: boolean
   children: any,
 };
 
-const Frame = ({ id, role, label, desc, className, children }: Props) => {
+const Frame = ({ id, role, label, desc, className, children, hideHeaderLinks = false }: Props) => {
   return (
     <div
       id={id}
@@ -20,7 +21,9 @@ const Frame = ({ id, role, label, desc, className, children }: Props) => {
       aria-describedby={desc}
       className={className}
     >
-      <Header />
+      <Header
+        hideLinks={hideHeaderLinks}
+      />
       {children}
       <Footer />
     </div>
