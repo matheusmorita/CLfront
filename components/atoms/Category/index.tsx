@@ -1,5 +1,6 @@
 import React from 'react'
 import Styles from './styles.module.scss'
+import IonIcon from '@reacticons/ionicons';
 
 type Props = {
   id?: string,
@@ -11,14 +12,17 @@ type Props = {
   height?: number,
   color?: string,
   weight?: string | number,
+  iconColor?: any,
+  iconSize?: any,
+  iconName: any,
 }
 
-const Paragrah = ({ id, className, text, hidden, width, size, color, height, weight }: Props) => {
+const Category = ({ id, className, text, hidden, width, color, size, height, weight, iconName, iconSize, iconColor }: Props) => {
   return (
-    <p
+    <h1
       id={id}
       aria-hidden={hidden}
-      className={`${Styles.paragraph} ${className}`}
+      className={`${Styles.category} ${className}`}
       style={{
         maxWidth: `${width}ch`,
         color: color,
@@ -27,9 +31,18 @@ const Paragrah = ({ id, className, text, hidden, width, size, color, height, wei
         lineHeight: `${height}px`
       }}
     >
+      <IonIcon
+        name={iconName}
+        size={iconSize}
+        className={Styles.icon}
+        style={{
+          stroke: iconColor,
+          fill: iconColor
+        }}
+      />
       {text}
-    </p>
+    </h1>
   )
 }
 
-export default Paragrah
+export default Category

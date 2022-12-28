@@ -13,12 +13,12 @@ type Props = {
   weight?: string | number,
 }
 
-const Paragrah = ({ id, className, text, hidden, width, size, color, height, weight }: Props) => {
+const Subtitle = ({ id, className, text, hidden, width, color, size, height, weight }: Props) => {
   return (
-    <p
+    <h1
       id={id}
       aria-hidden={hidden}
-      className={`${Styles.paragraph} ${className}`}
+      className={`${Styles.subtitle} ${className}`}
       style={{
         maxWidth: `${width}ch`,
         color: color,
@@ -28,8 +28,8 @@ const Paragrah = ({ id, className, text, hidden, width, size, color, height, wei
       }}
     >
       {text}
-    </p>
+    </h1>
   )
 }
 
-export default Paragrah
+export default Subtitle

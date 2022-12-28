@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import Button from '../../atoms/Button'
 import Logo from '../../atoms/Logo'
 import Styles from './styles.module.scss'
@@ -19,9 +20,9 @@ const Header = () => {
   return (
     <nav className={`${Styles.navbar} ${whiteTheme ? Styles.white : ''}`}>
       <div className={`${Styles.navbar__wrapper} container`}>
-        <a href="#">
+        <Link href="/">
           <Logo white={!whiteTheme} />
-        </a>
+        </Link>
         <div className="d-flex align-items-center justify-content-center">
           <a href="#" className={Styles.active}>
             Sobre
@@ -29,9 +30,6 @@ const Header = () => {
           <span className={Styles.disabled}>
             Tokens
           </span>
-          {/* <span className={Styles.disabled}>
-            Invista
-          </span> */}
           <span className={Styles.disabled}>
             News
           </span>

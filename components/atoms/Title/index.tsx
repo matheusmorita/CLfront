@@ -8,16 +8,24 @@ type Props = {
   hidden?: boolean,
   size?: number,
   width?: number,
-  color?: string
+  height?: number,
+  color?: string,
+  weight?: string | number,
 }
 
-const Title = ({ id, className, text, hidden, width, color, size }: Props) => {
+const Title = ({ id, className, text, hidden, width, color, size, height, weight }: Props) => {
   return (
     <h1
       id={id}
       aria-hidden={hidden}
       className={`${Styles.title} ${className}`}
-      style={{maxWidth: `${width}ch`, color: color, fontSize: `${size}px`}}
+      style={{
+        maxWidth: `${width}ch`,
+        color: color,
+        fontSize: `${size}px`,
+        fontWeight: weight,
+        lineHeight: `${height}px`
+      }}
     >
       {text}
     </h1>
