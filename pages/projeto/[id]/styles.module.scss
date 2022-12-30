@@ -1,8 +1,8 @@
 @import '../../../styles/variables.scss';
 
 .background {
-    background: url(../../../assets/img/BG.webp),
-        linear-gradient(to right, $black, transparent);
+    background: linear-gradient(to right, $black, transparent),
+                url(../../../assets/img/BG.webp);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
@@ -13,7 +13,7 @@
 }
 
 .intro {
-    min-height: 85vh;
+    min-height: 91vh;
 
     &__title {
         @media (max-width: 992px) {
