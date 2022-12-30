@@ -1,0 +1,84 @@
+@import '../../../styles/variables.scss';
+
+.quotashow {
+    background: #F0F0F0;
+    border-radius: 4px;
+    padding: .8rem;
+    position: relative;
+    overflow: hidden;
+    grid-column: 1fr;
+    margin-bottom: .5rem;
+
+    @media (max-width: 992px) {
+        margin-bottom: 1rem;
+    }
+
+    &__content {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        max-width: 70%;
+        min-width: 320px;
+        overflow-x: hidden;
+    }
+
+    &__data {
+        max-width: max-content;
+        text-align: center;
+    }
+
+    &__title {
+        font-size: 16px;
+        font-weight: 500;
+        color: $purple;
+        line-height: 16px;
+        margin-bottom: 0;
+        text-transform: uppercase;
+    }
+
+    &__value {
+        font-size: 16px;
+        font-weight: 300;
+        color: $black;
+        line-height: 16px;
+        text-transform: uppercase;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__badge {
+        top: 0;
+        right: 0;
+        position: absolute;
+        background: $black;
+        padding: .3rem .8rem;
+        padding-left: 1rem;
+        text-transform: uppercase;
+        border-bottom-left-radius: 20px;
+        box-shadow: -5px 5px 20px rgba($color: #000, $alpha: .3);
+        font-weight: 500;
+
+        &[data-type="success"] {
+            color: $white !important;
+            background: $primary !important;
+            box-shadow: -5px 5px 20px rgba($color: $primary, $alpha: .3);
+        }
+
+        &[data-type="warning"] {
+            color: $black !important;
+            background: $warning !important;
+            box-shadow: -5px 5px 20px rgba($color: $warning, $alpha: .3);
+        }
+
+        &[data-type="error"] {
+            color: $white !important;
+            background: $error !important;
+            box-shadow: -5px 5px 20px rgba($color: $error, $alpha: .3);
+        }
+
+        @media (max-width: 992px) {
+            display: none;
+        }
+    }
+}

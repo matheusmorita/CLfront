@@ -1,10 +1,15 @@
 @import '../../../styles/variables.scss';
 
 .background {
-    background: url(../../../assets/img/BG.webp);
+    background: url(../../../assets/img/BG.webp),
+        linear-gradient(to right, $black, transparent);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.lighten {
+    background: linear-gradient(to bottom, $white, $white, rgba($color: #b4ffe1, $alpha: 1));
 }
 
 .intro {
@@ -19,6 +24,80 @@
 }
 
 .sobre {
-    min-height: 100vh;
+    padding-top: 60px !important;
     background: $white;
+
+    &__title {
+        @media (max-width: 992px) {
+            font-size: 48px !important;
+        }
+    }
+
+    .grid {
+        @media (min-width: 992px) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 1rem;
+            row-gap: 1rem;
+        }
+    }
+}
+
+.documentos {
+    background: linear-gradient(to bottom, $white, #F3F3F3, #F3F3F3, $white);
+
+    &__title {
+        @media (max-width: 992px) {
+            font-size: 48px !important;
+        }
+    }
+
+    .gradbox {
+        height: 100%;
+        padding: 1rem;
+        border-radius: 4px;
+        position: relative;
+        background: linear-gradient(to bottom, #DADADA, $white);
+
+        &__header {
+            background: $white;
+            border-radius: 6px;
+            padding: 1.5rem;
+            box-shadow: 0 0 20px rgba($color: $black, $alpha: .2);
+            border-bottom: 6px solid $primary;
+            margin-bottom: 1rem;
+        }
+
+        &__body {
+            max-height: 100%;
+            overflow-y: scroll;
+            padding-right: 1rem;
+            max-height: 440px;
+
+            &::-webkit-scrollbar {
+                width: 8px;
+                background: rgba($color: $black, $alpha: .1);
+                border-radius: 1rem;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: rgba($color: $primary, $alpha: .2);
+                border-radius: 1rem;
+
+                &:hover {
+                    background: rgba($color: $primary, $alpha: .8);
+                }
+            }
+
+            @media (max-width: 992px) {
+                padding: 0 !important;
+                max-height: unset !important;
+                scrollbar-width: 0 !important;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+        }
+    }
 }

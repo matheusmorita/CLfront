@@ -18,6 +18,7 @@
     &.white {
         background: $white;
         padding: .2rem 0;
+        box-shadow: 0 0 30px rgba($color: #c9c9c9, $alpha: .8);
 
         .active,
         .active:hover {
