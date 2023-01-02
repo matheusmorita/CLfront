@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import Data from './_json/SiteData.json'
 import Styles from './styles.module.scss'
 import Discord from '../../../assets/img/discord_2.webp'
+import Credito from '../../../assets/img/credito-logo.webp'
 
 import Frame from '../../../templates/Frame'
 import Section from '../../../components/organisms/Section'
@@ -93,12 +94,12 @@ const ProjectPage = () => {
           />
         </Column>
       </Section>
-      
+
       <TabNavigation
         links={[
-          {name: "Sobre", path: "sobre"},
-          {name: "Documentos", path: "documentos"},
-          {name: "Emissor", path: "emissor"}
+          { name: "Sobre", path: "sobre" },
+          { name: "Documentos", path: "documentos" },
+          { name: "Emissor", path: "emissor" }
         ]}
       />
 
@@ -338,6 +339,61 @@ const ProjectPage = () => {
               />
             </div>
           </div>
+        </Column>
+      </Section>
+
+      <Section
+        id='emissor'
+        label='emissor-title'
+        desc='emissor-description'
+        justify='start'
+        hidden={false}
+        className={`${Styles.emissor} d-flex align-items-center`}
+      >
+        <Column
+          media='lg'
+          size={5}
+          className='position-relative'
+        >
+          <Separator
+            color="#00EE8D"
+            size={200}
+          />
+          <Title
+            id='documentos-title'
+            text={Data.emissor.title}
+            hidden={false}
+            size={48}
+            height={48}
+            width={14}
+            weight="normal"
+            color="#404040"
+            className={`${Styles.documentos__title} mb-4`}
+          />
+          <Paragrah
+            id='emissor-description'
+            text={Data.emissor.description}
+            className="py-4"
+            color='#000000'
+            hidden={false}
+            width={50}
+            size={18}
+          />
+          <Button
+            id='emissor-cta'
+            text={Data.emissor.button.text}
+            label={Data.emissor.button.label}
+            hidden={false}
+            disabled={false}
+            onClick={() => {
+              window.open(Data.emissor.button.path)
+            }}
+          />
+          <Image
+            src={Credito}
+            alt='SBCrédito logo'
+            className={`${Styles.emissor__logo} img-fluid`}
+          />
         </Column>
       </Section>
 

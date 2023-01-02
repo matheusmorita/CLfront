@@ -2,7 +2,7 @@
 
 .background {
     background: linear-gradient(to right, $black, transparent),
-                url(../../../assets/img/BG.webp);
+                url(../../../assets/img/BG2.webp);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
@@ -99,5 +99,19 @@
                 }
             }
         }
+    }
+}
+
+.emissor {
+    background: url(../../../assets/img/bg-logo.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+
+    &__logo {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 200px;
     }
 }
