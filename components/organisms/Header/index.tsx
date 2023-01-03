@@ -5,7 +5,7 @@ import Logo from '../../atoms/Logo'
 import Styles from './styles.module.scss'
 
 import { useRouter } from "next/router";
-import { getPageTopDistance } from '../../../assets/js/scrollUtil'
+import { getPageTopDistance } from '../../../assets/js/util/scroll'
 
 type Props = {
   hideLinks: boolean

@@ -1,7 +1,6 @@
 import React from 'react'
 import Row from '../../molecules/Row'
 import Project from '../../molecules/Project'
-import Picture from '../../../assets/img/project.webp'
 
 const Projects = () => {
   const [projects, setProjects] = React.useState([])
