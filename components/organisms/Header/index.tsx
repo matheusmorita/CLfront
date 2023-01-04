@@ -33,7 +33,7 @@ const Header = ({ hideLinks }: Props) => {
   const router = useRouter();
   const routes: Array<Object> = [
     { name: "Sobre", path: "/quem-somos", disabled: false },
-    { name: "Projetos", path: "/projeto/named", disabled: false },
+    { name: "Projetos", path: "/projeto/1", disabled: false },
     { name: "Tokens", path: "/tokens", disabled: true },
     { name: "News", path: "/news", disabled: true },
   ]
