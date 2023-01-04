@@ -106,7 +106,8 @@
     background: url(../../../assets/img/bg-logo.webp);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 500px;
+    min-height: 500px;
+    padding: 5rem 0;
 
     &__logo {
         position: absolute;
