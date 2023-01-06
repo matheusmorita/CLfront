@@ -41,9 +41,7 @@ const Header = ({ hideLinks }: Props) => {
   return (
     <nav className={`${Styles.navbar} ${whiteTheme ? Styles.white : ''}`}>
       <div className={`${Styles.navbar__wrapper} container`}>
-        <Link href="/">
-          <Logo white={!whiteTheme} />
-        </Link>
+        <Logo redirect={true} white={!whiteTheme} />
         <div className="d-flex align-items-center justify-content-center">
           {
             routes &&

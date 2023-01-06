@@ -5,16 +5,24 @@ import SourceWhite from '../../../assets/img/logo-white.webp'
 import Styles from './styles.module.scss'
 
 type Props = {
-  white: boolean
+  white: boolean,
+  redirect?: boolean
 }
 
-const Logo = ({ white }: Props) => {
+const Logo = ({ white, redirect = false }: Props) => {
   const width = 200
   const height = undefined
   const alt = "Logomarca da Coinlivre"
 
+  const setRedirect = () => {
+    return redirect ? location.href = '/' : null
+  }
+
   return (
-    <figure className={Styles.figure}>
+    <figure
+      className={Styles.figure}
+      onClick={setRedirect}
+    >
       <Image
         alt={alt}
         width={width}
