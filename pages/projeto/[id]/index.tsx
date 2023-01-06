@@ -7,7 +7,6 @@ import { useRouter } from 'next/router'
 import Data from './_json/SiteData.json'
 import Styles from './styles.module.scss'
 import Discord from '../../../assets/img/discord_2.webp'
-import Credito from '../../../assets/img/credito-logo.webp'
 
 import Frame from '../../../templates/Frame'
 import Section from '../../../components/organisms/Section'
