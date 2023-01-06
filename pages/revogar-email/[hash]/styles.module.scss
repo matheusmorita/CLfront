@@ -1,0 +1,11 @@
+@import '../../../styles/variables.scss';
+
+.intro {
+    // background: url(../../../assets/img/bg-unsub.webp);
+    // background-repeat: no-repeat;
+    // background-position-y: bottom;
+    // background-size: contain;
+    min-height: 500px;
+    padding-top: 100px;
+    background: linear-gradient(to bottom, $black, $black, rgba($color: #042317, $alpha: 1));
+}

@@ -1,0 +1,9 @@
+{
+    "title": "Inscrição cancelada",
+    "description": "A partir de agora você não receberá mais e-mails informativos da CoinLivre.",
+    "button": {
+        "label": "Clique no botão e volte ao início",
+        "text": "Voltar ao início",
+        "path": "/"
+    }
+}
