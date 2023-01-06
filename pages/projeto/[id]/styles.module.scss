@@ -10,10 +10,12 @@
 
 .lighten {
     background: linear-gradient(to bottom, $white, $white, rgba($color: #b4ffe1, $alpha: 1));
+    padding: 2rem;
 }
 
 .intro {
-    min-height: 91vh;
+    min-height: 90vh;
+    padding: 5rem 0 !important;
 
     &__title {
         @media (max-width: 992px) {
@@ -105,6 +107,7 @@
 .emissor {
     background: url(../../../assets/img/bg-logo.webp);
     background-repeat: no-repeat;
+    background-position-x: -5rem;
     background-size: cover;
     min-height: 500px;
     padding: 5rem 0;

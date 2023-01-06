@@ -230,8 +230,8 @@ const ProjectPage = () => {
                 />
               )}
               <DataShow
-                title={"Dado"}
-                value={"DADO_VALUE"}
+                title={"Contrato"}
+                value={"N/A"}
                 highlight={true}
                 badge={{
                   type: "success",
@@ -239,8 +239,8 @@ const ProjectPage = () => {
                 }}
               />
               <DataShow
-                title={"Dado"}
-                value={"DADO_VALUE"}
+                title={"Captação"}
+                value={"N/A"}
                 highlight={true}
                 badge={{
                   type: "success",
