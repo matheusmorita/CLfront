@@ -27,7 +27,6 @@ const ProjectPage = () => {
   const [project, setProject] = React.useState<any>()
 
   const fetchData = async () => {
-    console.log(id)
     var data = JSON.stringify({
       id
     });
@@ -45,7 +44,6 @@ const ProjectPage = () => {
     await fetch('https://parseapi.back4app.com/parse/functions/retornar-projeto-id', config)
       .then(resp => resp.json())
       .then(json => {
-        console.log(json.result)
         setProject(json.result)
       })
       .catch(error => {
