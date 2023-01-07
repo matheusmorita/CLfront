@@ -38,7 +38,7 @@ const RevogarEmail = () => {
     await fetch('https://parseapi.back4app.com/parse/functions/retornar-projeto-id', config)
       .then(resp => resp.json())
       .then(json => {
-        if (json.result.code)
+        if (json.result)
           setFetched(true)
       })
       .catch(error => {
