@@ -22,7 +22,7 @@ const RevogarEmail = () => {
 
   const fetchData = async () => {
     var data = JSON.stringify({
-      userId: hash
+      id: hash
     });
 
     var config = {
