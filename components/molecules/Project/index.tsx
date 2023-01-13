@@ -3,15 +3,20 @@ import Image from 'next/image'
 import Styles from './styles.module.scss'
 import Title from '../../atoms/Title'
 import Column from '../Column'
+import Button from '../../atoms/Button'
 
 type Props = {
   id: string,
   name: string,
-  desc: string,
+  desc?: string,
   src: any,
+  dataLanc: string,
+  emissor: string,
+  rent: string,
+  path: string
 }
 
-const Project = ({ id, src, name, desc }: Props) => {
+const Project = ({ id, src, name, desc, dataLanc, emissor, rent, path }: Props) => {
   return (
     <Column
       media='lg'
@@ -45,12 +50,31 @@ const Project = ({ id, src, name, desc }: Props) => {
               {`#${id}`}
             </span>
           </h1>
-          <p
+          {/* <p
             id={`project-description-${id}`}
             className={Styles.project__description}
           >
             {desc}
+          </p> */}
+          <p
+            id={`project-description-${id}`}
+            className={Styles.project__details}
+          >
+            Data de lançamento <b>{dataLanc}</b> <br />
+            Emitido por <b>{emissor}</b> <br />
+            Rentabilidade de até <b>{rent}</b>
           </p>
+          <Button
+            id="header-cta"
+            text="SAIBA MAIS"
+            label="Clique e veja mais sobre o projeto"
+            className="w-100 mb-3"
+            hidden={false}
+            disabled={false}
+            onClick={() => {
+              location.href = `projeto/${path}`
+            }}
+          />
         </div>
       </div>
     </Column>

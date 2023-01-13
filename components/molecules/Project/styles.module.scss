@@ -5,6 +5,7 @@
     background: $white;
     overflow: hidden;
     border-radius: 6px;
+    box-shadow: 0 0 30px $light;
 
     &__header {
         overflow: hidden;
@@ -61,6 +62,17 @@
             &::-webkit-scrollbar-thumb {
                 display: block;
             }
+        }
+    }
+
+    &__details {
+        font-size: 12px;
+        color: $gray;
+        line-height: 20px;
+
+        b {
+            font-weight: 800;
+            color: $gray;
         }
     }
 

@@ -1,9 +1,10 @@
 import React from 'react'
 import Row from '../../molecules/Row'
 import Project from '../../molecules/Project'
+import Logo from '../../../assets/img/bg2.webp'
 
 const Projects = () => {
-  const [projects, setProjects] = React.useState([])
+  const [projects, setProjects] = React.useState<any>([])
 
   const fetchData = async () => {
     var data = JSON.stringify({
@@ -31,7 +32,13 @@ const Projects = () => {
   }
 
   React.useEffect(() => {
-    fetchData()
+    // fetchData()
+    setProjects([
+      {acronimo: 'ACRONIMO', nome: 'Project title definition', data: '22/06/2035', emissor: 'GDN INNOVATION', rent: "180%", path: "1"},
+      {acronimo: 'ACRONIMO', nome: 'Project title definition', data: '22/06/2035', emissor: 'GDN INNOVATION', rent: "180%", path: "1"},
+      {acronimo: 'ACRONIMO', nome: 'Project title definition', data: '22/06/2035', emissor: 'GDN INNOVATION', rent: "180%", path: "1"},
+      {acronimo: 'ACRONIMO', nome: 'Project title definition', data: '22/06/2035', emissor: 'GDN INNOVATION', rent: "180%", path: "1"},
+    ])
   }, [])
 
   return (
@@ -42,8 +49,12 @@ const Projects = () => {
           <Project
             id={item.acronimo}
             name={item.nome}
-            src={item.logo.url}
+            src={Logo}
             desc={item.resumo}
+            dataLanc={item.data}
+            emissor={item.emissor}
+            rent={item.rent}
+            path={item.path}
             key={index}
           />
         ))
