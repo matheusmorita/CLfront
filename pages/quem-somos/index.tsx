@@ -125,7 +125,7 @@ const QuemSomos = () => {
         <Title
           id='projetos-title'
           text={Data.projects.title}
-          className='fw-normal'
+          className={`${Styles.bright__title} fw-normal`}
           color='#1d3315'
           hidden={false}
         />
