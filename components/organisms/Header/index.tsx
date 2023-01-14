@@ -32,7 +32,7 @@ const Header = ({ hideLinks }: Props) => {
 
   const router = useRouter();
   const routes: Array<Object> = [
-    { name: "Sobre", path: "/quem-somos", disabled: false },
+    { name: "Início", path: "/quem-somos", disabled: false },
     { name: "Projetos", path: "/projeto/1", disabled: false },
     { name: "Tokens", path: "/tokens", disabled: true },
     { name: "News", path: "/news", disabled: true },
@@ -58,7 +58,7 @@ const Header = ({ hideLinks }: Props) => {
           }
           <Button
             id="header-cta"
-            text="Lista VIP"
+            text="Cadastro/Login"
             label="Clique e cadastre-se na Lista VIP"
             className="ms-3"
             hidden={false}

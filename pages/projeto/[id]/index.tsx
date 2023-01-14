@@ -129,19 +129,19 @@ const ProjectPage = () => {
 
         <TabNavigation
           links={[
-            { name: "Sobre", path: "sobre" },
+            { name: "inicio", path: "inicio" },
             { name: "Documentos", path: "documentos" },
             { name: "Emissor", path: "emissor" }
           ]}
         />
 
         <Section
-          id='sobre'
-          label='sobre-title'
-          desc='sobre-description'
+          id='inicio'
+          label='inicio-title'
+          desc='inicio-description'
           justify='center'
           hidden={false}
-          className={`${Styles.sobre} pt-5 pt-lg-0 d-flex align-items-center pb-lg-5`}
+          className={`${Styles.inicio} pt-5 pt-lg-0 d-flex align-items-center pb-lg-5`}
         >
           <Column
             media='lg'
@@ -152,18 +152,18 @@ const ProjectPage = () => {
               color="#00EE8D"
             />
             <Title
-              id='sobre-title'
-              text={Data.sobre.title}
+              id='inicio-title'
+              text={Data.inicio.title}
               hidden={false}
               size={48}
               height={48}
               width={14}
               weight="normal"
               color="#404040"
-              className={`${Styles.sobre__title} mb-4`}
+              className={`${Styles.inicio__title} mb-4`}
             />
             <Paragrah
-              id='sobre-description'
+              id='inicio-description'
               text={project.Projeto.descricao}
               hidden={false}
               width={45}
