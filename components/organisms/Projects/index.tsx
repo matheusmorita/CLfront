@@ -1,8 +1,6 @@
 import React from 'react'
 import Row from '../../molecules/Row'
 import Project from '../../molecules/Project'
-import Logo from '../../../assets/img/bg2.webp'
-
 
 const Projects = () => {
   const [projects, setProjects] = React.useState<any>([])
