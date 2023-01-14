@@ -21,6 +21,8 @@ import Separator from '../../../components/atoms/Separator'
 import QuotaShow from '../../../components/molecules/QuotaShow'
 import TabNavigation from '../../../components/organisms/TabNavigation'
 
+import { getCurrencyMask } from '../../../assets/js/util/masks'
+
 const ProjectPage = () => {
   const router = useRouter()
   const id = router.query.id
@@ -211,7 +213,7 @@ const ProjectPage = () => {
               {project.Lotes && (
                 <DataShow
                   title={"Valor do Token"}
-                  value={project.Lotes[0].valorDoToken}
+                  value={getCurrencyMask(project.Lotes[0].valorDoToken)}
                 />
               )}
               {project.Lotes && (
