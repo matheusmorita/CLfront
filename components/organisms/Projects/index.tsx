@@ -3,6 +3,7 @@ import Row from '../../molecules/Row'
 import Project from '../../molecules/Project'
 import Logo from '../../../assets/img/bg2.webp'
 
+
 const Projects = () => {
   const [projects, setProjects] = React.useState<any>([])
 
@@ -32,13 +33,7 @@ const Projects = () => {
   }
 
   React.useEffect(() => {
-    // fetchData()
-    setProjects([
-      {acronimo: 'ACRONIMO', nome: 'Project title definition', data: '22/06/2035', emissor: 'GDN INNOVATION', rent: "180%", path: "1"},
-      {acronimo: 'ACRONIMO', nome: 'Project title definition', data: '22/06/2035', emissor: 'GDN INNOVATION', rent: "180%", path: "1"},
-      {acronimo: 'ACRONIMO', nome: 'Project title definition', data: '22/06/2035', emissor: 'GDN INNOVATION', rent: "180%", path: "1"},
-      {acronimo: 'ACRONIMO', nome: 'Project title definition', data: '22/06/2035', emissor: 'GDN INNOVATION', rent: "180%", path: "1"},
-    ])
+    fetchData()
   }, [])
 
   return (
@@ -50,11 +45,10 @@ const Projects = () => {
             id={item.acronimo}
             name={item.nome}
             src={Logo}
-            desc={item.resumo}
-            dataLanc={item.data}
-            emissor={item.emissor}
-            rent={item.rent}
-            path={item.path}
+            dataLanc={item.createdAt}
+            emissor={item.emissor.className}
+            rent={item.rentabilidade ? item.rentabilidade : null}
+            path={item.idProjeto}
             key={index}
           />
         ))

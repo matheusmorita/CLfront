@@ -1,14 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
 import Styles from './styles.module.scss'
-import Title from '../../atoms/Title'
 import Column from '../Column'
 import Button from '../../atoms/Button'
 
 type Props = {
   id: string,
   name: string,
-  desc?: string,
   src: any,
   dataLanc: string,
   emissor: string,
@@ -16,7 +14,16 @@ type Props = {
   path: string
 }
 
-const Project = ({ id, src, name, desc, dataLanc, emissor, rent, path }: Props) => {
+const Project = ({ id, src, name, dataLanc, emissor, rent, path }: Props) => {
+
+  const callRentText = () => {
+    if (rent) {
+      return rent
+    }
+
+    return "Não informada"
+  }
+
   return (
     <Column
       media='lg'
@@ -50,19 +57,13 @@ const Project = ({ id, src, name, desc, dataLanc, emissor, rent, path }: Props) 
               {`#${id}`}
             </span>
           </h1>
-          {/* <p
-            id={`project-description-${id}`}
-            className={Styles.project__description}
-          >
-            {desc}
-          </p> */}
           <p
             id={`project-description-${id}`}
             className={Styles.project__details}
           >
             Data de lançamento <b>{dataLanc}</b> <br />
             Emitido por <b>{emissor}</b> <br />
-            Rentabilidade de até <b>{rent}</b>
+            Rentabilidade de até <b>{callRentText()}</b>
           </p>
           <Button
             id="header-cta"
