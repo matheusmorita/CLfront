@@ -44,7 +44,7 @@ const Projects = () => {
           <Project
             id={item.acronimo}
             name={item.nome}
-            src={Logo}
+            src={item.logo.url}
             dataLanc={item.createdAt}
             emissor={item.emissor.className}
             rent={item.rentabilidade ? item.rentabilidade : null}
