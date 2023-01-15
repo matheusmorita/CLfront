@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Styles from './styles.module.scss'
-import Blocklize from '../../../assets/img/blocklize.webp'
+import Blocklize from '@/assets/img/blocklize.webp'
 
 const Copyright = () => {
   return (

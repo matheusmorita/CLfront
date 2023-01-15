@@ -1,8 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 import Styles from './styles.module.scss'
-import Column from '../Column'
-import Button from '../../atoms/Button'
+import Column from '@/components/molecules/Column'
+import Button from '@/components/atoms/Button'
 
 type Props = {
   id: string,

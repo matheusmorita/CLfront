@@ -3,8 +3,8 @@ import React from 'react'
 
 // Static
 import Styles from './styles.module.scss'
-import Polygon from '../../../assets/img/polygon.webp'
-import Ethereum from '../../../assets/img/ethereum.webp'
+import Polygon from '@/assets/img/polygon.webp'
+import Ethereum from '@/assets/img/ethereum.webp'
 
 const Networks = () => {
   return (

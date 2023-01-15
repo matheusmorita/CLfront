@@ -1,11 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
-import Button from '../../atoms/Button'
-import Logo from '../../atoms/Logo'
+import Button from '@/atoms/Button'
+import Logo from '@/atoms/Logo'
 import Styles from './styles.module.scss'
 
 import { useRouter } from "next/router";
-import { getPageTopDistance } from '../../../assets/js/util/scroll'
+import { getPageTopDistance } from '@/assets/js/util/scroll'
 
 type Props = {
   hideLinks: boolean
@@ -33,7 +33,6 @@ const Header = ({ hideLinks }: Props) => {
   const router = useRouter();
   const routes: Array<Object> = [
     { name: "Início", path: "/quem-somos", disabled: false },
-    { name: "Projetos", path: "/projeto/1", disabled: false },
     { name: "Tokens", path: "/tokens", disabled: true },
     { name: "News", path: "/news", disabled: true },
   ]
@@ -64,7 +63,7 @@ const Header = ({ hideLinks }: Props) => {
             hidden={false}
             disabled={false}
             onClick={() => {
-              window.scrollTo(0, 0)
+              location.href = "/login"
             }}
           />
         </div>

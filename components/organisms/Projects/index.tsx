@@ -1,6 +1,6 @@
 import React from 'react'
-import Row from '../../molecules/Row'
-import Project from '../../molecules/Project'
+import Row from '@/molecules/Row'
+import Project from '@/molecules/Project'
 
 const Projects = () => {
   const [projects, setProjects] = React.useState<any>([])

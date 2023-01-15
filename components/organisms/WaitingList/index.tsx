@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import React from 'react'
-import Button from '../../atoms/Button';
-import Paragraph from '../../atoms/Paragraph';
-import Title from '../../atoms/Title';
-import Form from '../../molecules/Form'
+import Button from '@/atoms/Button';
+import Paragraph from '@/atoms/Paragraph';
+import Title from '@/atoms/Title';
+import Form from '@/molecules/Form'
 import Styles from './styles.module.scss'
-import Check from '../../../assets/img/Check.webp'
+import Check from '@/assets/img/Check.webp'
 
 const WaitingList = () => {
   const [name, setName] = React.useState(null)

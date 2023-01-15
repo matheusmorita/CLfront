@@ -1,6 +1,6 @@
 import React from 'react'
 import Styles from './styles.module.scss'
-import Cross from '../../../assets/img/Cross.svg'
+import Cross from '@/assets/img/Cross.svg'
 import Image from 'next/image'
 
 type Props = {

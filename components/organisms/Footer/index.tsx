@@ -1,17 +1,17 @@
 import React from 'react'
-import Section from '../Section'
-import Title from '../../atoms/Title'
-import Paragrah from '../../atoms/Paragraph'
-import Column from '../../molecules/Column'
-import Social from '../../molecules/Social'
-import Copyright from '../../molecules/Copyright'
+import Section from '@/organisms/Section'
+import Title from '@/atoms/Title'
+import Paragrah from '@/atoms/Paragraph'
+import Column from '@/molecules/Column'
+import Social from '@/molecules/Social'
+import Copyright from '@/molecules/Copyright'
 import Image from 'next/image'
 
 // Static
 import Styles from './styles.module.scss'
-import Logo from '../../../assets/img/logo-white.webp'
-import Metacast from '../../../assets/img/metacast.webp'
-import Networks from '../../molecules/Networks'
+import Logo from '@/assets/img/logo-white.webp'
+import Metacast from '@/assets/img/metacast.webp'
+import Networks from '@/molecules/Networks'
 
 const Footer = () => {
   return (
