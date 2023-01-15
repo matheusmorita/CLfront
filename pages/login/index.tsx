@@ -68,9 +68,9 @@ const Login = () => {
               type='password'
             />
             <p className={Styles.form__desc}>
-              Esqueceu sua senha? <a href="">Clique aqui</a>
+              Esqueceu sua senha? <Link href="/recuperar-senha">Clique aqui</Link>
               <br />
-              Ainda não tem uma conta? <Link href="/registrar">Cadastre-se</Link>
+              Ainda não tem uma conta? <Link href="/registrar-se">Cadastre-se</Link>
             </p>
             <Button
               id="submit-button"

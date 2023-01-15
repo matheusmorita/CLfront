@@ -16,7 +16,7 @@ const Register = () => {
     <Frame
       id='register'
       role='main'
-      label='Página de register'
+      label='Página de Registro'
     >
       <Head>
         <title>CoinLivre | Registrar</title>
@@ -108,7 +108,6 @@ const Register = () => {
           </Form>
         </Column>
       </Section>
-
     </Frame>
   )
 }
