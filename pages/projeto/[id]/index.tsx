@@ -115,7 +115,7 @@ const ProjectPage = () => {
             />
             <Button
               id="header-cta"
-              text="Simular investimento"
+              text="Investir"
               label="Clique e cadastre-se na Lista VIP"
               hidden={false}
               disabled={false}
