@@ -6,20 +6,22 @@ import { useRouter } from 'next/router'
 
 import Data from './_json/SiteData.json'
 import Styles from './styles.module.scss'
-import Discord from '../../../assets/img/discord_2.webp'
+import Discord from '@/assets/img/discord_2.webp'
 
-import Frame from '../../../templates/Frame'
-import Section from '../../../components/organisms/Section'
-import Column from '../../../components/molecules/Column'
-import Title from '../../../components/atoms/Title'
-import Paragrah from '../../../components/atoms/Paragraph'
-import Subtitle from '../../../components/atoms/Subtitle'
-import Category from '../../../components/atoms/Category'
-import Button from '../../../components/atoms/Button'
-import DataShow from '../../../components/molecules/DataShow'
-import Separator from '../../../components/atoms/Separator'
-import QuotaShow from '../../../components/molecules/QuotaShow'
-import TabNavigation from '../../../components/organisms/TabNavigation'
+import Frame from '@/templates/Frame'
+import Section from '@/components/organisms/Section'
+import Column from '@/components/molecules/Column'
+import Title from '@/components/atoms/Title'
+import Paragrah from '@/components/atoms/Paragraph'
+import Subtitle from '@/components/atoms/Subtitle'
+import Category from '@/components/atoms/Category'
+import Button from '@/components/atoms/Button'
+import DataShow from '@/components/molecules/DataShow'
+import Separator from '@/components/atoms/Separator'
+import QuotaShow from '@/components/molecules/QuotaShow'
+import TabNavigation from '@/components/organisms/TabNavigation'
+
+import { getCurrencyMask } from '@/assets/js/util/masks'
 
 const ProjectPage = () => {
   const router = useRouter()
@@ -211,7 +213,7 @@ const ProjectPage = () => {
               {project.Lotes && (
                 <DataShow
                   title={"Valor do Token"}
-                  value={project.Lotes[0].valorDoToken}
+                  value={getCurrencyMask(project.Lotes[0].valorDoToken)}
                 />
               )}
               {project.Lotes && (

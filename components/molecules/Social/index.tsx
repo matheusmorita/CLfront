@@ -3,12 +3,12 @@ import Image from 'next/image'
 import Styles from './styles.module.scss'
 
 // Static
-import Discord from '../../../assets/img/logo-discord.webp'
-import Instagram from '../../../assets/img/logo-instagram.webp'
-import Facebook from '../../../assets/img/logo-facebook.webp'
-import Linkedin from '../../../assets/img/logo-linkedin.webp'
-import Youtube from '../../../assets/img/logo-youtube.webp'
-import Title from '../../atoms/Title'
+import Discord from '@/assets/img/logo-discord.webp'
+import Instagram from '@/assets/img/logo-instagram.webp'
+import Facebook from '@/assets/img/logo-facebook.webp'
+import Linkedin from '@/assets/img/logo-linkedin.webp'
+import Youtube from '@/assets/img/logo-youtube.webp'
+import Title from '@/atoms/Title'
 
 type Props = {
   width: number,

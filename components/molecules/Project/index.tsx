@@ -1,17 +1,29 @@
 import React from 'react'
 import Image from 'next/image'
 import Styles from './styles.module.scss'
-import Title from '../../atoms/Title'
-import Column from '../Column'
+import Column from '@/components/molecules/Column'
+import Button from '@/components/atoms/Button'
 
 type Props = {
   id: string,
   name: string,
-  desc: string,
   src: any,
+  dataLanc: string,
+  emissor: string,
+  rent: string,
+  path: string
 }
 
-const Project = ({ id, src, name, desc }: Props) => {
+const Project = ({ id, src, name, dataLanc, emissor, rent, path }: Props) => {
+
+  const callRentText = () => {
+    if (rent) {
+      return rent
+    }
+
+    return "Não informada"
+  }
+
   return (
     <Column
       media='lg'
@@ -47,10 +59,23 @@ const Project = ({ id, src, name, desc }: Props) => {
           </h1>
           <p
             id={`project-description-${id}`}
-            className={Styles.project__description}
+            className={Styles.project__details}
           >
-            {desc}
+            Data de lançamento <b>{dataLanc}</b> <br />
+            Emitido por <b>{emissor}</b> <br />
+            Rentabilidade de até <b>{callRentText()}</b>
           </p>
+          <Button
+            id="header-cta"
+            text="SAIBA MAIS"
+            label="Clique e veja mais sobre o projeto"
+            className="w-100 mb-3"
+            hidden={false}
+            disabled={false}
+            onClick={() => {
+              location.href = `projeto/${path}`
+            }}
+          />
         </div>
       </div>
     </Column>

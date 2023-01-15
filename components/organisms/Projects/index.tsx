@@ -1,9 +1,9 @@
 import React from 'react'
-import Row from '../../molecules/Row'
-import Project from '../../molecules/Project'
+import Row from '@/molecules/Row'
+import Project from '@/molecules/Project'
 
 const Projects = () => {
-  const [projects, setProjects] = React.useState([])
+  const [projects, setProjects] = React.useState<any>([])
 
   const fetchData = async () => {
     var data = JSON.stringify({
@@ -43,7 +43,10 @@ const Projects = () => {
             id={item.acronimo}
             name={item.nome}
             src={item.logo.url}
-            desc={item.resumo}
+            dataLanc={item.createdAt}
+            emissor={item.emissor.className}
+            rent={item.rentabilidade ? item.rentabilidade : null}
+            path={item.idProjeto}
             key={index}
           />
         ))
