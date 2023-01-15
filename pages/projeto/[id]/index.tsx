@@ -21,7 +21,9 @@ import Separator from '@/components/atoms/Separator'
 import QuotaShow from '@/components/molecules/QuotaShow'
 import TabNavigation from '@/components/organisms/TabNavigation'
 
-import { getCurrencyMask } from '@/assets/js/util/masks'
+import * as masks from '@/assets/js/util/masks'
+
+
 
 const ProjectPage = () => {
   const router = useRouter()
@@ -183,7 +185,7 @@ const ProjectPage = () => {
               {project.Projeto.createdAt && (
                 <DataShow
                   title={"Data de lançamento"}
-                  value={project.Projeto.createdAt}
+                  value={masks.getDateMask(project.Projeto.createdAt)}
                   badge={{
                     type: "success",
                     message: "NOVO"
@@ -203,7 +205,7 @@ const ProjectPage = () => {
               {project.Lotes && (
                 <DataShow
                   title={"Lote"}
-                  value={project.Lotes[0].lote}
+                  value={masks.getLotMask(project.Lotes[0].lote)}
                   badge={{
                     type: "success",
                     message: "NOVO"
@@ -213,19 +215,19 @@ const ProjectPage = () => {
               {project.Lotes && (
                 <DataShow
                   title={"Valor do Token"}
-                  value={getCurrencyMask(project.Lotes[0].valorDoToken)}
+                  value={masks.getCurrencyMask(project.Lotes[0].valorDoToken)}
                 />
               )}
               {project.Lotes && (
                 <DataShow
                   title={"Prazo do Lote"}
-                  value={project.Lotes[0].prazoDoLote}
+                  value={masks.getLotPeriodMask(project.Lotes[0].prazoDoLote)}
                 />
               )}
               {project.Lotes && (
                 <DataShow
                   title={"QTDE de Tokens"}
-                  value={project.Lotes[0].qtdeDeTokens}
+                  value={masks.getQuantityMask(project.Lotes[0].qtdeDeTokens)}
                 />
               )}
               <DataShow
