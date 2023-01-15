@@ -9,6 +9,7 @@ import Form from '@/components/molecules/Form'
 import Button from '@/components/atoms/Button'
 import Input from '@/components/atoms/Input'
 import Logo from '@/components/atoms/Logo'
+import Link from 'next/link'
 
 const Login = () => {
   return (
@@ -69,7 +70,7 @@ const Login = () => {
             <p className={Styles.form__desc}>
               Esqueceu sua senha? <a href="">Clique aqui</a>
               <br />
-              Ainda não tem uma conta? <a href="">Cadastre-se</a>
+              Ainda não tem uma conta? <Link href="/registrar">Cadastre-se</Link>
             </p>
             <Button
               id="submit-button"
