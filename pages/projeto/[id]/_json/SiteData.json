@@ -21,8 +21,7 @@
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut urna ornare, varius nisl in, condimentum dui. Integer sit amet hendrerit lectus, nec molestie dolor. Pellentesque id sodales justo. Phasellus ac lectus ipsum. Sed sed quam nec lectus accumsan sagittis et a erat. Cras porta rhoncus libero, sed maximus massa ornare vel. Nullam non urna lobortis, ultricies risus at, mollis erat.",
         "button": {
             "text": "ACESSE O SITE",
-            "label": "Clique e acesse o site do emissor.",
-            "path": "https://discord.gg/Xx9U4j74Aa"
+            "label": "Clique e acesse o site do emissor."
         }
     }
 }

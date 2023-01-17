@@ -46,6 +46,7 @@ const ProjectPage = () => {
     await fetch('https://parseapi.back4app.com/parse/functions/retornar-projeto-id', config)
       .then(resp => resp.json())
       .then(json => {
+        console.log(json.result)
         setProject(json.result)
       })
       .catch(error => {
@@ -200,7 +201,7 @@ const ProjectPage = () => {
                   }}
                 />
               )}
-              {project.Lotes && (
+              {project.Lotes.length > 0 && (
                 <DataShow
                   title={"Lote"}
                   value={project.Lotes[0].lote}
@@ -210,19 +211,19 @@ const ProjectPage = () => {
                   }}
                 />
               )}
-              {project.Lotes && (
+              {project.Lotes.length > 0 && (
                 <DataShow
                   title={"Valor do Token"}
                   value={getCurrencyMask(project.Lotes[0].valorDoToken)}
                 />
               )}
-              {project.Lotes && (
+              {project.Lotes.length > 0 && (
                 <DataShow
                   title={"Prazo do Lote"}
                   value={project.Lotes[0].prazoDoLote}
                 />
               )}
-              {project.Lotes && (
+              {project.Lotes.length > 0 && (
                 <DataShow
                   title={"QTDE de Tokens"}
                   value={project.Lotes[0].qtdeDeTokens}
@@ -421,16 +422,20 @@ const ProjectPage = () => {
               width={100}
               size={18}
             />
-            <Button
-              id='emissor-cta'
-              text={Data.emissor.button.text}
-              label={Data.emissor.button.label}
-              hidden={false}
-              disabled={false}
-              onClick={() => {
-                window.open(Data.emissor.button.path)
-              }}
-            />
+            {
+              project.Emissor.Link && (
+                <Button
+                  id='emissor-cta'
+                  text={Data.emissor.button.text}
+                  label={Data.emissor.button.label}
+                  hidden={false}
+                  disabled={false}
+                  onClick={() => {
+                    window.open(project.Emissor.Link)
+                  }}
+                />
+              )
+            }
             {project.Emissor.logo && (
               <Image
                 src={project.Emissor.logo.url}
