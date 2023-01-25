@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import Styles from './styles.module.scss'
-import { useRouter } from "next/router";
+import { useRouter } from "next/router"
 
 type Link = {
   name: string,

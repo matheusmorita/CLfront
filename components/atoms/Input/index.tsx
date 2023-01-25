@@ -1,3 +1,4 @@
+import { captureEmail } from '@/assets/js/util/validations'
 import React from 'react'
 import Styles from './styles.module.scss'
 
@@ -8,13 +9,25 @@ type Props = {
   disabled?: boolean
   error?: boolean,
   onInput?: any,
+  validation?: any,
   className?: string,
   minLength?: number,
   maxLength?: number,
   required?: boolean,
 }
 
-const Input = ({id, type, error, onInput, disabled, className, minLength, maxLength, required, label}: Props) => {
+const Input = ({id, type, error, onInput, disabled, className, minLength, maxLength, required, label, validation}: Props) => {
+  const InputRef = React.useRef<any>(null)
+
+  const handleInputValue = () => {
+    handleInputValidation()
+    onInput(InputRef.current.value)
+  }
+
+  const handleInputValidation = () => {
+    validation(captureEmail(InputRef.current.value))
+  }
+
   return (
     <div
       className={Styles.group}
@@ -26,11 +39,12 @@ const Input = ({id, type, error, onInput, disabled, className, minLength, maxLen
         type={type}
         disabled={disabled}
         className={`${Styles.input} ${className}`}
-        onInput={onInput}
+        onInput={handleInputValue}
         placeholder=' '
         minLength={minLength}
         maxLength={maxLength}
         required={required}
+        ref={InputRef}
       />
       <label
         htmlFor={id}

@@ -12,6 +12,38 @@ import Logo from '@/components/atoms/Logo'
 import Link from 'next/link'
 
 const Login = () => {
+  const [email, setEmail] = React.useState()
+  const [error, setError] = React.useState(false)
+
+  const handleUserRequest = async () => {
+    if (email && !error) {
+      const data = JSON.stringify({
+        "email": email
+      })
+
+      const config = {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: data
+      }
+
+      await fetch('http://52.86.28.156:3000/auth/requestLogin', config)
+        .then(resp => {
+          if (resp.ok) console.log("Sucesso")
+          else throw new Error("Falha");
+          return resp.json()
+        })
+        .then(json => {
+          console.log(json)
+        })
+    } else {
+      setError(true)
+    }
+  }
+
   return (
     <Frame
       id='login'
@@ -61,11 +93,9 @@ const Login = () => {
               id='email'
               label='Digite seu e-mail'
               type='email'
-            />
-            <Input
-              id='password'
-              label='Digite sua senha'
-              type='password'
+              onInput={setEmail}
+              validation={setError}
+              error={error}
             />
             <p className={Styles.form__desc}>
               Esqueceu sua senha? <Link href="/recuperar-senha">Clique aqui</Link>
@@ -78,7 +108,7 @@ const Login = () => {
               label="Clique e faça login em sua conta CoinLivre"
               className="w-100 py-2 mt-2 fs-5"
               hidden={false}
-              onClick={() => { }}
+              onClick={() => { handleUserRequest() }}
             />
           </Form>
         </Column>
