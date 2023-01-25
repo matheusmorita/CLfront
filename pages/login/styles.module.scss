@@ -7,6 +7,7 @@
 }
 
 .form {
+    transition: .4s;
     margin-top: 24px;
 
     &__desc {
@@ -24,4 +25,12 @@
             }
         }
     }
+}
+
+.waiting {
+    opacity: .3;
+    cursor: default;
+    touch-action: none;
+    pointer-events: none;
+    transform: scale(.8);
 }

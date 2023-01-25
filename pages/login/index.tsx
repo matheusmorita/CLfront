@@ -9,14 +9,21 @@ import Form from '@/components/molecules/Form'
 import Button from '@/components/atoms/Button'
 import Input from '@/components/atoms/Input'
 import Logo from '@/components/atoms/Logo'
+import Loader from '@/components/atoms/Loader'
 import Link from 'next/link'
+import Paragrah from '@/components/atoms/Paragraph'
+import Check from '@/assets/img/Check.webp'
+import Image from 'next/image'
 
 const Login = () => {
   const [email, setEmail] = React.useState()
   const [error, setError] = React.useState(false)
+  const [waiting, setWaiting] = React.useState(false)
+  const [feedback, setFeedback] = React.useState(false)
 
   const handleUserRequest = async () => {
     if (email && !error) {
+      setWaiting(true)
       const data = JSON.stringify({
         "email": email
       })
@@ -32,16 +39,18 @@ const Login = () => {
 
       await fetch('http://35.171.248.91:3000/auth/requestLogin', config)
         .then(resp => {
-          if (resp.ok) console.log("Sucesso")
-          else throw new Error("Falha");
-          return resp.json()
-        })
-        .then(json => {
-          console.log(json)
+          if (resp.ok) {
+            setWaiting(false)
+            setFeedback(true)
+          }
         })
     } else {
       setError(true)
     }
+  }
+
+  const handleWaitState = () => {
+    return waiting ? Styles.waiting : null
   }
 
   return (
@@ -56,7 +65,6 @@ const Login = () => {
         <meta name="theme-color" content="#00ee8d" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content="CoinLivre | Login." />
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
       </Head>
 
       <Section
@@ -77,41 +85,76 @@ const Login = () => {
             white={true}
             width={300}
           />
-          <Form
-            id='form'
-            onSubmit={() => { }}
-            label="Formulário de Lista VIP"
-            className={Styles.form}
-          >
-            <Title
-              id='form-title'
-              className='text-center fw-normal'
-              text='Login'
-              size={24}
-              hidden={false}
-            />
-            <Input
-              id='email'
-              label='Digite seu e-mail'
-              type='email'
-              onInput={setEmail}
-              validation={setError}
-              error={error}
-            />
-            <p className={Styles.form__desc}>
-              Esqueceu sua senha? <Link href="/recuperar-senha">Clique aqui</Link>
-              <br />
-              Ainda não tem uma conta? <Link href="/registrar-se">Cadastre-se</Link>
-            </p>
-            <Button
-              id="submit-button"
-              text="Entrar"
-              label="Clique e faça login em sua conta CoinLivre"
-              className="w-100 py-2 mt-2 fs-5"
-              hidden={false}
-              onClick={() => { handleUserRequest() }}
-            />
-          </Form>
+          {!feedback && (
+            <Form
+              id='form'
+              onSubmit={() => { }}
+              label="Formulário de Lista VIP"
+              className={`${Styles.form} ${handleWaitState()}`}
+            >
+              <Loader
+                active={waiting}
+              />
+              <Title
+                id='form-title'
+                className='text-center fw-normal'
+                text='Login'
+                size={24}
+                hidden={false}
+              />
+              <Input
+                id='email'
+                label='Digite seu e-mail'
+                type='email'
+                onInput={setEmail}
+                validation={setError}
+                error={error}
+              />
+              <p className={Styles.form__desc}>
+                Esqueceu sua senha? <Link href="/recuperar-senha">Clique aqui</Link>
+                <br />
+                Ainda não tem uma conta? <Link href="/registrar-se">Cadastre-se</Link>
+              </p>
+              <Button
+                id="submit-button"
+                text="Entrar"
+                label="Clique e faça login em sua conta CoinLivre"
+                className="w-100 py-2 mt-2 fs-5"
+                hidden={false}
+                onClick={() => { handleUserRequest() }}
+              />
+            </Form>
+          )}
+
+          {feedback && (
+            <Form
+              id='form'
+              onSubmit={() => { }}
+              label="Formulário de Lista VIP"
+              className={`${Styles.form} ${handleWaitState()}`}
+            >
+              <Title
+                id='form-title'
+                className='text-center fw-normal'
+                text='Login'
+                size={24}
+                hidden={false}
+              />
+              <Paragrah
+                id='form-description'
+                text={'Um e-mail foi encaminhado para a sua caixa de entrada.'}
+                hidden={false}
+                width={100}
+              />
+              <Image
+                src={Check}
+                width={60}
+                height={60}
+                className='mb-4'
+                alt='Ícone de confirmação.'
+              />
+            </Form>
+          )}
         </Column>
       </Section>
 
