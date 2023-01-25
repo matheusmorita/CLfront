@@ -56,6 +56,7 @@ const Login = () => {
         <meta name="theme-color" content="#00ee8d" />
         <meta name="robots" content="index, follow" />
         <meta name="description" content="CoinLivre | Login." />
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
       </Head>
 
       <Section
