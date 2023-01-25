@@ -29,6 +29,10 @@
         .disabled {
             color: $gray;
         }
+
+        .user__phrase {
+            color: $gray;
+        }
     }
 }
 
@@ -71,5 +75,26 @@
 
     @media (max-width: 992px) {
         display: none;
+    }
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__phrase {
+        color: $white;
+        margin-bottom: 0;
+    }
+
+    &__picture {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 3px solid $primary;
+        margin-left: .5rem;
+        background: url(../../../assets/img/bg2.webp);
+        background-size: cover;
     }
 }

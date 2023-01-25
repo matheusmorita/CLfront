@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import Styles from './styles.module.scss'
 import Frame from '@/templates/Frame'
@@ -12,14 +13,21 @@ import Logo from '@/components/atoms/Logo'
 import Loader from '@/components/atoms/Loader'
 import Link from 'next/link'
 import Paragrah from '@/components/atoms/Paragraph'
+import UserContext from '@/context/UserContext'
 import Check from '@/assets/img/Check.webp'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 const Login = () => {
   const [email, setEmail] = React.useState()
   const [error, setError] = React.useState(false)
   const [waiting, setWaiting] = React.useState(false)
   const [feedback, setFeedback] = React.useState(false)
+
+  const router = useRouter()
+  const { userInfo, loggedIn } = React.useContext(UserContext)
+  const [info, setUserInfo] = userInfo
+  const [logged, setLoggedIn] = loggedIn
 
   const handleUserRequest = async () => {
     if (email && !error) {
@@ -52,6 +60,12 @@ const Login = () => {
   const handleWaitState = () => {
     return waiting ? Styles.waiting : null
   }
+
+  React.useEffect(() => {
+    if (logged) {
+      router.push('/')
+    }
+  }, [logged])
 
   return (
     <Frame
@@ -94,6 +108,7 @@ const Login = () => {
             >
               <Loader
                 active={waiting}
+                absolute={true}
               />
               <Title
                 id='form-title'

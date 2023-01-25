@@ -50,7 +50,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "context/UserContext.js"  ],
   "exclude": [
     "node_modules"
   ]

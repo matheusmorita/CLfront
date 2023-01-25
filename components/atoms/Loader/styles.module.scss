@@ -1,5 +1,11 @@
-
 @import '@/styles/variables.scss';
+
+.holder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 
 .loader {
     width: 80px;
@@ -8,10 +14,15 @@
     border: 8px solid $primary;
     border-left: 8px solid transparent;
     animation: spin 4s infinite linear;
-    position: absolute;
-    top: calc(50% - 40px);
-    left: calc(50% - 40px);
-    z-index: 1031;
+    margin: 1rem 0;
+
+    &.absolute {
+        margin: 0 !important;
+        position: absolute;
+        top: calc(50% - 40px);
+        left: calc(50% - 40px);
+        z-index: 1031;
+    }
 }
 
 @keyframes spin {
