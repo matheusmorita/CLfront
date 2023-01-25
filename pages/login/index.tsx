@@ -30,7 +30,7 @@ const Login = () => {
         body: data
       }
 
-      await fetch('http://52.86.28.156:3000/auth/requestLogin', config)
+      await fetch('http://35.171.248.91:3000/auth/requestLogin', config)
         .then(resp => {
           if (resp.ok) console.log("Sucesso")
           else throw new Error("Falha");
