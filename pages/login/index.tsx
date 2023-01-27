@@ -45,7 +45,7 @@ const Login = () => {
         body: data
       }
 
-      await fetch('http://35.171.248.91:3000/auth/requestLogin', config)
+      await fetch('https://greg.blocklize.io/auth/requestLogin', config)
         .then(resp => {
           if (resp.ok) {
             setWaiting(false)

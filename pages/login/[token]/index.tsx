@@ -33,7 +33,7 @@ const TokenShare = () => {
       body: data
     };
 
-    await fetch('http://35.171.248.91:3000/auth/login', config)
+    await fetch('https://greg.blocklize.io/auth/login', config)
       .then(resp => resp.json())
       .then(json => {
         if (json.accessToken && json.refreshToken) {
