@@ -43,11 +43,13 @@ const Projects = () => {
             id={item.acronimo}
             name={item.nome}
             src={item.logo.url}
-            dataLanc={item.createdAt}
-            emissor={item.emissor.className}
+            dataLanc={item.data_lancamento}
+            emissor={item.nome_token}
             rent={item.rentabilidade ? item.rentabilidade : null}
             path={item.idProjeto}
             key={index}
+            showOrNot={
+              item.nome.includes('TBK Esports Fan Token') || item.nome.includes('Fan-Token de Influenciadores') ? false : true }
           />
         ))
       }

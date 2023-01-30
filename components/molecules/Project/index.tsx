@@ -11,10 +11,11 @@ type Props = {
   dataLanc: string,
   emissor: string,
   rent: string,
-  path: string
+  path: string,
+  showOrNot?: boolean,
 }
 
-const Project = ({ id, src, name, dataLanc, emissor, rent, path }: Props) => {
+const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot }: Props) => {
 
   const callRentText = () => {
     if (rent) {
@@ -63,7 +64,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path }: Props) => {
           >
             Data de lançamento <b>{dataLanc}</b> <br />
             Emitido por <b>{emissor}</b> <br />
-            Rentabilidade de até <b>{callRentText()}</b>
+            { showOrNot ? <p className={Styles.project__details}>Rentabilidade estimada de até <b>{callRentText()}</b></p> : ''}
           </p>
           <Button
             id="header-cta"
