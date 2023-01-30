@@ -44,7 +44,7 @@ const Projects = () => {
             name={item.nome}
             src={item.logo.url}
             dataLanc={item.data_lancamento}
-            emissor={item.nome_token}
+            emissor={item.nome}
             rent={item.rentabilidade ? item.rentabilidade : null}
             path={item.idProjeto}
             key={index}
