@@ -39,7 +39,6 @@ const Projects = () => {
       {
         projects &&
         projects.map((item: any, index: number) => {
-          console.log(item)
 
           return (
             <Project

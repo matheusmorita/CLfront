@@ -22,6 +22,7 @@ import QuotaShow from '@/components/molecules/QuotaShow'
 import TabNavigation from '@/components/organisms/TabNavigation'
 
 import * as masks from '@/assets/js/util/masks'
+import Modal from '@/components/organisms/Modal'
 
 
 
@@ -29,6 +30,7 @@ const ProjectPage = () => {
   const router = useRouter()
   const id = router.query.id
   const [project, setProject] = React.useState<any>()
+  const [showModal, setShowModal] = React.useState<any>(false)
 
   const fetchData = async () => {
     var data = JSON.stringify({
@@ -125,12 +127,11 @@ const ProjectPage = () => {
               hidden={false}
               disabled={false}
               size={20}
-              onClick={() => {
-                window.scrollTo(0, 0)
-              }}
+              onClick={() => setShowModal(!showModal)}
             />
           </Column>
         </Section>
+        {showModal ? <Modal /> : ''} {/* Adicionando Modal ao código */}
 
         <TabNavigation
           links={[
