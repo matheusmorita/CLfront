@@ -1,9 +1,9 @@
 import React from 'react'
-import Row from '../../molecules/Row'
-import Project from '../../molecules/Project'
+import Row from '@/molecules/Row'
+import Project from '@/molecules/Project'
 
 const Projects = () => {
-  const [projects, setProjects] = React.useState([])
+  const [projects, setProjects] = React.useState<any>([])
 
   const fetchData = async () => {
     var data = JSON.stringify({
@@ -20,7 +20,7 @@ const Projects = () => {
       body: data
     };
 
-    await fetch('https://parseapi.back4app.com/parse/functions/retornar-projeto', config)
+    await fetch('https://parseapi.back4app.com/parse/functions/retornar-projetoV2', config)
       .then(resp => resp.json())
       .then(json => {
         setProjects(Object.values(json.result))
@@ -38,15 +38,24 @@ const Projects = () => {
     <Row>
       {
         projects &&
-        projects.map((item: any, index: number) => (
-          <Project
-            id={item.acronimo}
-            name={item.nome}
-            src={item.logo.url}
-            desc={item.resumo}
+        projects.map((item: any, index: number) => {
+          console.log(item)
+
+          return (
+            <Project
+            id={item.Projeto.acronimo}
+            name={item.Projeto.nome}
+            src={item.Projeto.logo.url}
+            dataLanc={item.Projeto.data_lancamento}
+            emissor={item.Emissor.nome}
+            rent={item.Projeto.rentabilidade ? item.Projeto.rentabilidade : null}
+            path={item.Projeto.idProjeto}
             key={index}
+            showOrNot={
+              item.Projeto.nome.includes('TBK Esports Fan Token') || item.Projeto.nome.includes('Fan-Token de Influenciadores') ? false : true }
           />
-        ))
+          )
+            })
       }
     </Row>
   )

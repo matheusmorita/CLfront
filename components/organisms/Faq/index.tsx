@@ -1,5 +1,5 @@
 import React from 'react'
-import Flip from '../../molecules/Flip'
+import Flip from '@/molecules/Flip'
 
 type Props = {
   data: any

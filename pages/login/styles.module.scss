@@ -1,0 +1,36 @@
+@import '@/styles/variables.scss';
+
+.login {
+    min-height: 100vh;
+    padding-top: 10rem;
+    background: linear-gradient(to bottom, $black, $black, #013812);
+}
+
+.form {
+    transition: .4s;
+    margin-top: 24px;
+
+    &__desc {
+        text-align: start;
+        font-size: 14px;
+        margin-top: 16px;
+
+        a {
+            text-decoration: none;
+            color: $purple;
+            transition: .4s;
+
+            &:hover {
+                text-shadow: 0 0 10px #bb00ff;
+            }
+        }
+    }
+}
+
+.waiting {
+    opacity: .3;
+    cursor: default;
+    touch-action: none;
+    pointer-events: none;
+    transform: scale(.8);
+}

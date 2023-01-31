@@ -1,17 +1,17 @@
 import React from 'react'
-import Section from '../Section'
-import Title from '../../atoms/Title'
-import Paragrah from '../../atoms/Paragraph'
-import Column from '../../molecules/Column'
-import Social from '../../molecules/Social'
-import Copyright from '../../molecules/Copyright'
+import Section from '@/organisms/Section'
+import Title from '@/atoms/Title'
+import Paragrah from '@/atoms/Paragraph'
+import Column from '@/molecules/Column'
+import Social from '@/molecules/Social'
+import Copyright from '@/molecules/Copyright'
 import Image from 'next/image'
 
 // Static
 import Styles from './styles.module.scss'
-import Logo from '../../../assets/img/logo-white.webp'
-import Metacast from '../../../assets/img/metacast.webp'
-import Networks from '../../molecules/Networks'
+import Logo from '@/assets/img/logo-white.webp'
+import Metacast from '@/assets/img/metacast.webp'
+import Networks from '@/molecules/Networks'
 
 const Footer = () => {
   return (
@@ -47,13 +47,13 @@ const Footer = () => {
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="#">Quem somos</a>
+                <a href="#">quem somos</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#projetos">Nossos Projetos</a>
+                <a href="#projetos">nossos projetos</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="mailto:imprensa@coinlivre.com.br">Assessoria de imprensa</a>
+                <a href="mailto:imprensa@coinlivre.com.br">assessoria de imprensa</a>
               </li>
             </ul>
           </div>
@@ -65,10 +65,10 @@ const Footer = () => {
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="POLITICA_DE_PRIVACIDADE.pdf" download>Termo de uso</a>
+                <a href="POLITICA_DE_PRIVACIDADE.pdf" download>termo de uso</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="TERMO_DE_USO.pdf" download>Política de privacidade</a>
+                <a href="TERMO_DE_USO.pdf" download>política de privacidade</a>
               </li>
             </ul>
           </div>
@@ -84,13 +84,13 @@ const Footer = () => {
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="mailto:faleconosco@coinlivre.com.br">Fale conosco</a>
+                <a href="mailto:faleconosco@coinlivre.com.br">fale conosco</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#faq">Perguntas Frequentes</a>
+                <a href="#faq">perguntas frequentes</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#">Aprenda sobre Tokenização</a>
+                <a href="#">aprenda sobre tokenização</a>
               </li>
             </ul>
           </div>
@@ -102,7 +102,7 @@ const Footer = () => {
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="mailto:faleconosco@coinlivre.com.br">Ouvidoria</a>
+                <a href="mailto:faleconosco@coinlivre.com.br">ouvidoria</a>
               </li>
             </ul>
           </div>

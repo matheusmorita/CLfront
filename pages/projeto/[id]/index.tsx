@@ -6,20 +6,24 @@ import { useRouter } from 'next/router'
 
 import Data from './_json/SiteData.json'
 import Styles from './styles.module.scss'
-import Discord from '../../../assets/img/discord_2.webp'
+import Discord from '@/assets/img/discord_2.webp'
 
-import Frame from '../../../templates/Frame'
-import Section from '../../../components/organisms/Section'
-import Column from '../../../components/molecules/Column'
-import Title from '../../../components/atoms/Title'
-import Paragrah from '../../../components/atoms/Paragraph'
-import Subtitle from '../../../components/atoms/Subtitle'
-import Category from '../../../components/atoms/Category'
-import Button from '../../../components/atoms/Button'
-import DataShow from '../../../components/molecules/DataShow'
-import Separator from '../../../components/atoms/Separator'
-import QuotaShow from '../../../components/molecules/QuotaShow'
-import TabNavigation from '../../../components/organisms/TabNavigation'
+import Frame from '@/templates/Frame'
+import Section from '@/components/organisms/Section'
+import Column from '@/components/molecules/Column'
+import Title from '@/components/atoms/Title'
+import Paragrah from '@/components/atoms/Paragraph'
+import Subtitle from '@/components/atoms/Subtitle'
+import Category from '@/components/atoms/Category'
+import Button from '@/components/atoms/Button'
+import DataShow from '@/components/molecules/DataShow'
+import Separator from '@/components/atoms/Separator'
+import QuotaShow from '@/components/molecules/QuotaShow'
+import TabNavigation from '@/components/organisms/TabNavigation'
+
+import * as masks from '@/assets/js/util/masks'
+
+
 
 const ProjectPage = () => {
   const router = useRouter()
@@ -44,6 +48,7 @@ const ProjectPage = () => {
     await fetch('https://parseapi.back4app.com/parse/functions/retornar-projeto-id', config)
       .then(resp => resp.json())
       .then(json => {
+        console.log(json.result)
         setProject(json.result)
       })
       .catch(error => {
@@ -115,7 +120,7 @@ const ProjectPage = () => {
             />
             <Button
               id="header-cta"
-              text="Simular investimento"
+              text="Investir"
               label="Clique e cadastre-se na Lista VIP"
               hidden={false}
               disabled={false}
@@ -181,7 +186,7 @@ const ProjectPage = () => {
               {project.Projeto.createdAt && (
                 <DataShow
                   title={"Data de lançamento"}
-                  value={project.Projeto.createdAt}
+                  value={masks.getDateMask(project.Projeto.createdAt)}
                   badge={{
                     type: "success",
                     message: "NOVO"
@@ -198,32 +203,32 @@ const ProjectPage = () => {
                   }}
                 />
               )}
-              {project.Lotes && (
+              {project.Lotes.length > 0 && (
                 <DataShow
                   title={"Lote"}
-                  value={project.Lotes[0].lote}
+                  value={masks.getLotMask(project.Lotes[0].lote)}
                   badge={{
                     type: "success",
                     message: "NOVO"
                   }}
                 />
               )}
-              {project.Lotes && (
+              {project.Lotes.length > 0 && (
                 <DataShow
                   title={"Valor do Token"}
-                  value={project.Lotes[0].valorDoToken}
+                  value={masks.getCurrencyMask(project.Lotes[0].valorDoToken)}
                 />
               )}
-              {project.Lotes && (
+              {project.Lotes.length > 0 && (
                 <DataShow
                   title={"Prazo do Lote"}
-                  value={project.Lotes[0].prazoDoLote}
+                  value={masks.getLotPeriodMask(project.Lotes[0].prazoDoLote)}
                 />
               )}
-              {project.Lotes && (
+              {project.Lotes.length > 0 && (
                 <DataShow
                   title={"QTDE de Tokens"}
-                  value={project.Lotes[0].qtdeDeTokens}
+                  value={masks.getQuantityMask(project.Lotes[0].qtdeDeTokens)}
                 />
               )}
               <DataShow
@@ -419,16 +424,20 @@ const ProjectPage = () => {
               width={100}
               size={18}
             />
-            <Button
-              id='emissor-cta'
-              text={Data.emissor.button.text}
-              label={Data.emissor.button.label}
-              hidden={false}
-              disabled={false}
-              onClick={() => {
-                window.open(Data.emissor.button.path)
-              }}
-            />
+            {
+              project.Emissor.Link && (
+                <Button
+                  id='emissor-cta'
+                  text={Data.emissor.button.text}
+                  label={Data.emissor.button.label}
+                  hidden={false}
+                  disabled={false}
+                  onClick={() => {
+                    window.open(project.Emissor.Link)
+                  }}
+                />
+              )
+            }
             {project.Emissor.logo && (
               <Image
                 src={project.Emissor.logo.url}

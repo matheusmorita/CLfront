@@ -1,4 +1,4 @@
-@import '../../../styles/variables.scss';
+@import '@/styles/variables.scss';
 
 .background {
     background: $darker;
@@ -26,6 +26,11 @@
             text-decoration: none;
             border-bottom: 2px solid transparent;
             transition: .1s;
+            display: block;
+            text-transform: lowercase;
+            &::first-letter {
+                text-transform: uppercase !important;
+            }
 
             &:hover {
                 border-bottom: 2px solid $primary;

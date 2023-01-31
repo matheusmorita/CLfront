@@ -9,7 +9,7 @@ type Props = {
 
 const Column = ({ media, className, size, children }: Props) => {
   return (
-    <div className={`col-${media}-${size} ${className}`}>
+    <div style={{margin: '10px 0'}} className={`col-${media}-${size} ${className}`}>
       {children}
     </div>
   )
