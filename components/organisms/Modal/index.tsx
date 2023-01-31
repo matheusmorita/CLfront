@@ -1,78 +1,27 @@
-import Button from "@/components/atoms/Button";
-import Form from "@/components/molecules/Form";
 import React from "react";
 import Styles from './styles.module.scss';
 
+import HeaderModal from "@/components/molecules/HeaderModal";
+import InvestCard from "@/components/molecules/InvestCard";
+
 function Modal () {
-    const [checkedButton, SetCheckedButton] = React.useState<string>('comprar')
+    const test = ['1','1','1','1','1','1','1','1']
+
     return (
         <>
             <form className={Styles.form}>
-                <div className={Styles.sellBuy}>
-                    <div className={Styles.items}>
-                        <div className={Styles.buttons}>
-                            {checkedButton === 'comprar' ? (
-                                <>
-                                    <Button
-                                        id="buy"
-                                        hidden={false}
-                                        className={Styles.buttonSelected}
-                                        onClick={(e: React.FormEvent<EventTarget>) => {
-                                            e.preventDefault();
-                                            SetCheckedButton('comprar')
-                                        }}
-                                        label="buy button"
-                                        text="Comprar"
-                                        size={18}
-                                    />
-                                    <Button
-                                        id="sell"
-                                        hidden={false}
-                                        className={Styles.buttonUnselected}
-                                        onClick={(e: React.FormEvent<EventTarget>) => {
-                                            e.preventDefault();
-                                            SetCheckedButton('vender')
-                                        }}
-                                        label="sell button"
-                                        text="Vender" 
-                                        size={18}
-                                    />
-                                </>
-                            ) : (
-                                <>
-                                    <Button
-                                        id="buy"
-                                        hidden={false}
-                                        className={Styles.buttonUnselected}
-                                        onClick={(e: React.FormEvent<EventTarget>) => {
-                                            e.preventDefault();
-                                            SetCheckedButton('comprar')
-                                        }}
-                                        label="buy button"
-                                        text="Comprar"
-                                        size={18}
-                                    />
-                                    <Button
-                                        id="sell"
-                                        hidden={false}
-                                        className={Styles.buttonSelected}
-                                        onClick={(e: React.FormEvent<EventTarget>) => {
-                                            e.preventDefault();
-                                            SetCheckedButton('vender')
-                                        }}
-                                        label="sell button"
-                                        text="Vender" 
-                                        size={18}
-                                    />
-                                </>
-                            )}
-                            
-                        </div>
-                        <b>SALDO: R$00,00</b>
-                    </div>
-                </div>
-                <section>
-                    
+                <HeaderModal />
+                <section className={Styles.sectionCard}>
+                    {test.map((item, i) => (
+                        <InvestCard
+                            key={item}
+                            text={item}
+                            hidden={false}
+                            id={`${item} - ${i}`}
+                            label='Clique para comprar'
+                            onClick={() => {}}
+                        />
+                    ))}
                 </section>
             </form>
             

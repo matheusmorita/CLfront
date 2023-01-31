@@ -1,0 +1,12 @@
+@import '@/styles/variables.scss';
+
+.div {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: $darker;
+    width: 550px;
+    margin: 10px;
+    max-width: 600px;
+}

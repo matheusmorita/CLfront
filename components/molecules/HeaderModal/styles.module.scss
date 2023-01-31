@@ -1,0 +1,41 @@
+@import '@/styles/variables.scss';
+
+.items {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    background: $clay;
+    gap: 100px;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 95%;
+}
+
+.buttonSelected {
+    background-color: $gray;
+    box-shadow: none;
+    color: $primary;
+    border-radius: 10px;
+    margin: 0 5px;
+
+    &:hover {
+        margin: 0 5px;
+        border-radius: 10px;
+        color: $primary;
+        background: rgba($color: $darker, $alpha: .5);
+    }
+}
+
+.buttonUnselected {
+    box-shadow: none;
+    background: none;
+    color: $white;
+    margin: 0 5px;
+
+    &:hover {
+        margin: 0 5px;
+        border-radius: 10px;
+        color: $primary;
+        background: rgba($color: $darker, $alpha: .5);
+    }
+}
