@@ -11,10 +11,11 @@ type Props = {
   dataLanc: string,
   emissor: string,
   rent: string,
-  path: string
+  path: string,
+  showOrNot?: boolean,
 }
 
-const Project = ({ id, src, name, dataLanc, emissor, rent, path }: Props) => {
+const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot }: Props) => {
 
   const callRentText = () => {
     if (rent) {
@@ -35,6 +36,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path }: Props) => {
         className={Styles.project}
         aria-labelledby={`project-title-${id}`}
         aria-describedby={`project-description-${id}`}
+        style={{height: '100%'}}
       >
         <div
           className={Styles.project__header}
@@ -47,35 +49,44 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path }: Props) => {
             className='w-100'
           />
         </div>
-        <div className={Styles.project__info}>
-          <h1
-            id={`project-title-${id}`}
-            className={Styles.project__title}
+        <div 
+          style={{
+            height: '100%',
+          }}
+          className={Styles.project__info}
           >
-            {name}
-            <span>
-              {`#${id}`}
-            </span>
-          </h1>
-          <p
-            id={`project-description-${id}`}
-            className={Styles.project__details}
-          >
-            Data de lançamento <b>{dataLanc}</b> <br />
-            Emitido por <b>{emissor}</b> <br />
-            Rentabilidade de até <b>{callRentText()}</b>
-          </p>
-          <Button
-            id="header-cta"
-            text="SAIBA MAIS"
-            label="Clique e veja mais sobre o projeto"
-            className="w-100 mb-3"
-            hidden={false}
-            disabled={false}
-            onClick={() => {
-              location.href = `projeto/${path}`
-            }}
-          />
+          <div style={{height: '32%'}}>
+            <h1
+              id={`project-title-${id}`}
+              className={Styles.project__title}
+            >
+              {name}
+              <span>
+                {`#${id}`}
+              </span>
+            </h1>
+            <p
+              id={`project-description-${id}`}
+              className={Styles.project__details}
+            >
+              Data de lançamento <b>{dataLanc}</b> <br />
+              Emitido por <b>{emissor}</b> <br />
+              { showOrNot ? <p className={Styles.project__details}>Rentabilidade estimada de até <b>{callRentText()}</b></p> : ''}
+            </p>
+          </div>
+          <div>
+            <Button
+              id="header-cta"
+              text="SAIBA MAIS"
+              label="Clique e veja mais sobre o projeto"
+              className="w-100 mb-3"
+              hidden={false}
+              disabled={false}
+              onClick={() => {
+                location.href = `projeto/${path}`
+              }}
+            />
+          </div>
         </div>
       </div>
     </Column>
