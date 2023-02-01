@@ -8,7 +8,7 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 function HeaderModal() {
   const [checkedButton, SetCheckedButton] = React.useState<string>('comprar')
-  const [hiddenBalance, setHiddenBalance] = React.useState<boolean>(false)
+  const [hiddenBalance, setHiddenBalance] = React.useState<boolean>(true)
 
   return (
     <>

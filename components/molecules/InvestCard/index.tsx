@@ -17,7 +17,7 @@ interface InvestCardInterface {
 function InvestCard({ text, id, hidden, label, onClick, src, alt, name, emissor }: InvestCardInterface) {
   return (
     <div className={Styles.div}>
-      {/* <img  alt={alt} src={src} /> */}
+      <div className={Styles.divImgDescription}>
         <Image
           src={src}
           alt={alt}
@@ -25,9 +25,10 @@ function InvestCard({ text, id, hidden, label, onClick, src, alt, name, emissor 
           height={105}
           className={Styles.projectImage}
         />
-      <div>
-        <h4>{name}</h4>
-        <p>Emitido por <b>{emissor}</b></p>
+        <div className={Styles.divImgDescription__letters}>
+          <h4>{name}</h4>
+          <p>Emitido por <b>{emissor}</b></p>
+        </div>
       </div>
       <Button
         hidden={hidden}
