@@ -36,7 +36,6 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot }: Pr
         className={Styles.project}
         aria-labelledby={`project-title-${id}`}
         aria-describedby={`project-description-${id}`}
-        style={{height: '100%'}}
       >
         <div
           className={Styles.project__header}
@@ -49,13 +48,10 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot }: Pr
             className='w-100'
           />
         </div>
-        <div 
-          style={{
-            height: '100%',
-          }}
+        <div
           className={Styles.project__info}
           >
-          <div style={{height: '32%'}}>
+          <div>
             <h1
               id={`project-title-${id}`}
               className={Styles.project__title}
@@ -71,7 +67,8 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot }: Pr
             >
               Data de lançamento <b>{dataLanc}</b> <br />
               Emitido por <b>{emissor}</b> <br />
-              { showOrNot ? <p className={Styles.project__details}>Rentabilidade estimada de até <b>{callRentText()}</b></p> : ''}
+              {/* <p className={Styles.project__details}>Rentabilidade estimada de até <b>{callRentText()}</b></p> */}
+              { showOrNot ? <p className={Styles.project__details}>Rentabilidade estimada de até <b>{callRentText()}</b></p> : <br></br>}
             </p>
           </div>
           <div>

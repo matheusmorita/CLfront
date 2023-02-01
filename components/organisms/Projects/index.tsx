@@ -41,7 +41,7 @@ const Projects = () => {
       {
         projects &&
         projects.map((item: any, index: number) => {
-          console.log(item)
+          console.log(item.Projeto.rentabilidade)
 
           return (
             <Project
@@ -54,7 +54,7 @@ const Projects = () => {
             path={item.Projeto.idProjeto}
             key={index}
             showOrNot={
-              item.Projeto.nome.includes('TBK Esports Fan Token') || item.Projeto.nome.includes('Fan-Token de Influenciadores') ? false : true }
+              item.Projeto.rentabilidade === '' ? false : true }
           />
           )
             })
