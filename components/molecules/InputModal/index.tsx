@@ -1,6 +1,14 @@
 import Styles from './styles.module.scss'
 
-function InputModal() {
+interface InputModalInterface {
+  label: string;
+  id: string;
+  value?: number;
+  disabled?: boolean;
+  onChange?: any;
+}
+
+function InputModal({ label, id, value, disabled, onChange }: InputModalInterface ) {
   return (
     <div className={Styles.inputValueRs}>
       <input
@@ -8,12 +16,13 @@ function InputModal() {
         step="0.01"
         min="0.01"
         type='number'
-        value={2500.50}
+        value={value}
+        onChange={onChange}
         placeholder='0,00'
-        id="inputValueReal"
-        disabled
+        id={id}
+        disabled={disabled}
       />
-      <label className={Styles.labelValue} htmlFor="inputValueReal">Insira o valor em Reais</label>
+      <label className={Styles.labelValue} htmlFor="inputValueReal">{label}</label>
     </div>
   )
 }

@@ -33,8 +33,18 @@ function Modal() {
               className={Styles.inputValores}
             /> */}
             
-            <InputModal />
-            <InputModal />
+            <InputModal
+              id="inputReal"
+              label="Insira o valor em reais"
+              onChange={(e: any) => {
+                console.log(e.target.value)
+              }}
+            />
+            <InputModal
+              id="inputMoedaSelecionada"
+              label="Você receberá em CLNT"
+              disabled={true}
+            />
 
             <div className={Styles.checkboxLabel}>
               <input
