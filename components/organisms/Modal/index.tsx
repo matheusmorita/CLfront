@@ -3,47 +3,43 @@ import Styles from './styles.module.scss';
 
 import HeaderModal from "@/components/molecules/HeaderModal";
 import InvestCard from "@/components/molecules/InvestCard";
-import Input from "@/components/atoms/Input";
 import Button from "@/components/atoms/Button";
 import InputModal from "@/components/molecules/InputModal";
+
+import { fetchData } from '@/utils/fetchData'
 
 function Modal() {
   const test = ['1', '1', '1', '1', '1', '1', '1', '1']
   const [hidden, SetHidden] = React.useState<boolean>(false);
+  const [realValue, setRealValue] = React.useState<string>('');
+  const [projects, setProjects] = React.useState<any>([])
+
+
+  React.useEffect(() => {
+    fetchData(setProjects)
+  }, [])
+
 
   return (
-    <>
+    <main>
       <form className={Styles.form}>
         <HeaderModal />
         {hidden ? (
           <div className={Styles.divInput}>
             <p className={Styles.descriptionText}>Este é um texto de exemplo para dar descrição do projeto</p>
-            {/* <Input
-              id="valorInvestido"
-              label="Insira o valor em reais"
-              type="number"
-              required={true}
-              className={Styles.inputValores}
-            />
-            <Input
-              id="valorConvertido"
-              label="Você receberá em CLNT"
-              type="number"
-              required={true}
-              className={Styles.inputValores}
-            /> */}
             
             <InputModal
               id="inputReal"
               label="Insira o valor em reais"
-              onChange={(e: any) => {
-                console.log(e.target.value)
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setRealValue(e.target.value)
               }}
             />
             <InputModal
               id="inputMoedaSelecionada"
               label="Você receberá em CLNT"
               disabled={true}
+              value={Number(realValue)*1.5}
             />
 
             <div className={Styles.checkboxLabel}>
@@ -57,7 +53,8 @@ function Modal() {
                 htmlFor="checkboxInput"
                 className={Styles.descriptionText}
               >
-                Você concorda com os termos de uso da plataforma e está ciente dos usos das ferramentas incorporados nessa aplicação?
+                Você concorda com os termos de uso da plataforma e está ciente dos usos das 
+                ferramentas incorporados nessa aplicação?
               </label>
             </div>
             <div className={Styles.divButtons}>
@@ -83,10 +80,14 @@ function Modal() {
         ) : (
           <>
             <section className={Styles.sectionCard}>
-              {test.map((item, i) => (
+              {projects.map((item: any, i: number) => (
                 <InvestCard
-                  key={item}
+                  key={item.Projeto.acronimo}
+                  src={item.Projeto.logo.url}
+                  alt='Esta é uma imagem de um projeto a ser exibido'
                   text='Comprar'
+                  emissor={item.Emissor.nome}
+                  name={item.Projeto.nome}
                   hidden={true}
                   id={`${item} - ${i}`}
                   label='Clique para comprar'
@@ -98,7 +99,7 @@ function Modal() {
         )}
       </form>
 
-    </>
+    </main>
   )
 }
 

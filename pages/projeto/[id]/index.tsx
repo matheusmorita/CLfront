@@ -65,11 +65,14 @@ const ProjectPage = () => {
 
   if (project) {
     return (
+      
       <Frame
         id={`projeto-${id}`}
         role='main'
         label='Página de projeto'
       >
+        {showModal ? <Modal /> : ''}
+
         <Head>
           <title>CoinLivre | Projetos</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -131,7 +134,6 @@ const ProjectPage = () => {
             />
           </Column>
         </Section>
-        {showModal ? <Modal /> : ''} {/* Adicionando Modal ao código */}
 
         <TabNavigation
           links={[

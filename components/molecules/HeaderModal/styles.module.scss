@@ -3,13 +3,12 @@
 .items {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin: 10px;
     background: $clay;
-    gap: 100px;
     padding: 10px;
     border-radius: 10px;
-    width: 100%;
-    max-width: 97%;
+    width: 95%;
 }
 
 .buttonSelected {
@@ -39,4 +38,11 @@
         color: $primary;
         background: rgba($color: $darker, $alpha: .5);
     }
+}
+
+.balanceValue {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
 }

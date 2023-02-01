@@ -18,6 +18,7 @@ function InputModal({ label, id, value, disabled, onChange }: InputModalInterfac
         type='number'
         value={value}
         onChange={onChange}
+        dir='rtl'
         placeholder='0,00'
         id={id}
         disabled={disabled}

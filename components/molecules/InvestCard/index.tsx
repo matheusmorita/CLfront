@@ -1,5 +1,6 @@
 import Styles from './styles.module.scss'
 import Button from '@/components/atoms/Button';
+import Image from 'next/image';
 
 interface InvestCardInterface {
   text: string;
@@ -7,15 +8,26 @@ interface InvestCardInterface {
   hidden: boolean;
   label: string;
   onClick: any;
+  src: string;
+  alt: string;
+  name: string;
+  emissor: string;
 }
 
-function InvestCard({ text, id, hidden, label, onClick }: InvestCardInterface) {
+function InvestCard({ text, id, hidden, label, onClick, src, alt, name, emissor }: InvestCardInterface) {
   return (
     <div className={Styles.div}>
-      <div>LOGO</div>
+      {/* <img  alt={alt} src={src} /> */}
+        <Image
+          src={src}
+          alt={alt}
+          width={150}
+          height={105}
+          className={Styles.projectImage}
+        />
       <div>
-        <h3>Nome do projeto</h3>
-        <p>Emitido por <b>Emissor</b></p>
+        <h4>{name}</h4>
+        <p>Emitido por <b>{emissor}</b></p>
       </div>
       <Button
         hidden={hidden}
