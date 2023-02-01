@@ -22,6 +22,7 @@ import QuotaShow from '@/components/molecules/QuotaShow'
 import TabNavigation from '@/components/organisms/TabNavigation'
 
 import * as masks from '@/assets/js/util/masks'
+import Link from 'next/link'
 
 
 
@@ -186,7 +187,7 @@ const ProjectPage = () => {
               {project.Projeto.createdAt && (
                 <DataShow
                   title={"Data de lançamento"}
-                  value={masks.getDateMask(project.Projeto.createdAt)}
+                  value={project.Projeto.data_lancamento}
                   badge={{
                     type: "success",
                     message: "NOVO"
@@ -195,7 +196,7 @@ const ProjectPage = () => {
               )}
               {project.Projeto.rentabilidade && (
                 <DataShow
-                  title={"Rentabilidade"}
+                  title={"Rentabilidade estimada"}
                   value={project.Projeto.rentabilidade}
                   badge={{
                     type: "success",
@@ -222,7 +223,7 @@ const ProjectPage = () => {
               {project.Lotes.length > 0 && (
                 <DataShow
                   title={"Prazo do Lote"}
-                  value={masks.getLotPeriodMask(project.Lotes[0].prazoDoLote)}
+                  value={project.Lotes[0].prazoDoLote}
                 />
               )}
               {project.Lotes.length > 0 && (
@@ -231,18 +232,19 @@ const ProjectPage = () => {
                   value={masks.getQuantityMask(project.Lotes[0].qtdeDeTokens)}
                 />
               )}
-              <DataShow
+              <DataShow 
                 title={"Contrato"}
-                value={"N/A"}
+                value={project.Projeto.contrato_token}
                 highlight={true}
                 badge={{
                   type: "success",
                   message: "DESTAQUE"
                 }}
-              />
+                />
+              <Link target="_blank" href={`https://etherscan.io/address/${project.Projeto.contrato_token}`}>a</Link>
               <DataShow
                 title={"Captação"}
-                value={"N/A"}
+                value={project.Lotes[0].captacao}
                 highlight={true}
                 badge={{
                   type: "success",
