@@ -21,7 +21,8 @@ import Separator from '@/components/atoms/Separator'
 import QuotaShow from '@/components/molecules/QuotaShow'
 import TabNavigation from '@/components/organisms/TabNavigation'
 
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import Link from 'next/link'
+import { FiExternalLink } from 'react-icons/fi';
 
 
 import * as masks from '@/assets/js/util/masks'
@@ -254,11 +255,8 @@ const ProjectPage = () => {
                   value={project.Projeto.contrato_token}
                   highlight={true}
                   badge={{ type: "success", message: "DESTAQUE" }}
+                  contractLink={project.Projeto.contrato_token}
                 />
-                <a rel='noreferrer' target="_blank" href={`https://etherscan.io/address/${project.Projeto.contrato_token}`}>
-                  a
-                <OpenInNewIcon />
-                </a>
                 {project.Lotes.length > 0 ? (
                   <DataShow
                     title={"Captação"}
