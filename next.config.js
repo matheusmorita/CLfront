@@ -7,7 +7,7 @@ const nextConfig = {
     defaultLocale: "pt-BR",
   },
   images: {
-    domains: ["parsefiles.back4app.com"]
+    domains: ["parsefiles.back4app.com"],
   },
   async redirects() {
     return [

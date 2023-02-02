@@ -7,13 +7,15 @@ import Button from "@/components/atoms/Button";
 import InputModal from "@/components/molecules/InputModal";
 import BuyCoinLivre from "../buyCoinLivre";
 
-import Logo from '@/assets/img/logo.webp';
+import LogoImg from '@/assets/img/logo.webp';
 
 import { fetchData } from '@/utils/fetchData';
 import UserContext from "@/context/UserContext";
 
 function Modal() {
-  const [hidden, SetHidden] = React.useState<boolean>(false);
+  const [hiddenBuy, SetHiddenBuy] = React.useState<boolean>(false);
+  const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
+
   const [realValue, setRealValue] = React.useState<string>('');
   const [projects, setProjects] = React.useState<any>([])
 
@@ -27,11 +29,11 @@ function Modal() {
   
 
   return (
-    <main>
+    <main className={Styles.mainForm}>
       <form className={Styles.form}>
-        {/* <BuyCoinLivre /> */}
+        {hiddenBuyCoinLivre ? <BuyCoinLivre /> : ''}
         <HeaderModal />
-        {hidden ? (
+        {hiddenBuy ? (
           <div className={Styles.divInput}>
             <p className={Styles.descriptionText}>Este é um texto de exemplo para dar descrição do projeto</p>
             <InputModal
@@ -68,7 +70,7 @@ function Modal() {
                 hidden={false}
                 id="backButton"
                 label="Clique para voltar"
-                onClick={() => { SetHidden(!hidden) }}
+                onClick={() => { SetHiddenBuy(!hiddenBuy) }}
                 text="Voltar"
                 size={25}
                 className={Styles.divButtons__backButton}
@@ -77,7 +79,11 @@ function Modal() {
                 hidden={false}
                 id="generateQRButton"
                 label="Clique para gerar QR code"
-                onClick={() => { }}
+                onClick={(e: React.FormEvent<EventTarget>) => { 
+                  e.preventDefault()
+                  SetHiddenBuy(!hiddenBuy)
+                  setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
+                }}
                 text="Gerar QR Code"
                 size={25}
                 className={Styles.divButtons__QRButton}
@@ -95,10 +101,13 @@ function Modal() {
                 alt="Card CoinLivre"
                 label="Comprar"
                 hidden={false}
-                id={`CoinLivre - ${0}`}
-                src={Logo}
+                id={`CLNT-${0}`}
+                src={LogoImg}
                 text="Comprar"
-                onClick={() => { SetHidden(!hidden) }}
+                onClick={(e: React.FormEvent<EventTarget>) => { 
+                  e.preventDefault()
+                  setHiddenBuyCoinLivre(!hiddenBuyCoinLivre) 
+                }}
               />
               ) : ''}
               {projects.map((item: any, i: number) => (
@@ -111,9 +120,9 @@ function Modal() {
                   emissor={item.Emissor.nome}
                   name={item.Projeto.nome}
                   hidden={true}
-                  id={`${item} - ${i+1}`}
+                  id={`${item.Projeto.acronimo}-${i+1}`}
                   label='Clique para comprar'
-                  onClick={() => { SetHidden(!hidden) }}
+                  onClick={() => { SetHiddenBuy(!hiddenBuy) }}
                 />
               ))}
             </section>

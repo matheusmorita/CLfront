@@ -11,7 +11,7 @@
 }
 
 .inputValue {
-    width: 95%;
+    width: 90%;
     background-color: $clay;
     border: none;
     border-bottom: 3px solid $primary;
@@ -20,7 +20,7 @@
     padding-bottom: 5px;
     font-size: 25px;
     font-weight: 500;
-    padding-left: 79%;
+    padding-left: 73%;
 
 
 
@@ -47,6 +47,7 @@
 .labelValue {
     position: absolute;
     font-size: 12px;
-    left: 3em;
+    left: 4em;
+    margin-top: .5em;
     color: $primary;
 }
