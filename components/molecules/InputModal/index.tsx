@@ -1,6 +1,6 @@
 import Styles from './styles.module.scss'
 
-import InputMask from "react-input-mask";
+// import InputMask from "react-input-mask";
 
 
 interface InputModalInterface {
@@ -22,8 +22,8 @@ function InputModal({
 }: InputModalInterface ) {
   return (
     <div className={Styles.inputValueRs}>
-      <InputMask
-        mask='9999,99'
+      <input
+        // mask='9999,99'
         className={Styles.inputValue}
         // step="0.01"
         // min="0.01"

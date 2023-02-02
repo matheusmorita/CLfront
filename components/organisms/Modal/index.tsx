@@ -25,7 +25,7 @@ function Modal() {
   return (
     <main>
       <form className={Styles.form}>
-        <BuyCoinLivre />
+        {/* <BuyCoinLivre /> */}
         <HeaderModal />
         {hidden ? (
           <div className={Styles.divInput}>
