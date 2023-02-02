@@ -21,6 +21,9 @@ import Separator from '@/components/atoms/Separator'
 import QuotaShow from '@/components/molecules/QuotaShow'
 import TabNavigation from '@/components/organisms/TabNavigation'
 
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+
+
 import * as masks from '@/assets/js/util/masks'
 import Link from 'next/link'
 
@@ -197,12 +200,12 @@ const ProjectPage = () => {
 
               {project.Projeto.rentabilidade ? ( 
                 <DataShow
-                  title={"Rentabilidade"}
+                  title={"Rentabilidade estimada"}
                   value={project.Projeto.rentabilidade}
                   badge={{ type: "success", message: "NOVO" }}
                 /> ) : ( 
                 <DataShow
-                  title={"Rentabilidade"}
+                  title={"Rentabilidade estimada"}
                   value={'N/A'}
                 /> )} 
                 
@@ -251,7 +254,7 @@ const ProjectPage = () => {
                   value={project.Projeto.contrato_token}
                   highlight={true}
                   badge={{ type: "success", message: "DESTAQUE" }}
-                /> 
+                />
                 {project.Lotes.length > 0 ? (
                   <DataShow
                     title={"Captação"}
