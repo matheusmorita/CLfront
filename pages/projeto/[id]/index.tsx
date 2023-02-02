@@ -27,7 +27,6 @@ import Modal from '@/components/organisms/Modal'
 
 
 import * as masks from '@/assets/js/util/masks'
-import Link from 'next/link'
 
 
 

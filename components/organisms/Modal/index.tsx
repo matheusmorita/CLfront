@@ -7,13 +7,17 @@ import Button from "@/components/atoms/Button";
 import InputModal from "@/components/molecules/InputModal";
 import BuyCoinLivre from "../buyCoinLivre";
 
+import Logo from '@/assets/img/logo.webp';
+
 import { fetchData } from '@/utils/fetchData';
+import UserContext from "@/context/UserContext";
 
 function Modal() {
   const [hidden, SetHidden] = React.useState<boolean>(false);
   const [realValue, setRealValue] = React.useState<string>('');
   const [projects, setProjects] = React.useState<any>([])
 
+  const { loggedIn } = React.useContext(UserContext)
 
   React.useEffect(() => {
     fetchData(setProjects)
@@ -36,7 +40,6 @@ function Modal() {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setRealValue(e.target.value)
               }}
-              // onKeyDown={"inputMask"}
             />
             <InputModal
               id="inputMoedaSelecionada"
@@ -84,6 +87,20 @@ function Modal() {
         ) : (
           <>
             <section className={Styles.sectionCard}>
+              {!loggedIn[0] ? (
+                <InvestCard 
+                name="Token CoinLivre"
+                acronimo="CLNT"
+                emissor="CoinLivre"
+                alt="Card CoinLivre"
+                label="Comprar"
+                hidden={false}
+                id={`CoinLivre - ${0}`}
+                src={Logo}
+                text="Comprar"
+                onClick={() => { SetHidden(!hidden) }}
+              />
+              ) : ''}
               {projects.map((item: any, i: number) => (
                 <InvestCard
                   key={item.Projeto.acronimo}
@@ -94,7 +111,7 @@ function Modal() {
                   emissor={item.Emissor.nome}
                   name={item.Projeto.nome}
                   hidden={true}
-                  id={`${item} - ${i}`}
+                  id={`${item} - ${i+1}`}
                   label='Clique para comprar'
                   onClick={() => { SetHidden(!hidden) }}
                 />

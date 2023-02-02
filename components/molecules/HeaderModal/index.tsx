@@ -90,7 +90,7 @@ function HeaderModal() {
               <VisibilityOffIcon color="success" />
             </div> ): (
               <div className={Styles.balanceValue}>
-                <b>SALDO: R$00,00</b>
+                <b>SALDO: R$20000,00</b>
                 <RemoveRedEyeIcon />
               </div>
             )}

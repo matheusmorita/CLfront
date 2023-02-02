@@ -3,13 +3,16 @@ import Button from '@/components/atoms/Button';
 import Image from 'next/image';
 import ProgressBar from '../ProgressBar';
 
+import Logo from '@/assets/img/logo.webp';
+
+
 interface InvestCardInterface {
   text: string;
   id: string;
   hidden: boolean;
   label: string;
   onClick: any;
-  src: string;
+  src: any;
   alt: string;
   name: string;
   emissor: string;
