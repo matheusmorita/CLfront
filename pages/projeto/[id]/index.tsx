@@ -24,7 +24,7 @@ import TabNavigation from '@/components/organisms/TabNavigation'
 import * as masks from '@/assets/js/util/masks'
 import Modal from '@/components/organisms/Modal'
 
-
+// Subindo CL-182
 
 const ProjectPage = () => {
   const router = useRouter()
