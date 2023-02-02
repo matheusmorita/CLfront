@@ -11,7 +11,6 @@ import Button from '@/components/atoms/Button'
 import Input from '@/components/atoms/Input'
 import Logo from '@/components/atoms/Logo'
 import Loader from '@/components/atoms/Loader'
-import Link from 'next/link'
 import Paragrah from '@/components/atoms/Paragraph'
 import UserContext from '@/context/UserContext'
 import Check from '@/assets/img/Check.webp'
@@ -126,9 +125,9 @@ const Login = () => {
                 error={error}
               />
               <p className={Styles.form__desc}>
-                Esqueceu sua senha? <Link href="/recuperar-senha">Clique aqui</Link>
+                Esqueceu sua senha? Clique aqui
                 <br />
-                Ainda não tem uma conta? <Link href="/registrar-se">Cadastre-se</Link>
+                Ainda não tem uma conta? Cadastre-se
               </p>
               <Button
                 id="submit-button"
