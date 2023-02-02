@@ -194,63 +194,78 @@ const ProjectPage = () => {
                   }}
                 />
               )}
-              {project.Projeto.rentabilidade && (
+
+              {project.Projeto.rentabilidade ? ( 
                 <DataShow
-                  title={"Rentabilidade estimada"}
+                  title={"Rentabilidade"}
                   value={project.Projeto.rentabilidade}
-                  badge={{
-                    type: "success",
-                    message: "NOVO"
-                  }}
-                />
-              )}
-              {project.Lotes.length > 0 && (
+                  badge={{ type: "success", message: "NOVO" }}
+                /> ) : ( 
+                <DataShow
+                  title={"Rentabilidade"}
+                  value={'N/A'}
+                /> )} 
+                
+              {project.Lotes.length > 0 ? ( 
                 <DataShow
                   title={"Lote"}
                   value={masks.getLotMask(project.Lotes[0].lote)}
-                  badge={{
-                    type: "success",
-                    message: "NOVO"
-                  }}
-                />
-              )}
-              {project.Lotes.length > 0 && (
+                  badge={{ type: "success", message: "NOVO" }}
+                /> ) : ( 
+                <DataShow
+                  title={"Lote"}
+                  value={'N/A'}
+                /> )} 
+                
+              {project.Lotes.length > 0 ? ( 
                 <DataShow
                   title={"Valor do Token"}
                   value={masks.getCurrencyMask(project.Lotes[0].valorDoToken)}
-                />
-              )}
-              {project.Lotes.length > 0 && (
+                /> ) : ( 
+                <DataShow
+                  title={"Valor do Token"}
+                  value={masks.getCurrencyMask('N/A')}
+                /> )} 
+                
+              {project.Lotes.length > 0 ? (
                 <DataShow
                   title={"Prazo do Lote"}
                   value={project.Lotes[0].prazoDoLote}
-                />
-              )}
-              {project.Lotes.length > 0 && (
+                /> ) : ( 
+                <DataShow
+                  title={"Prazo do Lote"}
+                  value={'00/00/0000'}
+                /> )}
+              
+              {project.Lotes.length > 0 ? (
                 <DataShow
                   title={"QTDE de Tokens"}
                   value={masks.getQuantityMask(project.Lotes[0].qtdeDeTokens)}
-                />
-              )}
-              <DataShow 
-                title={"Contrato"}
-                value={project.Projeto.contrato_token}
-                highlight={true}
-                badge={{
-                  type: "success",
-                  message: "DESTAQUE"
-                }}
-                />
-              <Link target="_blank" href={`https://etherscan.io/address/${project.Projeto.contrato_token}`}>a</Link>
-              <DataShow
-                title={"Captação"}
-                value={project.Lotes[0].captacao}
-                highlight={true}
-                badge={{
-                  type: "success",
-                  message: "DESTAQUE"
-                }}
-              />
+                /> ) : (
+                <DataShow
+                  title={"QTDE de Tokens"}
+                  value={'N/A'}
+                /> )}
+                <DataShow
+                  title={"Contrato"}
+                  value={project.Projeto.contrato_token}
+                  highlight={true}
+                  badge={{ type: "success", message: "DESTAQUE" }}
+                /> 
+                {project.Lotes.length > 0 ? (
+                  <DataShow
+                    title={"Captação"}
+                    value={project.Lotes[0].captacao}
+                    highlight={true}
+                    badge={{ type: "success", message: "DESTAQUE" }}
+                  /> ) : (
+                    <DataShow
+                      title={"Captação"} 
+                      value={'N/A'} 
+                      highlight={true} 
+                      badge={{ type: "success", message: "DESTAQUE" }}
+                    />
+                  )}
             </div>
           </Column>
         </Section>
