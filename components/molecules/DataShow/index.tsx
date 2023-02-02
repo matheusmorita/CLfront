@@ -1,5 +1,10 @@
+import Link from 'next/link'
 import React from 'react'
 import Styles from './styles.module.scss'
+
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+
+// Subindo branch
 
 type Badge = {
   message: string,
@@ -12,9 +17,10 @@ type Props = {
   badge?: Badge,
   highlight?: boolean,
   className?: string,
+  contractLink?: string,
 }
 
-const DataShow = ({ title, value, badge, className, highlight = false }: Props) => {
+const DataShow = ({ title, value, badge, className, highlight = false, contractLink }: Props) => {
   return (
     <div
       className={`${Styles.datashow} ${className}`}
@@ -25,11 +31,19 @@ const DataShow = ({ title, value, badge, className, highlight = false }: Props) 
           {title}
         </h1>
         <span className={Styles.datashow__value}>
-          {value} 
+          {value}
+          {title.toLocaleLowerCase().includes('contrato') ? (
+            <Link
+              target="_blank"
+              href={`https://etherscan.io/address/${contractLink}`}
+            >
+              <OpenInNewIcon style={{color: '#00EE8D'}} />
+            </Link>
+          ) : ''}
         </span>
       </div>
       {badge && (
-        <div 
+        <div
           className={Styles.datashow__badge}
           data-type={badge.type}
         >
@@ -39,5 +53,7 @@ const DataShow = ({ title, value, badge, className, highlight = false }: Props) 
     </div>
   )
 }
+
+// atualização
 
 export default DataShow
