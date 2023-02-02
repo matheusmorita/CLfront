@@ -6,10 +6,9 @@ import InvestCard from "@/components/molecules/InvestCard";
 import Button from "@/components/atoms/Button";
 import InputModal from "@/components/molecules/InputModal";
 
-import { fetchData } from '@/utils/fetchData'
+import { fetchData } from '@/utils/fetchData';
 
 function Modal() {
-  const test = ['1', '1', '1', '1', '1', '1', '1', '1']
   const [hidden, SetHidden] = React.useState<boolean>(false);
   const [realValue, setRealValue] = React.useState<string>('');
   const [projects, setProjects] = React.useState<any>([])
@@ -20,6 +19,8 @@ function Modal() {
   }, [])
 
 
+  
+
   return (
     <main>
       <form className={Styles.form}>
@@ -27,19 +28,19 @@ function Modal() {
         {hidden ? (
           <div className={Styles.divInput}>
             <p className={Styles.descriptionText}>Este é um texto de exemplo para dar descrição do projeto</p>
-            
             <InputModal
               id="inputReal"
               label="Insira o valor em reais"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setRealValue(e.target.value)
               }}
+              // onKeyDown={"inputMask"}
             />
             <InputModal
               id="inputMoedaSelecionada"
               label="Você receberá em CLNT"
               disabled={true}
-              value={Number(realValue)*1.5}
+              value={realValue}
             />
 
             <div className={Styles.checkboxLabel}>
@@ -65,7 +66,7 @@ function Modal() {
                 onClick={() => { SetHidden(!hidden) }}
                 text="Voltar"
                 size={25}
-                className={Styles.backButton}
+                className={Styles.divButtons__backButton}
               />
               <Button
                 hidden={false}
@@ -74,6 +75,7 @@ function Modal() {
                 onClick={() => { }}
                 text="Gerar QR Code"
                 size={25}
+                className={Styles.divButtons__QRButton}
               />
             </div>
           </div>
