@@ -86,6 +86,7 @@ function Modal() {
                   src={item.Projeto.logo.url}
                   alt='Esta é uma imagem de um projeto a ser exibido'
                   text='Comprar'
+                  acronimo={item.Projeto.acronimo}
                   emissor={item.Emissor.nome}
                   name={item.Projeto.nome}
                   hidden={true}
