@@ -5,6 +5,7 @@ import HeaderModal from "@/components/molecules/HeaderModal";
 import InvestCard from "@/components/molecules/InvestCard";
 import Button from "@/components/atoms/Button";
 import InputModal from "@/components/molecules/InputModal";
+import BuyCoinLivre from "../buyCoinLivre";
 
 import { fetchData } from '@/utils/fetchData';
 
@@ -24,6 +25,7 @@ function Modal() {
   return (
     <main>
       <form className={Styles.form}>
+        <BuyCoinLivre />
         <HeaderModal />
         {hidden ? (
           <div className={Styles.divInput}>
