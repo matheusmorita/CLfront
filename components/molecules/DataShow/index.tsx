@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
-import { FiExternalLink } from 'react-icons/fi'
 import Styles from './styles.module.scss'
+
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 // Subindo branch
 
@@ -36,7 +37,7 @@ const DataShow = ({ title, value, badge, className, highlight = false, contractL
               target="_blank"
               href={`https://etherscan.io/address/${contractLink}`}
             >
-              <FiExternalLink size={28} color='#00EE8D' />
+              <OpenInNewIcon style={{color: '#00EE8D'}} />
             </Link>
           ) : ''}
         </span>

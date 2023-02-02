@@ -22,7 +22,6 @@ import QuotaShow from '@/components/molecules/QuotaShow'
 import TabNavigation from '@/components/organisms/TabNavigation'
 
 import Link from 'next/link'
-import { FiExternalLink } from 'react-icons/fi';
 
 import * as masks from '@/assets/js/util/masks'
 
