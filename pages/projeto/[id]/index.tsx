@@ -23,6 +23,8 @@ import TabNavigation from '@/components/organisms/TabNavigation'
 
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
+import Modal from '@/components/organisms/Modal'
+
 
 import * as masks from '@/assets/js/util/masks'
 import Link from 'next/link'
@@ -33,6 +35,8 @@ const ProjectPage = () => {
   const router = useRouter()
   const id = router.query.id
   const [project, setProject] = React.useState<any>()
+  
+  const [showModal, setShowModal] = React.useState<boolean>(false)
 
   const fetchData = async () => {
     var data = JSON.stringify({
@@ -129,12 +133,15 @@ const ProjectPage = () => {
               hidden={false}
               disabled={false}
               size={20}
-              onClick={() => {
-                window.scrollTo(0, 0)
+              onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
+                e.preventDefault()
+                setShowModal(!showModal)
               }}
             />
           </Column>
         </Section>
+
+        {showModal ? <Modal /> : ''}
 
         <TabNavigation
           links={[
