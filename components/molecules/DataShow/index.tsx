@@ -1,10 +1,8 @@
-import Link from 'next/link'
 import React from 'react'
 import Styles from './styles.module.scss'
 
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-
-// Subindo branch
+import Link from 'next/link';
 
 type Badge = {
   message: string,
@@ -17,7 +15,7 @@ type Props = {
   badge?: Badge,
   highlight?: boolean,
   className?: string,
-  contractLink?: string,
+  contractLink: string;
 }
 
 const DataShow = ({ title, value, badge, className, highlight = false, contractLink }: Props) => {
@@ -43,7 +41,7 @@ const DataShow = ({ title, value, badge, className, highlight = false, contractL
         </span>
       </div>
       {badge && (
-        <div
+        <div 
           className={Styles.datashow__badge}
           data-type={badge.type}
         >

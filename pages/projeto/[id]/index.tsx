@@ -21,14 +21,16 @@ import Separator from '@/components/atoms/Separator'
 import QuotaShow from '@/components/molecules/QuotaShow'
 import TabNavigation from '@/components/organisms/TabNavigation'
 
+import Modal from '@/components/organisms/Modal'
+
 import * as masks from '@/assets/js/util/masks'
-
-
 
 const ProjectPage = () => {
   const router = useRouter()
   const id = router.query.id
   const [project, setProject] = React.useState<any>()
+  
+  const [showModal, setShowModal] = React.useState<boolean>(false)
 
   const fetchData = async () => {
     var data = JSON.stringify({
@@ -126,12 +128,15 @@ const ProjectPage = () => {
               hidden={false}
               disabled={false}
               size={20}
-              onClick={() => {
-                window.scrollTo(0, 0)
+              onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
+                e.preventDefault()
+                setShowModal(!showModal)
               }}
             />
           </Column>
         </Section>
+
+        {showModal ? <Modal /> : ''}
 
         <TabNavigation
           links={[
@@ -192,66 +197,93 @@ const ProjectPage = () => {
                     type: "success",
                     message: "NOVO"
                   }}
+                  contractLink={project.Projeto.contrato_token}
                 />
               )}
-              {project.Projeto.rentabilidade && (
+              {project.Projeto.rentabilidade ? ( 
                 <DataShow
-                  title={"Rentabilidade"}
+                  title={"Rentabilidade estimada"}
                   value={project.Projeto.rentabilidade}
-                  badge={{
-                    type: "success",
-                    message: "NOVO"
-                  }}
-                />
-              )}
-              {project.Lotes.length > 0 && (
+                  badge={{ type: "success", message: "NOVO" }}
+                  contractLink={project.Projeto.contrato_token}
+                /> ) : ( 
+                <DataShow
+                  title={"Rentabilidade estimada"}
+                  value={'N/A'}
+                  contractLink={project.Projeto.contrato_token}
+                /> )} 
+                
+              {project.Lotes.length > 0 ? ( 
                 <DataShow
                   title={"Lote"}
                   value={masks.getLotMask(project.Lotes[0].lote)}
-                  badge={{
-                    type: "success",
-                    message: "NOVO"
-                  }}
-                />
-              )}
-              {project.Lotes.length > 0 && (
+                  badge={{ type: "success", message: "NOVO" }}
+                  contractLink={project.Projeto.contrato_token}
+                /> ) : ( 
+                <DataShow
+                  title={"Lote"}
+                  value={'N/A'}
+                  contractLink={project.Projeto.contrato_token}
+                /> )} 
+                
+              {project.Lotes.length > 0 ? ( 
                 <DataShow
                   title={"Valor do Token"}
                   value={masks.getCurrencyMask(project.Lotes[0].valorDoToken)}
-                />
-              )}
-              {project.Lotes.length > 0 && (
+                  contractLink={project.Projeto.contrato_token}
+                /> ) : ( 
+                <DataShow
+                  title={"Valor do Token"}
+                  value={masks.getCurrencyMask('N/A')}
+                  contractLink={project.Projeto.contrato_token}
+                /> )} 
+                
+              {project.Lotes.length > 0 ? (
                 <DataShow
                   title={"Prazo do Lote"}
-                  value={masks.getLotPeriodMask(project.Lotes[0].prazoDoLote)}
-                />
-              )}
-              {project.Lotes.length > 0 && (
+                  value={project.Lotes[0].prazoDoLote}
+                  contractLink={project.Projeto.contrato_token}
+                /> ) : ( 
+                <DataShow
+                  title={"Prazo do Lote"}
+                  value={'00/00/0000'}
+                  contractLink={project.Projeto.contrato_token}
+                /> )}
+              
+              {project.Lotes.length > 0 ? (
                 <DataShow
                   title={"QTDE de Tokens"}
                   value={masks.getQuantityMask(project.Lotes[0].qtdeDeTokens)}
-                />
-              )}
-              <DataShow
-                title={"Contrato"}
-                value={"N/A"}
-                highlight={true}
-                badge={{
-                  type: "success",
-                  message: "DESTAQUE"
-                }}
-              />
-              {project.Lotes.length > 0 && (
+                  contractLink={project.Projeto.contrato_token}
+                /> ) : (
                 <DataShow
-                  title={"Captação"}
-                  value={`${project.Lotes[0].captacao}/${project.Lotes[0].qtdeDeTokens}`}
+                  title={"QTDE de Tokens"}
+                  value={'N/A'}
+                  contractLink={project.Projeto.contrato_token}
+                /> )}
+                <DataShow
+                  title={"Contrato"}
+                  value={project.Projeto.contrato_token}
                   highlight={true}
-                  badge={{
-                    type: "success",
-                    message: project.Lotes[0].status
-                  }}
+                  badge={{ type: "success", message: "DESTAQUE" }}
+                  contractLink={project.Projeto.contrato_token}
                 />
-              )}
+                {project.Lotes.length > 0 ? (
+                  <DataShow
+                    title={"Captação"}
+                    value={project.Lotes[0].captacao}
+                    highlight={true}
+                    badge={{ type: "success", message: "DESTAQUE" }}
+                    contractLink={project.Projeto.contrato_token}
+                  /> ) : (
+                    <DataShow
+                      title={"Captação"} 
+                      value={'N/A'} 
+                      highlight={true} 
+                      badge={{ type: "success", message: "DESTAQUE" }}
+                      contractLink={project.Projeto.contrato_token}
+                    />
+                  )}
             </div>
           </Column>
         </Section>
@@ -301,6 +333,7 @@ const ProjectPage = () => {
                 type: "success",
                 message: "DOCUMENTO"
               }}
+              contractLink={project.Projeto.contrato_token}
             />
             <DataShow
               title={"Título do doc"}
@@ -309,6 +342,7 @@ const ProjectPage = () => {
                 type: "success",
                 message: "DOCUMENTO"
               }}
+              contractLink={project.Projeto.contrato_token}
             />
           </Column>
           <Column
