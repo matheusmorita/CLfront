@@ -5,7 +5,7 @@
                 url(../../../assets/img/BG.webp);
     background-attachment: fixed;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover !important;
 }
 
 .lighten {
@@ -112,7 +112,7 @@
 .emissor {
     background: url(../../../assets/img/bg-logo.webp);
     background-repeat: no-repeat;
-    background-position-x: -5rem;
+    background-position-x: right;
     background-size: cover;
     min-height: 500px;
     padding: 5rem 0;

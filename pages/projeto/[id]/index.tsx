@@ -84,6 +84,7 @@ const ProjectPage = () => {
           justify='center'
           hidden={false}
           className={`${Styles.background} ${Styles.intro} pt-5 pt-lg-0 d-flex align-items-center pb-5`}
+          bgImage={project.Projeto.imgTipo?.url}
         >
           <Column
             media='lg'
@@ -240,15 +241,17 @@ const ProjectPage = () => {
                   message: "DESTAQUE"
                 }}
               />
-              <DataShow
-                title={"Captação"}
-                value={`${project.Lotes[0].captacao}/${project.Lotes[0].qtdeDeTokens}`}
-                highlight={true}
-                badge={{
-                  type: "success",
-                  message: project.Lotes[0].status
-                }}
-              />
+              {project.Lotes.length > 0 && (
+                <DataShow
+                  title={"Captação"}
+                  value={`${project.Lotes[0].captacao}/${project.Lotes[0].qtdeDeTokens}`}
+                  highlight={true}
+                  badge={{
+                    type: "success",
+                    message: project.Lotes[0].status
+                  }}
+                />
+              )}
             </div>
           </Column>
         </Section>
