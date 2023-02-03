@@ -48,6 +48,7 @@ const ProjectPage = () => {
     await fetch('https://parseapi.back4app.com/parse/functions/retornar-projeto-id', config)
       .then(resp => resp.json())
       .then(json => {
+        console.log(json)
         setProject(json.result)
       })
       .catch(error => {
@@ -241,11 +242,11 @@ const ProjectPage = () => {
               />
               <DataShow
                 title={"Captação"}
-                value={"N/A"}
+                value={`${project.Lotes[0].captacao}/${project.Lotes[0].qtdeDeTokens}`}
                 highlight={true}
                 badge={{
                   type: "success",
-                  message: "DESTAQUE"
+                  message: project.Lotes[0].status
                 }}
               />
             </div>
