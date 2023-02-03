@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import Styles from './styles.module.scss'
 import Frame from '@/templates/Frame'
@@ -8,10 +9,79 @@ import Title from '@/components/atoms/Title'
 import Form from '@/components/molecules/Form'
 import Button from '@/components/atoms/Button'
 import Input from '@/components/atoms/Input'
-import Link from 'next/link'
+import UserContext from '@/context/UserContext'
+import Checkbox from '@/components/atoms/Checkbox'
+import Loader from '@/components/atoms/Loader'
+import { useRouter } from 'next/router'
+import { captureName } from '@/assets/js/util/validations'
 
 const Register = () => {
-  const [step, setStep] = React.useState<number>(1)
+  const router = useRouter()
+  const { userInfo, loggedIn } = React.useContext(UserContext)
+  const [info, setUserInfo] = userInfo
+  const [logged, setLoggedIn] = loggedIn
+
+  const [name, setName] = React.useState()
+  const [date, setDate] = React.useState()
+  const [cpf, setCpf] = React.useState()
+
+  const [waiting, setWaiting] = React.useState<boolean>(false)
+  const [validation, setValidation] = React.useState<boolean>()
+
+  const [errorName, setErrorName] = React.useState()
+  const [errorCPF, setErrorCPF] = React.useState()
+  const [errorDate, setErrorDate] = React.useState()
+
+  const handleUserRequest = async () => {
+    if (validation) {
+      setWaiting(true)
+      const token = localStorage.getItem('accessToken')
+      if (token && name && cpf && date) {
+        const data = JSON.stringify({
+          "accessToken": token,
+          "nome": name,
+          "cpf": cpf,
+          "dataNascimento": date
+        })
+
+        const config = {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          body: data
+        }
+
+        await fetch('https://coinlivre.blocklize.io/usuario/cadastrarUser', config)
+          .then(resp => {
+            if (resp.ok) {
+              setWaiting(false)
+            }
+          })
+      }
+    }
+  }
+
+  const handleWaitState = () => {
+    return waiting ? Styles.waiting : null
+  }
+
+  React.useEffect(() => {
+    if (!logged) {
+      // router.push('/login')
+    }
+  }, [logged])
+
+  React.useEffect(() => {
+    console.log(validation)
+    if (errorName || errorDate || errorCPF) {
+      setValidation(false)
+    } else {
+      setValidation(true)
+    }
+  }, [name, date, cpf])
+
   return (
     <Frame
       id='register'
@@ -43,8 +113,12 @@ const Register = () => {
             id='form'
             onSubmit={() => { }}
             label="Formulário de Lista VIP"
-            className={Styles.form}
+            className={`${Styles.form} ${handleWaitState()}`}
           >
+            <Loader
+              active={waiting}
+              absolute={true}
+            />
             <Title
               id='form-title'
               className='text-center fw-normal'
@@ -52,58 +126,40 @@ const Register = () => {
               size={24}
               hidden={false}
             />
-            {
-              step === 1 && (
-                <div>
-                  <Input
-                    id='name'
-                    label='Digite seu nome completo'
-                    type='name'
-                  />
-                  <Input
-                    id='email'
-                    label='Digite seu email'
-                    type='email'
-                  />
-                  <p className={Styles.form__desc}>
-                    Já possui uma conta? <Link href="/login">Clique aqui</Link>
-                  </p>
-                </div>
-              )
-            }
-            {
-              step === 2 && (
-                <div>
-                  <Input
-                    id='cpf'
-                    label='Digite seu CPF'
-                    type='text'
-                  />
-                  <Input
-                    id='birth'
-                    label='Data de nascimento'
-                    type='date'
-                  />
-                  <Input
-                    id='password'
-                    label='Digite sua senha'
-                    type='password'
-                  />
-                  <Input
-                    id='passwordConfirm'
-                    label='Confirme a senha digitada'
-                    type='password'
-                  />
-                </div>
-              )
-            }
+            <Input
+              id='name'
+              label='Digite seu nome completo'
+              type='name'
+              onInput={setName}
+              validation={setErrorName}
+              validator={captureName}
+              error={errorName}
+            />
+            <Input
+              id='birth'
+              label='Data de nascimento'
+              type='date'
+              onInput={setDate}
+              validation={setErrorDate}
+              error={errorDate}
+            />
+            <Input
+              id='cpf'
+              label='Digite seu CPF'
+              type='text'
+              onInput={setCpf}
+              validation={setErrorCPF}
+              error={errorCPF}
+            />
+            <Checkbox />
             <Button
               id="submit-button"
               text="Continuar"
               label="Clique continue para seu cadastro"
               className="w-100 py-2 mt-3 fs-5"
+              disabled={!validation}
               hidden={false}
-              onClick={() => { setStep(2) }}
+              onClick={() => { handleUserRequest() }}
             />
           </Form>
         </Column>

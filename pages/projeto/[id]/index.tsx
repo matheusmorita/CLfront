@@ -21,15 +21,9 @@ import Separator from '@/components/atoms/Separator'
 import QuotaShow from '@/components/molecules/QuotaShow'
 import TabNavigation from '@/components/organisms/TabNavigation'
 
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-
 import Modal from '@/components/organisms/Modal'
 
-
 import * as masks from '@/assets/js/util/masks'
-import Link from 'next/link'
-
-// Subindo configurações definidas
 
 const ProjectPage = () => {
   const router = useRouter()
@@ -56,7 +50,7 @@ const ProjectPage = () => {
     await fetch('https://parseapi.back4app.com/parse/functions/retornar-projeto-id', config)
       .then(resp => resp.json())
       .then(json => {
-        console.log(json.result)
+        console.log(json)
         setProject(json.result)
       })
       .catch(error => {
@@ -92,6 +86,7 @@ const ProjectPage = () => {
           justify='center'
           hidden={false}
           className={`${Styles.background} ${Styles.intro} pt-5 pt-lg-0 d-flex align-items-center pb-5`}
+          bgImage={project.Projeto.imgTipo?.url}
         >
           <Column
             media='lg'
@@ -197,7 +192,7 @@ const ProjectPage = () => {
               {project.Projeto.createdAt && (
                 <DataShow
                   title={"Data de lançamento"}
-                  value={project.Projeto.data_lancamento}
+                  value={masks.getDateMask(project.Projeto.createdAt)}
                   badge={{
                     type: "success",
                     message: "NOVO"
@@ -205,7 +200,6 @@ const ProjectPage = () => {
                   contractLink={project.Projeto.contrato_token}
                 />
               )}
-
               {project.Projeto.rentabilidade ? ( 
                 <DataShow
                   title={"Rentabilidade estimada"}

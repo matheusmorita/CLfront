@@ -1,4 +1,5 @@
 import React from 'react'
+import { dynamicBackground } from '@/assets/js/util/styles'
 
 type Props = {
   id: string,
@@ -7,10 +8,11 @@ type Props = {
   hidden: boolean,
   className: string,
   children: any,
-  justify: string
+  justify: string,
+  bgImage?: string,
 }
 
-const Section = ({ id, label, desc, hidden, className, children, justify }: Props) => {
+const Section = ({ id, label, desc, hidden, className, children, justify, bgImage }: Props) => {
   return (
     <section
       id={id}
@@ -19,6 +21,7 @@ const Section = ({ id, label, desc, hidden, className, children, justify }: Prop
       aria-labelledby={label}
       aria-describedby={desc}
       aria-hidden={hidden}
+      style={dynamicBackground(bgImage)}
     >
       <div
         id={`${id}__container`}

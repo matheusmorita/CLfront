@@ -6,6 +6,9 @@
     overflow: hidden;
     border-radius: 6px;
     box-shadow: 0 0 30px $light;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     &__header {
         overflow: hidden;
@@ -26,6 +29,7 @@
         line-height: 1em;
         min-height: 2em;
         font-size: 28px;
+        
 
         span {
             color: $gray;
@@ -42,6 +46,7 @@
         padding: .8rem;
         max-height: 8rem;
         overflow-y: scroll;
+        
 
         &::-webkit-scrollbar {
             width: .5rem;
