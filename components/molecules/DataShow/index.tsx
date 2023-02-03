@@ -1,6 +1,8 @@
 import React from 'react'
 import Styles from './styles.module.scss'
 
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+
 type Badge = {
   message: string,
   type?: "success" | "warning" | "error"
@@ -25,7 +27,15 @@ const DataShow = ({ title, value, badge, className, highlight = false }: Props) 
           {title}
         </h1>
         <span className={Styles.datashow__value}>
-          {value} 
+          {value}
+          {title.toLocaleLowerCase().includes('contrato') ? (
+            <Link
+              target="_blank"
+              href={`https://etherscan.io/address/${contractLink}`}
+            >
+              <OpenInNewIcon style={{color: '#00EE8D'}} />
+            </Link>
+          ) : ''}
         </span>
       </div>
       {badge && (
@@ -39,5 +49,7 @@ const DataShow = ({ title, value, badge, className, highlight = false }: Props) 
     </div>
   )
 }
+
+// atualização
 
 export default DataShow
