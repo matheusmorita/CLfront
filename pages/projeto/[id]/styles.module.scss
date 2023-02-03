@@ -13,14 +13,11 @@
     padding: 2rem;
 }
 
-
-
 .intro {
     min-height: 90vh;
     padding: 5rem 0 !important;
 
     &__title {
-        color: white;
         @media (max-width: 992px) {
             font-size: 72px !important;
             line-height: 60px !important;
