@@ -2,6 +2,7 @@ import React from 'react'
 import Styles from './styles.module.scss'
 
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import Link from 'next/link';
 
 type Badge = {
   message: string,
@@ -14,9 +15,10 @@ type Props = {
   badge?: Badge,
   highlight?: boolean,
   className?: string,
+  contractLink: string;
 }
 
-const DataShow = ({ title, value, badge, className, highlight = false }: Props) => {
+const DataShow = ({ title, value, badge, className, highlight = false, contractLink }: Props) => {
   return (
     <div
       className={`${Styles.datashow} ${className}`}
