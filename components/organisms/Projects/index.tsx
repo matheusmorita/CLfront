@@ -52,7 +52,7 @@ const Projects = () => {
             path={item.Projeto.idProjeto}
             key={index}
             showOrNot={
-              item.Projeto.nome.includes('TBK Esports Fan Token') || item.Projeto.nome.includes('Fan-Token de Influenciadores') ? false : true }
+              item.Projeto.rentabilidade === '' ? false : true }
           />
           )
             })

@@ -41,6 +41,9 @@
         max-width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     &__badge {

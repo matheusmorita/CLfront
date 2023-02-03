@@ -21,6 +21,8 @@ import Separator from '@/components/atoms/Separator'
 import QuotaShow from '@/components/molecules/QuotaShow'
 import TabNavigation from '@/components/organisms/TabNavigation'
 
+import Link from 'next/link'
+
 import * as masks from '@/assets/js/util/masks'
 
 
@@ -187,49 +189,71 @@ const ProjectPage = () => {
               {project.Projeto.createdAt && (
                 <DataShow
                   title={"Data de lançamento"}
-                  value={masks.getDateMask(project.Projeto.createdAt)}
+                  value={project.Projeto.data_lancamento}
                   badge={{
                     type: "success",
                     message: "NOVO"
                   }}
                 />
               )}
-              {project.Projeto.rentabilidade && (
+
+              {project.Projeto.rentabilidade ? ( 
                 <DataShow
-                  title={"Rentabilidade"}
+                  title={"Rentabilidade estimada"}
                   value={project.Projeto.rentabilidade}
-                  badge={{
-                    type: "success",
-                    message: "NOVO"
-                  }}
-                />
-              )}
-              {project.Lotes.length > 0 && (
+                  badge={{ type: "success", message: "NOVO" }}
+                /> ) : ( 
+                <DataShow
+                  title={"Rentabilidade estimada"}
+                  value={'N/A'}
+                /> )} 
+                
+              {project.Lotes.length > 0 ? ( 
                 <DataShow
                   title={"Lote"}
                   value={masks.getLotMask(project.Lotes[0].lote)}
-                  badge={{
-                    type: "success",
-                    message: "NOVO"
-                  }}
-                />
-              )}
-              {project.Lotes.length > 0 && (
+                  badge={{ type: "success", message: "NOVO" }}
+                /> ) : ( 
+                <DataShow
+                  title={"Lote"}
+                  value={'N/A'}
+                /> )} 
+                
+              {project.Lotes.length > 0 ? ( 
                 <DataShow
                   title={"Valor do Token"}
                   value={masks.getCurrencyMask(project.Lotes[0].valorDoToken)}
-                />
-              )}
-              {project.Lotes.length > 0 && (
+                /> ) : ( 
+                <DataShow
+                  title={"Valor do Token"}
+                  value={masks.getCurrencyMask('N/A')}
+                /> )} 
+                
+              {project.Lotes.length > 0 ? (
                 <DataShow
                   title={"Prazo do Lote"}
-                  value={masks.getLotPeriodMask(project.Lotes[0].prazoDoLote)}
-                />
-              )}
-              {project.Lotes.length > 0 && (
+                  value={project.Lotes[0].prazoDoLote}
+                /> ) : ( 
+                <DataShow
+                  title={"Prazo do Lote"}
+                  value={'00/00/0000'}
+                /> )}
+              
+              {project.Lotes.length > 0 ? (
                 <DataShow
                   title={"QTDE de Tokens"}
                   value={masks.getQuantityMask(project.Lotes[0].qtdeDeTokens)}
+                /> ) : (
+                <DataShow
+                  title={"QTDE de Tokens"}
+                  value={'N/A'}
+                /> )}
+                <DataShow
+                  title={"Contrato"}
+                  value={project.Projeto.contrato_token}
+                  highlight={true}
+                  badge={{ type: "success", message: "DESTAQUE" }}
+                  contractLink={project.Projeto.contrato_token}
                 />
               )}
               <DataShow
