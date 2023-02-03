@@ -21,7 +21,6 @@ export default function App({ Component, pageProps }: AppProps) {
       fetch('https://greg.blocklize.io/auth/userInfo', config)
         .then(resp => resp.json())
         .then(json => {
-          console.log(json)
           if (json.email) {
             setUserInfo(json)
             setLoggedIn(true)
