@@ -21,7 +21,7 @@ import Separator from '@/components/atoms/Separator'
 import QuotaShow from '@/components/molecules/QuotaShow'
 import TabNavigation from '@/components/organisms/TabNavigation'
 
-import Link from 'next/link'
+// Subindo branch 230
 
 import * as masks from '@/assets/js/util/masks'
 
