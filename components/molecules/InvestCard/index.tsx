@@ -7,21 +7,37 @@ import Logo from '@/assets/img/logo.webp';
 
 
 interface InvestCardInterface {
-  text: string;
+  text?: any;
   id: string;
-  hidden: boolean;
-  label: string;
-  onClick: any;
+  hidden?: any;
+  label?: any;
+  onClick?: any;
   src: any;
   alt: string;
   name: string;
   emissor: string;
   acronimo: string;
+  hiddenButton: boolean;
+  className?: any;
 }
 
-function InvestCard({ text, id, hidden, label, onClick, src, alt, name, emissor, acronimo }: InvestCardInterface) {
+function InvestCard({
+  text,
+  id,
+  hidden,
+  label,
+  onClick,
+  src,
+  alt,
+  name,
+  emissor,
+  acronimo,
+  hiddenButton,
+  className
+}: InvestCardInterface) {
   return (
-    <div className={Styles.div}>
+    <div className={className}>
+      {/* <div className={Styles.divBackgroundGradient}></div> */}
       <div className={Styles.divImgDescription}>
         <Image
           src={src}
@@ -47,13 +63,16 @@ function InvestCard({ text, id, hidden, label, onClick, src, alt, name, emissor,
           />
         </div>
       </div>
-      <Button
+      {!hiddenButton ? (
+        <Button
         hidden={hidden}
         id={id}
         label={label}
         onClick={onClick}
         text={text}
       />
+      ) : ''}
+      
     </div>
   )
 }

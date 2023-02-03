@@ -27,6 +27,7 @@ import Modal from '@/components/organisms/Modal'
 
 
 import * as masks from '@/assets/js/util/masks'
+import UserContext from '@/context/UserContext'
 
 
 
@@ -36,6 +37,8 @@ const ProjectPage = () => {
   const [project, setProject] = React.useState<any>()
   
   const [showModal, setShowModal] = React.useState<boolean>(false)
+
+  const { loggedIn } = React.useContext(UserContext)
 
   const fetchData = async () => {
     var data = JSON.stringify({
@@ -125,18 +128,21 @@ const ProjectPage = () => {
               text={`${project.Projeto.tipo_token}`}
               className="mt-5 mb-5"
             />
-            <Button
-              id="header-cta"
-              text="Investir"
-              label="Clique e cadastre-se na Lista VIP"
-              hidden={false}
-              disabled={false}
-              size={20}
-              onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
-                e.preventDefault()
-                setShowModal(!showModal)
-              }}
-            />
+              <Button
+                id="header-cta"
+                text="Investir"
+                label="Clique e cadastre-se na Lista VIP"
+                hidden={false}
+                disabled={false}
+                size={20}
+                onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  e.preventDefault()
+                  // if (!loggedIn) {
+                  //   location.href = '/login'
+                  // }
+                  setShowModal(!showModal)
+                }}
+              />
           </Column>
         </Section>
 

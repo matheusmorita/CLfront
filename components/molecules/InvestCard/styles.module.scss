@@ -8,39 +8,25 @@
     border-radius: 10px;
     padding-right: 10px;
     gap: 10px;
-    margin: 10px 10px 0 0;
-}
+    margin: 10px;
 
-.divImgDescription {
-    display: flex;
-    gap:  10px;
-    width: 100%;
-
-    &__letters {
-        margin-top: .5em;
+    &ImgDescription {
+        display: flex;
+        gap:  10px;
         width: 100%;
-    }
-
-    &__span {
-        color: $light;
-        font-size: 14px;
+    
+        &__letters {
+            margin-top: .5em;
+            width: 100%;
+        }
+    
+        &__span {
+            color: $light;
+            font-size: 14px;
+        }
     }
 }
 
 .projectImage {
     border-radius: 10px;
 }
-
-// .h1Test {
-//     position: absolute;
-//     height: 105px;
-//     color: #fff;
-//     font-weight: bold;
-//     transform: scaleX(-1);
-//     width: 21.5%;
-//     background-image: linear-gradient(to right, 
-//     rgba(0,0,0,1), 
-//     rgba(0,0,0,.7)
-//     rgba(0,0,0,.4)
-//     rgba(0,0,0,0))
-// }

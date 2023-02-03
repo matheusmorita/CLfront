@@ -2,6 +2,7 @@ import Styles from './styles.module.scss';
 
 import Button from "@/components/atoms/Button"
 import InputModal from "@/components/molecules/InputModal"
+import InvestCard from '@/components/molecules/InvestCard';
 
 interface BuyProjectInterface {
   setRealValue: any;
@@ -10,7 +11,11 @@ interface BuyProjectInterface {
   hiddenBuy: boolean;
   setHiddenBuyCoinLivre: any;
   hiddenBuyCoinLivre: boolean;
+  conditionalBuy: string;
+  projectSelected: any;
 }
+
+
 
 function BuyProject({
   setRealValue,
@@ -19,9 +24,31 @@ function BuyProject({
   hiddenBuy,
   setHiddenBuyCoinLivre,
   hiddenBuyCoinLivre,
+  conditionalBuy,
+  projectSelected,
 }: BuyProjectInterface) {
+
   return (
     <div className={Styles.divInput}>
+      {conditionalBuy !== 'CLNT-0' ? (
+        <div className={Styles.divInput__investCardExib}>
+          <InvestCard
+            hiddenButton={true}
+            hidden={false}
+            acronimo={projectSelected.Projeto.acronimo}
+            alt='Esta é uma imagem de um projeto a ser exibido'
+            emissor={projectSelected.Emissor.nome}
+            id={projectSelected.Projeto.acronimo}
+            label={'Clique para comprar'}
+            name={projectSelected.Projeto.nome}
+            onClick={() => {}}
+            src={projectSelected.Projeto.logo.url}
+            text='Comprar'
+            className={Styles.div}
+          />
+        </div>
+        
+      ) : ''}
       <p className={Styles.descriptionText}>Este é um texto de exemplo para dar descrição do projeto</p>
       <InputModal
         id="inputReal"
@@ -66,19 +93,35 @@ function BuyProject({
           size={25}
           className={Styles.divButtons__backButton}
         />
-        <Button
-          hidden={false}
-          id="generateQRButton"
-          label="Clique para gerar QR code"
-          onClick={(e: React.FormEvent<EventTarget>) => {
-            e.preventDefault()
-            SetHiddenBuy(!hiddenBuy)
-            setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
-          }}
-          text="Gerar QR Code"
-          size={25}
-          className={Styles.divButtons__QRButton}
-        />
+        {conditionalBuy === 'CLNT-0' ? (
+          <Button
+            hidden={false}
+            id="generateQRButton"
+            label="Clique para gerar QR code"
+            onClick={(e: React.FormEvent<EventTarget>) => {
+              e.preventDefault()
+              SetHiddenBuy(!hiddenBuy)
+              setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
+            }}
+            text="Gerar QR Code"
+            size={25}
+            className={Styles.divButtons__QRButton}
+          />
+        ) : (
+          <Button
+            hidden={false}
+            id="continueBuyProject"
+            label="Clique para continuar compra"
+            onClick={(e: React.FormEvent<EventTarget>) => {
+              e.preventDefault()
+              SetHiddenBuy(!hiddenBuy)
+              setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
+            }}
+            text="Continuar"
+            size={25}
+            className={Styles.divButtons__QRButton}
+          />
+        )}
       </div>
     </div>
   )

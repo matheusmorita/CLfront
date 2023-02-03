@@ -17,8 +17,11 @@ function Modal() {
   const [hiddenBuy, SetHiddenBuy] = React.useState<boolean>(false);
   const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
 
+  const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
+
   const [realValue, setRealValue] = React.useState<string>('');
   const [projects, setProjects] = React.useState<any>([])
+  const [projectSelected, setProjectSelected] = React.useState<any>();
 
   const { loggedIn } = React.useContext(UserContext)
 
@@ -26,9 +29,11 @@ function Modal() {
     fetchData(setProjects)
   }, [])
 
-  // const largura = window.innerWidth
-  // console.log(largura)
   
+
+
+  // const largura = window.innerWidth
+  // console.log(largura)  
 
   return (
     <main className={Styles.mainForm}>
@@ -43,13 +48,15 @@ function Modal() {
             realValue={realValue}
             setHiddenBuyCoinLivre={setHiddenBuyCoinLivre}
             setRealValue={setRealValue}
-            
+            conditionalBuy={conditionalBuy}
+            projectSelected={projectSelected}
           />
         ) : (
           <>
             <section className={Styles.sectionCard}>
               {!loggedIn[0] ? (
                 <InvestCard 
+                hiddenButton={false}
                 name="Token CoinLivre"
                 acronimo="CLNT"
                 emissor="CoinLivre"
@@ -59,14 +66,19 @@ function Modal() {
                 id={`CLNT-${0}`}
                 src={LogoImg}
                 text="Comprar"
-                onClick={(e: React.FormEvent<EventTarget>) => { 
+                className={Styles.div}
+                onClick={(e: any) => { 
                   e.preventDefault()
-                  setHiddenBuyCoinLivre(!hiddenBuyCoinLivre) 
+                  if (e.target.id) {
+                    setConditionalBuy(e.target.id)
+                  }
+                  SetHiddenBuy(!hiddenBuy)
                 }}
               />
               ) : ''}
               {projects.map((item: any, i: number) => (
                 <InvestCard
+                  hiddenButton={false}
                   key={item.Projeto.acronimo}
                   src={item.Projeto.logo.url}
                   alt='Esta é uma imagem de um projeto a ser exibido'
@@ -77,9 +89,13 @@ function Modal() {
                   hidden={true}
                   id={`${item.Projeto.acronimo}-${i+1}`}
                   label='Clique para comprar'
-                  onClick={(e: React.FormEvent<EventTarget>) => { 
+                  className={Styles.div}
+                  onClick={(e: any) => { 
                     e.preventDefault()
-                    console.log(e.target)
+                    if (e.target.id) {
+                      setConditionalBuy(e.target.id)
+                    }
+                    setProjectSelected(item)
                     SetHiddenBuy(!hiddenBuy)
                   }}
                 />
