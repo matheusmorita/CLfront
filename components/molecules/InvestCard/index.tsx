@@ -3,9 +3,6 @@ import Button from '@/components/atoms/Button';
 import Image from 'next/image';
 import ProgressBar from '../ProgressBar';
 
-import Logo from '@/assets/img/logo.webp';
-
-
 interface InvestCardInterface {
   text?: any;
   id: string;
@@ -33,7 +30,7 @@ function InvestCard({
   emissor,
   acronimo,
   hiddenButton,
-  className
+  className,
 }: InvestCardInterface) {
   return (
     <div className={className}>

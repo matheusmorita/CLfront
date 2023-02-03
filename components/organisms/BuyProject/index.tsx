@@ -3,6 +3,10 @@ import Styles from './styles.module.scss';
 import Button from "@/components/atoms/Button"
 import InputModal from "@/components/molecules/InputModal"
 import InvestCard from '@/components/molecules/InvestCard';
+import React from 'react';
+import Image from 'next/image';
+
+import Logo from '@/assets/img/logo.webp'
 
 interface BuyProjectInterface {
   setRealValue: any;
@@ -27,6 +31,8 @@ function BuyProject({
   conditionalBuy,
   projectSelected,
 }: BuyProjectInterface) {
+  const [hiddenBuyProject, setHiddenBuyProject] = React.useState<boolean>(false)
+  const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
 
   return (
     <div className={Styles.divInput}>
@@ -34,95 +40,133 @@ function BuyProject({
         <div className={Styles.divInput__investCardExib}>
           <InvestCard
             hiddenButton={true}
-            hidden={false}
             acronimo={projectSelected.Projeto.acronimo}
             alt='Esta é uma imagem de um projeto a ser exibido'
             emissor={projectSelected.Emissor.nome}
             id={projectSelected.Projeto.acronimo}
-            label={'Clique para comprar'}
             name={projectSelected.Projeto.nome}
-            onClick={() => {}}
             src={projectSelected.Projeto.logo.url}
-            text='Comprar'
             className={Styles.div}
           />
         </div>
-        
       ) : ''}
-      <p className={Styles.descriptionText}>Este é um texto de exemplo para dar descrição do projeto</p>
-      <InputModal
-        id="inputReal"
-        label="Insira o valor em reais"
-        placeholder="0000,00"
-        className={Styles.inputValue}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setRealValue(e.target.value)
-        }}
-      />
-      <InputModal
-        id="inputMoedaSelecionada"
-        label="Você receberá em CLNT"
-        placeholder="0000,00"
-        className={Styles.inputValue}
-        disabled={true}
-        value={realValue}
-      />
-
-      <div className={Styles.checkboxLabel}>
-        <input
-          id="checkboxInput"
-          type="checkbox"
-          className={Styles.checkboxInput}
-
-        />
-        <label
-          htmlFor="checkboxInput"
-          className={Styles.descriptionText}
-        >
-          Você concorda com os termos de uso da plataforma e está ciente dos usos das
-          ferramentas incorporados nessa aplicação?
-        </label>
-      </div>
-      <div className={Styles.divButtons}>
-        <Button
-          hidden={false}
-          id="backButton"
-          label="Clique para voltar"
-          onClick={() => { SetHiddenBuy(!hiddenBuy) }}
-          text="Voltar"
-          size={25}
-          className={Styles.divButtons__backButton}
-        />
-        {conditionalBuy === 'CLNT-0' ? (
+      {hiddenBuyProject ? (
+        <>
+          <p className={Styles.descriptionText}>
+            Este é um texto de exemplo para dar descrição do projeto
+            Este é um texto de exemplo para dar descrição do projeto
+            Este é um texto de exemplo para dar descrição do projeto
+            Este é um texto de exemplo para dar descrição do projeto
+          </p>
+          <Image
+            width={150}
+            height={150}
+            alt='Imagem de QR code'
+            src={Logo}
+            style={{ border: '2px solid #00EE8D' }}
+          />
+          <InputModal
+            id='inputQrcode'
+            label='Clique para copiar o código'
+            disabled={false}
+            placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
+            className={Styles.inputValueBuyProject}
+          />
           <Button
             hidden={false}
-            id="generateQRButton"
-            label="Clique para gerar QR code"
-            onClick={(e: React.FormEvent<EventTarget>) => {
-              e.preventDefault()
-              SetHiddenBuy(!hiddenBuy)
-              setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
-            }}
-            text="Gerar QR Code"
+            id={'paymentQRcodeBtn'}
+            label="Escaneie para efetuar o pagamento"
+            onClick={() => { }}
+            text={buyConfirmed ? "Pagamento realizado com sucesso" : "Aguardando confirmação do pagamento"}
+            disabled={true}
+            className={Styles.btnPayQrCode}
             size={25}
-            className={Styles.divButtons__QRButton}
           />
-        ) : (
-          <Button
-            hidden={false}
-            id="continueBuyProject"
-            label="Clique para continuar compra"
-            onClick={(e: React.FormEvent<EventTarget>) => {
-              e.preventDefault()
-              SetHiddenBuy(!hiddenBuy)
-              setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
+        </>
+      ) : (
+        <>
+          <p className={Styles.descriptionText}>
+            Este é um texto de exemplo para dar descrição do projeto
+            Este é um texto de exemplo para dar descrição do projeto
+            Este é um texto de exemplo para dar descrição do projeto
+            Este é um texto de exemplo para dar descrição do projeto
+          </p>
+          <InputModal
+            id="inputReal"
+            label={conditionalBuy !== 'CLNT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
+            placeholder="0000,00"
+            className={Styles.inputValue}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setRealValue(e.target.value)
             }}
-            text="Continuar"
-            size={25}
-            className={Styles.divButtons__QRButton}
           />
-        )}
-      </div>
+          <InputModal
+            id="inputMoedaSelecionada"
+            label={conditionalBuy !== 'CLNT-0' ? "Valor final" : "Você receberá em CLNT"}
+            placeholder="0000,00"
+            className={Styles.inputValue}
+            disabled={true}
+            value={realValue}
+          />
+
+          <div className={Styles.checkboxLabel}>
+            <input
+              id="checkboxInput"
+              type="checkbox"
+              className={Styles.checkboxInput}
+
+            />
+            <label
+              htmlFor="checkboxInput"
+              className={Styles.descriptionTextCheckbox}
+            >
+              Você concorda com os termos de uso da plataforma e está ciente dos usos das
+              ferramentas incorporados nessa aplicação?
+            </label>
+          </div>
+          <div className={Styles.divButtons}>
+            <Button
+              hidden={false}
+              id="backButton"
+              label="Clique para voltar"
+              onClick={() => { SetHiddenBuy(!hiddenBuy) }}
+              text="Voltar"
+              size={25}
+              className={Styles.divButtons__backButton}
+            />
+            {conditionalBuy === 'CLNT-0' ? (
+              <Button
+                hidden={false}
+                id="generateQRButton"
+                label="Clique para gerar QR code"
+                onClick={(e: React.FormEvent<EventTarget>) => {
+                  e.preventDefault()
+                  SetHiddenBuy(!hiddenBuy)
+                  setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
+                }}
+                text="Gerar QR Code"
+                size={25}
+                className={Styles.divButtons__QRButton}
+              />
+            ) : (
+              <Button
+                hidden={false}
+                id="continueBuyProject"
+                label="Clique para continuar compra"
+                onClick={(e: React.FormEvent<EventTarget>) => {
+                  e.preventDefault()
+                  setHiddenBuyProject(!hiddenBuyProject)
+                  // SetHiddenBuy(!hiddenBuy)
+                }}
+                text="Continuar"
+                size={25}
+                className={Styles.divButtons__QRButton}
+              />
+            )}
+          </div>
+        </>
+      )}
+
     </div>
   )
 }
