@@ -48,7 +48,6 @@ const ProjectPage = () => {
     await fetch('https://parseapi.back4app.com/parse/functions/retornar-projeto-id', config)
       .then(resp => resp.json())
       .then(json => {
-        console.log(json.result)
         setProject(json.result)
       })
       .catch(error => {
