@@ -20,5 +20,41 @@
     &__btnPayQrCode {
         margin: 2%;
         width: 95%;
+        border: 2px solid $primary;
+        background-color: $clay;
+        color: $primary;
+    }
+}
+
+.inputValue {
+    width: 90%;
+    background-color: $clay;
+    border: none;
+    border-bottom: 3px solid $primary;
+    border-radius: 5px;
+    padding-top: 30px;
+    padding-bottom: 5px;
+    font-size: 25px;
+    font-weight: 500;
+
+
+
+    &:focus {
+        box-shadow: 0 0 0 0;
+        outline: 0;
+    }
+
+    &::placeholder {
+        color: $white;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+
+    &[type="number"]::-webkit-outer-spin-button,
+    &[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
 }

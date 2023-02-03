@@ -5,8 +5,10 @@ import Styles from './styles.module.scss'
 import QRcodeImage from '@/assets/img/qrcode.webp'
 import Button from '@/components/atoms/Button'
 import InputModal from '@/components/molecules/InputModal'
+import React from 'react'
 
 function BuyCoinLivre () {
+    const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
     return (
         <div className={Styles.divBuy}>
             <HeaderModal />
@@ -26,13 +28,15 @@ function BuyCoinLivre () {
                 id='inputQrcode'
                 label='Clique para copiar o código'
                 disabled={true}
+                placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
+                className={Styles.inputValue}
             />
             <Button
                 hidden={false}
                 id={'paymentQRcodeBtn'}
                 label="Escaneie para efetuar o pagamento"
                 onClick={() => {}}
-                text="Aguardando confirmação do pagamento"
+                text={buyConfirmed ? "Pagamento realizado com sucesso" : "Aguardando confirmação do pagamento"}   
                 disabled={true}
                 className={Styles.divBuy__btnPayQrCode}
                 size={25}

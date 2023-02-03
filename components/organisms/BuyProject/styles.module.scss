@@ -1,0 +1,82 @@
+@import '@/styles/variables.scss';
+
+.divInput {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.descriptionText {
+  color: $light
+}
+
+.checkboxLabel {
+  display: flex;
+  gap: 10px;
+  width: 90%;
+}
+
+.checkboxInput {
+  width: 35px;
+
+  &:after {
+    background-color: $primary;
+  }
+}
+
+.divButtons {
+  display: flex;
+  margin: 10px 0;
+  gap: 10px;
+  width: 90%;
+
+  &__backButton {
+    background: none;
+    border: 2px solid $primary;
+    color: $white;
+    flex: 1;
+
+    &:hover {
+      background-color: $primary;
+      color: $darker;
+    }
+  }
+
+  &__QRButton {
+    flex: 1;
+  }
+}
+
+.inputValue {
+  width: 90%;
+  background-color: $clay;
+  border: none;
+  border-bottom: 3px solid $primary;
+  border-radius: 5px;
+  padding-top: 30px;
+  padding-bottom: 5px;
+  font-size: 25px;
+  font-weight: 500;
+  padding-left: 73%;
+
+
+  &:focus {
+      box-shadow: 0 0 0 0;
+      outline: 0;
+  }
+
+  &::placeholder {
+      color: $white;
+  }
+
+  &:disabled {
+      cursor: not-allowed;
+  }
+
+  &[type="number"]::-webkit-outer-spin-button,
+  &[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
+}

@@ -11,6 +11,7 @@ import LogoImg from '@/assets/img/logo.webp';
 
 import { fetchData } from '@/utils/fetchData';
 import UserContext from "@/context/UserContext";
+import BuyProject from "../BuyProject";
 
 function Modal() {
   const [hiddenBuy, SetHiddenBuy] = React.useState<boolean>(false);
@@ -25,7 +26,8 @@ function Modal() {
     fetchData(setProjects)
   }, [])
 
-
+  // const largura = window.innerWidth
+  // console.log(largura)
   
 
   return (
@@ -34,62 +36,15 @@ function Modal() {
         {hiddenBuyCoinLivre ? <BuyCoinLivre /> : ''}
         <HeaderModal />
         {hiddenBuy ? (
-          <div className={Styles.divInput}>
-            <p className={Styles.descriptionText}>Este é um texto de exemplo para dar descrição do projeto</p>
-            <InputModal
-              id="inputReal"
-              label="Insira o valor em reais"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setRealValue(e.target.value)
-              }}
-            />
-            <InputModal
-              id="inputMoedaSelecionada"
-              label="Você receberá em CLNT"
-              disabled={true}
-              value={realValue}
-            />
-
-            <div className={Styles.checkboxLabel}>
-              <input
-                id="checkboxInput"
-                type="checkbox"
-                className={Styles.checkboxInput}
-
-              />
-              <label
-                htmlFor="checkboxInput"
-                className={Styles.descriptionText}
-              >
-                Você concorda com os termos de uso da plataforma e está ciente dos usos das 
-                ferramentas incorporados nessa aplicação?
-              </label>
-            </div>
-            <div className={Styles.divButtons}>
-              <Button
-                hidden={false}
-                id="backButton"
-                label="Clique para voltar"
-                onClick={() => { SetHiddenBuy(!hiddenBuy) }}
-                text="Voltar"
-                size={25}
-                className={Styles.divButtons__backButton}
-              />
-              <Button
-                hidden={false}
-                id="generateQRButton"
-                label="Clique para gerar QR code"
-                onClick={(e: React.FormEvent<EventTarget>) => { 
-                  e.preventDefault()
-                  SetHiddenBuy(!hiddenBuy)
-                  setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
-                }}
-                text="Gerar QR Code"
-                size={25}
-                className={Styles.divButtons__QRButton}
-              />
-            </div>
-          </div>
+          <BuyProject
+            SetHiddenBuy={SetHiddenBuy}
+            hiddenBuy={hiddenBuy}
+            hiddenBuyCoinLivre={hiddenBuyCoinLivre}
+            realValue={realValue}
+            setHiddenBuyCoinLivre={setHiddenBuyCoinLivre}
+            setRealValue={setRealValue}
+            
+          />
         ) : (
           <>
             <section className={Styles.sectionCard}>
@@ -122,7 +77,11 @@ function Modal() {
                   hidden={true}
                   id={`${item.Projeto.acronimo}-${i+1}`}
                   label='Clique para comprar'
-                  onClick={() => { SetHiddenBuy(!hiddenBuy) }}
+                  onClick={(e: React.FormEvent<EventTarget>) => { 
+                    e.preventDefault()
+                    console.log(e.target)
+                    SetHiddenBuy(!hiddenBuy)
+                  }}
                 />
               ))}
             </section>

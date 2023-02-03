@@ -10,6 +10,8 @@ interface InputModalInterface {
   disabled?: boolean;
   onChange?: any;
   maxLength?: number;
+  placeholder?: string;
+  className?: any;
 }
 
 function InputModal({ 
@@ -19,12 +21,14 @@ function InputModal({
   disabled,
   onChange,
   maxLength,
+  placeholder,
+  className,
 }: InputModalInterface ) {
   return (
     <div className={Styles.inputValueRs}>
       <input
         // mask='9999,99'
-        className={Styles.inputValue}
+        className={className}
         // step="0.01"
         // min="0.01"
         type='string'
@@ -32,7 +36,7 @@ function InputModal({
         value={value}
         onChange={onChange}
         // dir='rtl'
-        placeholder='0000,00'
+        placeholder={placeholder}
         id={id}
         disabled={disabled}
       />

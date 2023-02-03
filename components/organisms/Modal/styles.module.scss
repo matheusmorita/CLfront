@@ -35,23 +35,6 @@
   }
 }
 
-.divInput {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.descriptionText {
-  color: $light
-}
-
-.checkboxLabel {
-  display: flex;
-  gap: 10px;
-  width: 90%;
-}
-
 .inputValores {
   width: 520px;
   margin: 10px 0;
@@ -63,34 +46,3 @@
   }
 }
 
-
-.checkboxInput {
-  width: 35px;
-
-  &:after {
-    background-color: $primary;
-  }
-}
-
-.divButtons {
-  display: flex;
-  margin: 10px 0;
-  gap: 10px;
-  width: 90%;
-
-  &__backButton {
-    background: none;
-    border: 2px solid $primary;
-    color: $white;
-    flex: 1;
-
-    &:hover {
-      background-color: $primary;
-      color: $darker;
-    }
-  }
-
-  &__QRButton {
-    flex: 1;
-  }
-}
