@@ -50,7 +50,7 @@ const ProjectPage = () => {
     await fetch('https://parseapi.back4app.com/parse/functions/retornar-projeto-id', config)
       .then(resp => resp.json())
       .then(json => {
-        console.log(json.result)
+        console.log(json)
         setProject(json.result)
       })
       .catch(error => {
@@ -86,6 +86,7 @@ const ProjectPage = () => {
           justify='center'
           hidden={false}
           className={`${Styles.background} ${Styles.intro} pt-5 pt-lg-0 d-flex align-items-center pb-5`}
+          bgImage={project.Projeto.imgTipo?.url}
         >
           <Column
             media='lg'
@@ -254,20 +255,27 @@ const ProjectPage = () => {
                   badge={{ type: "success", message: "DESTAQUE" }}
                   contractLink={project.Projeto.contrato_token}
                 />
-                {project.Lotes.length > 0 ? (
-                  <DataShow
-                    title={"Captação"}
-                    value={project.Lotes[0].captacao}
-                    highlight={true}
-                    badge={{ type: "success", message: "DESTAQUE" }}
-                  /> ) : (
-                    <DataShow
-                      title={"Captação"} 
-                      value={'N/A'} 
-                      highlight={true} 
-                      badge={{ type: "success", message: "DESTAQUE" }}
-                    />
-                  )}
+              )}
+              <DataShow
+                title={"Contrato"}
+                value={"N/A"}
+                highlight={true}
+                badge={{
+                  type: "success",
+                  message: "DESTAQUE"
+                }}
+              />
+              {project.Lotes.length > 0 && (
+                <DataShow
+                  title={"Captação"}
+                  value={`${project.Lotes[0].captacao}/${project.Lotes[0].qtdeDeTokens}`}
+                  highlight={true}
+                  badge={{
+                    type: "success",
+                    message: project.Lotes[0].status
+                  }}
+                />
+              )}
             </div>
           </Column>
         </Section>

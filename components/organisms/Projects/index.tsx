@@ -41,7 +41,6 @@ const Projects = () => {
       {
         projects &&
         projects.map((item: any, index: number) => {
-
           return (
             <Project
             id={item.Projeto.acronimo}
