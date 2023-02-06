@@ -27,7 +27,7 @@ const Section = ({ id, label, desc, hidden, className, children, justify, bgImag
         id={`${id}__container`}
         className="container"
       >
-        <div className={`row d-flex justify-content-${justify}`}>
+        <div className={`row d-flex align-items-start justify-content-${justify}`}>
           {children}
         </div>
       </div>

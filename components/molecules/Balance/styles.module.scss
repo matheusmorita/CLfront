@@ -1,0 +1,27 @@
+.balance {
+    background: rgba($color: #fff, $alpha: .1);
+    backdrop-filter: blur(2rem);
+    padding: 1rem;
+    border-radius: 8px;
+
+    &__title {
+        font-size: 20px;
+        margin-bottom: .5rem;
+    }
+
+    &__value {
+        font-size: 30px;
+        line-height: 30px;
+        margin: 0;
+
+        .shown {
+            font-size: 18px;
+            line-height: 18px;
+            font-weight: 500;
+        }
+    }
+
+    @media (max-width: 992px) {
+        margin-bottom: 1rem;
+    }
+}

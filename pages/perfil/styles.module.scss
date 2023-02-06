@@ -1,0 +1,122 @@
+@import '@/styles/variables.scss';
+
+.profile {
+    width: 100%;
+
+    @media (max-width: 992px) {
+        display: none;
+    }
+
+    &__header {
+        overflow: hidden;
+        border-radius: 8px;
+        background: $darker;
+        position: relative;
+    }
+
+    &__background {
+        height: 150px;
+        border-radius: 8px;
+        background: url(../../assets/img/BG.webp);
+        background-size: cover;
+    }
+
+    &__picture {
+        width: 100px;
+        height: 100px;
+        border-radius: 8px;
+        position: absolute;
+        left: 12px;
+        bottom: 12px;
+        background: url(../../assets/img/placeholder.webp);
+        background-size: cover;
+    }
+
+    &__info {
+        padding: .5rem 0;
+
+        span {
+            display: block;
+            margin-left: 124px;
+
+            &.tiny {
+                font-size: 12px;
+            }
+        }
+    }
+
+    &__body {
+        .actions {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            &__item {
+                padding: .75rem;
+                font-size: 18px;
+                background: $darker;
+                border-radius: 6px;
+                margin: .5rem 0;
+                color: $light;
+                transition: .2s;
+                cursor: pointer;
+
+                &.danger {
+                    color: $error;
+                    border: 1px solid $error;
+                    background: rgba($color: $error, $alpha: .2);
+
+                    &:hover {
+                        background: rgba($color: $error, $alpha: .4);
+                    }
+                }
+
+                &:hover {
+                    background: $clay;
+                }
+            }
+        }
+    }
+}
+
+.wallet {
+    background: $clay;
+    border-radius: 8px;
+    padding: 1rem;
+
+    @media (min-width: 992px) {
+        background: rgba($color: #fff, $alpha: .1);
+        backdrop-filter: blur(2rem);
+    }
+
+    &__body {
+        margin-top: 1rem;
+        max-height: 380px;
+        overflow-x: hidden;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+            background: $darker;
+            border-radius: 1rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $primary;
+            border-radius: 1rem;
+        }
+
+        @media (max-width: 992px) {
+            margin-top: 0;
+        }
+    }
+}
+
+.bottom {
+    @media (max-width: 992px) {
+        margin-bottom: 68px;
+    }
+}
+
+.intro {
+    background: linear-gradient(to bottom, $black, $black, rgba($color: #042317, $alpha: 1));
+}
