@@ -234,7 +234,7 @@ const ProjectPage = () => {
                 /> ) : ( 
                 <DataShow
                   title={"Valor do Token"}
-                  value={masks.getCurrencyMask('N/A')}
+                  value={'N/A'}
                   contractLink={project.Projeto.contrato_token}
                 /> )} 
                 
