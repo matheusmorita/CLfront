@@ -6,9 +6,15 @@ import InvestCardMobile from '@/organisms/InvestCardMobile';
 import LogoImg from '@/assets/img/logo.webp'
 import { fetchData } from '@/utils/fetchData';
 import FooterMobileModal from '../FooterMobileModal';
+import CloseButton from '@/components/atoms/CloseButton';
+import ModalContext from '@/context/ModalContext';
 
-function MobileModal() {
+function MobileModal(showOrNot: any) {
   const [projects, setProjects] = React.useState<any>([])
+
+  const { 
+    modalMobileControl: [showMobileModal, setShowMobileModal]
+  } = React.useContext(ModalContext)
 
   React.useEffect(() => {
     fetchData(setProjects)
@@ -17,6 +23,15 @@ function MobileModal() {
   return (
     <main className={Styles.mainMobileModal}>
       <section className={Styles.sectionItems}>
+      <div className={Styles.closeButtonDiv}>
+        <CloseButton
+          className={Styles.closeButton}
+          onClick={(e: any) => {
+            e.preventDefault()
+            setShowMobileModal(false)
+          }}
+        />
+      </div>
         <HeaderModalMobile />
         <section className={Styles.sectionCard}>
           <InvestCardMobile

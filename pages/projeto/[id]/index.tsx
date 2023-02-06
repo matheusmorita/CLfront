@@ -83,14 +83,13 @@ const ProjectPage = () => {
       <ModalContext.Provider
         value={{
           modalControl: [showModal, setShowModal],
+          modalMobileControl: [showMobileModal, setShowMobileModal]
         }}
       >
         {showMobileModal ? (<MobileModal />) : ''}
         {showModal ? (
           <section className={Styles.divFormModal}>
-          <Modal
-            showOrNot={setShowModal}
-          />
+          <Modal />
         </section>
         ) : ''}
         <Frame
