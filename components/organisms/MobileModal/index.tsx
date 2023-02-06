@@ -9,8 +9,16 @@ import FooterMobileModal from '../FooterMobileModal';
 import CloseButton from '@/components/atoms/CloseButton';
 import ModalContext from '@/context/ModalContext';
 
+import BuyProjectMobile from '../BuyProjectMobile';
+
 function MobileModal(showOrNot: any) {
   const [projects, setProjects] = React.useState<any>([])
+  const [projectSelected, setProjectSelected] = React.useState<any>();
+
+  const [hiddenBuy, SetHiddenBuy] = React.useState<boolean>(false);
+  const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
+  const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
+  const [realValue, setRealValue] = React.useState<string>('');
 
   const { 
     modalMobileControl: [showMobileModal, setShowMobileModal]
@@ -33,7 +41,19 @@ function MobileModal(showOrNot: any) {
         />
       </div>
         <HeaderModalMobile />
-        <section className={Styles.sectionCard}>
+        {hiddenBuy ? (
+          <BuyProjectMobile
+          SetHiddenBuy={SetHiddenBuy}
+          hiddenBuy={hiddenBuy}
+          hiddenBuyCoinLivre={hiddenBuyCoinLivre}
+          realValue={realValue}
+          setHiddenBuyCoinLivre={setHiddenBuyCoinLivre}
+          setRealValue={setRealValue}
+          conditionalBuy={conditionalBuy}
+          projectSelected={projectSelected}
+        />
+        ) : (
+          <section className={Styles.sectionCard}>
           <InvestCardMobile
             hiddenButton={false}
             name="Token CoinLivre"
@@ -62,10 +82,16 @@ function MobileModal(showOrNot: any) {
               id={`${item.Projeto.acronimo}-${i + 1}`}
               label='Clique para comprar'
               className={Styles.div}
-              onClick={() => { }}
+              onClick={(e: any) => { 
+                e.preventDefault();
+                SetHiddenBuy(!hiddenBuy)
+                setProjectSelected(item)
+              }}
             />
           ))}
         </section>
+        )}
+        
       </section>
       <div style={{width: '100%'}}>
         <FooterMobileModal />

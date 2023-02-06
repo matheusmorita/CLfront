@@ -34,7 +34,6 @@ function InvestCard({
 }: InvestCardInterface) {
   return (
     <div className={className}>
-      {/* <div className={Styles.divBackgroundGradient}></div> */}
       <div className={Styles.divImgDescription}>
         <Image
           src={src}
