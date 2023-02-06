@@ -5,8 +5,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  top: 10%;
-  right: 10%;
   max-width: 700px;
   max-height: 650px;
   background: $gray;
@@ -14,6 +12,25 @@
   z-index: 1032;
   opacity: 99%;
   padding: 10px;
+}
+
+.closeButtonDiv {
+  display: flex;
+  justify-content: flex-end;
+  width: 95%;
+}
+
+.closeButton {
+  background: none;
+  color: white;
+  border: 1px solid $gray;
+
+  margin: 1px;
+
+  &:hover {
+    border: 1px solid $primary;
+    transition: .5s;
+  }
 }
 
 .sectionCard {

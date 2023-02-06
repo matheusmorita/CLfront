@@ -24,6 +24,7 @@ import TabNavigation from '@/components/organisms/TabNavigation'
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 import Modal from '@/components/organisms/Modal'
+import ModalContext from '@/context/ModalContext'
 
 
 import * as masks from '@/assets/js/util/masks'
@@ -73,7 +74,19 @@ const ProjectPage = () => {
 
   if (project) {
     return (
-      <Frame
+      <ModalContext.Provider
+        value={{
+          modalControl: [showModal, setShowModal],
+        }}
+      >
+        {showModal ? (
+          <section className={Styles.divFormModal}>
+            <Modal
+              showOrNot={setShowModal}
+            />
+          </section>
+        ) : ''}
+        <Frame
         id={`projeto-${id}`}
         role='main'
         label='Página de projeto'
@@ -85,7 +98,6 @@ const ProjectPage = () => {
           <meta name="robots" content="index, follow" />
           <meta name="description" content="CoinLivre | Projetos." />
         </Head>
-
 
         <Section
           id='introducao'
@@ -145,8 +157,6 @@ const ProjectPage = () => {
               />
           </Column>
         </Section>
-
-        {showModal ? <Modal /> : ''}
 
         <TabNavigation
           links={[
@@ -532,6 +542,7 @@ const ProjectPage = () => {
           </Column>
         </Section>
       </Frame>
+      </ModalContext.Provider>
     )
   }
 }
