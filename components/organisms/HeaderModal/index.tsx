@@ -1,6 +1,6 @@
+import React from 'react'
 import Button from "@/components/atoms/Button";
 import Styles from './styles.module.scss';
-import React from 'react'
 
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';

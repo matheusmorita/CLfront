@@ -5,6 +5,7 @@ import InvestCardMobile from '@/organisms/InvestCardMobile';
 
 import LogoImg from '@/assets/img/logo.webp'
 import { fetchData } from '@/utils/fetchData';
+import FooterMobileModal from '../FooterMobileModal';
 
 function MobileModal() {
   const [projects, setProjects] = React.useState<any>([])
@@ -50,10 +51,9 @@ function MobileModal() {
             />
           ))}
         </section>
-        <h1>Olá, sou o Modal mobile</h1>
       </section>
-      <div>
-        Buttons
+      <div style={{width: '100%'}}>
+        <FooterMobileModal />
       </div>
     </main>
   )

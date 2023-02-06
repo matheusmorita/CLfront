@@ -9,13 +9,14 @@
   padding: 20px;
   gap: 10px;
   margin: 10px;
-  background-image: linear-gradient(to bottom, rgb(0, 0, 0, 0), #0d0d0d);
+  background-image: linear-gradient(to bottom, rgb(0, 0, 0, 0), $darker);
 }
 
 .sectionCard {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 85vh;
+  height: 70vh;
+  margin: 20px;
 
   &::-webkit-scrollbar {
     width: 10px;
@@ -34,14 +35,14 @@
 
 .mainMobileModal {
   background-color: $darker;
+  height: 100vh;
   position: fixed;
   width: 100%;
-  height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   padding: 10px;
-  z-index: 1032;
+  flex-direction: column;
+  justify-content: space-around;
+  z-index: 1033;
 }
 
 .sectionItems {
