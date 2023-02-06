@@ -26,6 +26,25 @@
     }
 }
 
+.closeButtonDiv {
+    display: flex;
+    justify-content: flex-end;
+    width: 95%;
+}
+
+.closeButton {
+    background: none;
+    color: white;
+    border: 1px solid $gray;
+
+    margin: 1px;
+
+    &:hover {
+        border: 1px solid $primary;
+        transition: .5s;
+    }
+}
+
 .divButtonsResponse {
     display: flex; 
     flex-direction: column; 

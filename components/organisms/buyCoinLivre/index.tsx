@@ -7,13 +7,28 @@ import QRcodeImage from '@/assets/img/qrcode.webp'
 
 import Button from '@/components/atoms/Button'
 import InputModal from '@/components/molecules/InputModal'
+import CloseButton from '@/components/atoms/CloseButton'
+
+import ModalContext from '@/context/ModalContext'
 
 function BuyCoinLivre() {
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
 
+  const { modalControl: [showModal, setShowModal] } = React.useContext(ModalContext)
+
+
 
   return (
     <div className={Styles.divBuy}>
+      <div className={Styles.closeButtonDiv}>
+        <CloseButton
+          className={Styles.closeButton}
+          onClick={(e: any) => {
+            e.preventDefault()
+            setShowModal(false)
+          }}
+        />
+      </div>
       <HeaderModal />
       <p className={Styles.divBuy__text}>
         Este é um texto de exemplo para ser passado alguma informação relevante relacionada

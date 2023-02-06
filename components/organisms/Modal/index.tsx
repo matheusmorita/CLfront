@@ -50,8 +50,8 @@ function Modal(showOrNot: any) {
             setShowModal(false)
           }}
         />
-
       </div>
+
       {hiddenBuyCoinLivre ? <BuyCoinLivre /> : ''}
       <HeaderModal />
       {hiddenBuy ? (
