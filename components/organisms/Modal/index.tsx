@@ -1,7 +1,7 @@
 import React from "react";
 import Styles from './styles.module.scss';
 
-import HeaderModal from "@/components/molecules/HeaderModal";
+import HeaderModal from "@/components/organisms/HeaderModal";
 import InvestCard from "@/components/molecules/InvestCard";
 import Button from "@/components/atoms/Button";
 import InputModal from "@/components/molecules/InputModal";
@@ -33,12 +33,6 @@ function Modal(showOrNot: any) {
   React.useEffect(() => {
     fetchData(setProjects)
   }, [])
-
-
-
-
-  // const largura = window.innerWidth
-  // console.log(largura)  
 
   return (
     <form className={Styles.form}>

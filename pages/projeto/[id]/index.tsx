@@ -26,6 +26,8 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import Modal from '@/components/organisms/Modal'
 import ModalContext from '@/context/ModalContext'
 
+import MobileModal from '@/components/organisms/MobileModal'
+
 
 import * as masks from '@/assets/js/util/masks'
 import UserContext from '@/context/UserContext'
@@ -38,6 +40,8 @@ const ProjectPage = () => {
   const [project, setProject] = React.useState<any>()
   
   const [showModal, setShowModal] = React.useState<boolean>(false)
+  const [showMobileModal, setShowMobileModal] = React.useState<boolean>(false)
+  const [lengthWindow, setLengthWindow] = React.useState<number>(0)
 
   const { loggedIn } = React.useContext(UserContext)
 
@@ -70,6 +74,8 @@ const ProjectPage = () => {
   React.useEffect(() => {
     if (!id) return
     fetchData()
+    const largura = window.innerWidth
+    setLengthWindow(largura)
   }, [router])
 
   if (project) {
@@ -79,12 +85,13 @@ const ProjectPage = () => {
           modalControl: [showModal, setShowModal],
         }}
       >
+        {showMobileModal ? (<MobileModal />) : ''}
         {showModal ? (
           <section className={Styles.divFormModal}>
-            <Modal
-              showOrNot={setShowModal}
-            />
-          </section>
+          <Modal
+            showOrNot={setShowModal}
+          />
+        </section>
         ) : ''}
         <Frame
         id={`projeto-${id}`}
@@ -152,7 +159,10 @@ const ProjectPage = () => {
                   // if (!loggedIn) {
                   //   location.href = '/login'
                   // }
-                  setShowModal(!showModal)
+                  if (lengthWindow <= 600) {
+                    return setShowMobileModal(!showMobileModal)
+                  }
+                  return setShowModal(!showModal)
                 }}
               />
           </Column>

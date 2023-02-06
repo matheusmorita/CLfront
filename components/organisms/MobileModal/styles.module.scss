@@ -1,0 +1,54 @@
+@import '@/styles/variables.scss';
+
+.div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 95%;
+  border-radius: 10px;
+  padding: 20px;
+  gap: 10px;
+  margin: 10px;
+  background-image: linear-gradient(to bottom, rgb(0, 0, 0, 0), #0d0d0d);
+}
+
+.sectionCard {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 85vh;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $primary;
+    border-radius: 20px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $clay;
+    border-radius: 20px;
+  }
+}
+
+.mainMobileModal {
+  background-color: $darker;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  z-index: 1032;
+}
+
+.sectionItems {
+  background-color: $gray;
+  width: 100%;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

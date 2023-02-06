@@ -1,5 +1,5 @@
 import React from 'react'
-import HeaderModal from '@/components/molecules/HeaderModal'
+import HeaderModal from '@/components/organisms/HeaderModal'
 import Image from 'next/image'
 import Styles from './styles.module.scss'
 
