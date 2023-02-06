@@ -1,15 +1,16 @@
 import React from 'react'
 
 type Props = {
-    children: any
+  children: any,
+  className: string,
 }
 
-const Row = ({ children }: Props) => {
-    return (
-        <div className='row'>
-            {children}
-        </div>
-    )
+const Row = ({ children, className }: Props) => {
+  return (
+    <div className={`row ${className}`}>
+      {children}
+    </div>
+  )
 }
 
 export default Row
