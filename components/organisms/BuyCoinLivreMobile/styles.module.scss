@@ -2,13 +2,11 @@
 
 .divBuy {
     width: 100%;
-    height: 100%;
     position: absolute;
     background-color: $gray;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     border-radius: 12px;
 
 
@@ -43,6 +41,14 @@
         border: 1px solid $primary;
         transition: .5s;
     }
+}
+
+.labelValue {
+    position: absolute;
+    font-size: 12px;
+    left: 3.5em;
+    margin-top: .5em;
+    color: $primary;
 }
 
 .divButtonsResponse {

@@ -47,6 +47,14 @@
   }
 }
 
+.labelValue {
+  position: absolute;
+  font-size: 12px;
+  left: 4em;
+  margin-top: .5em;
+  color: $primary;
+}
+
 .descriptionText {
   color: $light;
   width: 90%;
@@ -77,7 +85,7 @@
   display: flex;
   margin: 10px 0;
   gap: 10px;
-  width: 95%;
+  width: 90%;
 
   &__backButton {
     background: none;

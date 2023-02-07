@@ -110,7 +110,7 @@ function MobileModal() {
         )}
         
       </section>
-      <div style={{width: '100%'}}>
+      <div className={Styles.footerStyle}>
         <FooterMobileModal />
       </div>
     </main>

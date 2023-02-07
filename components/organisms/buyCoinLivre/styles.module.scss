@@ -26,6 +26,14 @@
     }
 }
 
+.labelValue {
+    position: absolute;
+    font-size: 12px;
+    left: 3.5em;
+    margin-top: .5em;
+    color: $primary;
+}
+
 .closeButtonDiv {
     display: flex;
     justify-content: flex-end;

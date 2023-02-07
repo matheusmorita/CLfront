@@ -12,6 +12,7 @@ interface InputModalInterface {
   maxLength?: number;
   placeholder?: string;
   className?: any;
+  classNameLabel?: any;
 }
 
 function InputModal({ 
@@ -22,6 +23,7 @@ function InputModal({
   onChange,
   placeholder,
   className,
+  classNameLabel,
 }: InputModalInterface ) {
   return (
     <div className={Styles.inputValueRs}>
@@ -34,7 +36,7 @@ function InputModal({
         id={id}
         disabled={disabled}
       />
-      <label className={Styles.labelValue} htmlFor="inputValueReal">{label}</label>
+      <label className={classNameLabel} htmlFor="inputValueReal">{label}</label>
     </div>
   )
 }

@@ -49,6 +49,7 @@ function BuyCoinLivre() {
         disabled={true}
         placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
         className={Styles.inputValue}
+        classNameLabel={Styles.labelValue}
       />
       <Button
         hidden={false}

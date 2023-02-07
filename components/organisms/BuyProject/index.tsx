@@ -142,6 +142,7 @@ function BuyProject({
                 disabled={false}
                 placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
                 className={Styles.inputValueBuyProject}
+                classNameLabel={Styles.labelValue}
               />
               <Button
                 hidden={false}
@@ -167,6 +168,7 @@ function BuyProject({
                 label={conditionalBuy !== 'CLNT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
                 placeholder="0000,00"
                 className={Styles.inputValue}
+                classNameLabel={Styles.labelValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setRealValue(e.target.value)
                 }}
@@ -176,6 +178,7 @@ function BuyProject({
                 label={conditionalBuy !== 'CLNT-0' ? "Valor final" : "Você receberá em CLNT"}
                 placeholder="0000,00"
                 className={Styles.inputValue}
+                classNameLabel={Styles.labelValue}
                 disabled={true}
                 value={realValue}
               />

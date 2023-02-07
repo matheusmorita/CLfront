@@ -37,15 +37,23 @@
   color: $primary;
 }
 
+.labelValue {
+  position: absolute;
+  font-size: 12px;
+  left: 3.5em;
+  margin-top: .5em;
+  color: $primary;
+}
+
 .divInput {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  height: 70vh;
+  margin: 10px 0;
 
   &__investCardExib {
-    width: 90%;
+    width: 95%;
   }
 }
 
@@ -63,12 +71,14 @@
 
 .checkboxLabel {
   display: flex;
+  justify-content: space-between;
   gap: 10px;
   width: 90%;
+
 }
 
 .checkboxInput {
-  width: 35px;
+  width: 20px;
 
   &:after {
     background-color: $primary;
@@ -77,9 +87,10 @@
 
 .divButtons {
   display: flex;
-  margin: 10px 0;
-  gap: 10px;
-  width: 95%;
+  flex-direction: column;
+  // margin: 10px 0;
+  // gap: 10px;
+  width: 90%;
   
 
   &__backButton {
@@ -117,7 +128,7 @@
   padding-bottom: 5px;
   font-size: 25px;
   font-weight: 500;
-  padding-left: 65%;
+  padding-left: 60%;
 
 
   &:focus {

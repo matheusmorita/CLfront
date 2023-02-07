@@ -50,13 +50,14 @@ function BuyCoinLivreMobile() {
         disabled={true}
         placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
         className={Styles.inputValue}
+        classNameLabel={Styles.labelValue}
       />
       <Button
         hidden={false}
         id={'paymentQRcodeBtn'}
         label="Escaneie para efetuar o pagamento"
         onClick={() => { }}
-        text={buyConfirmed ? "Pagamento realizado com sucesso" : "Aguardando confirmação do pagamento"}
+        text={buyConfirmed ? "Sucesso" : "Aguardando"}
         disabled={true}
         className={Styles.divBuy__btnPayQrCode}
         size={25}

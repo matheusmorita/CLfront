@@ -3,8 +3,6 @@ import Styles from './styles.module.scss';
 
 import HeaderModal from "@/components/organisms/HeaderModal";
 import InvestCard from "@/components/molecules/InvestCard";
-import Button from "@/components/atoms/Button";
-import InputModal from "@/components/molecules/InputModal";
 import BuyCoinLivre from "../buyCoinLivre";
 
 import CloseButton from "@/components/atoms/CloseButton";
@@ -28,7 +26,7 @@ function Modal() {
 
   const { loggedIn } = React.useContext(UserContext)
 
-  const { modalControl: [showModal, setShowModal] } = React.useContext(ModalContext)
+  const { modalControl: [, setShowModal] } = React.useContext(ModalContext)
 
   React.useEffect(() => {
     fetchData(setProjects)

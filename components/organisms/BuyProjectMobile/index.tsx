@@ -6,7 +6,6 @@ import Styles from './styles.module.scss';
 
 import Image from "next/image"
 import Logo from '@/assets/img/logo.webp'
-import InvestCard from '@/components/molecules/InvestCard';
 import InputModal from '@/components/molecules/InputModal';
 import InvestCardMobile from '../InvestCardMobile';
 
@@ -70,7 +69,7 @@ function BuyProjectMobile({ setRealValue,
               label="Clique para voltar"
               onClick={() => { SetHiddenBuy(!hiddenBuy) }}
               text="Voltar"
-              size={25}
+              size={20}
               className={Styles.divButtons__backButton}
             />
             {conditionalBuy === 'CLNT-0' ? (
@@ -84,7 +83,7 @@ function BuyProjectMobile({ setRealValue,
                   setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                 }}
                 text="Gerar QR Code"
-                size={30}
+                size={20}
                 className={Styles.divButtons__QRButton}
               />
             ) : (
@@ -98,7 +97,7 @@ function BuyProjectMobile({ setRealValue,
                   setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                 }}
                 text="Continuar"
-                size={25}
+                size={20}
                 className={Styles.divButtons__QRButton}
               />
             )}
@@ -142,31 +141,32 @@ function BuyProjectMobile({ setRealValue,
                 disabled={false}
                 placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
                 className={Styles.inputValueBuyProject}
+                classNameLabel={Styles.labelValue}
               />
               <Button
                 hidden={false}
                 id={'paymentQRcodeBtn'}
                 label="Escaneie para efetuar o pagamento"
                 onClick={() => { }}
-                text={buyConfirmed ? "Pagamento realizado com sucesso" : "Aguardando confirmação do pagamento"}
+                text={buyConfirmed ? "Sucesso" : "Aguardando"}
                 disabled={true}
                 className={Styles.btnPayQrCode}
-                size={25}
+                size={20}
               />
             </>
           ) : (
             <>
               <p className={Styles.descriptionText}>
-                Este é um texto de exemplo para dar descrição do projeto
-                Este é um texto de exemplo para dar descrição do projeto
-                Este é um texto de exemplo para dar descrição do projeto
-                Este é um texto de exemplo para dar descrição do projeto
+              Ao comprar Tokens CNLT, você receberá o equivalente 
+              em Tokens da quantia escolhida, deduzida da taxa da CoinLivre (de X%) 
+              de acordo com os seus benefícios
               </p>
               <InputModal
                 id="inputReal"
                 label={conditionalBuy !== 'CLNT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
                 placeholder="0000,00"
                 className={Styles.inputValue}
+                classNameLabel={Styles.labelValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setRealValue(e.target.value)
                 }}
@@ -176,6 +176,7 @@ function BuyProjectMobile({ setRealValue,
                 label={conditionalBuy !== 'CLNT-0' ? "Valor final" : "Você receberá em CLNT"}
                 placeholder="0000,00"
                 className={Styles.inputValue}
+                classNameLabel={Styles.labelValue}
                 disabled={true}
                 value={realValue}
               />
@@ -191,8 +192,8 @@ function BuyProjectMobile({ setRealValue,
                   htmlFor="checkboxInput"
                   className={Styles.descriptionTextCheckbox}
                 >
-                  Você concorda com os termos de uso da plataforma e está ciente dos usos das
-                  ferramentas incorporados nessa aplicação?
+                  Eu concordo com os termos de uso e política de privacidade da CoinLivre.
+                  Estou ciente de que a conta de origem do depósito deve estar no meu nome e CPF.
                 </label>
               </div>
               <div className={Styles.divButtons}>
@@ -202,7 +203,7 @@ function BuyProjectMobile({ setRealValue,
                   label="Clique para voltar"
                   onClick={() => { SetHiddenBuy(!hiddenBuy) }}
                   text="Voltar"
-                  size={25}
+                  size={20}
                   className={Styles.divButtons__backButton}
                 />
                 {conditionalBuy === 'CLNT-0' ? (
@@ -216,7 +217,7 @@ function BuyProjectMobile({ setRealValue,
                       setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                     }}
                     text="Gerar QR Code"
-                    size={25}
+                    size={20}
                     className={Styles.divButtons__QRButton}
                   />
                 ) : (
@@ -231,7 +232,7 @@ function BuyProjectMobile({ setRealValue,
                       // SetHiddenBuy(!hiddenBuy)
                     }}
                     text="Continuar"
-                    size={25}
+                    size={20}
                     className={Styles.divButtons__QRButton}
                   />
                 )}
