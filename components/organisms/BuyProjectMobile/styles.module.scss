@@ -8,6 +8,7 @@
   border-radius: 10px;
   padding-right: 10px;
   gap: 10px;
+  // height: 90vh;
 
   &ImgDescription {
       display: flex;
@@ -97,6 +98,8 @@
     background: none;
     border: 2px solid $primary;
     color: $white;
+    padding: 15px 0;
+    margin: 8px 0;
     flex: 1;
 
     &:hover {
@@ -107,6 +110,8 @@
 
   &__QRButton {
     flex: 1;
+    padding: 15px 0;
+    margin: 8px 0;
   }
 }
 

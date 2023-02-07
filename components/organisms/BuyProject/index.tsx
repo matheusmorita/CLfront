@@ -6,7 +6,7 @@ import InvestCard from '@/components/molecules/InvestCard';
 import React from 'react';
 import Image from 'next/image';
 
-import Logo from '@/assets/img/logo.webp'
+import Logo from '@/assets/img/logo.png'
 
 interface BuyProjectInterface {
   setRealValue: any;

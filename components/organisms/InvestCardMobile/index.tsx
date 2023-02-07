@@ -34,7 +34,6 @@ function InvestCardMobile({
   : InvestCardInterface) {
   return (
     <div className={className}>
-      {/* <div className={Styles.divBackgroundGradient}></div> */}
       <Image
           src={src}
           alt={alt}

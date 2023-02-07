@@ -1,27 +1,46 @@
 @import '@/styles/variables.scss';
 
 .divBuy {
-    width: 100%;
-    position: absolute;
     background-color: $gray;
+    position: absolute;
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
     align-items: center;
     border-radius: 12px;
+    height: 90vh;
+    margin-left: 10px;
+    margin-right: 10px;
 
 
     &__text {
         color: $light;
+        width: 95%;
+        margin: 10px 0;
         text-align: center;
     }
 
     &__btnPayQrCode {
         margin: 2%;
-        width: 90%;
+        width: 100%;
         border: 2px solid $primary;
         background-color: $clay;
         color: $primary;
     }
+}
+
+.qrConfirmButton {
+    width: 90%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headerText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .closeButtonDiv {
@@ -33,32 +52,20 @@
 .closeButton {
     background: none;
     color: white;
-    border: 1px solid $gray;
-
-    margin: 1px;
-
-    &:hover {
-        border: 1px solid $primary;
-        transition: .5s;
-    }
+    border: none;
+    margin: 5px;
 }
 
 .labelValue {
     position: absolute;
     font-size: 12px;
-    left: 3.5em;
+    left: 2em;
     margin-top: .5em;
     color: $primary;
 }
 
-.divButtonsResponse {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center;
-}
-
 .inputValue {
-    width: 90%;
+    width: 100%;
     background-color: $clay;
     border: none;
     border-bottom: 3px solid $primary;

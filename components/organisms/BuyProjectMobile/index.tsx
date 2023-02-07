@@ -5,7 +5,7 @@ import Button from "@/components/atoms/Button"
 import Styles from './styles.module.scss';
 
 import Image from "next/image"
-import Logo from '@/assets/img/logo.webp'
+import Logo from '@/assets/img/logo.png'
 import InputModal from '@/components/molecules/InputModal';
 import InvestCardMobile from '../InvestCardMobile';
 
@@ -54,6 +54,8 @@ function BuyProjectMobile({ setRealValue,
           <Image
             alt='Logo image'
             src={Logo}
+            width={200}
+            height={200}
           />
           <p className={Styles.descriptionText}>
             Texto de exemplo para utilizar alguma descrição sobre a falta de fundos
