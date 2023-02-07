@@ -16,7 +16,7 @@ import UserContext from "@/context/UserContext";
 import BuyProject from "../BuyProject";
 import ModalContext from "@/context/ModalContext";
 
-function Modal(showOrNot: any) {
+function Modal() {
   const [hiddenBuy, SetHiddenBuy] = React.useState<boolean>(false);
   const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
 

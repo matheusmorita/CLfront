@@ -8,6 +8,7 @@ import Image from "next/image"
 import Logo from '@/assets/img/logo.webp'
 import InvestCard from '@/components/molecules/InvestCard';
 import InputModal from '@/components/molecules/InputModal';
+import InvestCardMobile from '../InvestCardMobile';
 
 
 interface BuyProjectInterface {
@@ -106,9 +107,9 @@ function BuyProjectMobile({ setRealValue,
         </>
       ) : (
         <>
-          {/* {conditionalBuy !== 'CLNT-0' ? (
+          {conditionalBuy !== 'CLNT-0' ? (
             <div className={Styles.divInput__investCardExib}>
-              <InvestCard
+              <InvestCardMobile
                 hiddenButton={true}
                 acronimo={projectSelected.Projeto.acronimo}
                 alt='Esta é uma imagem de um projeto a ser exibido'
@@ -119,7 +120,7 @@ function BuyProjectMobile({ setRealValue,
                 className={Styles.div}
               />
             </div>
-          ) : ''} */}
+          ) : ''}
           {hiddenBuyProject ? (
             <>
               <p className={Styles.descriptionText}>

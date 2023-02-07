@@ -10,8 +10,10 @@ import CloseButton from '@/components/atoms/CloseButton';
 import ModalContext from '@/context/ModalContext';
 
 import BuyProjectMobile from '../BuyProjectMobile';
+import BuyCoinLivreMobile from '../BuyCoinLivreMobile';
+import UserContext from '@/context/UserContext';
 
-function MobileModal(showOrNot: any) {
+function MobileModal() {
   const [projects, setProjects] = React.useState<any>([])
   const [projectSelected, setProjectSelected] = React.useState<any>();
 
@@ -20,8 +22,10 @@ function MobileModal(showOrNot: any) {
   const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
   const [realValue, setRealValue] = React.useState<string>('');
 
+  const { loggedIn } = React.useContext(UserContext)
+
   const { 
-    modalMobileControl: [showMobileModal, setShowMobileModal]
+    modalMobileControl: [, setShowMobileModal]
   } = React.useContext(ModalContext)
 
   React.useEffect(() => {
@@ -40,6 +44,8 @@ function MobileModal(showOrNot: any) {
           }}
         />
       </div>
+
+        {hiddenBuyCoinLivre ? <BuyCoinLivreMobile /> : ''}
         <HeaderModalMobile />
         {hiddenBuy ? (
           <BuyProjectMobile
@@ -54,7 +60,8 @@ function MobileModal(showOrNot: any) {
         />
         ) : (
           <section className={Styles.sectionCard}>
-          <InvestCardMobile
+          {!loggedIn[0] ? (
+            <InvestCardMobile
             hiddenButton={false}
             name="Token CoinLivre"
             acronimo="CLNT"
@@ -66,8 +73,15 @@ function MobileModal(showOrNot: any) {
             src={LogoImg}
             text="Comprar"
             className={Styles.div}
-            onClick={() => { }}
+            onClick={(e: any) => { 
+              e.preventDefault()
+              if (e.target.id) {
+                setConditionalBuy(e.target.id)
+              }
+              SetHiddenBuy(!hiddenBuy)
+            }}
           />
+          ) : ''}
           {projects.map((item: any, i: number) => (
             <InvestCardMobile
               hiddenButton={false}
@@ -84,6 +98,9 @@ function MobileModal(showOrNot: any) {
               className={Styles.div}
               onClick={(e: any) => { 
                 e.preventDefault();
+                if (e.target.id) {
+                  setConditionalBuy(e.target.id)
+                }
                 SetHiddenBuy(!hiddenBuy)
                 setProjectSelected(item)
               }}
