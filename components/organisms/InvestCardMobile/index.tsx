@@ -1,7 +1,7 @@
 import Styles from './styles.module.scss'
 import Button from '@/components/atoms/Button';
 import Image from 'next/image';
-import ProgressBar from '../ProgressBar';
+import ProgressBar from '@/molecules/ProgressBar';
 
 interface InvestCardInterface {
   text?: any;
@@ -18,7 +18,7 @@ interface InvestCardInterface {
   className?: any;
 }
 
-function InvestCard({
+function InvestCardMobile({
   text,
   id,
   hidden,
@@ -30,18 +30,18 @@ function InvestCard({
   emissor,
   acronimo,
   hiddenButton,
-  className,
-}: InvestCardInterface) {
+  className, }
+  : InvestCardInterface) {
   return (
     <div className={className}>
-      <div className={Styles.divImgDescription}>
-        <Image
+      <Image
           src={src}
           alt={alt}
           width={150}
-          height={110}
+          height={105}
           className={Styles.projectImage}
         />
+      <div className={Styles.divImgDescription}>
         <div className={Styles.divImgDescription__letters}>
           <div>
             <h5 style={{ margin: '0' }}>
@@ -61,16 +61,17 @@ function InvestCard({
       </div>
       {!hiddenButton ? (
         <Button
-        hidden={hidden}
-        id={id}
-        label={label}
-        onClick={onClick}
-        text={text}
-      />
+          hidden={hidden}
+          id={id}
+          label={label}
+          onClick={onClick}
+          text={text}
+          className={Styles.buttonBuyCard}
+        />
       ) : ''}
-      
+
     </div>
   )
 }
 
-export default InvestCard;
+export default InvestCardMobile;

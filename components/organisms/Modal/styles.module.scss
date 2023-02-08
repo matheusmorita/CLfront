@@ -5,11 +5,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto;
-  top: 10%;
-  right: 10%;
-  width: 700px;
-  max-height: 600px;
+  max-width: 700px;
+  max-height: 700px;
   background: $gray;
   border-radius: 12px;
   z-index: 1032;
@@ -17,7 +14,18 @@
   padding: 10px;
 }
 
-// safebranch
+.closeButtonDiv {
+  display: flex;
+  justify-content: flex-end;
+  width: 95%;
+}
+
+.closeButton {
+  background: none;
+  color: white;
+  border: none;
+  margin: 1px;
+}
 
 .sectionCard {
   overflow-y: auto;
@@ -38,23 +46,6 @@
   }
 }
 
-.divInput {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.descriptionText {
-  color: $light
-}
-
-.checkboxLabel {
-  display: flex;
-  gap: 10px;
-  width: 95%;
-}
-
 .inputValores {
   width: 520px;
   margin: 10px 0;
@@ -66,34 +57,30 @@
   }
 }
 
-
-.checkboxInput {
-  width: 35px;
-
-  &:after {
-    background-color: $primary;
-  }
-}
-
-.divButtons {
+.div {
   display: flex;
-  margin: 10px 0;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $darker;
+  border-radius: 10px;
+  padding-right: 10px;
   gap: 10px;
-  width: 95%;
+  margin: 10px;
 
-  &__backButton {
-    background: none;
-    border: 2px solid $primary;
-    color: $white;
-    flex: 1;
-
-    &:hover {
-      background-color: $primary;
-      color: $darker;
-    }
-  }
-
-  &__QRButton {
-    flex: 1;
+  &ImgDescription {
+      display: flex;
+      gap:  10px;
+      width: 100%;
+  
+      &__letters {
+          margin-top: .5em;
+          width: 100%;
+      }
+  
+      &__span {
+          color: $light;
+          font-size: 14px;
+      }
   }
 }
+

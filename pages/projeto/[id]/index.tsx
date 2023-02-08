@@ -22,8 +22,14 @@ import QuotaShow from '@/components/molecules/QuotaShow'
 import TabNavigation from '@/components/organisms/TabNavigation'
 
 import Modal from '@/components/organisms/Modal'
+import ModalContext from '@/context/ModalContext'
+
+import MobileModal from '@/components/organisms/MobileModal'
 
 import * as masks from '@/assets/js/util/masks'
+import UserContext from '@/context/UserContext'
+
+
 
 const ProjectPage = () => {
   const router = useRouter()
@@ -31,6 +37,10 @@ const ProjectPage = () => {
   const [project, setProject] = React.useState<any>()
   
   const [showModal, setShowModal] = React.useState<boolean>(false)
+  const [showMobileModal, setShowMobileModal] = React.useState<boolean>(false)
+  const [lengthWindow, setLengthWindow] = React.useState<number>(0)
+
+  const { loggedIn } = React.useContext(UserContext)
 
   const fetchData = async () => {
     var data = JSON.stringify({
@@ -61,11 +71,25 @@ const ProjectPage = () => {
   React.useEffect(() => {
     if (!id) return
     fetchData()
+    const largura = window.innerWidth
+    setLengthWindow(largura)
   }, [router])
 
   if (project) {
     return (
-      <Frame
+      <ModalContext.Provider
+        value={{
+          modalControl: [showModal, setShowModal],
+          modalMobileControl: [showMobileModal, setShowMobileModal]
+        }}
+      >
+        {showMobileModal ? (<MobileModal />) : ''}
+        {showModal ? (
+          <section className={Styles.divFormModal}>
+          <Modal />
+        </section>
+        ) : ''}
+        <Frame
         id={`projeto-${id}`}
         role='main'
         label='Página de projeto'
@@ -77,7 +101,6 @@ const ProjectPage = () => {
           <meta name="robots" content="index, follow" />
           <meta name="description" content="CoinLivre | Projetos." />
         </Head>
-
 
         <Section
           id='introducao'
@@ -121,22 +144,26 @@ const ProjectPage = () => {
               text={`${project.Projeto.tipo_token}`}
               className="mt-5 mb-5"
             />
-            <Button
-              id="header-cta"
-              text="Investir"
-              label="Clique e cadastre-se na Lista VIP"
-              hidden={false}
-              disabled={false}
-              size={20}
-              onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
-                e.preventDefault()
-                setShowModal(!showModal)
-              }}
-            />
+              <Button
+                id="header-cta"
+                text="Investir"
+                label="Clique e cadastre-se na Lista VIP"
+                hidden={false}
+                disabled={false}
+                size={20}
+                onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  e.preventDefault()
+                  // if (!loggedIn) {
+                  //   location.href = '/login'
+                  // }
+                  if (lengthWindow <= 600) {
+                    return setShowMobileModal(!showMobileModal)
+                  }
+                  return setShowModal(!showModal)
+                }}
+              />
           </Column>
         </Section>
-
-        {showModal ? <Modal /> : ''}
 
         <TabNavigation
           links={[
@@ -533,6 +560,7 @@ const ProjectPage = () => {
           </Column>
         </Section>
       </Frame>
+      </ModalContext.Provider>
     )
   }
 }

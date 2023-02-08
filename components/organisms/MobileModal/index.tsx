@@ -1,67 +1,67 @@
-import React from "react";
+import React from 'react';
+import HeaderModalMobile from '../HeaderModalMobile';
 import Styles from './styles.module.scss';
+import InvestCardMobile from '@/organisms/InvestCardMobile';
 
-import HeaderModal from "@/components/organisms/HeaderModal";
-import InvestCard from "@/components/molecules/InvestCard";
-import BuyCoinLivre from "../buyCoinLivre";
-
-import CloseButton from "@/components/atoms/CloseButton";
-
-import LogoImg from '@/assets/img/logo.png';
-
+import LogoImg from '@/assets/img/logo.png'
 import { fetchData } from '@/utils/fetchData';
-import UserContext from "@/context/UserContext";
-import BuyProject from "../BuyProject";
-import ModalContext from "@/context/ModalContext";
+import FooterMobileModal from '../FooterMobileModal';
+import CloseButton from '@/components/atoms/CloseButton';
+import ModalContext from '@/context/ModalContext';
 
-function Modal() {
-  const [hiddenBuy, SetHiddenBuy] = React.useState<boolean>(false);
-  const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
+import BuyProjectMobile from '../BuyProjectMobile';
+import BuyCoinLivreMobile from '../BuyCoinLivreMobile';
+import UserContext from '@/context/UserContext';
 
-  const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
-
-  const [realValue, setRealValue] = React.useState<string>('');
+function MobileModal() {
   const [projects, setProjects] = React.useState<any>([])
   const [projectSelected, setProjectSelected] = React.useState<any>();
 
+  const [hiddenBuy, SetHiddenBuy] = React.useState<boolean>(false);
+  const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
+  const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
+  const [realValue, setRealValue] = React.useState<string>('');
+
   const { loggedIn } = React.useContext(UserContext)
 
-  const { modalControl: [, setShowModal] } = React.useContext(ModalContext)
+  const {
+    modalMobileControl: [, setShowMobileModal]
+  } = React.useContext(ModalContext)
 
   React.useEffect(() => {
     fetchData(setProjects)
   }, [])
 
   return (
-    <form className={Styles.form}>
-      <div className={Styles.closeButtonDiv}>
-        <CloseButton
-          className={Styles.closeButton}
-          onClick={(e: any) => {
-            e.preventDefault()
-            setShowModal(false)
-          }}
-        />
-      </div>
+    <main className={Styles.mainMobileModal}>
+      <section className={Styles.sectionItems}>
+        <div className={Styles.closeButtonDiv}>
+          <CloseButton
+            className={Styles.closeButton}
+            onClick={(e: any) => {
+              e.preventDefault()
+              setShowMobileModal(false)
+            }}
+          />
+        </div>
 
-      {hiddenBuyCoinLivre ? <BuyCoinLivre /> : ''}
-      <HeaderModal />
-      {hiddenBuy ? (
-        <BuyProject
-          SetHiddenBuy={SetHiddenBuy}
-          hiddenBuy={hiddenBuy}
-          hiddenBuyCoinLivre={hiddenBuyCoinLivre}
-          realValue={realValue}
-          setHiddenBuyCoinLivre={setHiddenBuyCoinLivre}
-          setRealValue={setRealValue}
-          conditionalBuy={conditionalBuy}
-          projectSelected={projectSelected}
-        />
-      ) : (
-        <>
+        {hiddenBuyCoinLivre ? <BuyCoinLivreMobile /> : ''}
+        <HeaderModalMobile />
+        {hiddenBuy ? (
+          <BuyProjectMobile
+            SetHiddenBuy={SetHiddenBuy}
+            hiddenBuy={hiddenBuy}
+            hiddenBuyCoinLivre={hiddenBuyCoinLivre}
+            realValue={realValue}
+            setHiddenBuyCoinLivre={setHiddenBuyCoinLivre}
+            setRealValue={setRealValue}
+            conditionalBuy={conditionalBuy}
+            projectSelected={projectSelected}
+          />
+        ) : (
           <section className={Styles.sectionCard}>
             {!loggedIn[0] ? (
-              <InvestCard
+              <InvestCardMobile
                 hiddenButton={false}
                 name="Token CoinLivre"
                 acronimo="CLNT"
@@ -83,7 +83,7 @@ function Modal() {
               />
             ) : ''}
             {projects.map((item: any, i: number) => (
-              <InvestCard
+              <InvestCardMobile
                 hiddenButton={false}
                 key={item.Projeto.acronimo}
                 src={item.Projeto.logo.url}
@@ -97,20 +97,24 @@ function Modal() {
                 label='Clique para comprar'
                 className={Styles.div}
                 onClick={(e: any) => {
-                  e.preventDefault()
+                  e.preventDefault();
                   if (e.target.id) {
                     setConditionalBuy(e.target.id)
                   }
-                  setProjectSelected(item)
                   SetHiddenBuy(!hiddenBuy)
+                  setProjectSelected(item)
                 }}
               />
             ))}
           </section>
-        </>
-      )}
-    </form>
+        )}
+
+      </section>
+      <div className={Styles.footerStyle}>
+        <FooterMobileModal />
+      </div>
+    </main>
   )
 }
 
-export default Modal;
+export default MobileModal;

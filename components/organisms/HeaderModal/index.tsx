@@ -1,6 +1,6 @@
+import React from 'react'
 import Button from "@/components/atoms/Button";
 import Styles from './styles.module.scss';
-import React from 'react'
 
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -90,7 +90,7 @@ function HeaderModal() {
               <VisibilityOffIcon color="success" />
             </div> ): (
               <div className={Styles.balanceValue}>
-                <b>SALDO: R$00,00</b>
+                <b>SALDO: R$20000,00</b>
                 <RemoveRedEyeIcon />
               </div>
             )}
