@@ -13,6 +13,7 @@ import { fetchData } from '@/utils/fetchData';
 import UserContext from "@/context/UserContext";
 import BuyProject from "../BuyProject";
 import ModalContext from "@/context/ModalContext";
+import Projecard from "@/components/molecules/Projecard";
 
 function Modal() {
   const [hiddenBuy, SetHiddenBuy] = React.useState<boolean>(false);
@@ -31,6 +32,12 @@ function Modal() {
   React.useEffect(() => {
     fetchData(setProjects)
   }, [])
+
+  const projecardMock = [
+    { title: 'Qtde.', value: 16654 },
+    { title: 'Saldo', value: 0.00336569 },
+    { title: 'Data', value: '28/01/2023 - 11:21' }
+  ]
 
   return (
     <form className={Styles.form}>
@@ -72,7 +79,6 @@ function Modal() {
                 id={`CLNT-${0}`}
                 src={LogoImg}
                 text="Comprar"
-                className={Styles.div}
                 onClick={(e: any) => {
                   e.preventDefault()
                   if (e.target.id) {
@@ -83,19 +89,17 @@ function Modal() {
               />
             ) : ''}
             {projects.map((item: any, i: number) => (
+              // <Projecard key={i} data={projecardMock}/>
               <InvestCard
-                hiddenButton={false}
-                key={item.Projeto.acronimo}
-                src={item.Projeto.logo.url}
-                alt='Esta é uma imagem de um projeto a ser exibido'
-                text='Comprar'
+                key={i}
                 acronimo={item.Projeto.acronimo}
+                alt='Esta é uma imagem de um projeto a ser exibido'
                 emissor={item.Emissor.nome}
-                name={item.Projeto.nome}
-                hidden={true}
+                hiddenButton={false}
                 id={`${item.Projeto.acronimo}-${i + 1}`}
-                label='Clique para comprar'
-                className={Styles.div}
+                name={item.Projeto.nome}
+                src={item.Projeto.logo.url}
+                text='Comprar'
                 onClick={(e: any) => {
                   e.preventDefault()
                   if (e.target.id) {
@@ -105,6 +109,20 @@ function Modal() {
                   SetHiddenBuy(!hiddenBuy)
                 }}
               />
+              // <InvestCard
+              //   hiddenButton={false}
+              //   key={item.Projeto.acronimo}
+              //   src={item.Projeto.logo.url}
+              //   alt='Esta é uma imagem de um projeto a ser exibido'
+              //   text='Comprar'
+              //   acronimo={item.Projeto.acronimo}
+              //   emissor={item.Emissor.nome}
+              //   name={item.Projeto.nome}
+              //   hidden={true}
+              //   id={`${item.Projeto.acronimo}-${i + 1}`}
+              //   label='Clique para comprar'
+              //   className={Styles.div}
+              // />
             ))}
           </section>
         </>

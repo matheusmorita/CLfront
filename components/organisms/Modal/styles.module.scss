@@ -2,12 +2,13 @@
 
 .form {
   position: fixed;
+  background: $gray;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 700px;
   max-width: 700px;
   max-height: 700px;
-  background: $gray;
   border-radius: 12px;
   z-index: 1032;
   opacity: 99%;
@@ -30,6 +31,7 @@
 .sectionCard {
   overflow-y: auto;
   overflow-x: hidden;
+  width: 90%;
 
   &::-webkit-scrollbar {
     width: 10px;
