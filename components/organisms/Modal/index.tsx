@@ -7,7 +7,7 @@ import BuyCoinLivre from "../buyCoinLivre";
 
 import CloseButton from "@/components/atoms/CloseButton";
 
-import LogoImg from '@/assets/img/logo.webp';
+import LogoImg from '@/assets/img/logo.png';
 
 import { fetchData } from '@/utils/fetchData';
 import UserContext from "@/context/UserContext";

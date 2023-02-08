@@ -8,18 +8,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     border-radius: 12px;
 
 
     &__text {
+        width: 90%;
         color: $light;
         text-align: center;
     }
 
     &__btnPayQrCode {
-        margin: 2%;
-        width: 90%;
+        width: 100%;
+        margin: 10px 0;
         border: 2px solid $primary;
         background-color: $clay;
         color: $primary;
@@ -43,14 +44,15 @@
 .closeButton {
     background: none;
     color: white;
-    border: 1px solid $gray;
-
     margin: 1px;
+    border: none;
+}
 
-    &:hover {
-        border: 1px solid $primary;
-        transition: .5s;
-    }
+.buttonDivPayment {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .divButtonsResponse {
@@ -60,7 +62,7 @@
 }
 
 .inputValue {
-    width: 90%;
+    width: 100%;
     background-color: $clay;
     border: none;
     border-bottom: 3px solid $primary;

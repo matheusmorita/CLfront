@@ -8,6 +8,8 @@ import Image from "next/image"
 import Logo from '@/assets/img/logo.png'
 import InputModal from '@/components/molecules/InputModal';
 import InvestCardMobile from '../InvestCardMobile';
+import Test from './teste';
+import HeaderModalMobile from '../HeaderModalMobile';
 
 
 interface BuyProjectInterface {
@@ -49,7 +51,8 @@ function BuyProjectMobile({ setRealValue,
         <>
           <h4 className={Styles.titleEnough}>Fundos insuficientes</h4>
           <p className={Styles.descriptionText}>
-            Texto de exemplo para utilizar alguma descrição sobre a falta de fundos
+          Para comprar a quantidade desejada de Tokens deste projeto, 
+          você precisa antes comprar os Tokens CNLT, o que pode ser feito abaixo, via PIX.
           </p>
           <Image
             alt='Logo image'
@@ -57,12 +60,6 @@ function BuyProjectMobile({ setRealValue,
             width={200}
             height={200}
           />
-          <p className={Styles.descriptionText}>
-            Texto de exemplo para utilizar alguma descrição sobre a falta de fundos
-            Texto de exemplo para utilizar alguma descrição sobre a falta de fundos
-            Texto de exemplo para utilizar alguma descrição sobre a falta de fundos
-            Texto de exemplo para utilizar alguma descrição sobre a falta de fundos
-          </p>
 
           <div className={Styles.divButtons}>
             <Button
@@ -109,18 +106,26 @@ function BuyProjectMobile({ setRealValue,
       ) : (
         <>
           {conditionalBuy !== 'CLNT-0' ? (
-            <div className={Styles.divInput__investCardExib}>
-              <InvestCardMobile
-                hiddenButton={true}
-                acronimo={projectSelected.Projeto.acronimo}
-                alt='Esta é uma imagem de um projeto a ser exibido'
-                emissor={projectSelected.Emissor.nome}
-                id={projectSelected.Projeto.acronimo}
-                name={projectSelected.Projeto.nome}
-                src={projectSelected.Projeto.logo.url}
-                className={Styles.div}
-              />
-            </div>
+            // <Test
+            //   image={projectSelected.Projeto.logo.url}
+            // />
+            <p className={Styles.descriptionText}>
+              Para comprar os Tokens deste projeto, insira a quantidade de Tokens desejada.
+              Iremos calcular a quantidade de CNLTs necessária para a transação.
+              Lembre-se: a CoinLivre arcará com todo e qualquer custo de transação interna desta operação (Gas Fee).
+            </p>
+            // <div className={Styles.divInput__investCardExib}>
+            //   <InvestCardMobile
+            //     hiddenButton={true}
+            //     acronimo={projectSelected.Projeto.acronimo}
+            //     alt='Esta é uma imagem de um projeto a ser exibido'
+            //     emissor={projectSelected.Emissor.nome}
+            //     id={projectSelected.Projeto.acronimo}
+            //     name={projectSelected.Projeto.nome}
+            //     src={projectSelected.Projeto.logo.url}
+            //     className={Styles.div}
+            //   />
+            // </div>
           ) : ''}
           {hiddenBuyProject ? (
             <>
@@ -158,11 +163,13 @@ function BuyProjectMobile({ setRealValue,
             </>
           ) : (
             <>
-              <p className={Styles.descriptionText}>
-              Ao comprar Tokens CNLT, você receberá o equivalente 
-              em Tokens da quantia escolhida, deduzida da taxa da CoinLivre (de X%) 
-              de acordo com os seus benefícios
-              </p>
+              {conditionalBuy !== 'CLNT-0' ? ('') : (
+                <p className={Styles.descriptionText}>
+                  Ao comprar Tokens CNLT, você receberá o equivalente 
+                  em Tokens da quantia escolhida, deduzida da taxa da CoinLivre (de X%) 
+                  de acordo com os seus benefícios
+                </p>
+              )}
               <InputModal
                 id="inputReal"
                 label={conditionalBuy !== 'CLNT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}

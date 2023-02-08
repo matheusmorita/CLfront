@@ -11,20 +11,32 @@
   // height: 90vh;
 
   &ImgDescription {
-      display: flex;
-      gap:  10px;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+
+    &__letters {
+      margin-top: .5em;
       width: 100%;
-  
-      &__letters {
-          margin-top: .5em;
-          width: 100%;
-      }
-  
-      &__span {
-          color: $light;
-          font-size: 14px;
-      }
+    }
+
+    &__span {
+      color: $light;
+      font-size: 14px;
+    }
   }
+}
+
+.cardMobileProject {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  width: 95%;
+  border-radius: 20px;
+  // -webkit-mask-image: linear-gradient(to top, black 45%, black 100%);
 }
 
 .enoughCoinDiv {
@@ -48,10 +60,13 @@
 
 .divInput {
   display: flex;
+  padding-top: 5%;
   flex-direction: column;
+  background-color: $gray;
   align-items: center;
   justify-content: space-around;
-  margin: 10px 0;
+  border-radius: 10px;
+
 
   &__investCardExib {
     width: 95%;
@@ -92,7 +107,7 @@
   // margin: 10px 0;
   // gap: 10px;
   width: 90%;
-  
+
 
   &__backButton {
     background: none;
@@ -137,22 +152,22 @@
 
 
   &:focus {
-      box-shadow: 0 0 0 0;
-      outline: 0;
+    box-shadow: 0 0 0 0;
+    outline: 0;
   }
 
   &::placeholder {
-      color: $white;
+    color: $white;
   }
 
   &:disabled {
-      cursor: not-allowed;
+    cursor: not-allowed;
   }
 
   &[type="number"]::-webkit-outer-spin-button,
   &[type="number"]::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
   }
 }
 
@@ -169,21 +184,21 @@
 
 
   &:focus {
-      box-shadow: 0 0 0 0;
-      outline: 0;
+    box-shadow: 0 0 0 0;
+    outline: 0;
   }
 
   &::placeholder {
-      color: $white;
+    color: $white;
   }
 
   &:disabled {
-      cursor: not-allowed;
+    cursor: not-allowed;
   }
 
   &[type="number"]::-webkit-outer-spin-button,
   &[type="number"]::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
   }
 }

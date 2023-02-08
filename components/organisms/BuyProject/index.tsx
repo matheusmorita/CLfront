@@ -50,18 +50,21 @@ function BuyProject({
         <>
           <h4 className={Styles.titleEnough}>Fundos insuficientes</h4>
           <p className={Styles.descriptionText}>
-            Texto de exemplo para utilizar alguma descrição sobre a falta de fundos
+          Para comprar a quantidade desejada de Tokens deste projeto, você precisa antes
+          comprar os Tokens CNLT, o que pode ser feito abaixo, via PIX.
           </p>
           <Image
             alt='Logo image'
             src={Logo}
+            width={250}
+            height={250}
           />
-          <p className={Styles.descriptionText}>
+          {/* <p className={Styles.descriptionText}>
             Texto de exemplo para utilizar alguma descrição sobre a falta de fundos
             Texto de exemplo para utilizar alguma descrição sobre a falta de fundos
             Texto de exemplo para utilizar alguma descrição sobre a falta de fundos
             Texto de exemplo para utilizar alguma descrição sobre a falta de fundos
-          </p>
+          </p> */}
 
           <div className={Styles.divButtons}>
             <Button
@@ -157,12 +160,19 @@ function BuyProject({
             </>
           ) : (
             <>
-              <p className={Styles.descriptionText}>
-                Este é um texto de exemplo para dar descrição do projeto
-                Este é um texto de exemplo para dar descrição do projeto
-                Este é um texto de exemplo para dar descrição do projeto
-                Este é um texto de exemplo para dar descrição do projeto
+              {conditionalBuy !== 'CLNT-0' ? (
+                <p className={Styles.descriptionText}>
+                Para comprar os Tokens deste projeto, insira a quantidade de Tokens desejada. 
+                Iremos calcular a quantidade de CNLTs necessária para a transação. 
+                Lembre-se: a CoinLivre arcará com todo e qualquer custo de transação interna desta operação (Gas Fee).
               </p>
+              ) : (
+                <p className={Styles.descriptionText}>
+                  Ao comprar Tokens CNLT, você receberá o equivalente 
+                  em Tokens da quantia escolhida, deduzida da taxa da 
+                  CoinLivre (de X%) de acordo com os seus benefícios
+                </p>
+              )}
               <InputModal
                 id="inputReal"
                 label={conditionalBuy !== 'CLNT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
@@ -194,8 +204,8 @@ function BuyProject({
                   htmlFor="checkboxInput"
                   className={Styles.descriptionTextCheckbox}
                 >
-                  Você concorda com os termos de uso da plataforma e está ciente dos usos das
-                  ferramentas incorporados nessa aplicação?
+                  Eu concordo com os termos de uso e política de privacidade da CoinLivre.
+                  Estou ciente de que a conta de origem do depósito deve estar no meu nome e CPF.
                 </label>
               </div>
               <div className={Styles.divButtons}>

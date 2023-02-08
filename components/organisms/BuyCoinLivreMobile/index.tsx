@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Styles from './styles.module.scss'
 
 import QRcodeImage from '@/assets/img/qrcode.webp'
+import Logo from '@/assets/img/logo.png';
 
 import Button from '@/components/atoms/Button'
 import InputModal from '@/components/molecules/InputModal'
@@ -12,7 +13,7 @@ import ModalContext from '@/context/ModalContext'
 import HeaderModalMobile from '../HeaderModalMobile'
 
 function BuyCoinLivreMobile() {
-  const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
+  const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(true)
 
 
   const {
@@ -32,20 +33,39 @@ function BuyCoinLivreMobile() {
           />
         </div>
         <HeaderModalMobile />
-        <p className={Styles.divBuy__text}>
-          Este é um texto de exemplo para ser passado alguma informação relevante relacionada
-          a compra das moedas CoinLivre
-          Este é um texto de exemplo para ser passado alguma informação relevante relacionada
-          a compra das moedas CoinLivre
-        </p>
+        {buyConfirmed ? (
+          <p className={Styles.divBuy__text}>
+            Obrigado pela sua compra. Dentro de alguns instantes os seus Tokens CNLT
+            estarão disponíveis na sua carteira, para que você possa trocar pelos Tokens
+            dos projetos que desejar. Lembre-se: você pode sacar seus CNLT a qualquer momento,
+            pois 100% dos Tokens comprados tem liquidez garantida pela CoinLivre.
+          </p>
+        ) : (
+          <p className={Styles.divBuy__text}>
+            Escaneie este código com o seu celular ou use o pix copia e cola
+            no app do seu banco de escolha, para realizar a sua compra de Tokens CNLT.
+          </p>
+        )}
+
+
       </section>
-      <Image
+      {buyConfirmed ? (
+        <Image
+        width={200}
+        height={200}
+        alt='Imagem de QR code'
+        src={Logo}
+      />
+      ) : (
+        <Image
         width={200}
         height={200}
         alt='Imagem de QR code'
         src={QRcodeImage}
         style={{ border: '2px solid #00EE8D' }}
       />
+      )}
+      
       <section className={Styles.qrConfirmButton}>
         <InputModal
           id='inputQrcode'

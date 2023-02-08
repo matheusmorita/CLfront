@@ -39,7 +39,7 @@ function InvestCard({
           src={src}
           alt={alt}
           width={150}
-          height={105}
+          height={110}
           className={Styles.projectImage}
         />
         <div className={Styles.divImgDescription__letters}>
