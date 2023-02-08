@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = {
   children: any,
-  className: string,
+  className?: string,
 }
 
 const Row = ({ children, className }: Props) => {
