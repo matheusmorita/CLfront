@@ -16,6 +16,7 @@ import UserContext from '@/context/UserContext'
 import Check from '@/assets/img/Check.webp'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { captureEmail } from '@/assets/js/util/validations'
 
 const Login = () => {
   const [email, setEmail] = React.useState()
@@ -122,6 +123,7 @@ const Login = () => {
                 type='email'
                 onInput={setEmail}
                 validation={setError}
+                validator={captureEmail}
                 error={error}
               />
               <p className={Styles.form__desc}>

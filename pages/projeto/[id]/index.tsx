@@ -21,13 +21,10 @@ import Separator from '@/components/atoms/Separator'
 import QuotaShow from '@/components/molecules/QuotaShow'
 import TabNavigation from '@/components/organisms/TabNavigation'
 
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-
 import Modal from '@/components/organisms/Modal'
 import ModalContext from '@/context/ModalContext'
 
 import MobileModal from '@/components/organisms/MobileModal'
-
 
 import * as masks from '@/assets/js/util/masks'
 import UserContext from '@/context/UserContext'
@@ -63,7 +60,7 @@ const ProjectPage = () => {
     await fetch('https://parseapi.back4app.com/parse/functions/retornar-projeto-id', config)
       .then(resp => resp.json())
       .then(json => {
-        console.log(json.result)
+        console.log(json)
         setProject(json.result)
       })
       .catch(error => {
@@ -112,6 +109,7 @@ const ProjectPage = () => {
           justify='center'
           hidden={false}
           className={`${Styles.background} ${Styles.intro} pt-5 pt-lg-0 d-flex align-items-center pb-5`}
+          bgImage={project.Projeto.imgTipo?.url}
         >
           <Column
             media='lg'
@@ -221,23 +219,25 @@ const ProjectPage = () => {
               {project.Projeto.createdAt && (
                 <DataShow
                   title={"Data de lançamento"}
-                  value={project.Projeto.data_lancamento}
+                  value={masks.getDateMask(project.Projeto.createdAt)}
                   badge={{
                     type: "success",
                     message: "NOVO"
                   }}
+                  contractLink={project.Projeto.contrato_token}
                 />
               )}
-
               {project.Projeto.rentabilidade ? ( 
                 <DataShow
                   title={"Rentabilidade estimada"}
                   value={project.Projeto.rentabilidade}
                   badge={{ type: "success", message: "NOVO" }}
+                  contractLink={project.Projeto.contrato_token}
                 /> ) : ( 
                 <DataShow
                   title={"Rentabilidade estimada"}
                   value={'N/A'}
+                  contractLink={project.Projeto.contrato_token}
                 /> )} 
                 
               {project.Lotes.length > 0 ? ( 
@@ -245,63 +245,70 @@ const ProjectPage = () => {
                   title={"Lote"}
                   value={masks.getLotMask(project.Lotes[0].lote)}
                   badge={{ type: "success", message: "NOVO" }}
+                  contractLink={project.Projeto.contrato_token}
                 /> ) : ( 
                 <DataShow
                   title={"Lote"}
                   value={'N/A'}
+                  contractLink={project.Projeto.contrato_token}
                 /> )} 
                 
               {project.Lotes.length > 0 ? ( 
                 <DataShow
                   title={"Valor do Token"}
                   value={masks.getCurrencyMask(project.Lotes[0].valorDoToken)}
+                  contractLink={project.Projeto.contrato_token}
                 /> ) : ( 
                 <DataShow
                   title={"Valor do Token"}
-                  value={masks.getCurrencyMask('N/A')}
+                  value={'N/A'}
+                  contractLink={project.Projeto.contrato_token}
                 /> )} 
                 
               {project.Lotes.length > 0 ? (
                 <DataShow
                   title={"Prazo do Lote"}
                   value={project.Lotes[0].prazoDoLote}
+                  contractLink={project.Projeto.contrato_token}
                 /> ) : ( 
                 <DataShow
                   title={"Prazo do Lote"}
                   value={'00/00/0000'}
+                  contractLink={project.Projeto.contrato_token}
                 /> )}
               
               {project.Lotes.length > 0 ? (
                 <DataShow
                   title={"QTDE de Tokens"}
                   value={masks.getQuantityMask(project.Lotes[0].qtdeDeTokens)}
+                  contractLink={project.Projeto.contrato_token}
                 /> ) : (
                 <DataShow
                   title={"QTDE de Tokens"}
                   value={'N/A'}
+                  contractLink={project.Projeto.contrato_token}
                 /> )}
                 <DataShow
                   title={"Contrato"}
                   value={project.Projeto.contrato_token}
                   highlight={true}
                   badge={{ type: "success", message: "DESTAQUE" }}
+                  contractLink={project.Projeto.contrato_token}
                 />
-                <a rel='noreferrer' target="_blank" href={`https://etherscan.io/address/${project.Projeto.contrato_token}`}>
-                  a
-                <OpenInNewIcon />
-                </a>
                 {project.Lotes.length > 0 ? (
                   <DataShow
                     title={"Captação"}
                     value={project.Lotes[0].captacao}
                     highlight={true}
                     badge={{ type: "success", message: "DESTAQUE" }}
+                    contractLink={project.Projeto.contrato_token}
                   /> ) : (
                     <DataShow
                       title={"Captação"} 
                       value={'N/A'} 
                       highlight={true} 
                       badge={{ type: "success", message: "DESTAQUE" }}
+                      contractLink={project.Projeto.contrato_token}
                     />
                   )}
             </div>
@@ -353,6 +360,7 @@ const ProjectPage = () => {
                 type: "success",
                 message: "DOCUMENTO"
               }}
+              contractLink={project.Projeto.contrato_token}
             />
             <DataShow
               title={"Título do doc"}
@@ -361,6 +369,7 @@ const ProjectPage = () => {
                 type: "success",
                 message: "DOCUMENTO"
               }}
+              contractLink={project.Projeto.contrato_token}
             />
           </Column>
           <Column
