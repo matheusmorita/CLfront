@@ -24,8 +24,8 @@
     }
 
     &__picture {
-        // background: linear-gradient(to right, transparent, #000),
-        //     url(../../../assets/img/BG2.webp);
+        background: linear-gradient(to right, transparent, #000),
+            url(../../../assets/img/logo.png);
         background-size: cover;
         position: absolute;
         width: 25%;
@@ -35,7 +35,7 @@
 
         @media (max-width: 600px) {
             background: linear-gradient(to bottom, transparent, #000),
-                url(../../../assets/img/BG2.webp);
+                url(../../../assets/img/logo.png);
             height: 120px;
             width: 100%;
         }

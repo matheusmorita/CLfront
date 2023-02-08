@@ -45,12 +45,6 @@ function InvestCard({
           top: '0',
         }} 
         className={Styles.projecard__picture} />
-      {/* <Image
-        alt='image project'
-        src={src}
-        width={250}
-        height={250}
-      /> */}
       <div className={Styles.projecard__info}>
         <div className={Styles.info}>
           <h1 className={Styles.info__title}>{name}<span>#{acronimo}</span></h1>
@@ -76,6 +70,10 @@ function InvestCard({
       />
       ) : ''}
     </div>
+
+
+
+
     // <div className={className}>
     //   <div className={Styles.divImgDescription}>
     //     <Image

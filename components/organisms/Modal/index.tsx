@@ -7,16 +7,15 @@ import BuyCoinLivre from "../buyCoinLivre";
 
 import CloseButton from "@/components/atoms/CloseButton";
 
-import LogoImg from '@/assets/img/logo.png';
+import Logo from '@/assets/img/logo.png';
 
 import { fetchData } from '@/utils/fetchData';
 import UserContext from "@/context/UserContext";
 import BuyProject from "../BuyProject";
 import ModalContext from "@/context/ModalContext";
-import Projecard from "@/components/molecules/Projecard";
 
 function Modal() {
-  const [hiddenBuy, SetHiddenBuy] = React.useState<boolean>(false);
+  const [hiddenBuy, setHiddenBuy] = React.useState<boolean>(false);
   const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
 
   const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
@@ -32,12 +31,6 @@ function Modal() {
   React.useEffect(() => {
     fetchData(setProjects)
   }, [])
-
-  const projecardMock = [
-    { title: 'Qtde.', value: 16654 },
-    { title: 'Saldo', value: 0.00336569 },
-    { title: 'Data', value: '28/01/2023 - 11:21' }
-  ]
 
   return (
     <form className={Styles.form}>
@@ -55,7 +48,7 @@ function Modal() {
       <HeaderModal />
       {hiddenBuy ? (
         <BuyProject
-          SetHiddenBuy={SetHiddenBuy}
+          setHiddenBuy={setHiddenBuy}
           hiddenBuy={hiddenBuy}
           hiddenBuyCoinLivre={hiddenBuyCoinLivre}
           realValue={realValue}
@@ -63,6 +56,7 @@ function Modal() {
           setRealValue={setRealValue}
           conditionalBuy={conditionalBuy}
           projectSelected={projectSelected}
+          setConditionalBuy={setConditionalBuy}
         />
       ) : (
         <>
@@ -77,19 +71,18 @@ function Modal() {
                 label="Comprar"
                 hidden={false}
                 id={`CLNT-${0}`}
-                src={LogoImg}
+                src={Logo}
                 text="Comprar"
                 onClick={(e: any) => {
                   e.preventDefault()
                   if (e.target.id) {
                     setConditionalBuy(e.target.id)
                   }
-                  SetHiddenBuy(!hiddenBuy)
+                  setHiddenBuy(!hiddenBuy)
                 }}
               />
             ) : ''}
             {projects.map((item: any, i: number) => (
-              // <Projecard key={i} data={projecardMock}/>
               <InvestCard
                 key={i}
                 acronimo={item.Projeto.acronimo}
@@ -106,23 +99,9 @@ function Modal() {
                     setConditionalBuy(e.target.id)
                   }
                   setProjectSelected(item)
-                  SetHiddenBuy(!hiddenBuy)
+                  setHiddenBuy(!hiddenBuy)
                 }}
               />
-              // <InvestCard
-              //   hiddenButton={false}
-              //   key={item.Projeto.acronimo}
-              //   src={item.Projeto.logo.url}
-              //   alt='Esta é uma imagem de um projeto a ser exibido'
-              //   text='Comprar'
-              //   acronimo={item.Projeto.acronimo}
-              //   emissor={item.Emissor.nome}
-              //   name={item.Projeto.nome}
-              //   hidden={true}
-              //   id={`${item.Projeto.acronimo}-${i + 1}`}
-              //   label='Clique para comprar'
-              //   className={Styles.div}
-              // />
             ))}
           </section>
         </>
