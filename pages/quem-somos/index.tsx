@@ -20,7 +20,8 @@ import WaitingList from '@/components/organisms/WaitingList'
 
 const QuemSomos = () => {
   return (
-    <Frame
+    <main style={{color: 'white'}}>
+      <Frame
       id='quem-somos'
       role='main'
       label='Página de sobre da CoinLivre'
@@ -212,6 +213,7 @@ const QuemSomos = () => {
         </Column>
       </Section>
     </Frame>
+    </main>
   )
 }
 

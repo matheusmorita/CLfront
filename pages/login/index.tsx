@@ -68,113 +68,115 @@ const Login = () => {
   }, [logged])
 
   return (
-    <Frame
-      id='login'
-      role='main'
-      label='Página de Login'
-    >
-      <Head>
-        <title>CoinLivre | Login</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="theme-color" content="#00ee8d" />
-        <meta name="robots" content="index, follow" />
-        <meta name="description" content="CoinLivre | Login." />
-      </Head>
-
-      <Section
+    <main style={{ color: 'white' }}>
+      <Frame
         id='login'
-        label='login-title'
-        desc='login-description'
-        justify='center'
-        hidden={false}
-        className={`${Styles.login} pt-5 pt-lg-0 d-flex align-items-center pb-5`}
+        role='main'
+        label='Página de Login'
       >
-        <Column
-          size={4}
-          media={'lg'}
-          className='text-center'
+        <Head>
+          <title>CoinLivre | Login</title>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <meta name="theme-color" content="#00ee8d" />
+          <meta name="robots" content="index, follow" />
+          <meta name="description" content="CoinLivre | Login." />
+        </Head>
+
+        <Section
+          id='login'
+          label='login-title'
+          desc='login-description'
+          justify='center'
+          hidden={false}
+          className={`${Styles.login} pt-5 pt-lg-0 d-flex align-items-center pb-5`}
         >
+          <Column
+            size={4}
+            media={'lg'}
+            className='text-center'
+          >
 
-          <Logo
-            white={true}
-            width={300}
-          />
-          {!feedback && (
-            <Form
-              id='form'
-              onSubmit={() => { }}
-              label="Formulário de Lista VIP"
-              className={`${Styles.form} ${handleWaitState()}`}
-            >
-              <Loader
-                active={waiting}
-                absolute={true}
-              />
-              <Title
-                id='form-title'
-                className='text-center fw-normal'
-                text='Login'
-                size={24}
-                hidden={false}
-              />
-              <Input
-                id='email'
-                label='Digite seu e-mail'
-                type='email'
-                onInput={setEmail}
-                validation={setError}
-                validator={captureEmail}
-                error={error}
-              />
-              <p className={Styles.form__desc}>
-                Esqueceu sua senha? Clique aqui
-                <br />
-                Ainda não tem uma conta? Cadastre-se
-              </p>
-              <Button
-                id="submit-button"
-                text="Entrar"
-                label="Clique e faça login em sua conta CoinLivre"
-                className="w-100 py-2 mt-2 fs-5"
-                hidden={false}
-                onClick={() => { handleUserRequest() }}
-              />
-            </Form>
-          )}
+            <Logo
+              white={true}
+              width={300}
+            />
+            {!feedback && (
+              <Form
+                id='form'
+                onSubmit={() => { }}
+                label="Formulário de Lista VIP"
+                className={`${Styles.form} ${handleWaitState()}`}
+              >
+                <Loader
+                  active={waiting}
+                  absolute={true}
+                />
+                <Title
+                  id='form-title'
+                  className='text-center fw-normal'
+                  text='Login'
+                  size={24}
+                  hidden={false}
+                />
+                <Input
+                  id='email'
+                  label='Digite seu e-mail'
+                  type='email'
+                  onInput={setEmail}
+                  validation={setError}
+                  validator={captureEmail}
+                  error={error}
+                />
+                <p className={Styles.form__desc}>
+                  Esqueceu sua senha? Clique aqui
+                  <br />
+                  Ainda não tem uma conta? Cadastre-se
+                </p>
+                <Button
+                  id="submit-button"
+                  text="Entrar"
+                  label="Clique e faça login em sua conta CoinLivre"
+                  className="w-100 py-2 mt-2 fs-5"
+                  hidden={false}
+                  onClick={() => { handleUserRequest() }}
+                />
+              </Form>
+            )}
 
-          {feedback && (
-            <Form
-              id='form'
-              onSubmit={() => { }}
-              label="Formulário de Lista VIP"
-              className={`${Styles.form} ${handleWaitState()}`}
-            >
-              <Title
-                id='form-title'
-                className='text-center fw-normal'
-                text='Login'
-                size={24}
-                hidden={false}
-              />
-              <Paragrah
-                id='form-description'
-                text={'Um e-mail foi encaminhado para a sua caixa de entrada.'}
-                hidden={false}
-                width={100}
-              />
-              <Image
-                src={Check}
-                width={60}
-                height={60}
-                className='mb-4'
-                alt='Ícone de confirmação.'
-              />
-            </Form>
-          )}
-        </Column>
-      </Section>
+            {feedback && (
+              <Form
+                id='form'
+                onSubmit={() => { }}
+                label="Formulário de Lista VIP"
+                className={`${Styles.form} ${handleWaitState()}`}
+              >
+                <Title
+                  id='form-title'
+                  className='text-center fw-normal'
+                  text='Login'
+                  size={24}
+                  hidden={false}
+                />
+                <Paragrah
+                  id='form-description'
+                  text={'Um e-mail foi encaminhado para a sua caixa de entrada.'}
+                  hidden={false}
+                  width={100}
+                />
+                <Image
+                  src={Check}
+                  width={60}
+                  height={60}
+                  className='mb-4'
+                  alt='Ícone de confirmação.'
+                />
+              </Form>
+            )}
+          </Column>
+        </Section>
 
-    </Frame>
+      </Frame>
+    </main>
   )
 }
 

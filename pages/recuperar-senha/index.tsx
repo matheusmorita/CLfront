@@ -15,7 +15,8 @@ import Image from 'next/image'
 const RecoveryPassword = () => {
   const [step, setStep] = React.useState<number>(1)
   return (
-    <Frame
+    <main style={{color: 'white'}}>
+      <Frame
       id='recovery'
       role='main'
       label='Página de Recuperação de senha'
@@ -101,6 +102,7 @@ const RecoveryPassword = () => {
         </Column>
       </Section>
     </Frame>
+    </main>
   )
 }
 
