@@ -124,8 +124,12 @@
   height: 550px;
 }
 
-.inputValue {
+.InputsGroupStyle {
   width: 90%;
+}
+
+.inputValue {
+  width: 100% ;
   background-color: $clay;
   text-align: right;
   border: none;

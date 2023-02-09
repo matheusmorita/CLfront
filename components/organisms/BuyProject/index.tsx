@@ -71,8 +71,8 @@ function BuyProject({
               hidden={false}
               id="backButton"
               label="Clique para voltar"
-              onClick={() => { 
-                setHiddenBuy(!hiddenBuy) 
+              onClick={() => {
+                setHiddenBuy(!hiddenBuy)
               }}
               text="Voltar"
               size={25}
@@ -127,9 +127,9 @@ function BuyProject({
           {hiddenBuyProject ? (
             <>
               <p className={Styles.descriptionText}>
-              Muito obrigado por investir neste projeto. Seus Tokens estarão na sua carteira
-              em alguns instantes e poderão ser visualizados na aba Histórico, 
-              além de contabilizarem no seu Saldo. 
+                Muito obrigado por investir neste projeto. Seus Tokens estarão na sua carteira
+                em alguns instantes e poderão ser visualizados na aba Histórico,
+                além de contabilizarem no seu Saldo.
               </p>
               <Image
                 width={150}
@@ -139,11 +139,11 @@ function BuyProject({
               />
               <InputModal
                 id='inputQrcode'
+                type='string'
                 label='Clique para copiar o código'
                 disabled={false}
                 placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
                 className={Styles.inputValueBuyProject}
-                classNameLabel={Styles.labelValue}
               />
               <Button
                 hidden={false}
@@ -171,26 +171,28 @@ function BuyProject({
                   CoinLivre (de X%) de acordo com os seus benefícios
                 </p>
               )}
-              <InputModal
-                id="inputReal"
-                label={conditionalBuy !== 'CLNT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
-                placeholder="0000.00"
-                value={realValue}
-                className={Styles.inputValue}
-                classNameLabel={Styles.labelValue}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setRealValue(e.target.value)
-                }}
-              />
-              <InputModal
-                id="inputMoedaSelecionada"
-                label={conditionalBuy !== 'CLNT-0' ? "Valor final" : "Você receberá em CLNT"}
-                placeholder="0000.00"
-                className={Styles.inputValue}
-                classNameLabel={Styles.labelValue}
-                disabled={true}
-                value={mask.getCurrencyMask(realValue)}
-              />
+              <div className={Styles.InputsGroupStyle}>
+                <InputModal
+                  id="inputReal"
+                  type='string'
+                  label={conditionalBuy !== 'CLNT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
+                  placeholder="0000.00"
+                  value={realValue}
+                  className={Styles.inputValue}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setRealValue(e.target.value)
+                  }}
+                />
+                <InputModal
+                  id="inputMoedaSelecionada"
+                  type='string'
+                  label={conditionalBuy !== 'CLNT-0' ? "Valor final" : "Você receberá em CLNT"}
+                  placeholder="0000.00"
+                  className={Styles.inputValue}
+                  disabled={true}
+                  value={mask.getCurrencyMask(realValue)}
+                />
+              </div>
 
               <div className={Styles.checkboxLabel}>
                 <input
