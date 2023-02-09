@@ -7,11 +7,7 @@ import Styles from './styles.module.scss';
 import Image from "next/image"
 import Logo from '@/assets/img/logo.png'
 import InputModal from '@/components/molecules/InputModal';
-// import InvestCardMobile from '../InvestCardMobile';
-import Test from './teste';
-import HeaderModalMobile from '../HeaderModalMobile';
 import InvestCardMobile from '@/components/molecules/InvestCardMobile';
-import Input from '@/components/atoms/Input';
 
 
 interface BuyProjectInterface {
@@ -40,7 +36,7 @@ function BuyProjectMobile({ setRealValue,
   const [btnCheckBalance, setBtnCheckBalance] = React.useState<string>('');
 
 
-  const saldo = 2;
+  const saldo = 20;
 
   const checkSaldo = () => {
     if (saldo < 10) {
@@ -97,7 +93,6 @@ function BuyProjectMobile({ setRealValue,
                 onClick={(e: React.FormEvent<EventTarget>) => {
                   e.preventDefault()
                   setHiddenBuy(!hiddenBuy)
-                  setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                 }}
                 text="Continuar"
                 size={20}
@@ -108,40 +103,53 @@ function BuyProjectMobile({ setRealValue,
 
         </section>
       ) : (
-        <>
-          {conditionalBuy === 'CLNT-0' ? (
-            ''
-          ) : ''}
+        <section className={Styles.successBuyProject}>
           {hiddenBuyProject ? (
-            <>
+            <main className={Styles.buyCoinLivre}>
+              <div className={Styles.divInput__investCardExib}>
+                <InvestCardMobile
+                  hiddenButton={true}
+                  acronimo={projectSelected.Projeto.acronimo}
+                  alt='Esta é uma imagem de um projeto a ser exibido'
+                  emissor={projectSelected.Emissor.nome}
+                  id={projectSelected.Projeto.acronimo}
+                  name={projectSelected.Projeto.nome}
+                  src={projectSelected.Projeto.logo.url}
+                  className={Styles.div}
+                />
+              </div>
               <p className={Styles.descriptionText}>
-                Obrigado por comprar coinlivre
+                Muito obrigado por investir neste projeto. Seus Tokens estarão
+                na sua carteira em alguns instantes e poderão ser visualizados
+                na aba Histórico, além de contabilizarem no seu Saldo.
               </p>
               <Image
-                width={150}
-                height={150}
+                width={200}
+                height={200}
                 alt='Imagem de QR code'
                 src={Logo}
               />
-              <InputModal
-                id='inputQrcode'
-                type='string'
-                label='Clique para copiar o código'
-                disabled={false}
-                placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
-                className={Styles.inputValueBuyProject}
-              />
-              <Button
-                hidden={false}
-                id={'paymentQRcodeBtn'}
-                label="Escaneie para efetuar o pagamento"
-                onClick={() => { }}
-                text={buyConfirmed ? "Sucesso" : "Aguardando"}
-                disabled={true}
-                className={Styles.btnPayQrCode}
-                size={20}
-              />
-            </>
+              <div>
+                <InputModal
+                  id='inputQrcode'
+                  type='string'
+                  label='Clique para copiar o código'
+                  disabled={false}
+                  placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
+                  className={Styles.inputValueBuyProject}
+                />
+                <Button
+                  hidden={false}
+                  id={'paymentQRcodeBtn'}
+                  label="Escaneie para efetuar o pagamento"
+                  onClick={() => { }}
+                  text={"Sucesso"}
+                  disabled={true}
+                  className={Styles.btnPayQrCode}
+                  size={20}
+                />
+              </div>
+            </main>
           ) : (
             <main className={Styles.buyCoinLivre}>
               {conditionalBuy !== 'CLNT-0' ? (
@@ -252,7 +260,7 @@ function BuyProjectMobile({ setRealValue,
               </div>
             </main>
           )}
-        </>
+        </section>
       )}
 
     </div>

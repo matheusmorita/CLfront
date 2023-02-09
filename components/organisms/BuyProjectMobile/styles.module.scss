@@ -80,6 +80,14 @@
   overflow-x: hidden;
 }
 
+.successBuyProject {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
 .buyCoinLivre {
   display: flex;
   flex-direction: column;
@@ -122,8 +130,6 @@
 .divButtons {
   display: flex;
   flex-direction: column;
-  // margin: 10px 0;
-  // gap: 10px;
   width: 90%;
 
 
@@ -149,8 +155,10 @@
 }
 
 .btnPayQrCode {
-  margin: 2%;
-  width: 90%;
+  width: 100%;
+  padding: 12px 0;
+  width: 100%;
+  margin: 3% 0;
   border: 2px solid $primary;
   background-color: $clay;
   color: $primary;
@@ -199,7 +207,6 @@
 }
 
 .inputValueBuyProject {
-  width: 90%;
   background-color: $clay;
   border: none;
   border-bottom: 3px solid $primary;

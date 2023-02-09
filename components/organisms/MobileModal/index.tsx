@@ -47,87 +47,89 @@ function MobileModal() {
   ]
 
   return (
-    <main className={Styles.mainMobileModal}>
-      <section className={Styles.sectionItems}>
-        <div className={Styles.closeButtonDiv}>
-          <CloseButton
-            className={Styles.closeButton}
-            onClick={(e: any) => {
-              e.preventDefault()
-              setShowMobileModal(false)
-            }}
-          />
-        </div>
+    <>
+      <main className={Styles.mainMobileModal}>
+        <section className={Styles.sectionItems}>
+          <div className={Styles.closeButtonDiv}>
+            <CloseButton
+              className={Styles.closeButton}
+              onClick={(e: any) => {
+                e.preventDefault()
+                setShowMobileModal(false)
+              }}
+            />
+          </div>
 
-        {hiddenBuyCoinLivre ? <BuyCoinLivreMobile /> : ''}
-        <HeaderModalMobile />
-        {hiddenBuy ? (
-          <BuyProjectMobile
-            setHiddenBuy={setHiddenBuy}
-            hiddenBuy={hiddenBuy}
-            hiddenBuyCoinLivre={hiddenBuyCoinLivre}
-            realValue={realValue}
-            setHiddenBuyCoinLivre={setHiddenBuyCoinLivre}
-            setRealValue={setRealValue}
-            conditionalBuy={conditionalBuy}
-            projectSelected={projectSelected}
-          />
-        ) : (
-          <section className={Styles.sectionCard}>
-            {!loggedIn[0] ? (
-               <InvestCardMobile
-               className={Styles.buttonStyle}
-               hiddenButton={false}
-               name="Token CoinLivre"
-               acronimo="CLNT"
-               emissor="CoinLivre"
-               alt="Card CoinLivre"
-               label="Comprar"
-               hidden={false}
-               id={`CLNT-${0}`}
-               src={Logo}
-               text="Comprar"
-               onClick={(e: any) => {
-                 e.preventDefault()
-                 if (e.target.id) {
-                   setConditionalBuy(e.target.id)
-                 }
-                 setHiddenBuy(!hiddenBuy)
-               }}
-             />
-            ) : ''}
-            {projects.map((item: any, i: number) => (
-              <InvestCardMobile
-                hiddenButton={false}
-                key={item.Projeto.acronimo}
-                src={item.Projeto.logo.url}
-                alt='Esta é uma imagem de um projeto a ser exibido'
-                text='Comprar'
-                acronimo={item.Projeto.acronimo}
-                emissor={item.Emissor.nome}
-                name={item.Projeto.nome}
-                hidden={true}
-                id={`${item.Projeto.acronimo}-${i + 1}`}
-                label='Clique para comprar'
-               className={Styles.buttonStyle}
-                onClick={(e: any) => {
-                  e.preventDefault();
-                  if (e.target.id) {
-                    setConditionalBuy(e.target.id)
-                  }
-                  setHiddenBuy(!hiddenBuy)
-                  setProjectSelected(item)
-                }}
-              />
-            ))} 
-          </section>
-        )}
+          {hiddenBuyCoinLivre ? <BuyCoinLivreMobile /> : ''}
+          <HeaderModalMobile />
+          {hiddenBuy ? (
+            <BuyProjectMobile
+              setHiddenBuy={setHiddenBuy}
+              hiddenBuy={hiddenBuy}
+              hiddenBuyCoinLivre={hiddenBuyCoinLivre}
+              realValue={realValue}
+              setHiddenBuyCoinLivre={setHiddenBuyCoinLivre}
+              setRealValue={setRealValue}
+              conditionalBuy={conditionalBuy}
+              projectSelected={projectSelected}
+            />
+          ) : (
+            <section className={Styles.sectionCard}>
+              {!loggedIn[0] ? (
+                <InvestCardMobile
+                  className={Styles.buttonStyle}
+                  hiddenButton={false}
+                  name="Token CoinLivre"
+                  acronimo="CLNT"
+                  emissor="CoinLivre"
+                  alt="Card CoinLivre"
+                  label="Comprar"
+                  hidden={false}
+                  id={`CLNT-${0}`}
+                  src={Logo}
+                  text="Comprar"
+                  onClick={(e: any) => {
+                    e.preventDefault()
+                    if (e.target.id) {
+                      setConditionalBuy(e.target.id)
+                    }
+                    setHiddenBuy(!hiddenBuy)
+                  }}
+                />
+              ) : ''}
+              {projects.map((item: any, i: number) => (
+                <InvestCardMobile
+                  hiddenButton={false}
+                  key={item.Projeto.acronimo}
+                  src={item.Projeto.logo.url}
+                  alt='Esta é uma imagem de um projeto a ser exibido'
+                  text='Comprar'
+                  acronimo={item.Projeto.acronimo}
+                  emissor={item.Emissor.nome}
+                  name={item.Projeto.nome}
+                  hidden={true}
+                  id={`${item.Projeto.acronimo}-${i + 1}`}
+                  label='Clique para comprar'
+                  className={Styles.buttonStyle}
+                  onClick={(e: any) => {
+                    e.preventDefault();
+                    if (e.target.id) {
+                      setConditionalBuy(e.target.id)
+                    }
+                    setHiddenBuy(!hiddenBuy)
+                    setProjectSelected(item)
+                  }}
+                />
+              ))}
+            </section>
+          )}
 
-      </section>
+        </section>
       <div className={Styles.footerStyle}>
         <FooterMobileModal />
       </div>
-    </main>
+      </main>
+    </>
   )
 }
 
