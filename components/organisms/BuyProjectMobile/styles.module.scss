@@ -51,7 +51,6 @@
 }
 
 .labelValue {
-  position: absolute;
   font-size: 12px;
   left: 3.5em;
   margin-top: .5em;
@@ -60,17 +59,44 @@
 
 .divInput {
   display: flex;
-  padding-top: 5%;
+  height: 80vh;
+  margin: .5rem 0;
   flex-direction: column;
-  background-color: $gray;
   align-items: center;
-  justify-content: space-around;
   border-radius: 10px;
 
 
   &__investCardExib {
     width: 95%;
   }
+}
+
+.buyProjectCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.successBuyProject {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.buyCoinLivre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 70vh;
+  border-radius: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .descriptionText {
@@ -104,8 +130,6 @@
 .divButtons {
   display: flex;
   flex-direction: column;
-  // margin: 10px 0;
-  // gap: 10px;
   width: 90%;
 
 
@@ -131,29 +155,40 @@
 }
 
 .btnPayQrCode {
-  margin: 2%;
-  width: 90%;
+  width: 100%;
+  padding: 12px 0;
+  width: 100%;
+  margin: 3% 0;
   border: 2px solid $primary;
   background-color: $clay;
   color: $primary;
 }
 
+.notEnoughCoins {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 75vh;
+}
+
 .inputValue {
-  width: 90%;
+  width: 85vw;
   background-color: $clay;
   border: none;
   border-bottom: 3px solid $primary;
   border-radius: 5px;
-  padding-top: 30px;
+  padding-top: 1.5rem;
   padding-bottom: 5px;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 500;
-  padding-left: 60%;
+  text-align: right;
 
 
   &:focus {
     box-shadow: 0 0 0 0;
     outline: 0;
+    border-bottom: 3px solid $primary;
   }
 
   &::placeholder {
@@ -172,7 +207,6 @@
 }
 
 .inputValueBuyProject {
-  width: 90%;
   background-color: $clay;
   border: none;
   border-bottom: 3px solid $primary;

@@ -7,15 +7,13 @@ import Styles from './styles.module.scss';
 import Image from "next/image"
 import Logo from '@/assets/img/logo.png'
 import InputModal from '@/components/molecules/InputModal';
-import InvestCardMobile from '../InvestCardMobile';
-import Test from './teste';
-import HeaderModalMobile from '../HeaderModalMobile';
+import InvestCardMobile from '@/components/molecules/InvestCardMobile';
 
 
 interface BuyProjectInterface {
   setRealValue: any;
   realValue: string;
-  SetHiddenBuy: any;
+  setHiddenBuy: any;
   hiddenBuy: boolean;
   setHiddenBuyCoinLivre: any;
   hiddenBuyCoinLivre: boolean;
@@ -25,7 +23,7 @@ interface BuyProjectInterface {
 
 function BuyProjectMobile({ setRealValue,
   realValue,
-  SetHiddenBuy,
+  setHiddenBuy,
   hiddenBuy,
   setHiddenBuyCoinLivre,
   hiddenBuyCoinLivre,
@@ -35,8 +33,10 @@ function BuyProjectMobile({ setRealValue,
   const [hiddenBuyProject, setHiddenBuyProject] = React.useState<boolean>(false);
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false);
   const [valueSaldo, setValueSaldo] = React.useState<boolean>(true);
+  const [btnCheckBalance, setBtnCheckBalance] = React.useState<string>('');
 
-  const saldo = 2;
+
+  const saldo = 20;
 
   const checkSaldo = () => {
     if (saldo < 10) {
@@ -47,12 +47,12 @@ function BuyProjectMobile({ setRealValue,
 
   return (
     <div className={Styles.divInput}>
-      {valueSaldo === false ? (
-        <>
+      {(valueSaldo === false && btnCheckBalance === 'continueBuyProject') ? (
+        <section className={Styles.notEnoughCoins}>
           <h4 className={Styles.titleEnough}>Fundos insuficientes</h4>
           <p className={Styles.descriptionText}>
-          Para comprar a quantidade desejada de Tokens deste projeto, 
-          você precisa antes comprar os Tokens CNLT, o que pode ser feito abaixo, via PIX.
+            Para comprar a quantidade desejada de Tokens deste projeto,
+            você precisa antes comprar os Tokens CNLT, o que pode ser feito abaixo, via PIX.
           </p>
           <Image
             alt='Logo image'
@@ -66,7 +66,7 @@ function BuyProjectMobile({ setRealValue,
               hidden={false}
               id="backButton"
               label="Clique para voltar"
-              onClick={() => { SetHiddenBuy(!hiddenBuy) }}
+              onClick={() => { setHiddenBuy(!hiddenBuy) }}
               text="Voltar"
               size={20}
               className={Styles.divButtons__backButton}
@@ -78,7 +78,7 @@ function BuyProjectMobile({ setRealValue,
                 label="Clique para gerar QR code"
                 onClick={(e: React.FormEvent<EventTarget>) => {
                   e.preventDefault()
-                  SetHiddenBuy(!hiddenBuy)
+                  setHiddenBuy(!hiddenBuy)
                   setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                 }}
                 text="Gerar QR Code"
@@ -92,8 +92,7 @@ function BuyProjectMobile({ setRealValue,
                 label="Clique para continuar compra"
                 onClick={(e: React.FormEvent<EventTarget>) => {
                   e.preventDefault()
-                  SetHiddenBuy(!hiddenBuy)
-                  setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
+                  setHiddenBuy(!hiddenBuy)
                 }}
                 text="Continuar"
                 size={20}
@@ -102,92 +101,104 @@ function BuyProjectMobile({ setRealValue,
             )}
           </div>
 
-        </>
+        </section>
       ) : (
-        <>
-          {conditionalBuy !== 'CLNT-0' ? (
-            // <Test
-            //   image={projectSelected.Projeto.logo.url}
-            // />
-            <p className={Styles.descriptionText}>
-              Para comprar os Tokens deste projeto, insira a quantidade de Tokens desejada.
-              Iremos calcular a quantidade de CNLTs necessária para a transação.
-              Lembre-se: a CoinLivre arcará com todo e qualquer custo de transação interna desta operação (Gas Fee).
-            </p>
-            // <div className={Styles.divInput__investCardExib}>
-            //   <InvestCardMobile
-            //     hiddenButton={true}
-            //     acronimo={projectSelected.Projeto.acronimo}
-            //     alt='Esta é uma imagem de um projeto a ser exibido'
-            //     emissor={projectSelected.Emissor.nome}
-            //     id={projectSelected.Projeto.acronimo}
-            //     name={projectSelected.Projeto.nome}
-            //     src={projectSelected.Projeto.logo.url}
-            //     className={Styles.div}
-            //   />
-            // </div>
-          ) : ''}
+        <section className={Styles.successBuyProject}>
           {hiddenBuyProject ? (
-            <>
+            <main className={Styles.buyCoinLivre}>
+              <div className={Styles.divInput__investCardExib}>
+                <InvestCardMobile
+                  hiddenButton={true}
+                  acronimo={projectSelected.Projeto.acronimo}
+                  alt='Esta é uma imagem de um projeto a ser exibido'
+                  emissor={projectSelected.Emissor.nome}
+                  id={projectSelected.Projeto.acronimo}
+                  name={projectSelected.Projeto.nome}
+                  src={projectSelected.Projeto.logo.url}
+                  className={Styles.div}
+                />
+              </div>
               <p className={Styles.descriptionText}>
-                Este é um texto de exemplo para dar descrição do projeto
-                Este é um texto de exemplo para dar descrição do projeto
-                Este é um texto de exemplo para dar descrição do projeto
-                Este é um texto de exemplo para dar descrição do projeto
+                Muito obrigado por investir neste projeto. Seus Tokens estarão
+                na sua carteira em alguns instantes e poderão ser visualizados
+                na aba Histórico, além de contabilizarem no seu Saldo.
               </p>
               <Image
-                width={150}
-                height={150}
+                width={200}
+                height={200}
                 alt='Imagem de QR code'
                 src={Logo}
-                style={{ border: '2px solid #00EE8D' }}
               />
-              <InputModal
-                id='inputQrcode'
-                label='Clique para copiar o código'
-                disabled={false}
-                placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
-                className={Styles.inputValueBuyProject}
-                classNameLabel={Styles.labelValue}
-              />
-              <Button
-                hidden={false}
-                id={'paymentQRcodeBtn'}
-                label="Escaneie para efetuar o pagamento"
-                onClick={() => { }}
-                text={buyConfirmed ? "Sucesso" : "Aguardando"}
-                disabled={true}
-                className={Styles.btnPayQrCode}
-                size={20}
-              />
-            </>
+              <div>
+                <InputModal
+                  id='inputQrcode'
+                  type='string'
+                  label='Clique para copiar o código'
+                  disabled={false}
+                  placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
+                  className={Styles.inputValueBuyProject}
+                />
+                <Button
+                  hidden={false}
+                  id={'paymentQRcodeBtn'}
+                  label="Escaneie para efetuar o pagamento"
+                  onClick={() => { }}
+                  text={"Sucesso"}
+                  disabled={true}
+                  className={Styles.btnPayQrCode}
+                  size={20}
+                />
+              </div>
+            </main>
           ) : (
-            <>
-              {conditionalBuy !== 'CLNT-0' ? ('') : (
+            <main className={Styles.buyCoinLivre}>
+              {conditionalBuy !== 'CLNT-0' ? (
+                <>
+                  <div className={Styles.divInput__investCardExib}>
+                    <InvestCardMobile
+                      hiddenButton={true}
+                      acronimo={projectSelected.Projeto.acronimo}
+                      alt='Esta é uma imagem de um projeto a ser exibido'
+                      emissor={projectSelected.Emissor.nome}
+                      id={projectSelected.Projeto.acronimo}
+                      name={projectSelected.Projeto.nome}
+                      src={projectSelected.Projeto.logo.url}
+                      className={Styles.div}
+                    />
+                  </div>
+                  <p className={Styles.descriptionText}>
+                    Para comprar os Tokens deste projeto, insira a quantidade de Tokens desejada.
+                    Iremos calcular a quantidade de CNLTs necessária para a transação.
+                    Lembre-se: a CoinLivre arcará com todo e qualquer custo de transação interna desta operação (Gas Fee).
+                  </p>
+                </>
+              ) : (
                 <p className={Styles.descriptionText}>
-                  Ao comprar Tokens CNLT, você receberá o equivalente 
-                  em Tokens da quantia escolhida, deduzida da taxa da CoinLivre (de X%) 
+                  Ao comprar Tokens CNLT, você receberá o equivalente
+                  em Tokens da quantia escolhida, deduzida da taxa da CoinLivre (de X%)
                   de acordo com os seus benefícios
                 </p>
               )}
+
               <InputModal
                 id="inputReal"
+                type='string'
                 label={conditionalBuy !== 'CLNT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
-                placeholder="0000,00"
+                placeholder='000.00'
                 className={Styles.inputValue}
-                classNameLabel={Styles.labelValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setRealValue(e.target.value)
                 }}
               />
               <InputModal
-                id="inputMoedaSelecionada"
+                id="inputReal"
+                type='string'
                 label={conditionalBuy !== 'CLNT-0' ? "Valor final" : "Você receberá em CLNT"}
-                placeholder="0000,00"
+                placeholder='000.00'
                 className={Styles.inputValue}
-                classNameLabel={Styles.labelValue}
-                disabled={true}
-                value={realValue}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setRealValue(e.target.value)
+                }}
               />
 
               <div className={Styles.checkboxLabel}>
@@ -210,7 +221,7 @@ function BuyProjectMobile({ setRealValue,
                   hidden={false}
                   id="backButton"
                   label="Clique para voltar"
-                  onClick={() => { SetHiddenBuy(!hiddenBuy) }}
+                  onClick={() => { setHiddenBuy(!hiddenBuy) }}
                   text="Voltar"
                   size={20}
                   className={Styles.divButtons__backButton}
@@ -222,7 +233,7 @@ function BuyProjectMobile({ setRealValue,
                     label="Clique para gerar QR code"
                     onClick={(e: React.FormEvent<EventTarget>) => {
                       e.preventDefault()
-                      SetHiddenBuy(!hiddenBuy)
+                      setHiddenBuy(true)
                       setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                     }}
                     text="Gerar QR Code"
@@ -234,11 +245,12 @@ function BuyProjectMobile({ setRealValue,
                     hidden={false}
                     id="continueBuyProject"
                     label="Clique para continuar compra"
-                    onClick={(e: React.FormEvent<EventTarget>) => {
+                    onClick={(e: any) => {
                       e.preventDefault()
                       setHiddenBuyProject(!hiddenBuyProject)
                       checkSaldo()
-                      // SetHiddenBuy(!hiddenBuy)
+                      setBtnCheckBalance(e.target.id)
+                      // setHiddenBuy(!hiddenBuy)
                     }}
                     text="Continuar"
                     size={20}
@@ -246,9 +258,9 @@ function BuyProjectMobile({ setRealValue,
                   />
                 )}
               </div>
-            </>
+            </main>
           )}
-        </>
+        </section>
       )}
 
     </div>

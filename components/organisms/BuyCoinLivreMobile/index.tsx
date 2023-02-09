@@ -13,7 +13,7 @@ import ModalContext from '@/context/ModalContext'
 import HeaderModalMobile from '../HeaderModalMobile'
 
 function BuyCoinLivreMobile() {
-  const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(true)
+  const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
 
 
   const {
@@ -69,11 +69,11 @@ function BuyCoinLivreMobile() {
       <section className={Styles.qrConfirmButton}>
         <InputModal
           id='inputQrcode'
+          type='string'
           label='Clique para copiar o código'
           disabled={true}
           placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
           className={Styles.inputValue}
-          classNameLabel={Styles.labelValue}
         />
         <Button
           hidden={false}

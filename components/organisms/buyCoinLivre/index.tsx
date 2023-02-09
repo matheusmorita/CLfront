@@ -13,9 +13,9 @@ import CloseButton from '@/components/atoms/CloseButton'
 import ModalContext from '@/context/ModalContext'
 
 function BuyCoinLivre() {
-  const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(true)
+  const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
 
-  const { modalControl: [showModal, setShowModal] } = React.useContext(ModalContext)
+  const { modalControl: [, setShowModal] } = React.useContext(ModalContext)
 
 
 

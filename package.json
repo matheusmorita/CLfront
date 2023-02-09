@@ -12,7 +12,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
-    "@mui/material": "^5.11.7",
+    "@mui/material": "^5.11.8",
     "@reacticons/ionicons": "^6.0.4",
     "@types/node": "18.11.15",
     "@types/react": "18.0.26",

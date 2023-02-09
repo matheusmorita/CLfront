@@ -1,40 +1,65 @@
 @import '@/styles/variables.scss';
 
-.inputValueRs {
-    display: flex;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    width: 100%;
-    margin: 10px;
+.group {
+    position: relative;
+    margin-bottom: .5rem;
+
+    &[data-error="true"] {
+        .input {
+            border-bottom: 3px solid $error !important;
+        }
+
+        .label {
+            color: $error !important;
+        }
+    }
+
+    &:focus-within {
+        .label {
+            font-size: 12px;
+            top: .5rem;
+            color: $primary;
+        }
+
+        .input {
+            padding-top: 1.5rem;
+            padding-bottom: .5rem;
+        }
+    }
 }
 
-.inputValue {
-    width: 90%;
-    background-color: $clay;
+.input {
+    background: $clay;
     border: none;
-    border-bottom: 3px solid $primary;
-    border-radius: 5px;
-    padding-top: 30px;
-    padding-bottom: 5px;
-    font-size: 25px;
-    font-weight: 500;
-    padding-left: 73%;
-
-
+    border-bottom: 2px solid $clay;
+    padding: 1rem;
+    font-size: 18px;
+    color: white;
+    border-radius: 3px;
+    transition: .2s;
 
     &:focus {
-        box-shadow: 0 0 0 0;
-        outline: 0;
+        outline: none;
+        border-bottom: 2px solid $primary;
     }
 
-    &::placeholder {
-        color: $white;
+    &:not(:placeholder-shown)~.label {
+        font-size: 12px;
+        top: .5rem;
+        color: $primary;
     }
 
-    &:disabled {
-        cursor: not-allowed;
+    &:not(:placeholder-shown) {
+        padding-top: 1.5rem;
+        padding-bottom: .5rem;
+    }
+
+    &[disabled],
+    &[disabled]~.label {
+        opacity: .3 !important;
+        cursor: default !important;
+        pointer-events: none !important;
+        touch-action: none !important;
     }
 
     &[type="number"]::-webkit-outer-spin-button,
@@ -44,10 +69,17 @@
     }
 }
 
-.labelValue {
-    position: absolute;
+
+.label {
     font-size: 12px;
-    left: 4em;
-    margin-top: .5em;
+    top: .5rem;
     color: $primary;
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
 }
+
+.finish {
+    text-align: center;
+}
+

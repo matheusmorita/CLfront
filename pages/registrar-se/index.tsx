@@ -83,88 +83,90 @@ const Register = () => {
   }, [name, date, cpf])
 
   return (
-    <Frame
-      id='register'
-      role='main'
-      label='Página de Registro'
-    >
-      <Head>
-        <title>CoinLivre | Registrar</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="theme-color" content="#00ee8d" />
-        <meta name="robots" content="index, follow" />
-        <meta name="description" content="CoinLivre | Registrar." />
-      </Head>
-
-      <Section
+    <main style={{ color: 'white' }}>
+      <Frame
         id='register'
-        label='register-title'
-        desc='register-description'
-        justify='center'
-        hidden={false}
-        className={`${Styles.register} pt-5 pt-lg-0 d-flex align-items-center pb-5`}
+        role='main'
+        label='Página de Registro'
       >
-        <Column
-          size={4}
-          media={'lg'}
-          className='text-center'
+        <Head>
+          <title>CoinLivre | Registrar</title>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <meta name="theme-color" content="#00ee8d" />
+          <meta name="robots" content="index, follow" />
+          <meta name="description" content="CoinLivre | Registrar." />
+        </Head>
+
+        <Section
+          id='register'
+          label='register-title'
+          desc='register-description'
+          justify='center'
+          hidden={false}
+          className={`${Styles.register} pt-5 pt-lg-0 d-flex align-items-center pb-5`}
         >
-          <Form
-            id='form'
-            onSubmit={() => { }}
-            label="Formulário de Lista VIP"
-            className={`${Styles.form} ${handleWaitState()}`}
+          <Column
+            size={4}
+            media={'lg'}
+            className='text-center'
           >
-            <Loader
-              active={waiting}
-              absolute={true}
-            />
-            <Title
-              id='form-title'
-              className='text-center fw-normal'
-              text='Registrar-se'
-              size={24}
-              hidden={false}
-            />
-            <Input
-              id='name'
-              label='Digite seu nome completo'
-              type='name'
-              onInput={setName}
-              validation={setErrorName}
-              validator={captureName}
-              error={errorName}
-            />
-            <Input
-              id='birth'
-              label='Data de nascimento'
-              type='date'
-              onInput={setDate}
-              validation={setErrorDate}
-              error={errorDate}
-            />
-            <Input
-              id='cpf'
-              label='Digite seu CPF'
-              type='text'
-              onInput={setCpf}
-              validation={setErrorCPF}
-              error={errorCPF}
-            />
-            <Checkbox />
-            <Button
-              id="submit-button"
-              text="Continuar"
-              label="Clique continue para seu cadastro"
-              className="w-100 py-2 mt-3 fs-5"
-              disabled={!validation}
-              hidden={false}
-              onClick={() => { handleUserRequest() }}
-            />
-          </Form>
-        </Column>
-      </Section>
-    </Frame>
+            <Form
+              id='form'
+              onSubmit={() => { }}
+              label="Formulário de Lista VIP"
+              className={`${Styles.form} ${handleWaitState()}`}
+            >
+              <Loader
+                active={waiting}
+                absolute={true}
+              />
+              <Title
+                id='form-title'
+                className='text-center fw-normal'
+                text='Registrar-se'
+                size={24}
+                hidden={false}
+              />
+              <Input
+                id='name'
+                label='Digite seu nome completo'
+                type='name'
+                onInput={setName}
+                validation={setErrorName}
+                validator={captureName}
+                error={errorName}
+              />
+              <Input
+                id='birth'
+                label='Data de nascimento'
+                type='date'
+                onInput={setDate}
+                validation={setErrorDate}
+                error={errorDate}
+              />
+              <Input
+                id='cpf'
+                label='Digite seu CPF'
+                type='text'
+                onInput={setCpf}
+                validation={setErrorCPF}
+                error={errorCPF}
+              />
+              <Checkbox />
+              <Button
+                id="submit-button"
+                text="Continuar"
+                label="Clique continue para seu cadastro"
+                className="w-100 py-2 mt-3 fs-5"
+                disabled={!validation}
+                hidden={false}
+                onClick={() => { handleUserRequest() }}
+              />
+            </Form>
+          </Column>
+        </Section>
+      </Frame>
+    </main>
   )
 }
 
