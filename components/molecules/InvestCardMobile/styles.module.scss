@@ -12,10 +12,11 @@
     justify-content: space-between;
     padding: 1rem;
     padding-left: 17.5%;
-    margin: 0 3%;
+    margin: 10px 3%;
 
     &:last-child {
         margin-bottom: 0;
+        max-height: 220px;
     }
 
     @media (max-width: 992px) {
@@ -37,7 +38,7 @@
         @media (max-width: 992px) {
             background: linear-gradient(to top, transparent, #000),
                 url(../../../assets/img/logo.png);
-            height: 120px;
+            height: 150px;
             width: 100%;
         }
     }
@@ -109,6 +110,13 @@
             }
         }
     }
+}
+
+.infoButtonSection {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .progress {

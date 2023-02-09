@@ -4,6 +4,7 @@
   background-color: $darker;
   height: 100vh;
   position: fixed;
+  overflow-y: auto;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -68,6 +69,7 @@
 
 .footerStyle {
   display: flex;
+  margin-top: 20px;
   justify-content: space-around;
   margin: 10px;
 }

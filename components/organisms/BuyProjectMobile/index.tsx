@@ -51,7 +51,7 @@ function BuyProjectMobile({ setRealValue,
   return (
     <div className={Styles.divInput}>
       {(valueSaldo === false && btnCheckBalance === 'continueBuyProject') ? (
-        <>
+        <section className={Styles.notEnoughCoins}>
           <h4 className={Styles.titleEnough}>Fundos insuficientes</h4>
           <p className={Styles.descriptionText}>
           Para comprar a quantidade desejada de Tokens deste projeto, 
@@ -105,7 +105,7 @@ function BuyProjectMobile({ setRealValue,
             )}
           </div>
 
-        </>
+        </section>
       ) : (
         <>
           {conditionalBuy !== 'CLNT-0' ? (
