@@ -1,9 +1,9 @@
 import React from 'react';
 import HeaderModalMobile from '../HeaderModalMobile';
 import Styles from './styles.module.scss';
-import InvestCardMobile from '@/organisms/InvestCardMobile';
+import InvestCardMobile from '@/molecules/InvestCardMobile';
 
-import LogoImg from '@/assets/img/logo.png'
+import Logo from '@/assets/img/logo.png'
 import { fetchData } from '@/utils/fetchData';
 import FooterMobileModal from '../FooterMobileModal';
 import CloseButton from '@/components/atoms/CloseButton';
@@ -12,12 +12,14 @@ import ModalContext from '@/context/ModalContext';
 import BuyProjectMobile from '../BuyProjectMobile';
 import BuyCoinLivreMobile from '../BuyCoinLivreMobile';
 import UserContext from '@/context/UserContext';
+import InvestCard from '@/components/molecules/InvestCard';
+import Projecard from '@/components/molecules/Projecard';
 
 function MobileModal() {
   const [projects, setProjects] = React.useState<any>([])
   const [projectSelected, setProjectSelected] = React.useState<any>();
 
-  const [hiddenBuy, SetHiddenBuy] = React.useState<boolean>(false);
+  const [hiddenBuy, setHiddenBuy] = React.useState<boolean>(false);
   const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
   const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
   const [realValue, setRealValue] = React.useState<string>('');
@@ -31,6 +33,18 @@ function MobileModal() {
   React.useEffect(() => {
     fetchData(setProjects)
   }, [])
+
+  const projecardMock = [
+    { title: 'Qtde.', value: 16654 },
+    { title: 'Saldo', value: 0.00336569 },
+    { title: 'Data', value: '28/01/2023 - 11:21' }
+  ]
+
+  const walletMock = [
+    { title: 'Disponível.', value: '4.00000000' },
+    { title: 'Em uso', value: 0.00336569 },
+    { title: 'Total', value: '3.99663431' }
+  ]
 
   return (
     <main className={Styles.mainMobileModal}>
@@ -49,7 +63,7 @@ function MobileModal() {
         <HeaderModalMobile />
         {hiddenBuy ? (
           <BuyProjectMobile
-            SetHiddenBuy={SetHiddenBuy}
+            setHiddenBuy={setHiddenBuy}
             hiddenBuy={hiddenBuy}
             hiddenBuyCoinLivre={hiddenBuyCoinLivre}
             realValue={realValue}
@@ -61,26 +75,26 @@ function MobileModal() {
         ) : (
           <section className={Styles.sectionCard}>
             {!loggedIn[0] ? (
-              <InvestCardMobile
-                hiddenButton={false}
-                name="Token CoinLivre"
-                acronimo="CLNT"
-                emissor="CoinLivre"
-                alt="Card CoinLivre"
-                label="Comprar"
-                hidden={false}
-                id={`CLNT-${0}`}
-                src={LogoImg}
-                text="Comprar"
-                className={Styles.div}
-                onClick={(e: any) => {
-                  e.preventDefault()
-                  if (e.target.id) {
-                    setConditionalBuy(e.target.id)
-                  }
-                  SetHiddenBuy(!hiddenBuy)
-                }}
-              />
+               <InvestCardMobile
+               className={Styles.buttonStyle}
+               hiddenButton={false}
+               name="Token CoinLivre"
+               acronimo="CLNT"
+               emissor="CoinLivre"
+               alt="Card CoinLivre"
+               label="Comprar"
+               hidden={false}
+               id={`CLNT-${0}`}
+               src={Logo}
+               text="Comprar"
+               onClick={(e: any) => {
+                 e.preventDefault()
+                 if (e.target.id) {
+                   setConditionalBuy(e.target.id)
+                 }
+                 setHiddenBuy(!hiddenBuy)
+               }}
+             />
             ) : ''}
             {projects.map((item: any, i: number) => (
               <InvestCardMobile
@@ -95,17 +109,17 @@ function MobileModal() {
                 hidden={true}
                 id={`${item.Projeto.acronimo}-${i + 1}`}
                 label='Clique para comprar'
-                className={Styles.div}
+               className={Styles.buttonStyle}
                 onClick={(e: any) => {
                   e.preventDefault();
                   if (e.target.id) {
                     setConditionalBuy(e.target.id)
                   }
-                  SetHiddenBuy(!hiddenBuy)
+                  setHiddenBuy(!hiddenBuy)
                   setProjectSelected(item)
                 }}
               />
-            ))}
+            ))} 
           </section>
         )}
 

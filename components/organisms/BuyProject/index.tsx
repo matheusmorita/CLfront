@@ -38,7 +38,7 @@ function BuyProject({
 }: BuyProjectInterface) {
   const [hiddenBuyProject, setHiddenBuyProject] = React.useState<boolean>(false);
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false);
-  const [valueSaldo, setValueSaldo] = React.useState<boolean>(false);
+  const [valueSaldo, setValueSaldo] = React.useState<boolean>(true);
   const [btnCheckBalance, setBtnCheckBalance] = React.useState<string>('');
 
   const saldo = 2;

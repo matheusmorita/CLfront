@@ -54,11 +54,16 @@
   height: 91%;
   border-radius: 20px;
   display: flex;
-  max-height: 90vh;
-  overflow-y: auto;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  // align-items: center;
+  // max-height: 90vh;
+  // overflow-y: auto;
+  // justify-content: space-around;
+}
+
+.buttonStyle {
+  width: 100%;
+  margin: 4% 0;
 }
 
 .footerStyle {

@@ -7,15 +7,16 @@ import Styles from './styles.module.scss';
 import Image from "next/image"
 import Logo from '@/assets/img/logo.png'
 import InputModal from '@/components/molecules/InputModal';
-import InvestCardMobile from '../InvestCardMobile';
+// import InvestCardMobile from '../InvestCardMobile';
 import Test from './teste';
 import HeaderModalMobile from '../HeaderModalMobile';
+import InvestCardMobile from '@/components/molecules/InvestCardMobile';
 
 
 interface BuyProjectInterface {
   setRealValue: any;
   realValue: string;
-  SetHiddenBuy: any;
+  setHiddenBuy: any;
   hiddenBuy: boolean;
   setHiddenBuyCoinLivre: any;
   hiddenBuyCoinLivre: boolean;
@@ -25,7 +26,7 @@ interface BuyProjectInterface {
 
 function BuyProjectMobile({ setRealValue,
   realValue,
-  SetHiddenBuy,
+  setHiddenBuy,
   hiddenBuy,
   setHiddenBuyCoinLivre,
   hiddenBuyCoinLivre,
@@ -35,6 +36,8 @@ function BuyProjectMobile({ setRealValue,
   const [hiddenBuyProject, setHiddenBuyProject] = React.useState<boolean>(false);
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false);
   const [valueSaldo, setValueSaldo] = React.useState<boolean>(true);
+  const [btnCheckBalance, setBtnCheckBalance] = React.useState<string>('');
+
 
   const saldo = 2;
 
@@ -47,7 +50,7 @@ function BuyProjectMobile({ setRealValue,
 
   return (
     <div className={Styles.divInput}>
-      {valueSaldo === false ? (
+      {(valueSaldo === false && btnCheckBalance === 'continueBuyProject') ? (
         <>
           <h4 className={Styles.titleEnough}>Fundos insuficientes</h4>
           <p className={Styles.descriptionText}>
@@ -66,7 +69,7 @@ function BuyProjectMobile({ setRealValue,
               hidden={false}
               id="backButton"
               label="Clique para voltar"
-              onClick={() => { SetHiddenBuy(!hiddenBuy) }}
+              onClick={() => { setHiddenBuy(!hiddenBuy) }}
               text="Voltar"
               size={20}
               className={Styles.divButtons__backButton}
@@ -78,7 +81,7 @@ function BuyProjectMobile({ setRealValue,
                 label="Clique para gerar QR code"
                 onClick={(e: React.FormEvent<EventTarget>) => {
                   e.preventDefault()
-                  SetHiddenBuy(!hiddenBuy)
+                  setHiddenBuy(!hiddenBuy)
                   setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                 }}
                 text="Gerar QR Code"
@@ -92,7 +95,7 @@ function BuyProjectMobile({ setRealValue,
                 label="Clique para continuar compra"
                 onClick={(e: React.FormEvent<EventTarget>) => {
                   e.preventDefault()
-                  SetHiddenBuy(!hiddenBuy)
+                  setHiddenBuy(!hiddenBuy)
                   setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                 }}
                 text="Continuar"
@@ -109,38 +112,36 @@ function BuyProjectMobile({ setRealValue,
             // <Test
             //   image={projectSelected.Projeto.logo.url}
             // />
-            <p className={Styles.descriptionText}>
+            <>
+              {/* <p className={Styles.descriptionText}>
               Para comprar os Tokens deste projeto, insira a quantidade de Tokens desejada.
               Iremos calcular a quantidade de CNLTs necessária para a transação.
               Lembre-se: a CoinLivre arcará com todo e qualquer custo de transação interna desta operação (Gas Fee).
-            </p>
-            // <div className={Styles.divInput__investCardExib}>
-            //   <InvestCardMobile
-            //     hiddenButton={true}
-            //     acronimo={projectSelected.Projeto.acronimo}
-            //     alt='Esta é uma imagem de um projeto a ser exibido'
-            //     emissor={projectSelected.Emissor.nome}
-            //     id={projectSelected.Projeto.acronimo}
-            //     name={projectSelected.Projeto.nome}
-            //     src={projectSelected.Projeto.logo.url}
-            //     className={Styles.div}
-            //   />
-            // </div>
+            </p> */}
+            <div className={Styles.divInput__investCardExib}>
+              <InvestCardMobile
+                hiddenButton={true}
+                acronimo={projectSelected.Projeto.acronimo}
+                alt='Esta é uma imagem de um projeto a ser exibido'
+                emissor={projectSelected.Emissor.nome}
+                id={projectSelected.Projeto.acronimo}
+                name={projectSelected.Projeto.nome}
+                src={projectSelected.Projeto.logo.url}
+                className={Styles.div}
+              />
+            </div>
+            </>
           ) : ''}
           {hiddenBuyProject ? (
             <>
               <p className={Styles.descriptionText}>
-                Este é um texto de exemplo para dar descrição do projeto
-                Este é um texto de exemplo para dar descrição do projeto
-                Este é um texto de exemplo para dar descrição do projeto
-                Este é um texto de exemplo para dar descrição do projeto
+                Obrigado por comprar coinlivre e nos dar seu dinheiro
               </p>
               <Image
                 width={150}
                 height={150}
                 alt='Imagem de QR code'
                 src={Logo}
-                style={{ border: '2px solid #00EE8D' }}
               />
               <InputModal
                 id='inputQrcode'
@@ -210,7 +211,7 @@ function BuyProjectMobile({ setRealValue,
                   hidden={false}
                   id="backButton"
                   label="Clique para voltar"
-                  onClick={() => { SetHiddenBuy(!hiddenBuy) }}
+                  onClick={() => { setHiddenBuy(!hiddenBuy) }}
                   text="Voltar"
                   size={20}
                   className={Styles.divButtons__backButton}
@@ -222,7 +223,7 @@ function BuyProjectMobile({ setRealValue,
                     label="Clique para gerar QR code"
                     onClick={(e: React.FormEvent<EventTarget>) => {
                       e.preventDefault()
-                      SetHiddenBuy(!hiddenBuy)
+                      setHiddenBuy(true)
                       setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                     }}
                     text="Gerar QR Code"
@@ -234,11 +235,12 @@ function BuyProjectMobile({ setRealValue,
                     hidden={false}
                     id="continueBuyProject"
                     label="Clique para continuar compra"
-                    onClick={(e: React.FormEvent<EventTarget>) => {
+                    onClick={(e: any) => {
                       e.preventDefault()
                       setHiddenBuyProject(!hiddenBuyProject)
                       checkSaldo()
-                      // SetHiddenBuy(!hiddenBuy)
+                      setBtnCheckBalance(e.target.id)
+                      // setHiddenBuy(!hiddenBuy)
                     }}
                     text="Continuar"
                     size={20}
