@@ -11,6 +11,7 @@ import InputModal from '@/components/molecules/InputModal';
 import Test from './teste';
 import HeaderModalMobile from '../HeaderModalMobile';
 import InvestCardMobile from '@/components/molecules/InvestCardMobile';
+import Input from '@/components/atoms/Input';
 
 
 interface BuyProjectInterface {
@@ -54,8 +55,8 @@ function BuyProjectMobile({ setRealValue,
         <section className={Styles.notEnoughCoins}>
           <h4 className={Styles.titleEnough}>Fundos insuficientes</h4>
           <p className={Styles.descriptionText}>
-          Para comprar a quantidade desejada de Tokens deste projeto, 
-          você precisa antes comprar os Tokens CNLT, o que pode ser feito abaixo, via PIX.
+            Para comprar a quantidade desejada de Tokens deste projeto,
+            você precisa antes comprar os Tokens CNLT, o que pode ser feito abaixo, via PIX.
           </p>
           <Image
             alt='Logo image'
@@ -108,34 +109,13 @@ function BuyProjectMobile({ setRealValue,
         </section>
       ) : (
         <>
-          {conditionalBuy !== 'CLNT-0' ? (
-            // <Test
-            //   image={projectSelected.Projeto.logo.url}
-            // />
-            <>
-              {/* <p className={Styles.descriptionText}>
-              Para comprar os Tokens deste projeto, insira a quantidade de Tokens desejada.
-              Iremos calcular a quantidade de CNLTs necessária para a transação.
-              Lembre-se: a CoinLivre arcará com todo e qualquer custo de transação interna desta operação (Gas Fee).
-            </p> */}
-            <div className={Styles.divInput__investCardExib}>
-              <InvestCardMobile
-                hiddenButton={true}
-                acronimo={projectSelected.Projeto.acronimo}
-                alt='Esta é uma imagem de um projeto a ser exibido'
-                emissor={projectSelected.Emissor.nome}
-                id={projectSelected.Projeto.acronimo}
-                name={projectSelected.Projeto.nome}
-                src={projectSelected.Projeto.logo.url}
-                className={Styles.div}
-              />
-            </div>
-            </>
+          {conditionalBuy === 'CLNT-0' ? (
+            ''
           ) : ''}
           {hiddenBuyProject ? (
             <>
               <p className={Styles.descriptionText}>
-                Obrigado por comprar coinlivre e nos dar seu dinheiro
+                Obrigado por comprar coinlivre
               </p>
               <Image
                 width={150}
@@ -145,11 +125,11 @@ function BuyProjectMobile({ setRealValue,
               />
               <InputModal
                 id='inputQrcode'
+                type='string'
                 label='Clique para copiar o código'
                 disabled={false}
                 placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
                 className={Styles.inputValueBuyProject}
-                classNameLabel={Styles.labelValue}
               />
               <Button
                 hidden={false}
@@ -163,32 +143,54 @@ function BuyProjectMobile({ setRealValue,
               />
             </>
           ) : (
-            <>
-              {conditionalBuy !== 'CLNT-0' ? ('') : (
+            <main className={Styles.buyCoinLivre}>
+              {conditionalBuy !== 'CLNT-0' ? (
+                <>
+                  <div className={Styles.divInput__investCardExib}>
+                    <InvestCardMobile
+                      hiddenButton={true}
+                      acronimo={projectSelected.Projeto.acronimo}
+                      alt='Esta é uma imagem de um projeto a ser exibido'
+                      emissor={projectSelected.Emissor.nome}
+                      id={projectSelected.Projeto.acronimo}
+                      name={projectSelected.Projeto.nome}
+                      src={projectSelected.Projeto.logo.url}
+                      className={Styles.div}
+                    />
+                  </div>
+                  <p className={Styles.descriptionText}>
+                    Para comprar os Tokens deste projeto, insira a quantidade de Tokens desejada.
+                    Iremos calcular a quantidade de CNLTs necessária para a transação.
+                    Lembre-se: a CoinLivre arcará com todo e qualquer custo de transação interna desta operação (Gas Fee).
+                  </p>
+                </>
+              ) : (
                 <p className={Styles.descriptionText}>
-                  Ao comprar Tokens CNLT, você receberá o equivalente 
-                  em Tokens da quantia escolhida, deduzida da taxa da CoinLivre (de X%) 
+                  Ao comprar Tokens CNLT, você receberá o equivalente
+                  em Tokens da quantia escolhida, deduzida da taxa da CoinLivre (de X%)
                   de acordo com os seus benefícios
                 </p>
               )}
+
               <InputModal
                 id="inputReal"
+                type='string'
                 label={conditionalBuy !== 'CLNT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
-                placeholder="0000,00"
+                placeholder='000.00'
                 className={Styles.inputValue}
-                classNameLabel={Styles.labelValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setRealValue(e.target.value)
                 }}
               />
               <InputModal
-                id="inputMoedaSelecionada"
+                id="inputReal"
+                type='string'
                 label={conditionalBuy !== 'CLNT-0' ? "Valor final" : "Você receberá em CLNT"}
-                placeholder="0000,00"
+                placeholder='000.00'
                 className={Styles.inputValue}
-                classNameLabel={Styles.labelValue}
-                disabled={true}
-                value={realValue}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setRealValue(e.target.value)
+                }}
               />
 
               <div className={Styles.checkboxLabel}>
@@ -248,7 +250,7 @@ function BuyProjectMobile({ setRealValue,
                   />
                 )}
               </div>
-            </>
+            </main>
           )}
         </>
       )}
