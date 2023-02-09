@@ -22,7 +22,7 @@ const TokenShare = () => {
 
   const fetchData = async () => {
     var data = JSON.stringify({
-      'id': token
+      'tokenId': token
     });
 
     var config = {
