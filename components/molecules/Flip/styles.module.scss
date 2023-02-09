@@ -25,6 +25,10 @@
         }
     }
 
+    &__desc {
+        font-size: .9rem;
+    }
+
     &__id {
         color: $light;
         position: absolute;

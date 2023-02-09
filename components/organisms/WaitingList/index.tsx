@@ -7,6 +7,8 @@ import Form from '@/molecules/Form'
 import Styles from './styles.module.scss'
 import Check from '@/assets/img/Check.webp'
 
+import bgImage from '@/assets/img/BG2.webp';
+
 const WaitingList = () => {
   const [name, setName] = React.useState(null)
   const [email, setEmail] = React.useState(null)
@@ -90,6 +92,19 @@ const WaitingList = () => {
   }, [name, email, dataPolicy, mktPolicy])
 
   return (
+    // <main style={{
+    //   display: 'flex',
+    //   flexWrap: 'wrap',
+    //   justifyContent: 'center'
+    //   }}>
+    //   <Image 
+    //     alt='example image'
+    //     width={250}
+    //     height={250}
+    //     src={bgImage}
+    //     // style={{width: '100%', margin: '20% 0 0 30%'}}
+    //   />
+    // </main>
     <Form
       id='waiting-list'
       onSubmit={() => { }}

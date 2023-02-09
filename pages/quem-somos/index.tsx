@@ -54,6 +54,7 @@ const QuemSomos = () => {
             text={Data.banner.title}
             hidden={false}
             width={14}
+            weight={500}
           />
           <Paragrah
             id='introducao-description'
@@ -136,7 +137,7 @@ const QuemSomos = () => {
           className="pt-3 pb-5"
           color='#606060'
           hidden={false}
-          width={43}
+          width={60}
           size={24}
         />
         <Projects />
