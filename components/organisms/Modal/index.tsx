@@ -57,6 +57,7 @@ function Modal() {
           conditionalBuy={conditionalBuy}
           projectSelected={projectSelected}
           setConditionalBuy={setConditionalBuy}
+          setProjectSelected={setProjectSelected}
         />
       ) : (
         <>
@@ -64,12 +65,12 @@ function Modal() {
             <InvestCard
               hiddenButton={false}
               name="Token CoinLivre"
-              acronimo="CLNT"
+              acronimo="CNLT"
               emissor="CoinLivre"
               alt="Card CoinLivre"
               label="Comprar"
               hidden={false}
-              id={`CLNT-${0}`}
+              id={`CNLT-${0}`}
               src={Logo}
               text="Comprar"
               onClick={(e: any) => {

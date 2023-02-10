@@ -19,6 +19,11 @@ import Projects from '@/components/organisms/Projects'
 import WaitingList from '@/components/organisms/WaitingList'
 
 const QuemSomos = () => {
+
+  React.useEffect(() => {
+    console.log(window.history.state)
+  }, [])
+
   return (
     <main style={{color: 'white'}}>
       <Frame

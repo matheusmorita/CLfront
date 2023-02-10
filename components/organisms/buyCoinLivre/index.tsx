@@ -11,13 +11,13 @@ import InputModal from '@/components/molecules/InputModal'
 import CloseButton from '@/components/atoms/CloseButton'
 
 import ModalContext from '@/context/ModalContext'
+import QRCode from 'react-qr-code'
+import axios from 'axios'
 
 function BuyCoinLivre() {
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
 
   const { modalControl: [, setShowModal] } = React.useContext(ModalContext)
-
-
 
   return (
     <div className={Styles.divBuy}>
@@ -52,13 +52,11 @@ function BuyCoinLivre() {
           src={logo}
         />
       ) : (
-        <Image
-          width={200}
-          height={200}
-          alt='Imagem de QR code'
-          src={QRcodeImage}
-          style={{ border: '2px solid #00EE8D' }}
-        />
+        <div style={{ border: '2px solid #00EE8D' }}>
+          <QRCode
+            value='https://pix-h.bancogenial.com/qrs1/v2/01YH96kQsCjgxhM78z3lfLGZpPDInVNUNDDA55DJ5Mtfb0V'
+          />
+        </div>
       )}
       <div className={Styles.buttonDivPayment}>
         <div style={{width: '100%'}}>

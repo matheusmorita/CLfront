@@ -10,6 +10,7 @@ import Logo from '@/assets/img/logo.png'
 import DataShow from '@/components/molecules/DataShow';
 
 import * as mask from '@/assets/js/util/masks';
+import axios from 'axios';
 
 interface BuyProjectInterface {
   setRealValue: any;
@@ -21,6 +22,7 @@ interface BuyProjectInterface {
   setConditionalBuy: any;
   conditionalBuy: string;
   projectSelected: any;
+  setProjectSelected: any;
 }
 
 
@@ -35,6 +37,7 @@ function BuyProject({
   setConditionalBuy,
   conditionalBuy,
   projectSelected,
+  setProjectSelected
 }: BuyProjectInterface) {
   const [hiddenBuyProject, setHiddenBuyProject] = React.useState<boolean>(false);
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false);
@@ -42,7 +45,7 @@ function BuyProject({
   const [btnCheckBalance, setBtnCheckBalance] = React.useState<string>('');
   const [checkboxCheck, setCheckoxCheck] = React.useState<boolean>(false);
 
-  const saldo = 2;
+  const saldo = 20;
 
   const checkSaldo = () => {
     if (saldo < 10) {
@@ -51,10 +54,12 @@ function BuyProject({
     return setValueSaldo(true)
   }
 
-  const getCurrencyMaskNotSigla = (value: any) => {
-  return value.toLocaleString('pt-br', {minimumFractionDigits: 2});
+  const requestPix = () => {
+    axios.post('https://coinlivre.blocklize.io/token/criar-ordem-pix', {
+      quantity: 5,
+      accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMwZjdiNGZjLTgwM2EtNDlmYi1hOGI2LTAzZmQyYjhkYjc5ZiIsImlhdCI6MTY3NjA2MjIzMSwiZXhwIjoxNjc2MDY1ODMxfQ.ksY0NXTe6F-PYtDKHqar1RN1Y8SCa7AXH_zDZthoEw8'
+    }).then(response => console.log(response))
   }
-
 
   return (
     <div className={Styles.divInput}>
@@ -80,11 +85,11 @@ function BuyProject({
               onClick={() => {
                 setHiddenBuy(!hiddenBuy)
               }}
-              text="Voltar"
+              text="Voltei"
               size={25}
               className={Styles.divButtons__backButton}
             />
-            {conditionalBuy === 'CLNT-0' ? (
+            {conditionalBuy === 'CNLT-0' ? (
               <Button
                 hidden={false}
                 id="generateQRButton"
@@ -104,9 +109,12 @@ function BuyProject({
                 label="Clique para continuar compra"
                 onClick={(e: React.FormEvent<EventTarget>) => {
                   e.preventDefault()
-                  setHiddenBuy(!hiddenBuy)
+                  setHiddenBuy(hiddenBuy)
+                  // setConditionalBuy('CNLT-0')
+                  // setBtnCheckBalance('')
+                  // setHiddenBuyProject(true)
                 }}
-                text="Continuar"
+                text="Continuar compra"
                 size={25}
                 className={Styles.divButtons__QRButton}
               />
@@ -116,7 +124,7 @@ function BuyProject({
         </section>
       ) : (
         <>
-          {conditionalBuy !== 'CLNT-0' ? (
+          {conditionalBuy !== 'CNLT-0' ? (
             <div className={Styles.divInput__investCardExib}>
               <InvestCard
                 hiddenButton={true}
@@ -138,11 +146,12 @@ function BuyProject({
                 além de contabilizarem no seu Saldo.
               </p>
               <Image
-                width={150}
-                height={150}
+                width={200}
+                height={200}
                 alt='Imagem de QR code'
                 src={Logo}
               />
+              <div style={{width: '90%'}}>
               <InputModal
                 id='inputQrcode'
                 type='string'
@@ -161,10 +170,11 @@ function BuyProject({
                 className={Styles.btnPayQrCode}
                 size={25}
               />
+              </div>
             </>
           ) : (
             <>
-              {conditionalBuy !== 'CLNT-0' ? (
+              {conditionalBuy !== 'CNLT-0' ? (
                 <p className={Styles.descriptionText}>
                   Para comprar os Tokens deste projeto, insira a quantidade de Tokens desejada.
                   Iremos calcular a quantidade de CNLTs necessária para a transação.
@@ -178,7 +188,7 @@ function BuyProject({
                 </p>
               )}
               <div className={Styles.InputsGroupStyle}>
-                {conditionalBuy !== 'CLNT-0' ? (
+                {conditionalBuy !== 'CNLT-0' ? (
                   <InputModal
                     id="inputQtdTokens"
                     type='number'
@@ -204,7 +214,7 @@ function BuyProject({
                 <InputModal
                   id="inputMoedaSelecionada"
                   type='string'
-                  label={conditionalBuy !== 'CLNT-0' ? "Valor final" : "Você receberá em CLNT"}
+                  label={conditionalBuy !== 'CNLT-0' ? "Valor final" : "Você receberá em CNLT"}
                   placeholder="CNLT$ 0"
                   className={Styles.inputValue}
                   disabled={true}
@@ -237,14 +247,15 @@ function BuyProject({
                   size={25}
                   className={Styles.divButtons__backButton}
                 />
-                {conditionalBuy === 'CLNT-0' ? (
+                {conditionalBuy === 'CNLT-0' ? (
                   <Button
                     hidden={false}
                     type='submit'
                     id="generateQRButton"
                     label="Clique para gerar QR code"
-                    onClick={(e: React.FormEvent<EventTarget>) => {
+                    onClick={async (e: React.FormEvent<EventTarget>) => {
                       e.preventDefault()
+                      await requestPix()
                       setHiddenBuy(true)
                       setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                     }}
@@ -262,7 +273,7 @@ function BuyProject({
                     disabled={!checkboxCheck || (realValue === '')}
                     onClick={(e: any) => {
                       e.preventDefault()
-                      // setHiddenBuyProject(!hiddenBuyProject)
+                      setHiddenBuyProject(!hiddenBuyProject)
                       checkSaldo()
                       setBtnCheckBalance(e.target.id)
                       // setHiddenBuy(!hiddenBuy)

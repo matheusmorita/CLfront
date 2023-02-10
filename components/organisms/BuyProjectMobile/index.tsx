@@ -34,6 +34,8 @@ function BuyProjectMobile({ setRealValue,
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false);
   const [valueSaldo, setValueSaldo] = React.useState<boolean>(true);
   const [btnCheckBalance, setBtnCheckBalance] = React.useState<string>('');
+  const [checkboxCheck, setCheckoxCheck] = React.useState<boolean>(false);
+
 
 
   const saldo = 20;
@@ -71,7 +73,7 @@ function BuyProjectMobile({ setRealValue,
               size={20}
               className={Styles.divButtons__backButton}
             />
-            {conditionalBuy === 'CLNT-0' ? (
+            {conditionalBuy === 'CNLT-0' ? (
               <Button
                 hidden={false}
                 id="generateQRButton"
@@ -129,7 +131,7 @@ function BuyProjectMobile({ setRealValue,
                 alt='Imagem de QR code'
                 src={Logo}
               />
-              <div>
+              <div className={Styles.inputCheckBuy}>
                 <InputModal
                   id='inputQrcode'
                   type='string'
@@ -152,7 +154,7 @@ function BuyProjectMobile({ setRealValue,
             </main>
           ) : (
             <main className={Styles.buyCoinLivre}>
-              {conditionalBuy !== 'CLNT-0' ? (
+              {conditionalBuy !== 'CNLT-0' ? (
                 <>
                   <div className={Styles.divInput__investCardExib}>
                     <InvestCardMobile
@@ -183,7 +185,7 @@ function BuyProjectMobile({ setRealValue,
               <InputModal
                 id="inputReal"
                 type='string'
-                label={conditionalBuy !== 'CLNT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
+                label={conditionalBuy !== 'CNLT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
                 placeholder='000.00'
                 className={Styles.inputValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -193,7 +195,7 @@ function BuyProjectMobile({ setRealValue,
               <InputModal
                 id="inputReal"
                 type='string'
-                label={conditionalBuy !== 'CLNT-0' ? "Valor final" : "Você receberá em CLNT"}
+                label={conditionalBuy !== 'CNLT-0' ? "Valor final" : "Você receberá em CNLT"}
                 placeholder='000.00'
                 className={Styles.inputValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -204,6 +206,7 @@ function BuyProjectMobile({ setRealValue,
               <div className={Styles.checkboxLabel}>
                 <input
                   id="checkboxInput"
+                  onClick={() => setCheckoxCheck(!checkboxCheck)}
                   type="checkbox"
                   className={Styles.checkboxInput}
 
@@ -226,7 +229,7 @@ function BuyProjectMobile({ setRealValue,
                   size={20}
                   className={Styles.divButtons__backButton}
                 />
-                {conditionalBuy === 'CLNT-0' ? (
+                {conditionalBuy === 'CNLT-0' ? (
                   <Button
                     hidden={false}
                     id="generateQRButton"
@@ -238,6 +241,7 @@ function BuyProjectMobile({ setRealValue,
                     }}
                     text="Gerar QR Code"
                     size={20}
+                    disabled={!checkboxCheck || (realValue === '')}
                     className={Styles.divButtons__QRButton}
                   />
                 ) : (
@@ -254,6 +258,7 @@ function BuyProjectMobile({ setRealValue,
                     }}
                     text="Continuar"
                     size={20}
+                    disabled={!checkboxCheck || (realValue === '')}
                     className={Styles.divButtons__QRButton}
                   />
                 )}
