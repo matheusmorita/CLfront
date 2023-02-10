@@ -157,7 +157,7 @@ const ProjectPage = () => {
                     // if (!loggedIn) {
                     //   location.href = '/login'
                     // }
-                    if (lengthWindow <= 600) {
+                    if (lengthWindow < 700) {
                       return setShowMobileModal(!showMobileModal)
                     }
                     return setShowModal(!showModal)

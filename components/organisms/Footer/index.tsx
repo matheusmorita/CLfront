@@ -65,10 +65,10 @@ const Footer = () => {
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="POLITICA_DE_PRIVACIDADE.pdf" download>termo de uso</a>
+                <a href="TERMO_DE_USO.pdf" download>termo de uso</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="TERMO_DE_USO.pdf" download>política de privacidade</a>
+                <a href="POLITICA_DE_PRIVACIDADE.pdf" download>política de privacidade</a>
               </li>
             </ul>
           </div>

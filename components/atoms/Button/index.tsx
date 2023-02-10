@@ -9,10 +9,11 @@ type Props = {
   onClick: any,
   disabled?: boolean,
   className?: string,
-  size?: number
+  size?: number;
+  type?: any;
 }
 
-const Button = ({ id, label, hidden, disabled, text, onClick, className, size }: Props) => {
+const Button = ({ id, label, hidden, disabled, text, onClick, className, size, type }: Props) => {
   return (
     <button
       id={id}
@@ -22,6 +23,7 @@ const Button = ({ id, label, hidden, disabled, text, onClick, className, size }:
       onClick={onClick}
       className={`${Styles.button} ${className}`}
       style={{fontSize: size}}
+      type={type}
     >
       {text}
     </button>

@@ -40,6 +40,7 @@ function BuyProject({
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false);
   const [valueSaldo, setValueSaldo] = React.useState<boolean>(true);
   const [btnCheckBalance, setBtnCheckBalance] = React.useState<string>('');
+  const [checkboxCheck, setCheckoxCheck] = React.useState<boolean>(false);
 
   const saldo = 2;
 
@@ -49,6 +50,11 @@ function BuyProject({
     }
     return setValueSaldo(true)
   }
+
+  const getCurrencyMaskNotSigla = (value: any) => {
+  return value.toLocaleString('pt-br', {minimumFractionDigits: 2});
+  }
+
 
   return (
     <div className={Styles.divInput}>
@@ -172,34 +178,46 @@ function BuyProject({
                 </p>
               )}
               <div className={Styles.InputsGroupStyle}>
-                <InputModal
-                  id="inputReal"
-                  type='string'
-                  label={conditionalBuy !== 'CLNT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
-                  placeholder="0000.00"
-                  value={realValue}
-                  className={Styles.inputValue}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setRealValue(e.target.value)
-                  }}
-                />
+                {conditionalBuy !== 'CLNT-0' ? (
+                  <InputModal
+                    id="inputQtdTokens"
+                    type='number'
+                    label={"Escolha a quantidade de Tokens"}
+                    placeholder="0"
+                    className={Styles.inputValue}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setRealValue(e.target.value)
+                    }}
+                  />
+                ) : (
+                  <InputModal
+                    id="inputReal"
+                    type='number'
+                    label={"Insira o valor em reais"}
+                    placeholder={realValue}
+                    className={Styles.inputValue}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setRealValue(e.target.value)
+                    }}
+                  />
+                )}
                 <InputModal
                   id="inputMoedaSelecionada"
                   type='string'
                   label={conditionalBuy !== 'CLNT-0' ? "Valor final" : "Você receberá em CLNT"}
-                  placeholder="0000.00"
+                  placeholder="CNLT$ 0"
                   className={Styles.inputValue}
                   disabled={true}
-                  value={mask.getCurrencyMask(realValue)}
+                  value={`CNLT$ ${Number(realValue).toFixed(2)}`}
                 />
               </div>
 
               <div className={Styles.checkboxLabel}>
                 <input
                   id="checkboxInput"
+                  onClick={() => setCheckoxCheck(!checkboxCheck)}
                   type="checkbox"
                   className={Styles.checkboxInput}
-
                 />
                 <label
                   htmlFor="checkboxInput"
@@ -222,6 +240,7 @@ function BuyProject({
                 {conditionalBuy === 'CLNT-0' ? (
                   <Button
                     hidden={false}
+                    type='submit'
                     id="generateQRButton"
                     label="Clique para gerar QR code"
                     onClick={(e: React.FormEvent<EventTarget>) => {
@@ -229,6 +248,7 @@ function BuyProject({
                       setHiddenBuy(true)
                       setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                     }}
+                    disabled={!checkboxCheck || (realValue === '')}
                     text="Gerar QR Code"
                     size={25}
                     className={Styles.divButtons__QRButton}
@@ -236,8 +256,10 @@ function BuyProject({
                 ) : (
                   <Button
                     hidden={false}
+                    type='submit'
                     id="continueBuyProject"
                     label="Clique para continuar compra"
+                    disabled={!checkboxCheck || (realValue === '')}
                     onClick={(e: any) => {
                       e.preventDefault()
                       // setHiddenBuyProject(!hiddenBuyProject)

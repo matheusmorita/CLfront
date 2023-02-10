@@ -61,27 +61,25 @@ function Modal() {
       ) : (
         <>
           <section className={Styles.sectionCard}>
-            {!loggedIn[0] ? (
-              <InvestCard
-                hiddenButton={false}
-                name="Token CoinLivre"
-                acronimo="CLNT"
-                emissor="CoinLivre"
-                alt="Card CoinLivre"
-                label="Comprar"
-                hidden={false}
-                id={`CLNT-${0}`}
-                src={Logo}
-                text="Comprar"
-                onClick={(e: any) => {
-                  e.preventDefault()
-                  if (e.target.id) {
-                    setConditionalBuy(e.target.id)
-                  }
-                  setHiddenBuy(!hiddenBuy)
-                }}
-              />
-            ) : ''}
+            <InvestCard
+              hiddenButton={false}
+              name="Token CoinLivre"
+              acronimo="CLNT"
+              emissor="CoinLivre"
+              alt="Card CoinLivre"
+              label="Comprar"
+              hidden={false}
+              id={`CLNT-${0}`}
+              src={Logo}
+              text="Comprar"
+              onClick={(e: any) => {
+                e.preventDefault()
+                if (e.target.id) {
+                  setConditionalBuy(e.target.id)
+                }
+                setHiddenBuy(!hiddenBuy)
+              }}
+            />
             {projects.map((item: any, i: number) => (
               <InvestCard
                 key={i}

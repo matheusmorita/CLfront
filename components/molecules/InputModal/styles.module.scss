@@ -56,7 +56,7 @@
 
     &[disabled],
     &[disabled]~.label {
-        opacity: .3 !important;
+        // opacity: .3 !important;
         cursor: default !important;
         pointer-events: none !important;
         touch-action: none !important;
