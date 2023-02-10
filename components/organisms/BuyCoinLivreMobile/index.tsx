@@ -13,7 +13,11 @@ import ModalContext from '@/context/ModalContext'
 import HeaderModalMobile from '../HeaderModalMobile'
 import QRCode from 'react-qr-code';
 
-function BuyCoinLivreMobile() {
+interface buyCoinLivreInterface {
+  conditionalBuy: string;
+}
+
+function BuyCoinLivreMobile({conditionalBuy}: buyCoinLivreInterface) {
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
 
 
@@ -70,10 +74,18 @@ function BuyCoinLivreMobile() {
           <InputModal
             id='inputQrcode'
             type='string'
-            label='Clique para copiar o código'
-            disabled={true}
+            label={'Clique para copiar o código'}
             placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
             className={Styles.inputValue}
+            onClick={(e: any) => {
+              const inputQrCode = e.target;
+              inputQrCode.select();
+              inputQrCode.setSelectionRange(0, 99999)
+              document.execCommand("copy");
+              alert('Código copiado')
+            }}
+            readOnly={true}
+            style={{cursor: 'pointer'}}
           />
         </div>
         <Button

@@ -44,7 +44,7 @@ function Modal() {
         />
       </div>
 
-      {hiddenBuyCoinLivre ? <BuyCoinLivre /> : ''}
+      {hiddenBuyCoinLivre ? <BuyCoinLivre conditionalBuy={conditionalBuy}/> : ''}
       <HeaderModal />
       {hiddenBuy ? (
         <BuyProject

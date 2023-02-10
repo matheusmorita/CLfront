@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import HeaderModalMobile from '../HeaderModalMobile';
 import Styles from './styles.module.scss';
 import InvestCardMobile from '@/molecules/InvestCardMobile';
@@ -60,7 +60,7 @@ function MobileModal() {
             />
           </div>
 
-          {hiddenBuyCoinLivre ? <BuyCoinLivreMobile /> : ''}
+          {hiddenBuyCoinLivre ? <BuyCoinLivreMobile conditionalBuy={conditionalBuy} /> : ''}
           <HeaderModalMobile />
           {hiddenBuy ? (
             <BuyProjectMobile

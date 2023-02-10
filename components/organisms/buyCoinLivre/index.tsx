@@ -12,9 +12,12 @@ import CloseButton from '@/components/atoms/CloseButton'
 
 import ModalContext from '@/context/ModalContext'
 import QRCode from 'react-qr-code'
-import axios from 'axios'
 
-function BuyCoinLivre() {
+interface buyCoinLivreInterface {
+  conditionalBuy: any;
+}
+
+function BuyCoinLivre({conditionalBuy}: buyCoinLivreInterface) {
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
 
   const { modalControl: [, setShowModal] } = React.useContext(ModalContext)
@@ -63,7 +66,7 @@ function BuyCoinLivre() {
           <InputModal
             id='inputQrcode'
             type='string'
-            label='Clique para copiar o código'
+            label={'Clique para copiar o código'}
             // disabled={true}
             value='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
             className={Styles.inputValue}
@@ -72,6 +75,7 @@ function BuyCoinLivre() {
               inputQrCode.select();
               inputQrCode.setSelectionRange(0, 99999)
               document.execCommand("copy");
+              alert('Código copiado')
             }}
             readOnly={true}
             style={{cursor: 'pointer'}}

@@ -56,8 +56,8 @@ function BuyProject({
 
   const requestPix = () => {
     axios.post('https://coinlivre.blocklize.io/token/criar-ordem-pix', {
-      quantity: 5,
-      accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMwZjdiNGZjLTgwM2EtNDlmYi1hOGI2LTAzZmQyYjhkYjc5ZiIsImlhdCI6MTY3NjA2MjIzMSwiZXhwIjoxNjc2MDY1ODMxfQ.ksY0NXTe6F-PYtDKHqar1RN1Y8SCa7AXH_zDZthoEw8'
+      quantity: realValue,
+      accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMwZjdiNGZjLTgwM2EtNDlmYi1hOGI2LTAzZmQyYjhkYjc5ZiIsImlhdCI6MTY3NjA2NTEzMCwiZXhwIjoxNjc2MDY4NzMwfQ.CjObyGDEVTevhsqnCLtLd9lmPuoq3tdQ3Zi6cM-IM08'
     }).then(response => console.log(response))
   }
 
@@ -110,9 +110,6 @@ function BuyProject({
                 onClick={(e: React.FormEvent<EventTarget>) => {
                   e.preventDefault()
                   setHiddenBuy(hiddenBuy)
-                  // setConditionalBuy('CNLT-0')
-                  // setBtnCheckBalance('')
-                  // setHiddenBuyProject(true)
                 }}
                 text="Continuar compra"
                 size={25}
@@ -155,7 +152,7 @@ function BuyProject({
               <InputModal
                 id='inputQrcode'
                 type='string'
-                label='Clique para copiar o código'
+                label='Código de confirmação'
                 disabled={false}
                 placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
                 className={Styles.inputValueBuyProject}
@@ -203,7 +200,7 @@ function BuyProject({
                   <InputModal
                     id="inputReal"
                     type='number'
-                    label={"Insira o valor em reais"}
+                    label={conditionalBuy !== 'CNLT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
                     placeholder={realValue}
                     className={Styles.inputValue}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -215,10 +212,10 @@ function BuyProject({
                   id="inputMoedaSelecionada"
                   type='string'
                   label={conditionalBuy !== 'CNLT-0' ? "Valor final" : "Você receberá em CNLT"}
-                  placeholder="CNLT$ 0"
+                  placeholder="CNLT 0"
                   className={Styles.inputValue}
                   disabled={true}
-                  value={`CNLT$ ${Number(realValue).toFixed(2)}`}
+                  value={`CNLT ${Number(realValue).toFixed(2)}`}
                 />
               </div>
 

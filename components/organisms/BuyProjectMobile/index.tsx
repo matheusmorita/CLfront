@@ -135,7 +135,7 @@ function BuyProjectMobile({ setRealValue,
                 <InputModal
                   id='inputQrcode'
                   type='string'
-                  label='Clique para copiar o código'
+                  label='Código de confirmação'
                   disabled={false}
                   placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
                   className={Styles.inputValueBuyProject}
@@ -186,7 +186,7 @@ function BuyProjectMobile({ setRealValue,
                 id="inputReal"
                 type='string'
                 label={conditionalBuy !== 'CNLT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
-                placeholder='000.00'
+                placeholder='1'
                 className={Styles.inputValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setRealValue(e.target.value)
@@ -196,11 +196,13 @@ function BuyProjectMobile({ setRealValue,
                 id="inputReal"
                 type='string'
                 label={conditionalBuy !== 'CNLT-0' ? "Valor final" : "Você receberá em CNLT"}
-                placeholder='000.00'
+                placeholder='CNLT 0'
+                disabled={true}
                 className={Styles.inputValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setRealValue(e.target.value)
                 }}
+                value={`CNLT ${Number(realValue).toFixed(2)}`}
               />
 
               <div className={Styles.checkboxLabel}>

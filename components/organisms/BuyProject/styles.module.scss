@@ -115,6 +115,13 @@
   color: $primary;
 }
 
+.btnPayQrCodeSuccess {
+  width: 100%;
+  border: 2px solid $primary;
+  background-color: red;
+  color: $primary;
+}
+
 .notEnoughCoins {
   display: flex;
   flex-direction: column;
