@@ -35,7 +35,7 @@ const DataShow = ({ title, value, badge, className, highlight = false, contractL
               target="_blank"
               href={`https://etherscan.io/address/${contractLink}`}
             >
-              <OpenInNewIcon style={{color: '#00EE8D'}} />
+              <OpenInNewIcon className={Styles.datashow__iconStyle} />
             </Link>
           ) : ''}
         </span>
