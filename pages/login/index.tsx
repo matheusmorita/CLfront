@@ -128,9 +128,9 @@ const Login = () => {
                   error={error}
                 />
                 <p className={Styles.form__desc}>
-                  Esqueceu sua senha? Clique aqui
-                  <br />
-                  Ainda não tem uma conta? Cadastre-se
+                  Neste momento não é necessário um cadastro
+                  para realizar o login na plataforma. Em caso
+                  de dúvidas, <a href="#">Clique aqui.</a>
                 </p>
                 <Button
                   id="submit-button"

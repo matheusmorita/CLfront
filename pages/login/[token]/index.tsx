@@ -43,10 +43,16 @@ const TokenShare = () => {
           setLoggedIn(true)
         }
       })
+      // .then(async () => {
+      //   await fetch('')
+      // })
       .then(() => {
-        setTimeout(() => {
-          router.push('/')
-        }, 5000);
+        const bool = true
+        if (bool) {
+            router.push('/')
+        } else {
+            router.push('/register')
+        }
       })
   }
 
