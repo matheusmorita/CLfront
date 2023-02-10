@@ -17,6 +17,9 @@ type Props = {
   placeholder?: string;
   onChange?: any;
   value?: string;
+  onClick?: any;
+  readOnly?: any;
+  style?: object;
 }
 
 const Input = ({
@@ -34,20 +37,12 @@ const Input = ({
   validation,
   validator,
   onChange,
-  value
+  value,
+  onClick,
+  readOnly,
+  style,
 }: Props) => {
   const InputRef = React.useRef<any>(null)
-
-  // const handleInputValue = () => {
-  //   handleInputValidation()
-  //   onInput(InputRef.current.value)
-  // }
-
-  // const handleInputValidation = () => {
-  //   if (validator && validation) {
-  //     validation(validator(InputRef.current.value))
-  //   }
-  // }
 
   return (
     <div
@@ -68,6 +63,10 @@ const Input = ({
         ref={InputRef}
         onChange={onChange}
         value={value}
+        onClick={onClick}
+        readOnly={readOnly}
+        style={style}
+        // data-mask="____.__"
       />
       <label
         htmlFor={id}

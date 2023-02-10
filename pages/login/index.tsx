@@ -127,11 +127,6 @@ const Login = () => {
                   validator={captureEmail}
                   error={error}
                 />
-                <p className={Styles.form__desc}>
-                  Esqueceu sua senha? Clique aqui
-                  <br />
-                  Ainda não tem uma conta? Cadastre-se
-                </p>
                 <Button
                   id="submit-button"
                   text="Entrar"

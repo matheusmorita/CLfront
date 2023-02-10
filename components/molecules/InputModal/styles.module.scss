@@ -29,7 +29,6 @@
 }
 
 .input {
-    background: $clay;
     border: none;
     border-bottom: 2px solid $clay;
     padding: 1rem;
@@ -56,7 +55,7 @@
 
     &[disabled],
     &[disabled]~.label {
-        opacity: .3 !important;
+        // opacity: .3 !important;
         cursor: default !important;
         pointer-events: none !important;
         touch-action: none !important;

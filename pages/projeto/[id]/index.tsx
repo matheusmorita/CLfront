@@ -68,11 +68,22 @@ const ProjectPage = () => {
       })
   }
 
+  // const fetchData = async (data: {limit: number}) => {
+  //   const response: any = await axios.get(`https://coinlivre.blocklize.io/projeto/retornar/?limit=${data.limit}`, {
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   })
+  //   setProjects(response.data)
+  // }
+
   React.useEffect(() => {
     if (!id) return
     fetchData()
     const largura = window.innerWidth
     setLengthWindow(largura)
+    const { as } = window.history.state
+    console.log(as)
   }, [router])
 
   if (project) {
@@ -154,10 +165,10 @@ const ProjectPage = () => {
                   size={20}
                   onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
                     e.preventDefault()
-                    // if (!loggedIn) {
-                    //   location.href = '/login'
+                    // if (!loggedIn[0]) {
+                    //   return location.href = '/login'
                     // }
-                    if (lengthWindow <= 600) {
+                    if (lengthWindow < 700) {
                       return setShowMobileModal(!showMobileModal)
                     }
                     return setShowModal(!showModal)
