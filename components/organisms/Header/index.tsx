@@ -41,7 +41,7 @@ const Header = ({ hideLinks }: Props) => {
 
   React.useEffect(() => {
     window.addEventListener("scroll", handleHeaderChange)
-    window.addEventListener("load", handleWindowChange)
+    window.addEventListener("resize", handleWindowChange)
     handleWindowChange()
   }, [])
 
