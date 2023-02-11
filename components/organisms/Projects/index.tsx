@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import Row from '@/molecules/Row'
 import Project from '@/molecules/Project'
