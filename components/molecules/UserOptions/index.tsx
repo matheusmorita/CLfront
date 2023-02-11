@@ -38,9 +38,11 @@ const UserOptions = ({ email, contrast = false }: Props) => {
               Perfil
             </li>
           </Link>
-          <li className={Styles.user__item}>
-            Desconectar
-          </li>
+          <Link href='/logout'>
+            <li className={Styles.user__item}>
+              Desconectar
+            </li>
+          </Link>
         </ul>
       </div>
     </div>
