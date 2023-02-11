@@ -109,10 +109,16 @@
 }
 
 .btnPayQrCode {
-  margin: 2%;
-  width: 90%;
+  width: 100%;
   border: 2px solid $primary;
   background-color: $clay;
+  color: $primary;
+}
+
+.btnPayQrCodeSuccess {
+  width: 100%;
+  border: 2px solid $primary;
+  background-color: red;
   color: $primary;
 }
 
@@ -162,7 +168,7 @@
 }
 
 .inputValueBuyProject {
-  width: 90%;
+  width: 100%;
   background-color: $clay;
   border: none;
   border-bottom: 3px solid $primary;

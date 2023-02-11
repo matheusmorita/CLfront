@@ -11,13 +11,16 @@ import InputModal from '@/components/molecules/InputModal'
 import CloseButton from '@/components/atoms/CloseButton'
 
 import ModalContext from '@/context/ModalContext'
+import QRCode from 'react-qr-code'
 
-function BuyCoinLivre() {
+interface buyCoinLivreInterface {
+  conditionalBuy: any;
+}
+
+function BuyCoinLivre({conditionalBuy}: buyCoinLivreInterface) {
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
 
   const { modalControl: [, setShowModal] } = React.useContext(ModalContext)
-
-
 
   return (
     <div className={Styles.divBuy}>
@@ -33,14 +36,14 @@ function BuyCoinLivre() {
       <HeaderModal />
       {buyConfirmed ? (
         <p className={Styles.divBuy__text}>
-          Obrigado pela sua compra. Dentro de alguns instantes os seus Tokens CNLT 
-          estarão disponíveis na sua carteira, para que você possa trocar pelos Tokens dos 
-          projetos que desejar. Lembre-se: você pode sacar seus CNLT a qualquer momento, 
-          pois 100% dos Tokens comprados tem liquidez garantida pela CoinLivre. 
+          Obrigado pela sua compra. Dentro de alguns instantes os seus Tokens CNLT
+          estarão disponíveis na sua carteira, para que você possa trocar pelos Tokens dos
+          projetos que desejar. Lembre-se: você pode sacar seus CNLT a qualquer momento,
+          pois 100% dos Tokens comprados tem liquidez garantida pela CoinLivre.
         </p>
       ) : (
         <p className={Styles.divBuy__text}>
-          Escaneie este código com o seu celular ou use o pix 
+          Escaneie este código com o seu celular ou use o pix
           copia e cola no app do seu banco de escolha, para realizar a sua compra de Tokens CNLT.
         </p>
       )}
@@ -52,23 +55,32 @@ function BuyCoinLivre() {
           src={logo}
         />
       ) : (
-        <Image
-          width={200}
-          height={200}
-          alt='Imagem de QR code'
-          src={QRcodeImage}
-          style={{ border: '2px solid #00EE8D' }}
-        />
+        <div style={{ border: '2px solid #00EE8D' }}>
+          <QRCode
+            value='https://pix-h.bancogenial.com/qrs1/v2/01YH96kQsCjgxhM78z3lfLGZpPDInVNUNDDA55DJ5Mtfb0V'
+          />
+        </div>
       )}
       <div className={Styles.buttonDivPayment}>
-        <InputModal
-          id='inputQrcode'
-          type='string'
-          label='Clique para copiar o código'
-          disabled={true}
-          placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
-          className={Styles.inputValue}
-        />
+        <div style={{width: '100%'}}>
+          <InputModal
+            id='inputQrcode'
+            type='string'
+            label={'Clique para copiar o código'}
+            // disabled={true}
+            value='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
+            className={Styles.inputValue}
+            onClick={(e: any) => {
+              const inputQrCode = e.target;
+              inputQrCode.select();
+              inputQrCode.setSelectionRange(0, 99999)
+              document.execCommand("copy");
+              alert('Código copiado')
+            }}
+            readOnly={true}
+            style={{cursor: 'pointer'}}
+          />
+        </div>
         <Button
           hidden={false}
           id={'paymentQRcodeBtn'}
