@@ -7,6 +7,7 @@ import UserContext from '@/context/UserContext'
 
 import { useRouter } from "next/router";
 import { getPageTopDistance } from '@/assets/js/util/scroll'
+import { getWindowInnerWidth } from '@/assets/js/util/responsive'
 import Styles from './styles.module.scss'
 
 type Props = {
@@ -15,6 +16,8 @@ type Props = {
 
 const Header = ({ hideLinks }: Props) => {
   const [whiteTheme, setWhiteTheme] = React.useState<boolean>(false)
+  const [responsive, setResponsive] = React.useState<boolean>(false)
+
   const { userInfo, loggedIn } = React.useContext(UserContext)
   const [info, setUserInfo] = userInfo
   const [logged, setLoggedIn] = loggedIn
@@ -22,6 +25,10 @@ const Header = ({ hideLinks }: Props) => {
 
   const handleHeaderChange = () => {
     getPageTopDistance() > 0 ? setWhiteTheme(true) : setWhiteTheme(false)
+  }
+
+  const handleWindowChange = () => {
+    getWindowInnerWidth() < 992 ? setResponsive(true) : setResponsive(false)
   }
 
   const handleActiveLink = (path: string) => {
@@ -34,6 +41,8 @@ const Header = ({ hideLinks }: Props) => {
 
   React.useEffect(() => {
     window.addEventListener("scroll", handleHeaderChange)
+    window.addEventListener("load", handleWindowChange)
+    handleWindowChange()
   }, [])
 
   const router = useRouter();
@@ -46,7 +55,11 @@ const Header = ({ hideLinks }: Props) => {
   return (
     <nav className={`${Styles.navbar} ${whiteTheme ? Styles.white : ''}`}>
       <div className={`${Styles.navbar__wrapper} container`}>
-        <Logo redirect={true} white={!whiteTheme} />
+        <Logo
+          redirect={true}
+          white={!whiteTheme}
+          responsive={responsive}
+        />
         {!logged && (
           <div className="d-flex align-items-center justify-content-center">
             {
@@ -78,7 +91,7 @@ const Header = ({ hideLinks }: Props) => {
         {logged && (
           <UserOptions
             email={info.email}
-            contrast={whiteTheme}  
+            contrast={whiteTheme}
           />
         )}
       </div>
