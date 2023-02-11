@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "source-map-explorer .next/static/**/*.js",
+    "build:analyze": "npm run build && npm run analyze"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -30,6 +32,7 @@
     "typescript": "4.9.4"
   },
   "devDependencies": {
-    "@types/react-input-mask": "^3.0.2"
+    "@types/react-input-mask": "^3.0.2",
+    "source-map-explorer": "^2.5.3"
   }
 }
