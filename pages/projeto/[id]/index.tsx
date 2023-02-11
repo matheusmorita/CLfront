@@ -156,7 +156,7 @@ const ProjectPage = () => {
                   className="mt-5 mb-5"
                 />
                 <Button
-                  id="header-cta"
+                  id="introducao-cta"
                   text="Investir"
                   label="Clique e cadastre-se na Lista VIP"
                   hidden={false}
