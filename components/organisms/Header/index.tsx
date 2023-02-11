@@ -2,11 +2,12 @@ import React from 'react'
 import Link from 'next/link'
 import Button from '@/atoms/Button'
 import Logo from '@/atoms/Logo'
-import Styles from './styles.module.scss'
+import UserOptions from '@/components/molecules/UserOptions'
 import UserContext from '@/context/UserContext'
 
 import { useRouter } from "next/router";
 import { getPageTopDistance } from '@/assets/js/util/scroll'
+import Styles from './styles.module.scss'
 
 type Props = {
   hideLinks: boolean
@@ -75,10 +76,10 @@ const Header = ({ hideLinks }: Props) => {
           </div>
         )}
         {logged && (
-          <div className={Styles.user}>
-            <p className={Styles.user__phrase}>Olá, {info.email}</p>
-            <div className={Styles.user__picture}></div>
-          </div>
+          <UserOptions
+            email={info.email}
+            contrast={whiteTheme}  
+          />
         )}
       </div>
     </nav>
