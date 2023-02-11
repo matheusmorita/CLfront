@@ -43,15 +43,29 @@ const TokenShare = () => {
           setLoggedIn(true)
         }
       })
-      // .then(async () => {
-      //   await fetch('')
-      // })
       .then(() => {
-        const bool = true
-        if (bool) {
-            router.push('/')
+        handleGetUserInfo()
+      })
+  }
+
+  const handleGetUserInfo = async () => {
+    const token = localStorage.getItem('accessToken')
+
+    const config = {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        "Authorization": 'Bearer ' + token,
+      }
+    }
+
+    await fetch('https://coinlivre.blocklize.io/usuario/getUserCadastro', config)
+      .then(resp => {
+        if (resp.ok) {
+          router.push('/')
         } else {
-            router.push('/register')
+          router.push('/registrar-se')
         }
       })
   }

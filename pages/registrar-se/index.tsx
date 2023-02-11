@@ -6,12 +6,15 @@ import Head from 'next/head'
 import Section from '@/components/organisms/Section'
 import Column from '@/components/molecules/Column'
 import Title from '@/components/atoms/Title'
+import Paragrah from '@/components/atoms/Paragraph'
 import Form from '@/components/molecules/Form'
 import Button from '@/components/atoms/Button'
 import Input from '@/components/atoms/Input'
 import UserContext from '@/context/UserContext'
 import Checkbox from '@/components/atoms/Checkbox'
+import Check from '@/assets/img/Check.webp'
 import Loader from '@/components/atoms/Loader'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { captureName } from '@/assets/js/util/validations'
 
@@ -26,6 +29,8 @@ const Register = () => {
   const [cpf, setCpf] = React.useState()
 
   const [waiting, setWaiting] = React.useState<boolean>(false)
+  const [success, setSuccess] = React.useState<boolean>(false)
+
   const [validation, setValidation] = React.useState<boolean>()
   const [preloaded, setPreloaded] = React.useState<boolean>(false)
 
@@ -39,7 +44,6 @@ const Register = () => {
       const token = localStorage.getItem('accessToken')
       if (token && name && cpf && date) {
         const data = JSON.stringify({
-          "accessToken": token,
           "nome": name,
           "cpf": cpf,
           "dataNascimento": date
@@ -49,7 +53,8 @@ const Register = () => {
           method: 'post',
           headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Access-Control-Allow-Origin': '*',
+            "Authorization": 'Bearer ' + token,
           },
           body: data
         }
@@ -58,10 +63,40 @@ const Register = () => {
           .then(resp => {
             if (resp.ok) {
               setWaiting(false)
+              setSuccess(true)
+              setTimeout(() => {
+                router.push('/')
+              }, 3000);
             }
           })
       }
     }
+  }
+
+  const handleGetUserInfo = async () => {
+    const token = localStorage.getItem('accessToken')
+
+    const config = {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        "Authorization": 'Bearer ' + token,
+      }
+    }
+
+    await fetch('https://coinlivre.blocklize.io/usuario/getUserCadastro', config)
+      .then(resp => {
+        if (resp.ok) {
+          setSuccess(true)
+          setPreloaded(true)
+          setTimeout(() => {
+            router.push('/')
+          }, 3000);
+        } else {
+          setPreloaded(true)
+        }
+      })
   }
 
   const handleWaitState = () => {
@@ -70,9 +105,7 @@ const Register = () => {
 
   React.useEffect(() => {
     if (logged) {
-      setTimeout(() => {
-        setPreloaded(true)
-      }, 1000);
+      handleGetUserInfo()
     }
   }, [logged])
 
@@ -130,41 +163,62 @@ const Register = () => {
                   size={24}
                   hidden={false}
                 />
-                <Input
-                  id='name'
-                  label='Digite seu nome completo'
-                  type='name'
-                  onInput={setName}
-                  validation={setErrorName}
-                  validator={captureName}
-                  error={errorName}
-                />
-                <Input
-                  id='birth'
-                  label='Data de nascimento'
-                  type='date'
-                  onInput={setDate}
-                  validation={setErrorDate}
-                  error={errorDate}
-                />
-                <Input
-                  id='cpf'
-                  label='Digite seu CPF'
-                  type='text'
-                  onInput={setCpf}
-                  validation={setErrorCPF}
-                  error={errorCPF}
-                />
-                <Checkbox />
-                <Button
-                  id="submit-button"
-                  text="Continuar"
-                  label="Clique continue para seu cadastro"
-                  className="w-100 py-2 mt-3 fs-5"
-                  disabled={!validation}
-                  hidden={false}
-                  onClick={() => { handleUserRequest() }}
-                />
+                {!success && (
+                  <>
+                    <Input
+                      id='name'
+                      label='Digite seu nome completo'
+                      type='name'
+                      onInput={setName}
+                      validation={setErrorName}
+                      validator={captureName}
+                      error={errorName}
+                    />
+                    <Input
+                      id='birth'
+                      label='Data de nascimento'
+                      type='date'
+                      onInput={setDate}
+                      validation={setErrorDate}
+                      error={errorDate}
+                    />
+                    <Input
+                      id='cpf'
+                      label='Digite seu CPF'
+                      type='text'
+                      onInput={setCpf}
+                      validation={setErrorCPF}
+                      error={errorCPF}
+                    />
+                    <Checkbox />
+                    <Button
+                      id="submit-button"
+                      text="Continuar"
+                      label="Clique continue para seu cadastro"
+                      className="w-100 py-2 mt-3 fs-5"
+                      disabled={!validation}
+                      hidden={false}
+                      onClick={() => { handleUserRequest() }}
+                    />
+                  </>
+                )}
+                {success && (
+                  <>
+                    <Paragrah
+                      id='form-description'
+                      text={'Cadastro realizado com sucesso! Aguarde, você será redirecionado.'}
+                      hidden={false}
+                      width={100}
+                    />
+                    <Image
+                      src={Check}
+                      width={60}
+                      height={60}
+                      className='mb-4'
+                      alt='Ícone de confirmação.'
+                    />
+                  </>
+                )}
               </Form>
             </Column>
           </Section>
