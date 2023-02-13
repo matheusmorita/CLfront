@@ -182,28 +182,43 @@ function BuyProjectMobile({ setRealValue,
                 </p>
               )}
 
-              <InputModal
-                id="inputReal"
-                type='string'
-                label={conditionalBuy !== 'CNLT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
-                placeholder='1'
-                className={Styles.inputValue}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setRealValue(e.target.value)
-                }}
-              />
-              <InputModal
-                id="inputReal"
-                type='string'
-                label={conditionalBuy !== 'CNLT-0' ? "Valor final" : "Você receberá em CNLT"}
-                placeholder='CNLT 0'
-                disabled={true}
-                className={Styles.inputValue}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setRealValue(e.target.value)
-                }}
-                value={`CNLT ${Number(realValue).toFixed(2)}`}
-              />
+              <div className={Styles.InputsGroupStyle}>
+                {conditionalBuy !== 'CNLT-0' ? (
+                  <InputModal
+                    id="inputQtdTokens"
+                    type='number'
+                    prefix=''
+                    label={"Escolha a quantidade de Tokens"}
+                    placeholder="0"
+                    className={Styles.inputValue}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setRealValue(e.target.value)
+                    }}
+                  />
+                ) : (
+                  <InputModal
+                    id="inputReal"
+                    type='number'
+                    prefix='R$ '
+                    label={conditionalBuy !== 'CNLT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
+                    placeholder='R$ 0,00'
+                    className={Styles.inputValue}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setRealValue(e.target.value)
+                    }}
+                  />
+                )}
+                <InputModal
+                  id="inputMoedaSelecionada"
+                  type='string'
+                  prefix='CNLT '
+                  label={conditionalBuy !== 'CNLT-0' ? "Valor final" : "Você receberá em CNLT"}
+                  placeholder='CNLT 0,00'
+                  className={Styles.inputValue}
+                  disabled={true}
+                  value={realValue}
+                />
+              </div>
 
               <div className={Styles.checkboxLabel}>
                 <input

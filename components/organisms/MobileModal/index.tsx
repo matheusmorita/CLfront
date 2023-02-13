@@ -75,28 +75,27 @@ function MobileModal() {
             />
           ) : (
             <section className={Styles.sectionCard}>
-              {!loggedIn[0] ? (
-                <InvestCardMobile
-                  className={Styles.buttonStyle}
-                  hiddenButton={false}
-                  name="Token CoinLivre"
-                  acronimo="CNLT"
-                  emissor="CoinLivre"
-                  alt="Card CoinLivre"
-                  label="Comprar"
-                  hidden={false}
-                  id={`CNLT-${0}`}
-                  src={Logo}
-                  text="Comprar"
-                  onClick={(e: any) => {
-                    e.preventDefault()
-                    if (e.target.id) {
-                      setConditionalBuy(e.target.id)
-                    }
-                    setHiddenBuy(!hiddenBuy)
-                  }}
-                />
-              ) : ''}
+              <InvestCardMobile
+                className={Styles.buttonStyle}
+                hiddenButton={false}
+                name="Token CoinLivre"
+                acronimo="CNLT"
+                emissor="CoinLivre"
+                alt="Card CoinLivre"
+                label="Comprar"
+                hidden={false}
+                id={`CNLT-${0}`}
+                src={Logo}
+                text="Comprar"
+                onClick={(e: any) => {
+                  e.preventDefault()
+                  if (e.target.id) {
+                    setConditionalBuy(e.target.id)
+                  }
+                  setRealValue('')
+                  setHiddenBuy(!hiddenBuy)
+                }}
+              />
               {projects.map((item: any, i: number) => (
                 <InvestCardMobile
                   hiddenButton={false}
@@ -116,6 +115,7 @@ function MobileModal() {
                     if (e.target.id) {
                       setConditionalBuy(e.target.id)
                     }
+                    setRealValue('')
                     setHiddenBuy(!hiddenBuy)
                     setProjectSelected(item)
                   }}
@@ -125,9 +125,9 @@ function MobileModal() {
           )}
 
         </section>
-      <div className={Styles.footerStyle}>
-        <FooterMobileModal />
-      </div>
+        <div className={Styles.footerStyle}>
+          <FooterMobileModal />
+        </div>
       </main>
     </>
   )

@@ -39,10 +39,10 @@ function InvestCard({
           background: ` linear-gradient(to right, transparent, #000), url(${src})`,
           backgroundSize: 'cover',
           position: 'absolute',
-          width: '25%',
-          height: '100%',
-          left: '0',
-          top: '0',
+          width: id !== 'CNLT-0' ? '25%' : '18%',
+          height: id !== 'CNLT-0' ? '' : '100%',
+          left: id !== 'CNLT-0' ? 0 : 10,
+          top: id !== 'CNLT-0' ? 0 : -5,
         }} 
         className={Styles.projecard__picture} />
       <div className={Styles.projecard__info}>

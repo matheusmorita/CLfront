@@ -1,4 +1,5 @@
 import React from 'react'
+import { NumericFormat } from 'react-number-format'
 import Styles from './styles.module.scss'
 
 type Props = {
@@ -20,6 +21,7 @@ type Props = {
   onClick?: any;
   readOnly?: any;
   style?: object;
+  prefix?: string;
 }
 
 const Input = ({
@@ -41,32 +43,30 @@ const Input = ({
   onClick,
   readOnly,
   style,
+  prefix
 }: Props) => {
-  const InputRef = React.useRef<any>(null)
 
   return (
     <div
       className={Styles.group}
       data-error={error}
     >
-      <input
+      <NumericFormat 
         id={id}
-        name={id}
-        type={type}
-        disabled={disabled}
-        className={`${Styles.input} ${className}`}
-        // onInput={handleInputValue}
+        prefix={prefix}
         placeholder={placeholder}
-        minLength={minLength}
-        maxLength={maxLength}
-        required={required}
-        ref={InputRef}
-        onChange={onChange}
-        value={value}
+        type='text'
+        thousandSeparator="."
+        decimalSeparator=','
+        className={`${Styles.input} ${className}`}
         onClick={onClick}
+        onChange={onChange}
         readOnly={readOnly}
+        value={value}
         style={style}
-        // data-mask="____.__"
+        name={id}
+        disabled={disabled}
+        onInput={onInput}
       />
       <label
         htmlFor={id}

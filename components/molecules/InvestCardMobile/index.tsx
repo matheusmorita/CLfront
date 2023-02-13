@@ -40,7 +40,11 @@ function InvestCardMobile({
           background: ` linear-gradient(to bottom, transparent, #000), url(${src})`,
           backgroundSize: 'cover',
           position: 'absolute',
-          width: '100%',
+          width: id !== 'CNLT-0' ? '100%' : '40%',
+          height: id !== 'CNLT-0' ? '' : '45%',
+          left: id !== 'CNLT-0' ? '' : '35%',
+          top: id !== 'CNLT-0' ? '' : '8%',
+          
         }} 
         className={Styles.projecard__picture} 
       />

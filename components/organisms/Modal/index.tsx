@@ -44,7 +44,7 @@ function Modal() {
         />
       </div>
 
-      {hiddenBuyCoinLivre ? <BuyCoinLivre conditionalBuy={conditionalBuy}/> : ''}
+      {hiddenBuyCoinLivre ? <BuyCoinLivre conditionalBuy={conditionalBuy} /> : ''}
       <HeaderModal />
       {hiddenBuy ? (
         <BuyProject
@@ -78,6 +78,7 @@ function Modal() {
                 if (e.target.id) {
                   setConditionalBuy(e.target.id)
                 }
+                setRealValue('')
                 setHiddenBuy(!hiddenBuy)
               }}
             />
@@ -97,6 +98,7 @@ function Modal() {
                   if (e.target.id) {
                     setConditionalBuy(e.target.id)
                   }
+                  setRealValue('')
                   setProjectSelected(item)
                   setHiddenBuy(!hiddenBuy)
                 }}

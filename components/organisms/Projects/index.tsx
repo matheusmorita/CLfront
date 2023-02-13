@@ -69,7 +69,7 @@ const Projects = () => {
             path={item.idProjeto}
             key={index}
             showOrNot={
-              item.rentabilidade === '' ? false : true }
+              (item.rentabilidade).toLowerCase() === 'sem rentabilidade' ? false : true }
           />
           )
             })

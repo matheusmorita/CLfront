@@ -64,7 +64,6 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot }: Pr
             >
               Data de lançamento <b>{dataLanc}</b> <br />
               Emitido por <b>{emissor}</b> <br />
-              {/* <p className={Styles.project__details}>Rentabilidade estimada de até <b>{callRentText()}</b></p> */}
               { showOrNot ? <span className={Styles.project__details}>Rentabilidade estimada de até <b>{callRentText()}</b></span> : ''}
             </p>
           </div>
