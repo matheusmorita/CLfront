@@ -3,8 +3,7 @@ import HeaderModal from '@/components/organisms/HeaderModal'
 import Image from 'next/image'
 import Styles from './styles.module.scss'
 
-import QRcodeImage from '@/assets/img/qrcode.webp'
-import logo from '@/assets/img/logo.png';
+import logo from '@/assets/img/logo.png'; 
 
 import Button from '@/components/atoms/Button'
 import InputModal from '@/components/molecules/InputModal'
@@ -15,12 +14,19 @@ import QRCode from 'react-qr-code'
 
 interface buyCoinLivreInterface {
   conditionalBuy: any;
+  balance: number;
 }
 
-function BuyCoinLivre({conditionalBuy}: buyCoinLivreInterface) {
+function BuyCoinLivre({ conditionalBuy, balance }: buyCoinLivreInterface) {
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
+  const [QRcodeUrl, SetQRcodeUrl] = React.useState<any>('')
 
   const { modalControl: [, setShowModal] } = React.useContext(ModalContext)
+
+  React.useEffect(() => {
+    const QRcodeUrl = sessionStorage.getItem('textContent')
+    SetQRcodeUrl(QRcodeUrl)
+  }, [])
 
   return (
     <div className={Styles.divBuy}>
@@ -33,7 +39,7 @@ function BuyCoinLivre({conditionalBuy}: buyCoinLivreInterface) {
           }}
         />
       </div>
-      <HeaderModal />
+      <HeaderModal balance={balance} />
       {buyConfirmed ? (
         <p className={Styles.divBuy__text}>
           Obrigado pela sua compra. Dentro de alguns instantes os seus Tokens CNLT
@@ -57,18 +63,18 @@ function BuyCoinLivre({conditionalBuy}: buyCoinLivreInterface) {
       ) : (
         <div style={{ border: '2px solid #00EE8D' }}>
           <QRCode
-            value='https://pix-h.bancogenial.com/qrs1/v2/01YH96kQsCjgxhM78z3lfLGZpPDInVNUNDDA55DJ5Mtfb0V'
+            value={String(QRcodeUrl)}
           />
         </div>
       )}
       <div className={Styles.buttonDivPayment}>
-        <div style={{width: '100%'}}>
-          <InputModal
+        <div style={{ width: '100%' }}>
+          {/* <InputModal
             id='inputQrcode'
-            type='string'
+            type='text'
             label={'Clique para copiar o código'}
             // disabled={true}
-            value='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
+            value={String(QRcodeUrl)}
             className={Styles.inputValue}
             onClick={(e: any) => {
               const inputQrCode = e.target;
@@ -77,6 +83,20 @@ function BuyCoinLivre({conditionalBuy}: buyCoinLivreInterface) {
               document.execCommand("copy");
               alert('Código copiado')
             }}
+            readOnly={true}
+            style={{cursor: 'pointer'}}
+          /> */}
+          <input
+            onClick={(e: any) => {
+              const inputQrCode = e.target;
+              inputQrCode.select();
+              inputQrCode.setSelectionRange(0, 99999)
+              document.execCommand("copy");
+              alert('Código copiado')
+            }}
+            type='text'
+            className={Styles.inputValue}
+            value={QRcodeUrl}
             readOnly={true}
             style={{cursor: 'pointer'}}
           />

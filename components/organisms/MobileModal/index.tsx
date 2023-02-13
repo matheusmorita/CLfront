@@ -14,7 +14,7 @@ import BuyCoinLivreMobile from '../BuyCoinLivreMobile';
 import UserContext from '@/context/UserContext';
 import InvestCard from '@/components/molecules/InvestCard';
 import Projecard from '@/components/molecules/Projecard';
-import { fetchDataAxios } from '@/utils/fetchDataAxios';
+import { fetchDataAxios, fetchDataUserInfo } from '@/utils/fetchDataAxios';
 
 function MobileModal() {
   const [projects, setProjects] = React.useState<any>([])
@@ -24,6 +24,7 @@ function MobileModal() {
   const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
   const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
   const [realValue, setRealValue] = React.useState<string>('');
+  const [balance, setBalance] = React.useState<number>(0)
 
   const { loggedIn } = React.useContext(UserContext)
 
@@ -32,8 +33,9 @@ function MobileModal() {
   } = React.useContext(ModalContext)
 
   React.useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken')
     fetchDataAxios("4", setProjects)
-    // fetchData(setProjects)
+    fetchDataUserInfo(accessToken, setBalance)
   }, [])
 
   const projecardMock = [
@@ -62,8 +64,10 @@ function MobileModal() {
             />
           </div>
 
-          {hiddenBuyCoinLivre ? <BuyCoinLivreMobile conditionalBuy={conditionalBuy} /> : ''}
-          <HeaderModalMobile />
+          {hiddenBuyCoinLivre ? <BuyCoinLivreMobile balance={balance} conditionalBuy={conditionalBuy} /> : ''}
+          <HeaderModalMobile 
+            balance={balance}
+          />
           {hiddenBuy ? (
             <BuyProjectMobile
               setHiddenBuy={setHiddenBuy}
@@ -109,7 +113,7 @@ function MobileModal() {
                   emissor={item.emissor.nomeEmissor}
                   name={item.nome}
                   hidden={true}
-                  id={`${item.acronimo}-${i + 1}`}
+                  id={item.id}
                   label='Clique para comprar'
                   className={Styles.buttonStyle}
                   onClick={(e: any) => {

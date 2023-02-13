@@ -2,7 +2,6 @@ import React from 'react'
 import Image from 'next/image'
 import Styles from './styles.module.scss'
 
-import QRcodeImage from '@/assets/img/qrcode.webp'
 import Logo from '@/assets/img/logo.png';
 
 import Button from '@/components/atoms/Button'
@@ -15,15 +14,21 @@ import QRCode from 'react-qr-code';
 
 interface buyCoinLivreInterface {
   conditionalBuy: string;
+  balance: number;
 }
 
-function BuyCoinLivreMobile({conditionalBuy}: buyCoinLivreInterface) {
+function BuyCoinLivreMobile({ conditionalBuy,balance }: buyCoinLivreInterface) {
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
-
+  const [QRcodeUrl, SetQRcodeUrl] = React.useState<any>('')
 
   const {
     modalMobileControl: [, setShowMobileModal]
   } = React.useContext(ModalContext)
+
+  React.useEffect(() => {
+    const QRcodeUrl = sessionStorage.getItem('textContent')
+    SetQRcodeUrl(QRcodeUrl)
+  }, [])
 
   return (
     <div className={Styles.divBuy}>
@@ -37,7 +42,7 @@ function BuyCoinLivreMobile({conditionalBuy}: buyCoinLivreInterface) {
             }}
           />
         </div>
-        <HeaderModalMobile />
+        <HeaderModalMobile balance={balance} />
         {buyConfirmed ? (
           <p className={Styles.divBuy__text}>
             Obrigado pela sua compra. Dentro de alguns instantes os seus Tokens CNLT
@@ -64,14 +69,14 @@ function BuyCoinLivreMobile({conditionalBuy}: buyCoinLivreInterface) {
       ) : (
         <div style={{ border: '2px solid #00EE8D' }}>
           <QRCode
-            value='https://pix-h.bancogenial.com/qrs1/v2/01YH96kQsCjgxhM78z3lfLGZpPDInVNUNDDA55DJ5Mtfb0V'
+            value={QRcodeUrl}
           />
         </div>
       )}
 
       <section className={Styles.qrConfirmButton}>
         <div style={{ width: '100%' }}>
-          <InputModal
+          {/* <InputModal
             id='inputQrcode'
             type='string'
             label={'Clique para copiar o código'}
@@ -86,6 +91,20 @@ function BuyCoinLivreMobile({conditionalBuy}: buyCoinLivreInterface) {
             }}
             readOnly={true}
             style={{cursor: 'pointer'}}
+          /> */}
+          <input
+            onClick={(e: any) => {
+              const inputQrCode = e.target;
+              inputQrCode.select();
+              inputQrCode.setSelectionRange(0, 99999)
+              document.execCommand("copy");
+              alert('Código copiado')
+            }}
+            type='text'
+            className={Styles.inputValue}
+            value={QRcodeUrl}
+            readOnly={true}
+            style={{ cursor: 'pointer' }}
           />
         </div>
         <Button

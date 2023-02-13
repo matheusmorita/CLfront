@@ -6,7 +6,11 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
-function HeaderModalMobile() {
+interface HeaderModalInterface {
+  balance: number;
+}
+
+function HeaderModalMobile({balance}: HeaderModalInterface) {
   const [checkedButton, SetCheckedButton] = React.useState<string>('comprar')
   const [hiddenBalance, setHiddenBalance] = React.useState<boolean>(true)
 
@@ -33,7 +37,7 @@ function HeaderModalMobile() {
                 <VisibilityOffIcon color="success" />
               </div>) : (
               <div className={Styles.balanceValue}>
-                <b>CNLT <b style={{color: '#00EE8D'}}>20000,00</b></b>
+                <b>CNLT <b style={{color: '#00EE8D'}}>{balance}</b></b>
                 <RemoveRedEyeIcon />
               </div>
             )}

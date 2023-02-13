@@ -9,6 +9,8 @@ import CloseButton from "@/components/atoms/CloseButton";
 
 import Logo from '@/assets/img/logo.png';
 
+import { fetchRequestPix } from '@/utils/fetchDataAxios';
+
 import { fetchData } from '@/utils/fetchData';
 import { fetchDataAxios, fetchDataUserInfo } from '@/utils/fetchDataAxios';
 import UserContext from "@/context/UserContext";
@@ -22,6 +24,7 @@ function Modal() {
   const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
 
   const [realValue, setRealValue] = React.useState<string>('');
+  const [balance, setBalance] = React.useState<number>(0)
   const [projects, setProjects] = React.useState<any>([])
   const [projectSelected, setProjectSelected] = React.useState<any>();
 
@@ -32,8 +35,7 @@ function Modal() {
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
     fetchDataAxios("4", setProjects)
-    fetchDataUserInfo(accessToken)
-    // fetchData(setProjects)
+    fetchDataUserInfo(accessToken, setBalance)
   }, [])
 
   return (
@@ -48,8 +50,8 @@ function Modal() {
         />
       </div>
 
-      {hiddenBuyCoinLivre ? <BuyCoinLivre conditionalBuy={conditionalBuy} /> : ''}
-      <HeaderModal />
+      {hiddenBuyCoinLivre ? <BuyCoinLivre balance={balance} conditionalBuy={conditionalBuy} /> : ''}
+      <HeaderModal balance={balance} />
       {hiddenBuy ? (
         <BuyProject
           setHiddenBuy={setHiddenBuy}
@@ -62,6 +64,7 @@ function Modal() {
           projectSelected={projectSelected}
           setConditionalBuy={setConditionalBuy}
           setProjectSelected={setProjectSelected}
+          fetchRequestPix={fetchRequestPix}
         />
       ) : (
         <>

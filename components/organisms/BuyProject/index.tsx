@@ -9,9 +9,6 @@ import Image from 'next/image';
 import Logo from '@/assets/img/logo.png'
 import DataShow from '@/components/molecules/DataShow';
 
-import * as mask from '@/assets/js/util/masks';
-import axios from 'axios';
-
 interface BuyProjectInterface {
   setRealValue: any;
   realValue: string;
@@ -23,6 +20,7 @@ interface BuyProjectInterface {
   conditionalBuy: string;
   projectSelected: any;
   setProjectSelected: any;
+  fetchRequestPix: any;
 }
 
 
@@ -37,13 +35,15 @@ function BuyProject({
   setConditionalBuy,
   conditionalBuy,
   projectSelected,
-  setProjectSelected
+  setProjectSelected,
+  fetchRequestPix
 }: BuyProjectInterface) {
   const [hiddenBuyProject, setHiddenBuyProject] = React.useState<boolean>(false);
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false);
   const [valueSaldo, setValueSaldo] = React.useState<boolean>(true);
   const [btnCheckBalance, setBtnCheckBalance] = React.useState<string>('');
   const [checkboxCheck, setCheckoxCheck] = React.useState<boolean>(false);
+  const [accessTokenState, setAccessTokenState] = React.useState<string | null>('');
 
   const saldo = 20;
 
@@ -54,12 +54,11 @@ function BuyProject({
     return setValueSaldo(true)
   }
 
-  const requestPix = () => {
-    axios.post('https://coinlivre.blocklize.io/token/criar-ordem-pix', {
-      quantity: realValue,
-      accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMwZjdiNGZjLTgwM2EtNDlmYi1hOGI2LTAzZmQyYjhkYjc5ZiIsImlhdCI6MTY3NjA2NTEzMCwiZXhwIjoxNjc2MDY4NzMwfQ.CjObyGDEVTevhsqnCLtLd9lmPuoq3tdQ3Zi6cM-IM08'
-    }).then(response => console.log(response))
-  }
+
+  React.useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken')
+    setAccessTokenState(accessToken)
+  }, [])
 
   return (
     <div className={Styles.divInput}>
@@ -257,7 +256,8 @@ function BuyProject({
                     label="Clique para gerar QR code"
                     onClick={async (e: React.FormEvent<EventTarget>) => {
                       e.preventDefault()
-                      await requestPix()
+                      const response = await fetchRequestPix(accessTokenState, realValue)
+                      sessionStorage.setItem('textContent', response)
                       setHiddenBuy(true)
                       setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                     }}

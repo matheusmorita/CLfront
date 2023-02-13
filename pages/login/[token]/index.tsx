@@ -63,7 +63,7 @@ const TokenShare = () => {
     await fetch('https://coinlivre.blocklize.io/usuario/getUserCadastro', config)
       .then(resp => {
         if (resp.ok) {
-          router.push('/')
+          // router.push('/')
         } else {
           router.push('/registrar-se')
         }

@@ -8,6 +8,7 @@ import Image from "next/image"
 import Logo from '@/assets/img/logo.png'
 import InputModal from '@/components/molecules/InputModal';
 import InvestCardMobile from '@/components/molecules/InvestCardMobile';
+import { fetchRequestPix } from '@/utils/fetchDataAxios';
 
 
 interface BuyProjectInterface {
@@ -35,7 +36,7 @@ function BuyProjectMobile({ setRealValue,
   const [valueSaldo, setValueSaldo] = React.useState<boolean>(true);
   const [btnCheckBalance, setBtnCheckBalance] = React.useState<string>('');
   const [checkboxCheck, setCheckoxCheck] = React.useState<boolean>(false);
-
+  const [accessTokenState, setAccessTokenState] = React.useState<string | null>('');
 
 
   const saldo = 20;
@@ -46,6 +47,11 @@ function BuyProjectMobile({ setRealValue,
     }
     return setValueSaldo(true)
   }
+
+  React.useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken')
+    setAccessTokenState(accessToken)
+  }, [])
 
   return (
     <div className={Styles.divInput}>
@@ -78,8 +84,10 @@ function BuyProjectMobile({ setRealValue,
                 hidden={false}
                 id="generateQRButton"
                 label="Clique para gerar QR code"
-                onClick={(e: React.FormEvent<EventTarget>) => {
+                onClick={async (e: React.FormEvent<EventTarget>) => {
                   e.preventDefault()
+                  const response = await fetchRequestPix(accessTokenState, realValue)
+                  sessionStorage.setItem('textContent', response)
                   setHiddenBuy(!hiddenBuy)
                   setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                 }}
@@ -159,12 +167,12 @@ function BuyProjectMobile({ setRealValue,
                   <div className={Styles.divInput__investCardExib}>
                     <InvestCardMobile
                       hiddenButton={true}
-                      acronimo={projectSelected.Projeto.acronimo}
+                      acronimo={projectSelected.acronimo}
                       alt='Esta é uma imagem de um projeto a ser exibido'
-                      emissor={projectSelected.Emissor.nome}
-                      id={projectSelected.Projeto.acronimo}
-                      name={projectSelected.Projeto.nome}
-                      src={projectSelected.Projeto.logo.url}
+                      emissor={projectSelected.emissor.nomeEmissor}
+                      id={projectSelected.acronimo}
+                      name={projectSelected.nome}
+                      src={projectSelected.logoUrl}
                       className={Styles.div}
                     />
                   </div>

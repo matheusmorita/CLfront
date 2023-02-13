@@ -64,9 +64,9 @@ const Register = () => {
             if (resp.ok) {
               setWaiting(false)
               setSuccess(true)
-              setTimeout(() => {
-                router.push('/')
-              }, 3000);
+              // setTimeout(() => {
+              //   router.push('/')
+              // }, 3000);
             }
           })
       }
@@ -90,9 +90,9 @@ const Register = () => {
         if (resp.ok) {
           setSuccess(true)
           setPreloaded(true)
-          setTimeout(() => {
-            router.push('/')
-          }, 3000);
+          // setTimeout(() => {
+          //   router.push('/')
+          // }, 3000);
         } else {
           setPreloaded(true)
         }

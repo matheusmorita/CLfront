@@ -18,9 +18,9 @@ const Logout = () => {
     localStorage.clear()
     setLoggedIn(false)
     setUserInfo(null)
-    setTimeout(() => {
-      router.push('/')
-    }, 1500);
+    // setTimeout(() => {
+    //   router.push('/')
+    // }, 1500);
   }
 
   React.useEffect(() => {

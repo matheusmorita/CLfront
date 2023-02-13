@@ -87,8 +87,6 @@ const ProjectPage = () => {
     fetchData()
     const largura = window.innerWidth
     setLengthWindow(largura)
-    const { as } = window.history.state
-    console.log(as)
   }, [router])
 
   if (project) {

@@ -14,7 +14,7 @@ interface InvestCardInterface {
   alt: string;
   name: string;
   emissor: string;
-  acronimo: string;
+  acronimo?: string;
   hiddenButton: boolean;
   className?: any;
 }
