@@ -7,6 +7,7 @@ export async function fetchDataAxios(limit, setProjects) {
       'Content-Type': 'application/json'
     }
   })
+  setProjects(response.data)
   console.log(response.data)
 }
 

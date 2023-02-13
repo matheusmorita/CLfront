@@ -102,7 +102,6 @@ function Modal() {
                   if (e.target.id) {
                     setConditionalBuy(e.target.id)
                   }
-                  console.log(item.emissor.emissorNome)
                   setRealValue('')
                   setProjectSelected(item)
                   setHiddenBuy(!hiddenBuy)
