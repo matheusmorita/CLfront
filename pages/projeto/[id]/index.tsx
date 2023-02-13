@@ -28,6 +28,7 @@ import MobileModal from '@/components/organisms/MobileModal'
 
 import * as masks from '@/assets/js/util/masks'
 import UserContext from '@/context/UserContext'
+import axios from 'axios'
 
 
 
@@ -67,13 +68,18 @@ const ProjectPage = () => {
       })
   }
 
-  // const fetchData = async (data: {limit: number}) => {
-  //   const response: any = await axios.get(`https://coinlivre.blocklize.io/projeto/retornar/?limit=${data.limit}`, {
+  // const data = {
+  //   id
+  // }
+
+  // const fetchDataAxios = async (data: {id: string}) => {
+  //   const response: any = await axios.get(`https://coinlivre.blocklize.io/projeto/retornar/${data.id}`, {
   //     headers: {
   //       'Content-Type': 'application/json'
   //     }
   //   })
-  //   setProjects(response.data)
+  //   console.log(response.data)
+  //   setProject(response.data)
   // }
 
   React.useEffect(() => {

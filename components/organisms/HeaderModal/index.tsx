@@ -90,7 +90,7 @@ function HeaderModal() {
               <VisibilityOffIcon color="success" />
             </div> ): (
               <div className={Styles.balanceValue}>
-                <b>CNLT <b style={{color: '#00EE8D'}}>20000,00</b></b>
+                <b style={{fontSize: '20px'}}>CNLT <b style={{color: '#00EE8D'}}>20000,00</b></b>
                 <RemoveRedEyeIcon />
               </div>
             )}

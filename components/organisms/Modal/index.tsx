@@ -10,6 +10,7 @@ import CloseButton from "@/components/atoms/CloseButton";
 import Logo from '@/assets/img/logo.png';
 
 import { fetchData } from '@/utils/fetchData';
+import { fetchDataAxios, fetchDataUserInfo } from '@/utils/fetchDataAxios';
 import UserContext from "@/context/UserContext";
 import BuyProject from "../BuyProject";
 import ModalContext from "@/context/ModalContext";
@@ -29,7 +30,10 @@ function Modal() {
   const { modalControl: [, setShowModal] } = React.useContext(ModalContext)
 
   React.useEffect(() => {
-    fetchData(setProjects)
+    const accessToken = localStorage.getItem('accessToken')
+    fetchDataAxios("4", setProjects)
+    fetchDataUserInfo(accessToken)
+    // fetchData(setProjects)
   }, [])
 
   return (
@@ -85,19 +89,20 @@ function Modal() {
             {projects.map((item: any, i: number) => (
               <InvestCard
                 key={i}
-                acronimo={item.Projeto.acronimo}
+                acronimo={item.acronimo}
                 alt='Esta é uma imagem de um projeto a ser exibido'
-                emissor={item.Emissor.nome}
+                emissor={item.emissor.nomeEmissor}
                 hiddenButton={false}
-                id={`${item.Projeto.acronimo}-${i + 1}`}
-                name={item.Projeto.nome}
-                src={item.Projeto.logo.url}
+                id={item.id}
+                name={item.nome}
+                src={item.logoUrl}
                 text='Comprar'
                 onClick={(e: any) => {
                   e.preventDefault()
                   if (e.target.id) {
                     setConditionalBuy(e.target.id)
                   }
+                  console.log(item.emissor.emissorNome)
                   setRealValue('')
                   setProjectSelected(item)
                   setHiddenBuy(!hiddenBuy)

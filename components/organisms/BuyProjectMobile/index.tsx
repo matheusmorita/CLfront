@@ -111,12 +111,12 @@ function BuyProjectMobile({ setRealValue,
               <div className={Styles.divInput__investCardExib}>
                 <InvestCardMobile
                   hiddenButton={true}
-                  acronimo={projectSelected.Projeto.acronimo}
+                  acronimo={projectSelected.acronimo}
                   alt='Esta é uma imagem de um projeto a ser exibido'
-                  emissor={projectSelected.Emissor.nome}
-                  id={projectSelected.Projeto.acronimo}
-                  name={projectSelected.Projeto.nome}
-                  src={projectSelected.Projeto.logo.url}
+                  emissor={projectSelected.emissor.nomeEmissor}
+                  id={projectSelected.acronimo}
+                  name={projectSelected.nome}
+                  src={projectSelected.logoUrl}
                   className={Styles.div}
                 />
               </div>
@@ -192,7 +192,8 @@ function BuyProjectMobile({ setRealValue,
                     placeholder="0"
                     className={Styles.inputValue}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setRealValue(e.target.value)
+                      const newStr = e.target.value.replace(/[^0-9]/g, '')
+                      setRealValue(newStr)
                     }}
                   />
                 ) : (
@@ -204,7 +205,8 @@ function BuyProjectMobile({ setRealValue,
                     placeholder='R$ 0,00'
                     className={Styles.inputValue}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setRealValue(e.target.value)
+                      const newStr = e.target.value.replace(/[^0-9]/g, '')
+                      setRealValue(newStr)
                     }}
                   />
                 )}

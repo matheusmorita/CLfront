@@ -14,6 +14,7 @@ import BuyCoinLivreMobile from '../BuyCoinLivreMobile';
 import UserContext from '@/context/UserContext';
 import InvestCard from '@/components/molecules/InvestCard';
 import Projecard from '@/components/molecules/Projecard';
+import { fetchDataAxios } from '@/utils/fetchDataAxios';
 
 function MobileModal() {
   const [projects, setProjects] = React.useState<any>([])
@@ -31,7 +32,8 @@ function MobileModal() {
   } = React.useContext(ModalContext)
 
   React.useEffect(() => {
-    fetchData(setProjects)
+    fetchDataAxios("4", setProjects)
+    // fetchData(setProjects)
   }, [])
 
   const projecardMock = [
@@ -99,15 +101,15 @@ function MobileModal() {
               {projects.map((item: any, i: number) => (
                 <InvestCardMobile
                   hiddenButton={false}
-                  key={item.Projeto.acronimo}
-                  src={item.Projeto.logo.url}
+                  key={item.acronimo}
+                  src={item.logoUrl}
                   alt='Esta é uma imagem de um projeto a ser exibido'
                   text='Comprar'
-                  acronimo={item.Projeto.acronimo}
-                  emissor={item.Emissor.nome}
-                  name={item.Projeto.nome}
+                  acronimo={item.acronimo}
+                  emissor={item.emissor.nomeEmissor}
+                  name={item.nome}
                   hidden={true}
-                  id={`${item.Projeto.acronimo}-${i + 1}`}
+                  id={`${item.acronimo}-${i + 1}`}
                   label='Clique para comprar'
                   className={Styles.buttonStyle}
                   onClick={(e: any) => {
