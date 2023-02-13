@@ -11,13 +11,16 @@ import InputModal from '@/components/molecules/InputModal'
 import CloseButton from '@/components/atoms/CloseButton'
 
 import ModalContext from '@/context/ModalContext'
+import QRCode from 'react-qr-code'
 
-function BuyCoinLivre() {
+interface buyCoinLivreInterface {
+  conditionalBuy: any;
+}
+
+function BuyCoinLivre({conditionalBuy}: buyCoinLivreInterface) {
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
 
   const { modalControl: [, setShowModal] } = React.useContext(ModalContext)
-
-
 
   return (
     <div className={Styles.divBuy}>
@@ -52,20 +55,18 @@ function BuyCoinLivre() {
           src={logo}
         />
       ) : (
-        <Image
-          width={200}
-          height={200}
-          alt='Imagem de QR code'
-          src={QRcodeImage}
-          style={{ border: '2px solid #00EE8D' }}
-        />
+        <div style={{ border: '2px solid #00EE8D' }}>
+          <QRCode
+            value='https://pix-h.bancogenial.com/qrs1/v2/01YH96kQsCjgxhM78z3lfLGZpPDInVNUNDDA55DJ5Mtfb0V'
+          />
+        </div>
       )}
       <div className={Styles.buttonDivPayment}>
         <div style={{width: '100%'}}>
           <InputModal
             id='inputQrcode'
             type='string'
-            label='Clique para copiar o código'
+            label={'Clique para copiar o código'}
             // disabled={true}
             value='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
             className={Styles.inputValue}
@@ -74,6 +75,7 @@ function BuyCoinLivre() {
               inputQrCode.select();
               inputQrCode.setSelectionRange(0, 99999)
               document.execCommand("copy");
+              alert('Código copiado')
             }}
             readOnly={true}
             style={{cursor: 'pointer'}}

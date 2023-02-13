@@ -1,21 +1,36 @@
 import React from 'react'
 import Image from 'next/image'
-import Source from '@/assets/img/logo.webp'
-import SourceWhite from '@/assets/img/logo-white.webp'
+import SourceBlack from '@/assets/img/logo-white.webp'
+import SourceWhite from '@/assets/img/logo.webp'
+import BrandBlack from '@/assets/img/brand.webp'
+import BrandWhite from '@/assets/img/brand-white.webp'
 import Styles from './styles.module.scss'
 
 type Props = {
   white: boolean,
   redirect?: boolean,
-  width?: number
+  width?: number,
+  responsive?: boolean,
 }
 
-const Logo = ({ white, redirect = false, width = 200 }: Props) => {
+const Logo = ({ white, redirect = false, width = 200, responsive = false }: Props) => {
   const height = undefined
   const alt = "Logomarca da Coinlivre"
 
   const setRedirect = () => {
     return redirect ? location.href = '/' : null
+  }
+
+  const handleSourceWhite = () => {
+    return responsive ? BrandWhite : SourceWhite
+  }
+
+  const handleSourceBlack = () => {
+    return responsive ? BrandBlack : SourceBlack
+  }
+
+  const handleResponsiveWidth = () => {
+    return responsive ? width / 4 : width
   }
 
   return (
@@ -25,9 +40,9 @@ const Logo = ({ white, redirect = false, width = 200 }: Props) => {
     >
       <Image
         alt={alt}
-        width={width}
         height={height}
-        src={white ? SourceWhite : Source}
+        width={handleResponsiveWidth()}
+        src={!white ? handleSourceWhite() : handleSourceBlack()}
       />
     </figure>
   )

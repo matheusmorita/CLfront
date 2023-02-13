@@ -12,7 +12,7 @@ import Switch from '@/components/molecules/Switch'
 import Projecard from '@/components/molecules/Projecard'
 
 const Perfil = () => {
-  const [walletState, setWalletState] = React.useState()
+  const [walletState, setWalletState] = React.useState(0)
 
   const projecardMock = [
     { title: 'Qtde.', value: 16654 },

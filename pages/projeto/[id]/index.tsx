@@ -60,7 +60,6 @@ const ProjectPage = () => {
     await fetch('https://parseapi.back4app.com/parse/functions/retornar-projeto-id', config)
       .then(resp => resp.json())
       .then(json => {
-        console.log(json)
         setProject(json.result)
       })
       .catch(error => {
@@ -68,11 +67,22 @@ const ProjectPage = () => {
       })
   }
 
+  // const fetchData = async (data: {limit: number}) => {
+  //   const response: any = await axios.get(`https://coinlivre.blocklize.io/projeto/retornar/?limit=${data.limit}`, {
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   })
+  //   setProjects(response.data)
+  // }
+
   React.useEffect(() => {
     if (!id) return
     fetchData()
     const largura = window.innerWidth
     setLengthWindow(largura)
+    const { as } = window.history.state
+    console.log(as)
   }, [router])
 
   if (project) {
@@ -146,7 +156,7 @@ const ProjectPage = () => {
                   className="mt-5 mb-5"
                 />
                 <Button
-                  id="header-cta"
+                  id="introducao-cta"
                   text="Investir"
                   label="Clique e cadastre-se na Lista VIP"
                   hidden={false}
@@ -154,8 +164,8 @@ const ProjectPage = () => {
                   size={20}
                   onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
                     e.preventDefault()
-                    // if (!loggedIn) {
-                    //   location.href = '/login'
+                    // if (!loggedIn[0]) {
+                    //   return location.href = '/login'
                     // }
                     if (lengthWindow < 700) {
                       return setShowMobileModal(!showMobileModal)

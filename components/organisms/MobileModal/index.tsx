@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import HeaderModalMobile from '../HeaderModalMobile';
 import Styles from './styles.module.scss';
 import InvestCardMobile from '@/molecules/InvestCardMobile';
@@ -60,7 +60,7 @@ function MobileModal() {
             />
           </div>
 
-          {hiddenBuyCoinLivre ? <BuyCoinLivreMobile /> : ''}
+          {hiddenBuyCoinLivre ? <BuyCoinLivreMobile conditionalBuy={conditionalBuy} /> : ''}
           <HeaderModalMobile />
           {hiddenBuy ? (
             <BuyProjectMobile
@@ -80,12 +80,12 @@ function MobileModal() {
                   className={Styles.buttonStyle}
                   hiddenButton={false}
                   name="Token CoinLivre"
-                  acronimo="CLNT"
+                  acronimo="CNLT"
                   emissor="CoinLivre"
                   alt="Card CoinLivre"
                   label="Comprar"
                   hidden={false}
-                  id={`CLNT-${0}`}
+                  id={`CNLT-${0}`}
                   src={Logo}
                   text="Comprar"
                   onClick={(e: any) => {

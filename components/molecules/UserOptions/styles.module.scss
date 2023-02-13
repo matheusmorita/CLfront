@@ -1,0 +1,97 @@
+@import '@/styles/variables.scss';
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+
+    &__phrase {
+        color: $white;
+        margin-bottom: 0;
+    }
+
+    &__picture {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 3px solid $primary;
+        margin-left: .5rem;
+        background: url(../../../assets/img/BG2.webp);
+        background-size: cover;
+    }
+
+    &__menu {
+        position: absolute;
+        top: 3rem;
+        right: 0;
+        z-index: 1032;
+        display: none;
+
+        &.open {
+            display: block;
+        }
+    }
+
+    &__list {
+        list-style: none;
+        padding: .5rem;
+        border-radius: 8px;
+        margin: 0;
+        background: rgba($color: $black, $alpha: .4);
+        backdrop-filter: blur(1rem);
+        overflow: hidden;
+        border-bottom: 4px solid $primary;
+
+        a {
+            text-decoration: none;
+        }
+    }
+
+    &__item {
+        padding: .75rem;
+        font-size: 18px;
+        background: $darker;
+        border-radius: 6px;
+        margin: .5rem 0;
+        color: $light;
+        transition: .2s;
+        min-width: 250px;
+        width: 100%;
+        cursor: pointer;
+
+        &.danger {
+            color: $error;
+            border: 1px solid $error;
+            background: rgba($color: $error, $alpha: .2);
+
+            &:hover {
+                background: rgba($color: $error, $alpha: .4);
+            }
+        }
+
+        &:hover {
+            background: $clay;
+        }
+    }
+
+    &.white {
+        .user__phrase {
+            color: $black;
+        }
+
+        .user__list {
+            background: linear-gradient(to bottom, transparent, $light, $light);
+        }
+
+        .user__item {
+            background: rgba($color: $white, $alpha: .4);
+            color: $black;
+
+            &:hover {
+                background: rgba($color: $white, $alpha: .6);
+            }
+        }
+    }
+}

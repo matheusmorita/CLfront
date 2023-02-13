@@ -11,8 +11,13 @@ import CloseButton from '@/components/atoms/CloseButton'
 
 import ModalContext from '@/context/ModalContext'
 import HeaderModalMobile from '../HeaderModalMobile'
+import QRCode from 'react-qr-code';
 
-function BuyCoinLivreMobile() {
+interface buyCoinLivreInterface {
+  conditionalBuy: string;
+}
+
+function BuyCoinLivreMobile({conditionalBuy}: buyCoinLivreInterface) {
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
 
 
@@ -51,30 +56,38 @@ function BuyCoinLivreMobile() {
       </section>
       {buyConfirmed ? (
         <Image
-        width={200}
-        height={200}
-        alt='Imagem de QR code'
-        src={Logo}
-      />
-      ) : (
-        <Image
-        width={200}
-        height={200}
-        alt='Imagem de QR code'
-        src={QRcodeImage}
-        style={{ border: '2px solid #00EE8D' }}
-      />
-      )}
-      
-      <section className={Styles.qrConfirmButton}>
-        <InputModal
-          id='inputQrcode'
-          type='string'
-          label='Clique para copiar o código'
-          disabled={true}
-          placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
-          className={Styles.inputValue}
+          width={200}
+          height={200}
+          alt='Imagem de QR code'
+          src={Logo}
         />
+      ) : (
+        <div style={{ border: '2px solid #00EE8D' }}>
+          <QRCode
+            value='https://pix-h.bancogenial.com/qrs1/v2/01YH96kQsCjgxhM78z3lfLGZpPDInVNUNDDA55DJ5Mtfb0V'
+          />
+        </div>
+      )}
+
+      <section className={Styles.qrConfirmButton}>
+        <div style={{ width: '100%' }}>
+          <InputModal
+            id='inputQrcode'
+            type='string'
+            label={'Clique para copiar o código'}
+            placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
+            className={Styles.inputValue}
+            onClick={(e: any) => {
+              const inputQrCode = e.target;
+              inputQrCode.select();
+              inputQrCode.setSelectionRange(0, 99999)
+              document.execCommand("copy");
+              alert('Código copiado')
+            }}
+            readOnly={true}
+            style={{cursor: 'pointer'}}
+          />
+        </div>
         <Button
           hidden={false}
           id={'paymentQRcodeBtn'}

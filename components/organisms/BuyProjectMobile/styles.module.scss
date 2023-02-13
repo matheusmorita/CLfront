@@ -88,6 +88,13 @@
   height: 100%;
 }
 
+.inputCheckBuy {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .buyCoinLivre {
   display: flex;
   flex-direction: column;
@@ -172,6 +179,7 @@
   height: 75vh;
 }
 
+
 .inputValue {
   width: 85vw;
   background-color: $clay;
@@ -207,6 +215,7 @@
 }
 
 .inputValueBuyProject {
+  width: 86vw;
   background-color: $clay;
   border: none;
   border-bottom: 3px solid $primary;
