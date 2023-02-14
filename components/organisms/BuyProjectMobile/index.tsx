@@ -20,6 +20,7 @@ interface BuyProjectInterface {
   hiddenBuyCoinLivre: boolean;
   conditionalBuy: string;
   projectSelected: any;
+  valorToken: string;
 }
 
 function BuyProjectMobile({ setRealValue,
@@ -30,6 +31,7 @@ function BuyProjectMobile({ setRealValue,
   hiddenBuyCoinLivre,
   conditionalBuy,
   projectSelected,
+  valorToken
 }: BuyProjectInterface) {
   const [hiddenBuyProject, setHiddenBuyProject] = React.useState<boolean>(false);
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false);
@@ -227,7 +229,7 @@ function BuyProjectMobile({ setRealValue,
                   placeholder='CNLT 0,00'
                   className={Styles.inputValue}
                   disabled={true}
-                  value={realValue}
+                  value={conditionalBuy === 'CNLT-0' ? realValue : (Number(realValue) * Number(valorToken)).toString()}
                 />
               </div>
 
