@@ -21,6 +21,10 @@ interface BuyProjectInterface {
   projectSelected: any;
   setProjectSelected: any;
   fetchRequestPix: any;
+  requestPixValue: string;
+  setRequestPixValue: any;
+  valorToken: string;
+  balance: number;
 }
 
 
@@ -36,14 +40,18 @@ function BuyProject({
   conditionalBuy,
   projectSelected,
   setProjectSelected,
-  fetchRequestPix
+  fetchRequestPix,
+  requestPixValue,
+  setRequestPixValue,
+  valorToken,
+  balance
 }: BuyProjectInterface) {
   const [hiddenBuyProject, setHiddenBuyProject] = React.useState<boolean>(false);
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false);
   const [valueSaldo, setValueSaldo] = React.useState<boolean>(true);
   const [btnCheckBalance, setBtnCheckBalance] = React.useState<string>('');
   const [checkboxCheck, setCheckoxCheck] = React.useState<boolean>(false);
-  const [accessTokenState, setAccessTokenState] = React.useState<string | null>('');
+  const [accessTokenState, setAccessTokenState] = React.useState<any>('');
 
   const saldo = 20;
 
@@ -219,7 +227,7 @@ function BuyProject({
                   placeholder='CNLT 0,00'
                   className={Styles.inputValue}
                   disabled={true}
-                  value={(Number(realValue) * 2).toString()}
+                  value={conditionalBuy === 'CNLT-0' ? realValue : (Number(realValue) * Number(valorToken)).toString()}
                 />
               </div>
 
@@ -256,8 +264,9 @@ function BuyProject({
                     label="Clique para gerar QR code"
                     onClick={async (e: React.FormEvent<EventTarget>) => {
                       e.preventDefault()
-                      const response = await fetchRequestPix(accessTokenState, realValue)
-                      sessionStorage.setItem('textContent', response)
+                      const { itemId, textContent } = await fetchRequestPix(accessTokenState, realValue)
+                      sessionStorage.setItem('textContent', textContent)
+                      sessionStorage.setItem('itemId', itemId)
                       setHiddenBuy(true)
                       setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                     }}

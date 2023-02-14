@@ -11,6 +11,7 @@ import CloseButton from '@/components/atoms/CloseButton'
 
 import ModalContext from '@/context/ModalContext'
 import QRCode from 'react-qr-code'
+import { WebSocketContext } from '@/context/WebSocketContext';
 
 interface buyCoinLivreInterface {
   conditionalBuy: any;
@@ -23,9 +24,18 @@ function BuyCoinLivre({ conditionalBuy, balance }: buyCoinLivreInterface) {
 
   const { modalControl: [, setShowModal] } = React.useContext(ModalContext)
 
+  const socket = React.useContext(WebSocketContext)
+
   React.useEffect(() => {
     const QRcodeUrl = sessionStorage.getItem('textContent')
+    const itemId = sessionStorage.getItem('itemId')
+    console.log(itemId)
     SetQRcodeUrl(QRcodeUrl)
+    socket.on('onPix', data => {
+      if (data.idPix == itemId) {
+        setBuyConfirmed(true)
+      }
+    })
   }, [])
 
   return (
@@ -35,6 +45,7 @@ function BuyCoinLivre({ conditionalBuy, balance }: buyCoinLivreInterface) {
           className={Styles.closeButton}
           onClick={(e: any) => {
             e.preventDefault()
+            setBuyConfirmed(false)
             setShowModal(false)
           }}
         />
@@ -69,23 +80,6 @@ function BuyCoinLivre({ conditionalBuy, balance }: buyCoinLivreInterface) {
       )}
       <div className={Styles.buttonDivPayment}>
         <div style={{ width: '100%' }}>
-          {/* <InputModal
-            id='inputQrcode'
-            type='text'
-            label={'Clique para copiar o código'}
-            // disabled={true}
-            value={String(QRcodeUrl)}
-            className={Styles.inputValue}
-            onClick={(e: any) => {
-              const inputQrCode = e.target;
-              inputQrCode.select();
-              inputQrCode.setSelectionRange(0, 99999)
-              document.execCommand("copy");
-              alert('Código copiado')
-            }}
-            readOnly={true}
-            style={{cursor: 'pointer'}}
-          /> */}
           <input
             onClick={(e: any) => {
               const inputQrCode = e.target;

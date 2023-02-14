@@ -65,7 +65,7 @@ const TokenShare = () => {
         if (resp.ok) {
           // router.push('/')
         } else {
-          router.push('/registrar-se')
+          // router.push('/registrar-se')
         }
       })
   }

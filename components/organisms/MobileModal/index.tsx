@@ -36,19 +36,7 @@ function MobileModal() {
     const accessToken = localStorage.getItem('accessToken')
     fetchDataAxios("4", setProjects)
     fetchDataUserInfo(accessToken, setBalance)
-  }, [])
-
-  const projecardMock = [
-    { title: 'Qtde.', value: 16654 },
-    { title: 'Saldo', value: 0.00336569 },
-    { title: 'Data', value: '28/01/2023 - 11:21' }
-  ]
-
-  const walletMock = [
-    { title: 'Disponível.', value: '4.00000000' },
-    { title: 'Em uso', value: 0.00336569 },
-    { title: 'Total', value: '3.99663431' }
-  ]
+  }, [balance])
 
   return (
     <>

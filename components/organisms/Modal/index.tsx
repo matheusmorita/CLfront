@@ -27,6 +27,9 @@ function Modal() {
   const [balance, setBalance] = React.useState<number>(0)
   const [projects, setProjects] = React.useState<any>([])
   const [projectSelected, setProjectSelected] = React.useState<any>();
+  const [requestPixValue, setRequestPixValue] = React.useState<string>('')
+  const [valorToken, setValorToken] = React.useState<string>('')
+
 
   const { loggedIn } = React.useContext(UserContext)
 
@@ -36,7 +39,7 @@ function Modal() {
     const accessToken = localStorage.getItem('accessToken')
     fetchDataAxios("4", setProjects)
     fetchDataUserInfo(accessToken, setBalance)
-  }, [])
+  }, [balance])
 
   return (
     <form className={Styles.form}>
@@ -65,6 +68,10 @@ function Modal() {
           setConditionalBuy={setConditionalBuy}
           setProjectSelected={setProjectSelected}
           fetchRequestPix={fetchRequestPix}
+          setRequestPixValue={setRequestPixValue}
+          requestPixValue={requestPixValue}
+          valorToken={valorToken}
+          balance={balance}
         />
       ) : (
         <>
@@ -106,6 +113,7 @@ function Modal() {
                     setConditionalBuy(e.target.id)
                   }
                   setRealValue('')
+                  setValorToken(item.lotes[item.lotes.length - 1].valorDoToken)
                   setProjectSelected(item)
                   setHiddenBuy(!hiddenBuy)
                 }}

@@ -5,6 +5,7 @@ import type { AppProps } from 'next/app'
 import { useState, useEffect } from "react"
 import { useRouter } from 'next/router'
 import UserContext from '@/context/UserContext'
+import { socket, WebSocketProvider } from '@/context/WebSocketContext'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [userInfo, setUserInfo] = useState()
@@ -50,7 +51,7 @@ export default function App({ Component, pageProps }: AppProps) {
         if (resp.ok) {
           // router.push('/')
         } else {
-          router.push('/registrar-se')
+          // router.push('/registrar-se')
         }
       })
   }
@@ -60,13 +61,15 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <UserContext.Provider
-      value={{
-        userInfo: [userInfo, setUserInfo],
-        loggedIn: [loggedIn, setLoggedIn]
-      }}
-    >
-      <Component {...pageProps} />
-    </UserContext.Provider>
+    <WebSocketProvider value={socket}>
+      <UserContext.Provider
+        value={{
+          userInfo: [userInfo, setUserInfo],
+          loggedIn: [loggedIn, setLoggedIn]
+        }}
+      >
+        <Component {...pageProps} />
+      </UserContext.Provider>
+    </WebSocketProvider>
   )
 }

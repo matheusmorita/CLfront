@@ -61,11 +61,11 @@ const Login = () => {
     return waiting ? Styles.waiting : null
   }
 
-  // React.useEffect(() => {
-  //   if (logged) {
-  //     router.push('/')
-  //   }
-  // }, [logged])
+  React.useEffect(() => {
+    if (logged) {
+      // router.push('/')
+    }
+  }, [logged])
 
   return (
     <main style={{ color: 'white' }}>

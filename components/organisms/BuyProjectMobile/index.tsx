@@ -86,8 +86,9 @@ function BuyProjectMobile({ setRealValue,
                 label="Clique para gerar QR code"
                 onClick={async (e: React.FormEvent<EventTarget>) => {
                   e.preventDefault()
-                  const response = await fetchRequestPix(accessTokenState, realValue)
-                  sessionStorage.setItem('textContent', response)
+                  const {itemId, textContent} = await fetchRequestPix(accessTokenState, realValue)
+                  sessionStorage.setItem('textContent', textContent)
+                  sessionStorage.setItem('itemId', itemId)
                   setHiddenBuy(!hiddenBuy)
                   setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                 }}
@@ -261,8 +262,11 @@ function BuyProjectMobile({ setRealValue,
                     hidden={false}
                     id="generateQRButton"
                     label="Clique para gerar QR code"
-                    onClick={(e: React.FormEvent<EventTarget>) => {
+                    onClick={async (e: React.FormEvent<EventTarget>) => {
                       e.preventDefault()
+                      const { itemId, textContent } = await fetchRequestPix(accessTokenState, realValue)
+                      sessionStorage.setItem('textContent', textContent)
+                      sessionStorage.setItem('itemId', itemId)
                       setHiddenBuy(true)
                       setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                     }}
