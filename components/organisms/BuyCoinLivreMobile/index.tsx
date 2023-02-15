@@ -35,6 +35,9 @@ function BuyCoinLivreMobile({ conditionalBuy,balance }: buyCoinLivreInterface) {
     socket.on('onPix', data => {
       if (data.idPix == itemId) {
         setBuyConfirmed(true)
+        setTimeout(() => {
+          window.location.reload()
+        }, 1500);
       }
     })
   }, [])
@@ -47,6 +50,7 @@ function BuyCoinLivreMobile({ conditionalBuy,balance }: buyCoinLivreInterface) {
             className={Styles.closeButton}
             onClick={(e: any) => {
               e.preventDefault()
+              setBuyConfirmed(false)
               setShowMobileModal(false)
             }}
           />

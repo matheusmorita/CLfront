@@ -8,6 +8,7 @@ import Image from 'next/image';
 
 import Logo from '@/assets/img/logo.png'
 import DataShow from '@/components/molecules/DataShow';
+import { requestBuyToken } from '@/utils/fetchDataAxios';
 
 interface BuyProjectInterface {
   setRealValue: any;
@@ -25,6 +26,7 @@ interface BuyProjectInterface {
   setRequestPixValue: any;
   valorToken: string;
   balance: number;
+  lote: any;
 }
 
 
@@ -44,22 +46,22 @@ function BuyProject({
   requestPixValue,
   setRequestPixValue,
   valorToken,
-  balance
+  balance,
+  lote
 }: BuyProjectInterface) {
   const [hiddenBuyProject, setHiddenBuyProject] = React.useState<boolean>(false);
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false);
-  const [valueSaldo, setValueSaldo] = React.useState<boolean>(true);
+  const [valueSaldo, setValueSaldo] = React.useState<boolean>(false);
   const [btnCheckBalance, setBtnCheckBalance] = React.useState<string>('');
   const [checkboxCheck, setCheckoxCheck] = React.useState<boolean>(false);
   const [accessTokenState, setAccessTokenState] = React.useState<any>('');
 
-  const saldo = 20;
-
-  const checkSaldo = () => {
-    if (saldo < 10) {
-      return setValueSaldo(false)
+  const checkSaldo = (balance: number, valorToken: string, realValue: string): boolean => {
+    const multiplyValues = Number(realValue) * Number(valorToken)
+    if (balance >= multiplyValues) {
+      return true
     }
-    return setValueSaldo(true)
+    return false
   }
 
 
@@ -70,7 +72,7 @@ function BuyProject({
 
   return (
     <div className={Styles.divInput}>
-      {(valueSaldo === false && btnCheckBalance === 'continueBuyProject') ? (
+      {(!valueSaldo && btnCheckBalance === 'continueBuyProject') ? (
         <section className={Styles.notEnoughCoins}>
           <h4 className={Styles.titleEnough}>Fundos insuficientes</h4>
           <p className={Styles.descriptionText}>
@@ -92,7 +94,7 @@ function BuyProject({
               onClick={() => {
                 setHiddenBuy(!hiddenBuy)
               }}
-              text="Voltei"
+              text="Voltar"
               size={25}
               className={Styles.divButtons__backButton}
             />
@@ -118,7 +120,7 @@ function BuyProject({
                   e.preventDefault()
                   setHiddenBuy(hiddenBuy)
                 }}
-                text="Continuar compra"
+                text="Continuar"
                 size={25}
                 className={Styles.divButtons__QRButton}
               />
@@ -155,25 +157,25 @@ function BuyProject({
                 alt='Imagem de QR code'
                 src={Logo}
               />
-              <div style={{width: '90%'}}>
-              <InputModal
-                id='inputQrcode'
-                type='string'
-                label='Código de confirmação'
-                disabled={false}
-                placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
-                className={Styles.inputValueBuyProject}
-              />
-              <Button
-                hidden={false}
-                id={'paymentQRcodeBtn'}
-                label="Escaneie para efetuar o pagamento"
-                onClick={() => { }}
-                text={buyConfirmed ? "Pagamento realizado com sucesso" : "Aguardando confirmação do pagamento"}
-                disabled={true}
-                className={Styles.btnPayQrCode}
-                size={25}
-              />
+              <div style={{ width: '90%' }}>
+                <InputModal
+                  id='inputQrcode'
+                  type='string'
+                  label='Código de confirmação'
+                  disabled={false}
+                  placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
+                  className={Styles.inputValueBuyProject}
+                />
+                <Button
+                  hidden={false}
+                  id={'paymentQRcodeBtn'}
+                  label="Escaneie para efetuar o pagamento"
+                  onClick={() => { }}
+                  text={buyConfirmed ? "Pagamento realizado com sucesso" : "Aguardando confirmação do pagamento"}
+                  disabled={true}
+                  className={Styles.btnPayQrCode}
+                  size={25}
+                />
               </div>
             </>
           ) : (
@@ -282,10 +284,21 @@ function BuyProject({
                     id="continueBuyProject"
                     label="Clique para continuar compra"
                     disabled={!checkboxCheck || (realValue === '')}
-                    onClick={(e: any) => {
+                    onClick={async (e: any) => {
                       e.preventDefault()
+                      const responseSaldo = checkSaldo(balance, valorToken, realValue)
+                      setValueSaldo(responseSaldo)
+                      if (responseSaldo) {
+                        const confirm = await requestBuyToken(accessTokenState, realValue, lote.id)
+                        if (confirm != 0) {
+                          setBuyConfirmed(!buyConfirmed)
+                          setTimeout(() => {
+                            setBuyConfirmed(!buyConfirmed)
+                            window.location.reload()
+                          }, 2000);
+                        }
+                      }
                       setHiddenBuyProject(!hiddenBuyProject)
-                      checkSaldo()
                       setBtnCheckBalance(e.target.id)
                       // setHiddenBuy(!hiddenBuy)
                     }}

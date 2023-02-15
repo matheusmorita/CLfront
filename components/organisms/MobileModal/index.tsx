@@ -26,6 +26,8 @@ function MobileModal() {
   const [realValue, setRealValue] = React.useState<string>('');
   const [balance, setBalance] = React.useState<number>(0)
   const [valorToken, setValorToken] = React.useState<string>('')
+  const [lote, setLote] = React.useState<object>();
+
 
 
   const { loggedIn } = React.useContext(UserContext)
@@ -69,6 +71,8 @@ function MobileModal() {
               conditionalBuy={conditionalBuy}
               projectSelected={projectSelected}
               valorToken={valorToken}
+              balance={balance}
+              lote={lote}
             />
           ) : (
             <section className={Styles.sectionCard}>
@@ -113,6 +117,7 @@ function MobileModal() {
                       setConditionalBuy(e.target.id)
                     }
                     setRealValue('')
+                    setLote(item.lotes[item.lotes.length - 1])
                     setValorToken(item.lotes[item.lotes.length - 1].valorDoToken)
                     setHiddenBuy(!hiddenBuy)
                     setProjectSelected(item)

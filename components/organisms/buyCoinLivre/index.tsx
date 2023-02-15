@@ -34,6 +34,9 @@ function BuyCoinLivre({ conditionalBuy, balance }: buyCoinLivreInterface) {
     socket.on('onPix', data => {
       if (data.idPix == itemId) {
         setBuyConfirmed(true)
+        setTimeout(() => {
+          window.location.reload()
+        }, 1500);
       }
     })
   }, [])

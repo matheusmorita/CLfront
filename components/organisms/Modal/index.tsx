@@ -29,6 +29,7 @@ function Modal() {
   const [projectSelected, setProjectSelected] = React.useState<any>();
   const [requestPixValue, setRequestPixValue] = React.useState<string>('')
   const [valorToken, setValorToken] = React.useState<string>('')
+  const [lote, setLote] = React.useState<object>();
 
 
   const { loggedIn } = React.useContext(UserContext)
@@ -72,6 +73,7 @@ function Modal() {
           requestPixValue={requestPixValue}
           valorToken={valorToken}
           balance={balance}
+          lote={lote}
         />
       ) : (
         <>
@@ -113,6 +115,7 @@ function Modal() {
                     setConditionalBuy(e.target.id)
                   }
                   setRealValue('')
+                  setLote(item.lotes[item.lotes.length - 1])
                   setValorToken(item.lotes[item.lotes.length - 1].valorDoToken)
                   setProjectSelected(item)
                   setHiddenBuy(!hiddenBuy)

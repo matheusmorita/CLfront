@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export async function fetchDataAxios(limit, setProjects) {
   const response = await axios.get(`https://coinlivre.blocklize.io/projeto/retornar`, {
@@ -22,14 +22,14 @@ export async function fetchDataIdAxios(id) {
 
 export async function fetchDataUserInfo (accessToken, setBalance) {
   var config = {
-    method: 'post',
+    method: "post",
     headers: {
       "Authorization": `Bearer ${accessToken}`,
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
   };
   
-  const response = await fetch('https://coinlivre.blocklize.io/usuario/getUserInfo', config)
+  const response = await fetch("https://coinlivre.blocklize.io/usuario/getUserInfo", config)
   
   const data = await response.json()
   console.log(data)
@@ -38,19 +38,19 @@ export async function fetchDataUserInfo (accessToken, setBalance) {
 
 export async function fetchRequestPix (accessToken, quantity) {
   var dataBody = JSON.stringify({
-    "quantity": quantity.includes(',') ? `${quantity}` : `${quantity}.00`
+    "quantity": quantity.includes(",") ? `${quantity}` : `${quantity}.00`
   });
 
   var config = {
-    method: 'post',
+    method: "post",
     headers: {
       "Authorization": `Bearer ${accessToken}`,
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
     body: dataBody
   };
   
-  const response = await fetch('https://coinlivre.blocklize.io/token/criar-ordem-pix', config)
+  const response = await fetch("https://coinlivre.blocklize.io/token/criar-ordem-pix", config)
   
   const dataResponse = await response.json()
   return {
@@ -59,25 +59,24 @@ export async function fetchRequestPix (accessToken, quantity) {
   }
 }
 
-// export async function fetchRequestPix (accessToken, quantity) {
-//   var dataBody = JSON.stringify({
-//     "quantity": quantity.includes(',') ? `${quantity}` : `${quantity}.00`
-//   });
+export async function requestBuyToken (accessToken, quantity, loteId) {
+  const dataBody = JSON.stringify({
+    quantity: quantity.includes(",") ? `${quantity}` : `${quantity}.00`,
+    loteId
+  })
 
-//   var config = {
-//     method: 'post',
-//     headers: {
-//       "Authorization": `Bearer ${accessToken}`,
-//       'Content-Type': 'application/json'
-//     },
-//     body: dataBody
-//   };
-  
-//   const response = await fetch('https://coinlivre.blocklize.io/token/criar-ordem-pix', config)
-  
-//   const dataResponse = await response.json()
-//   return {
-//     itemId: dataResponse.data.items[0].itemId,
-//     textContent: dataResponse.data.items[0].data.textContent
-//   }
-// }
+  const config = {
+    method: "post",
+    headers: {
+      "Authorization": `Bearer ${accessToken}`,
+      "Content-Type": "application/json"
+    },
+    body: dataBody
+  }
+
+  const response = await fetch("https://coinlivre.blocklize.io/token/comprar-token", config)
+
+  const dataResponse = await response.json()
+
+  return dataResponse.confirmations
+}

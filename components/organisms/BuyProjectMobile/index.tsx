@@ -8,7 +8,7 @@ import Image from "next/image"
 import Logo from '@/assets/img/logo.png'
 import InputModal from '@/components/molecules/InputModal';
 import InvestCardMobile from '@/components/molecules/InvestCardMobile';
-import { fetchRequestPix } from '@/utils/fetchDataAxios';
+import { fetchRequestPix, requestBuyToken } from '@/utils/fetchDataAxios';
 
 
 interface BuyProjectInterface {
@@ -21,6 +21,8 @@ interface BuyProjectInterface {
   conditionalBuy: string;
   projectSelected: any;
   valorToken: string;
+  balance: number;
+  lote: any;
 }
 
 function BuyProjectMobile({ setRealValue,
@@ -31,23 +33,23 @@ function BuyProjectMobile({ setRealValue,
   hiddenBuyCoinLivre,
   conditionalBuy,
   projectSelected,
-  valorToken
+  valorToken,
+  balance,
+  lote
 }: BuyProjectInterface) {
   const [hiddenBuyProject, setHiddenBuyProject] = React.useState<boolean>(false);
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false);
-  const [valueSaldo, setValueSaldo] = React.useState<boolean>(true);
+  const [valueSaldo, setValueSaldo] = React.useState<boolean>(false);
   const [btnCheckBalance, setBtnCheckBalance] = React.useState<string>('');
   const [checkboxCheck, setCheckoxCheck] = React.useState<boolean>(false);
   const [accessTokenState, setAccessTokenState] = React.useState<string | null>('');
 
-
-  const saldo = 20;
-
-  const checkSaldo = () => {
-    if (saldo < 10) {
-      return setValueSaldo(false)
+  const checkSaldo = (balance: number, valorToken: string, realValue: string): boolean => {
+    const multiplyValues = Number(realValue) * Number(valorToken)
+    if (balance >= multiplyValues) {
+      return true
     }
-    return setValueSaldo(true)
+    return false
   }
 
   React.useEffect(() => {
@@ -57,7 +59,7 @@ function BuyProjectMobile({ setRealValue,
 
   return (
     <div className={Styles.divInput}>
-      {(valueSaldo === false && btnCheckBalance === 'continueBuyProject') ? (
+      {(!valueSaldo && btnCheckBalance === 'continueBuyProject') ? (
         <section className={Styles.notEnoughCoins}>
           <h4 className={Styles.titleEnough}>Fundos insuficientes</h4>
           <p className={Styles.descriptionText}>
@@ -143,7 +145,8 @@ function BuyProjectMobile({ setRealValue,
                 src={Logo}
               />
               <div className={Styles.inputCheckBuy}>
-                <InputModal
+                {buyConfirmed ? (
+                  <InputModal
                   id='inputQrcode'
                   type='string'
                   label='Código de confirmação'
@@ -151,12 +154,13 @@ function BuyProjectMobile({ setRealValue,
                   placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
                   className={Styles.inputValueBuyProject}
                 />
+                ) : ''}
                 <Button
                   hidden={false}
                   id={'paymentQRcodeBtn'}
                   label="Escaneie para efetuar o pagamento"
                   onClick={() => { }}
-                  text={"Sucesso"}
+                  text={buyConfirmed ? "Sucesso" : "Aguardando"}
                   disabled={true}
                   className={Styles.btnPayQrCode}
                   size={20}
@@ -282,10 +286,22 @@ function BuyProjectMobile({ setRealValue,
                     hidden={false}
                     id="continueBuyProject"
                     label="Clique para continuar compra"
-                    onClick={(e: any) => {
+                    onClick={async (e: any) => {
                       e.preventDefault()
+                      const responseSaldo = checkSaldo(balance, valorToken, realValue)
+                      setValueSaldo(responseSaldo)
+                      if (responseSaldo) {
+                        const confirm = await requestBuyToken(accessTokenState, realValue, lote.id)
+                        console.log(confirm)
+                        if (confirm != 0) {
+                          setBuyConfirmed(!buyConfirmed)
+                          setTimeout(() => {
+                            setBuyConfirmed(!buyConfirmed)
+                            window.location.reload()
+                          }, 2000);
+                        }
+                      }
                       setHiddenBuyProject(!hiddenBuyProject)
-                      checkSaldo()
                       setBtnCheckBalance(e.target.id)
                       // setHiddenBuy(!hiddenBuy)
                     }}
