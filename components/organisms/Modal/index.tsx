@@ -23,7 +23,7 @@ function Modal() {
 
   const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
 
-  const [realValue, setRealValue] = React.useState<string>('');
+  const [realValue, setRealValue] = React.useState<string>('0');
   const [balance, setBalance] = React.useState<number>(0)
   const [projects, setProjects] = React.useState<any>([])
   const [projectSelected, setProjectSelected] = React.useState<any>();
@@ -94,7 +94,7 @@ function Modal() {
                 if (e.target.id) {
                   setConditionalBuy(e.target.id)
                 }
-                setRealValue('')
+                setRealValue('0')
                 setHiddenBuy(!hiddenBuy)
               }}
             />
@@ -114,7 +114,7 @@ function Modal() {
                   if (e.target.id) {
                     setConditionalBuy(e.target.id)
                   }
-                  setRealValue('')
+                  setRealValue('0')
                   setLote(item.lotes[item.lotes.length - 1])
                   setValorToken(item.lotes[item.lotes.length - 1].valorDoToken)
                   setProjectSelected(item)

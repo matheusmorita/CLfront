@@ -43,6 +43,7 @@ function BuyProjectMobile({ setRealValue,
   const [btnCheckBalance, setBtnCheckBalance] = React.useState<string>('');
   const [checkboxCheck, setCheckoxCheck] = React.useState<boolean>(false);
   const [accessTokenState, setAccessTokenState] = React.useState<string | null>('');
+  const [hashConfirm, setHashConfirm] = React.useState<string>('')
 
   const checkSaldo = (balance: number, valorToken: string, realValue: string): boolean => {
     const multiplyValues = Number(realValue) * Number(valorToken)
@@ -50,6 +51,12 @@ function BuyProjectMobile({ setRealValue,
       return true
     }
     return false
+  }
+
+  const calcValueResponse = (realValue: string, valorToken: string) => {
+    const response = (parseFloat(realValue) * parseFloat(valorToken)).toFixed(2).toString()
+    const responseReplaced = response.replace('.', ',')
+    return responseReplaced
   }
 
   React.useEffect(() => {
@@ -90,7 +97,8 @@ function BuyProjectMobile({ setRealValue,
                 label="Clique para gerar QR code"
                 onClick={async (e: React.FormEvent<EventTarget>) => {
                   e.preventDefault()
-                  const {itemId, textContent} = await fetchRequestPix(accessTokenState, realValue)
+                  const newRealValue = realValue.replace(',', '.')
+                  const {itemId, textContent} = await fetchRequestPix(accessTokenState, newRealValue)
                   sessionStorage.setItem('textContent', textContent)
                   sessionStorage.setItem('itemId', itemId)
                   setHiddenBuy(!hiddenBuy)
@@ -151,7 +159,7 @@ function BuyProjectMobile({ setRealValue,
                   type='string'
                   label='Código de confirmação'
                   disabled={false}
-                  placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
+                  placeholder={hashConfirm}
                   className={Styles.inputValueBuyProject}
                 />
                 ) : ''}
@@ -207,8 +215,9 @@ function BuyProjectMobile({ setRealValue,
                     placeholder="0"
                     className={Styles.inputValue}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const newStr = e.target.value.replace(/[^0-9]/g, '')
-                      setRealValue(newStr)
+                      const newStr = e.target.value.replace(/[.]/g, '')
+                      const altStr = newStr.replace(',', '.')
+                      setRealValue(altStr)
                     }}
                   />
                 ) : (
@@ -220,7 +229,8 @@ function BuyProjectMobile({ setRealValue,
                     placeholder='R$ 0,00'
                     className={Styles.inputValue}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const newStr = e.target.value.replace(/[^0-9]/g, '')
+                      const strNotRs = e.target.value.replace('R$ ', '')
+                      const newStr = strNotRs.replace(/[.]/g, '')
                       setRealValue(newStr)
                     }}
                   />
@@ -233,7 +243,7 @@ function BuyProjectMobile({ setRealValue,
                   placeholder='CNLT 0,00'
                   className={Styles.inputValue}
                   disabled={true}
-                  value={conditionalBuy === 'CNLT-0' ? realValue : (Number(realValue) * Number(valorToken)).toString()}
+                  value={conditionalBuy === 'CNLT-0' ? realValue : calcValueResponse(realValue, valorToken)}
                 />
               </div>
 
@@ -291,8 +301,8 @@ function BuyProjectMobile({ setRealValue,
                       const responseSaldo = checkSaldo(balance, valorToken, realValue)
                       setValueSaldo(responseSaldo)
                       if (responseSaldo) {
-                        const confirm = await requestBuyToken(accessTokenState, realValue, lote.id)
-                        console.log(confirm)
+                        const {confirm, hash} = await requestBuyToken(accessTokenState, realValue, lote.id)
+                        setHashConfirm(hash)
                         if (confirm != 0) {
                           setBuyConfirmed(!buyConfirmed)
                           setTimeout(() => {

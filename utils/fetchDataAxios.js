@@ -32,13 +32,18 @@ export async function fetchDataUserInfo (accessToken, setBalance) {
   const response = await fetch("https://coinlivre.blocklize.io/usuario/getUserInfo", config)
   
   const data = await response.json()
-  console.log(data)
   setBalance(data.balanceCL)
 }
 
 export async function fetchRequestPix (accessToken, quantity) {
+  let newQuantity = ''
+  if (quantity.includes(',')) {
+    newQuantity = quantity.replace(',', '.')
+  } else {
+    newQuantity = `${quantity}.00`
+  }
   var dataBody = JSON.stringify({
-    "quantity": quantity.includes(",") ? `${quantity}` : `${quantity}.00`
+    "quantity": newQuantity
   });
 
   var config = {
@@ -60,8 +65,15 @@ export async function fetchRequestPix (accessToken, quantity) {
 }
 
 export async function requestBuyToken (accessToken, quantity, loteId) {
+  let newQuantity = ''
+  if (quantity.includes(',')) {
+    newQuantity = quantity.replace(',', '.')
+  } else {
+    newQuantity = `${quantity}.00`
+  }
+
   const dataBody = JSON.stringify({
-    quantity: quantity.includes(",") ? `${quantity}` : `${quantity}.00`,
+    quantity: newQuantity,
     loteId
   })
 
@@ -78,5 +90,8 @@ export async function requestBuyToken (accessToken, quantity, loteId) {
 
   const dataResponse = await response.json()
 
-  return dataResponse.confirmations
+  return {
+    hash: dataResponse.transactionHash,
+    confirm: dataResponse.confirmations
+  }
 }

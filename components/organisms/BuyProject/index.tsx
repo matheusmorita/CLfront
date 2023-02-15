@@ -55,6 +55,7 @@ function BuyProject({
   const [btnCheckBalance, setBtnCheckBalance] = React.useState<string>('');
   const [checkboxCheck, setCheckoxCheck] = React.useState<boolean>(false);
   const [accessTokenState, setAccessTokenState] = React.useState<any>('');
+  const [hashConfirm, setHashConfirm] = React.useState<string>('')
 
   const checkSaldo = (balance: number, valorToken: string, realValue: string): boolean => {
     const multiplyValues = Number(realValue) * Number(valorToken)
@@ -62,6 +63,12 @@ function BuyProject({
       return true
     }
     return false
+  }
+
+  const calcValueResponse = (realValue: string, valorToken: string) => {
+    const response = (parseFloat(realValue) * parseFloat(valorToken)).toFixed(2).toString()
+    const responseReplaced = response.replace('.', ',')
+    return responseReplaced
   }
 
 
@@ -158,14 +165,16 @@ function BuyProject({
                 src={Logo}
               />
               <div style={{ width: '90%' }}>
-                <InputModal
+                {buyConfirmed ? (
+                  <InputModal
                   id='inputQrcode'
                   type='string'
                   label='Código de confirmação'
                   disabled={false}
-                  placeholder='kashdlasjldhasldasd5asd4c54sac4as4dasa5a4sd54'
+                  placeholder={hashConfirm}
                   className={Styles.inputValueBuyProject}
                 />
+                ) : ''}
                 <Button
                   hidden={false}
                   id={'paymentQRcodeBtn'}
@@ -203,8 +212,9 @@ function BuyProject({
                     placeholder="0"
                     className={Styles.inputValue}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const newStr = e.target.value.replace(/[^0-9]/g, '')
-                      setRealValue(newStr)
+                      const newStr = e.target.value.replace(/[.]/g, '')
+                      const altStr = newStr.replace(',', '.')
+                      setRealValue(altStr)
                     }}
                   />
                 ) : (
@@ -216,7 +226,8 @@ function BuyProject({
                     placeholder='R$ 0,00'
                     className={Styles.inputValue}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const newStr = e.target.value.replace(/[^0-9]/g, '')
+                      const strNotRs = e.target.value.replace('R$ ', '')
+                      const newStr = strNotRs.replace(/[.]/g, '')
                       setRealValue(newStr)
                     }}
                   />
@@ -229,7 +240,7 @@ function BuyProject({
                   placeholder='CNLT 0,00'
                   className={Styles.inputValue}
                   disabled={true}
-                  value={conditionalBuy === 'CNLT-0' ? realValue : (Number(realValue) * Number(valorToken)).toString()}
+                  value={conditionalBuy === 'CNLT-0' ? realValue : calcValueResponse(realValue, valorToken)}
                 />
               </div>
 
@@ -289,7 +300,8 @@ function BuyProject({
                       const responseSaldo = checkSaldo(balance, valorToken, realValue)
                       setValueSaldo(responseSaldo)
                       if (responseSaldo) {
-                        const confirm = await requestBuyToken(accessTokenState, realValue, lote.id)
+                        const {confirm, hash} = await requestBuyToken(accessTokenState, realValue, lote.id)
+                        setHashConfirm(hash)
                         if (confirm != 0) {
                           setBuyConfirmed(!buyConfirmed)
                           setTimeout(() => {

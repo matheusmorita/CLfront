@@ -29,7 +29,6 @@ function BuyCoinLivre({ conditionalBuy, balance }: buyCoinLivreInterface) {
   React.useEffect(() => {
     const QRcodeUrl = sessionStorage.getItem('textContent')
     const itemId = sessionStorage.getItem('itemId')
-    console.log(itemId)
     SetQRcodeUrl(QRcodeUrl)
     socket.on('onPix', data => {
       if (data.idPix == itemId) {
