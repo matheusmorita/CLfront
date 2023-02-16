@@ -1,19 +1,14 @@
 import axios from "axios";
 
-export async function fetchDataAxios(limit, setProject) {
-  const config = {
-    method: 'post',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: {
-      limit,
+export async function fetchDataAxios(limit, setProjects) {
+  const response = await axios.get(`https://coinlivre.blocklize.io/projeto/retornar?limit=${limit}`,
+    {
+      headers: {
+        "Content-Type": "application/json"
+      },
     }
-  }
-
-  const response = await fetch(`https://coinlivre.blocklize.io/projeto/retornar`, config)
-  console.log(response)
-  setProject(response.data)
+  )
+  setProjects(response.data)
 }
 
 export async function fetchDataIdAxios(id, setProject) {
@@ -38,9 +33,23 @@ export async function fetchDataUserInfo (accessToken, setBalance, setDataUser) {
   const response = await fetch("https://coinlivre.blocklize.io/usuario/getUserInfo", config)
   
   const data = await response.json()
-  console.log(data)
   setDataUser(data)
   setBalance(data.balanceCL)
+  
+}
+
+export async function fetchUserHistoryinfo (accessToken, setHistoryUser, historyUser) {
+  var config = {
+    method: "post",
+    headers: {
+      "Authorization": `Bearer ${accessToken}`,
+      "Content-Type": "application/json"
+    },
+  };
+  
+  const response = await fetch("https://coinlivre.blocklize.io/token/findTransactions ", config)
+  
+  setHistoryUser(await response.json())
 }
 
 export async function fetchRequestPix (accessToken, quantity) {

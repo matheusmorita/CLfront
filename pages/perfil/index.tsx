@@ -10,13 +10,14 @@ import Row from '@/components/molecules/Row'
 import Balance from '@/components/molecules/Balance'
 import Switch from '@/components/molecules/Switch'
 import Projecard from '@/components/molecules/Projecard'
-import { fetchDataUserInfo } from '@/utils/fetchDataAxios'
+import { fetchDataUserInfo, fetchUserHistoryinfo } from '@/utils/fetchDataAxios'
 import Link from 'next/link'
 
 const Perfil = () => {
   const [walletState, setWalletState] = React.useState(0)
   const [balance, setBalance] = React.useState<number>(0);
   const [dataUser, setDataUser] = React.useState<object>();
+  const [historyUser, setHistoryUser] = React.useState<any[]>([1,2,3])
 
 
   const projecardMock = [
@@ -35,6 +36,7 @@ const Perfil = () => {
     const accessToken = localStorage.getItem('accessToken')
 
     fetchDataUserInfo(accessToken, setBalance, setDataUser)
+    fetchUserHistoryinfo(accessToken, setHistoryUser)
   }, [])
 
   return (
@@ -149,12 +151,15 @@ const Perfil = () => {
               <div className={Styles.wallet__body}>
                 {walletState === 0 && (
                   <>
+                    {historyUser.map((_item: any, i: number) => (
+                      <Projecard key={i} data={projecardMock} />
+                    ))}
+                    {/* <Projecard data={projecardMock} />
                     <Projecard data={projecardMock} />
                     <Projecard data={projecardMock} />
                     <Projecard data={projecardMock} />
                     <Projecard data={projecardMock} />
-                    <Projecard data={projecardMock} />
-                    <Projecard data={projecardMock} />
+                    <Projecard data={projecardMock} /> */}
                   </>
                 )}
                 {walletState === 1 && (
