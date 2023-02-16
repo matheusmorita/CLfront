@@ -117,8 +117,8 @@ function MobileModal() {
                       setConditionalBuy(e.target.id)
                     }
                     setRealValue('')
-                    setLote(item.lotes[item.lotes.length - 1])
-                    setValorToken(item.lotes[item.lotes.length - 1].valorDoToken)
+                    setLote(item?.lotes[item.lotes.length - 1])
+                    setValorToken(item?.lotes[item.lotes.length - 1]?.valorDoToken)
                     setHiddenBuy(!hiddenBuy)
                     setProjectSelected(item)
                   }}

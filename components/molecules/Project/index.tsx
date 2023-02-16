@@ -13,9 +13,10 @@ type Props = {
   rent: string,
   path: string,
   showOrNot?: boolean,
+  idProject: string
 }
 
-const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot }: Props) => {
+const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idProject }: Props) => {
 
   const callRentText = () => {
     if (rent) {
@@ -81,6 +82,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot }: Pr
               hidden={false}
               disabled={false}
               onClick={() => {
+                localStorage.setItem('idProject', idProject)
                 location.href = `projeto/${path}`
               }}
             />

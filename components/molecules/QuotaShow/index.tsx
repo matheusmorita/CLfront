@@ -11,9 +11,22 @@ type Props = {
   value?: string | number,
   badge?: Badge,
   className?: string,
+  parcela: number,
+  valor: string,
+  juros: string,
+  vencimento: string
 }
 
-const QuotaShow = ({ title, value, badge, className }: Props) => {
+const QuotaShow = ({
+  title,
+  value,
+  badge,
+  className,
+  parcela,
+  valor,
+  juros,
+  vencimento
+}: Props) => {
   return (
     <div
       className={`${Styles.quotashow} ${className}`}
@@ -24,7 +37,7 @@ const QuotaShow = ({ title, value, badge, className }: Props) => {
             Parcela
           </h1>
           <span className={Styles.quotashow__value}>
-            TESTE
+            {parcela}
           </span>
         </div>
         <div className={Styles.quotashow__data}>
@@ -32,7 +45,7 @@ const QuotaShow = ({ title, value, badge, className }: Props) => {
             Valor
           </h1>
           <span className={Styles.quotashow__value}>
-            TESTE
+            {valor}
           </span>
         </div>
         <div className={Styles.quotashow__data}>
@@ -40,7 +53,7 @@ const QuotaShow = ({ title, value, badge, className }: Props) => {
             Juros
           </h1>
           <span className={Styles.quotashow__value}>
-            TESTE
+            {juros}
           </span>
         </div>
         <div className={Styles.quotashow__data}>
@@ -48,7 +61,7 @@ const QuotaShow = ({ title, value, badge, className }: Props) => {
             Venc.
           </h1>
           <span className={Styles.quotashow__value}>
-            TESTE
+            {vencimento}
           </span>
         </div>
       </div>

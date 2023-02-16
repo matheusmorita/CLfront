@@ -1,22 +1,23 @@
 import axios from "axios";
 
-export async function fetchDataAxios(limit, setProjects) {
+export async function fetchDataAxios(limit, setProject) {
   const response = await axios.get(`https://coinlivre.blocklize.io/projeto/retornar`, {
     limit,
     headers: {
       "Content-Type": "application/json"
     }
   })
-  setProjects(response.data)
+  setProject(response.data)
 }
 
-export async function fetchDataIdAxios(id) {
+export async function fetchDataIdAxios(id, setProject) {
   const response = await axios.get(`https://coinlivre.blocklize.io/projeto/retornar/${id}`, {
     headers: {
       "Content-Type": "application/json"
     }
   })
   console.log(response.data)
+  setProject(response.data)
 }
 
 
