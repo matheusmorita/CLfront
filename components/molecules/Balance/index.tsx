@@ -5,11 +5,11 @@ import Eye from '@/assets/img/eye.webp'
 import Styles from './styles.module.scss'
 
 type Props = {
-  value?: number,
+  value?: string,
   type: string
 }
 
-const Balance = ({ value = 0, type }: Props) => {
+const Balance = ({ value = '0', type }: Props) => {
   const [hidden, setHidden] = React.useState<boolean>(true)
 
   const handleIcon = () => {

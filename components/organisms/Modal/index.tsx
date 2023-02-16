@@ -30,6 +30,7 @@ function Modal() {
   const [requestPixValue, setRequestPixValue] = React.useState<string>('')
   const [valorToken, setValorToken] = React.useState<string>('')
   const [lote, setLote] = React.useState<object>();
+  const [dataUser, setDataUser] = React.useState<object>();
 
 
   const { loggedIn } = React.useContext(UserContext)
@@ -39,7 +40,7 @@ function Modal() {
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
     fetchDataAxios("4", setProjects)
-    fetchDataUserInfo(accessToken, setBalance)
+    fetchDataUserInfo(accessToken, setBalance, setDataUser)
   }, [balance])
 
   return (

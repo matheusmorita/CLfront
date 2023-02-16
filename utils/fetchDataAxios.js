@@ -16,12 +16,11 @@ export async function fetchDataIdAxios(id, setProject) {
       "Content-Type": "application/json"
     }
   })
-  console.log(response.data)
   setProject(response.data)
 }
 
 
-export async function fetchDataUserInfo (accessToken, setBalance) {
+export async function fetchDataUserInfo (accessToken, setBalance, setDataUser) {
   var config = {
     method: "post",
     headers: {
@@ -33,6 +32,8 @@ export async function fetchDataUserInfo (accessToken, setBalance) {
   const response = await fetch("https://coinlivre.blocklize.io/usuario/getUserInfo", config)
   
   const data = await response.json()
+  console.log(data)
+  setDataUser(data)
   setBalance(data.balanceCL)
 }
 
