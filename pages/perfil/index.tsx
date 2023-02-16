@@ -10,9 +10,14 @@ import Row from '@/components/molecules/Row'
 import Balance from '@/components/molecules/Balance'
 import Switch from '@/components/molecules/Switch'
 import Projecard from '@/components/molecules/Projecard'
+import { fetchDataUserInfo } from '@/utils/fetchDataAxios'
+import Link from 'next/link'
 
 const Perfil = () => {
   const [walletState, setWalletState] = React.useState(0)
+  const [balance, setBalance] = React.useState<number>(0);
+  const [dataUser, setDataUser] = React.useState<object>();
+
 
   const projecardMock = [
     { title: 'Qtde.', value: 16654 },
@@ -25,6 +30,12 @@ const Perfil = () => {
     { title: 'Em uso', value: 0.00336569 },
     { title: 'Total', value: '3.99663431' }
   ]
+
+  React.useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken')
+
+    fetchDataUserInfo(accessToken, setBalance, setDataUser)
+  }, [])
 
   return (
     <main style={{ color: 'white' }}>
@@ -67,13 +78,22 @@ const Perfil = () => {
               <div className={Styles.profile__body}>
                 <ul className={Styles.actions}>
                   <li className={Styles.actions__item}>
-                    Mudar minha senha
+                    <Link
+                      className={Styles.actions__link}
+                      href={'/recuperar-senha'}
+                    >Mudar minha senha</Link>
                   </li>
                   <li className={Styles.actions__item}>
-                    Preciso de ajuda
+                    <Link
+                      className={Styles.actions__link}
+                      href={'#'}
+                    >Preciso de ajuda</Link>
                   </li>
                   <li className={Styles.actions__item}>
-                    Desconectar
+                    <Link
+                      className={Styles.actions__link}
+                      href={'/logout'}
+                    >Desconectar</Link>
                   </li>
                   <li className={`${Styles.actions__item} ${Styles.danger}`}>
                     Desativar minha conta
@@ -97,6 +117,7 @@ const Perfil = () => {
               >
                 <Balance
                   type='CoinLivre'
+                  value={`CNLT ${balance}`}
                 />
               </Column>
               <Column
@@ -106,6 +127,7 @@ const Perfil = () => {
               >
                 <Balance
                   type='em R$'
+                  value={`R$ 0`}
                 />
               </Column>
               <Column
@@ -114,7 +136,7 @@ const Perfil = () => {
                 className='m-0'
               >
                 <Balance
-                  type='em tokens'
+                  type='em Tokens'
                 />
               </Column>
             </Row>

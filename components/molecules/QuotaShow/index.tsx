@@ -40,14 +40,14 @@ const QuotaShow = ({
             {parcela}
           </span>
         </div>
-        <div className={Styles.quotashow__data}>
+        {/* <div className={Styles.quotashow__data}>
           <h1 className={Styles.quotashow__title}>
             Valor
           </h1>
           <span className={Styles.quotashow__value}>
             {valor}
           </span>
-        </div>
+        </div> */}
         <div className={Styles.quotashow__data}>
           <h1 className={Styles.quotashow__title}>
             Juros
