@@ -29,6 +29,7 @@ import MobileModal from '@/components/organisms/MobileModal'
 import * as masks from '@/assets/js/util/masks'
 import UserContext from '@/context/UserContext'
 import axios from 'axios'
+import { fetchDataIdAxios } from '@/utils/fetchDataAxios'
 
 
 
@@ -43,48 +44,13 @@ const ProjectPage = () => {
 
   const { loggedIn } = React.useContext(UserContext)
 
-  const fetchData = async () => {
-    var data = JSON.stringify({
-      id
-    });
 
-    var config = {
-      method: 'post',
-      headers: {
-        'X-Parse-Application-Id': 'dR30zBB72X8Hsrquh4DgPWRnJe8Nhd8N8AcQpXVU',
-        'X-Parse-REST-API-Key': 'wFa33ak4LMUXxJpFtQbt1qtRaF4ALicVHSzjKFGi',
-        'Content-Type': 'application/json'
-      },
-      body: data
-    };
-
-    await fetch('https://parseapi.back4app.com/parse/functions/retornar-projeto-id', config)
-      .then(resp => resp.json())
-      .then(json => {
-        setProject(json.result)
-      })
-      .catch(error => {
-        throw error
-      })
-  }
-
-  // const data = {
-  //   id
-  // }
-
-  // const fetchDataAxios = async (data: {id: string}) => {
-  //   const response: any = await axios.get(`https://coinlivre.blocklize.io/projeto/retornar/${data.id}`, {
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   })
-  //   console.log(response.data)
-  //   setProject(response.data)
-  // }
+  // fetchDataIdAxios()
 
   React.useEffect(() => {
     if (!id) return
-    fetchData()
+    const idProject = localStorage.getItem('idProject')
+    fetchDataIdAxios(idProject, setProject)
     const largura = window.innerWidth
     setLengthWindow(largura)
   }, [router])
@@ -124,7 +90,7 @@ const ProjectPage = () => {
               justify='center'
               hidden={false}
               className={`${Styles.background} ${Styles.intro} pt-5 pt-lg-0 d-flex align-items-center pb-5`}
-              bgImage={project.Projeto.imgTipo?.url}
+              bgImage={project.imgFundo}
             >
               <Column
                 media='lg'
@@ -132,12 +98,12 @@ const ProjectPage = () => {
                 className="pt-5"
               >
                 <Subtitle
-                  text={project.Projeto.acronimo}
+                  text={project.acronimo}
                   color="#00EE8D"
                 />
                 <Title
                   id='introducao-title'
-                  text={project.Projeto.nome}
+                  text={project.nome}
                   hidden={false}
                   size={100}
                   height={100}
@@ -147,7 +113,7 @@ const ProjectPage = () => {
                 />
                 <Paragrah
                   id='introducao-description'
-                  text={project.Projeto.resumo}
+                  text={project.resumo}
                   hidden={false}
                   width={39}
                   size={18}
@@ -156,7 +122,7 @@ const ProjectPage = () => {
                 />
                 <Category
                   iconName={"flash-sharp"}
-                  text={`${project.Projeto.tipo_token}`}
+                  text={`${project.tipoToken}`}
                   className="mt-5 mb-5"
                 />
                 <Button
@@ -217,7 +183,7 @@ const ProjectPage = () => {
                 />
                 <Paragrah
                   id='sobre-description'
-                  text={project.Projeto.descricao}
+                  text={project.descricao}
                   hidden={false}
                   width={45}
                   size={18}
@@ -231,99 +197,99 @@ const ProjectPage = () => {
                 className="pt-5"
               >
                 <div className={Styles.grid}>
-                  {project.Projeto.createdAt && (
+                  {project.criadoEm && (
                     <DataShow
                       title={"Data de lançamento"}
-                      value={masks.getDateMask(project.Projeto.createdAt)}
+                      value={masks.getDateMask(project.criadoEm)}
                       badge={{
                         type: "success",
                         message: "NOVO"
                       }}
-                      contractLink={project.Projeto.contrato_token}
+                      contractLink={project.contratoToken}
                     />
                   )}
-                  {project.Projeto.rentabilidade ? (
+                  {project.rentabilidade ? (
                     <DataShow
                       title={"Rentabilidade estimada"}
-                      value={project.Projeto.rentabilidade}
+                      value={project.rentabilidade}
                       badge={{ type: "success", message: "NOVO" }}
-                      contractLink={project.Projeto.contrato_token}
+                      contractLink={project.contratoToken}
                     />) : (
                     <DataShow
                       title={"Rentabilidade estimada"}
                       value={'N/A'}
-                      contractLink={project.Projeto.contrato_token}
+                      contractLink={project.contratoToken}
                     />)}
 
-                  {project.Lotes.length > 0 ? (
+                  {project.lotes.length > 0 ? (
                     <DataShow
                       title={"Lote"}
-                      value={masks.getLotMask(project.Lotes[0].lote)}
+                      value={project.lotes[project.lotes.length - 1].idLote}
                       badge={{ type: "success", message: "NOVO" }}
-                      contractLink={project.Projeto.contrato_token}
+                      contractLink={project.contratoToken}
                     />) : (
                     <DataShow
                       title={"Lote"}
                       value={'N/A'}
-                      contractLink={project.Projeto.contrato_token}
+                      contractLink={project.contratoToken}
                     />)}
 
-                  {project.Lotes.length > 0 ? (
+                  {project.lotes.length > 0 ? (
                     <DataShow
                       title={"Valor do Token"}
-                      value={masks.getCurrencyMask(project.Lotes[0].valorDoToken)}
-                      contractLink={project.Projeto.contrato_token}
+                      value={masks.getCurrencyMask(project.lotes[project.lotes.length - 1].valorDoToken)}
+                      contractLink={project.contratoToken}
                     />) : (
                     <DataShow
                       title={"Valor do Token"}
                       value={'N/A'}
-                      contractLink={project.Projeto.contrato_token}
+                      contractLink={project.contratoToken}
                     />)}
 
-                  {project.Lotes.length > 0 ? (
+                  {project.lotes.length > 0 ? (
                     <DataShow
                       title={"Prazo do Lote"}
-                      value={project.Lotes[0].prazoDoLote}
-                      contractLink={project.Projeto.contrato_token}
+                      value={project.lotes[project.lotes.length - 1].prazoDoLote}
+                      contractLink={project.contratoToken}
                     />) : (
                     <DataShow
                       title={"Prazo do Lote"}
                       value={'00/00/0000'}
-                      contractLink={project.Projeto.contrato_token}
+                      contractLink={project.contratoToken}
                     />)}
 
-                  {project.Lotes.length > 0 ? (
+                  {project.lotes.length > 0 ? (
                     <DataShow
                       title={"QTDE de Tokens"}
-                      value={masks.getQuantityMask(project.Lotes[0].qtdeDeTokens)}
-                      contractLink={project.Projeto.contrato_token}
+                      value={masks.getQuantityMask(project.lotes[project.lotes.length - 1].qtdeDeTokens)}
+                      contractLink={project.contratoToken}
                     />) : (
                     <DataShow
                       title={"QTDE de Tokens"}
                       value={'N/A'}
-                      contractLink={project.Projeto.contrato_token}
+                      contractLink={project.contratoToken}
                     />)}
                   <DataShow
                     title={"Contrato"}
-                    value={project.Projeto.contrato_token}
+                    value={project.contratoToken}
                     highlight={true}
                     badge={{ type: "success", message: "DESTAQUE" }}
-                    contractLink={project.Projeto.contrato_token}
+                    contractLink={project.contratoToken}
                   />
-                  {project.Lotes.length > 0 ? (
+                  {project.lotes.length > 0 ? (
                     <DataShow
                       title={"Captação"}
-                      value={project.Lotes[0].captacao}
+                      value={project.lotes[project.lotes.length - 1].captacao}
                       highlight={true}
                       badge={{ type: "success", message: "DESTAQUE" }}
-                      contractLink={project.Projeto.contrato_token}
+                      contractLink={project.contratoToken}
                     />) : (
                     <DataShow
                       title={"Captação"}
                       value={'N/A'}
                       highlight={true}
                       badge={{ type: "success", message: "DESTAQUE" }}
-                      contractLink={project.Projeto.contrato_token}
+                      contractLink={project.contratoToken}
                     />
                   )}
                 </div>
@@ -375,7 +341,7 @@ const ProjectPage = () => {
                     type: "success",
                     message: "DOCUMENTO"
                   }}
-                  contractLink={project.Projeto.contrato_token}
+                  contractLink={project.contratoToken}
                 />
                 <DataShow
                   title={"Título do doc"}
@@ -384,7 +350,7 @@ const ProjectPage = () => {
                     type: "success",
                     message: "DOCUMENTO"
                   }}
-                  contractLink={project.Projeto.contrato_token}
+                  contractLink={project.contratoToken}
                 />
               </Column>
               <Column
@@ -407,60 +373,25 @@ const ProjectPage = () => {
                     />
                   </div>
                   <div className={Styles.gradbox__body}>
-                    <QuotaShow
-                      badge={{
-                        type: "success",
-                        message: "Paga"
-                      }}
-                    />
-                    <QuotaShow
-                      badge={{
-                        type: "success",
-                        message: "Paga"
-                      }}
-                    />
-                    <QuotaShow
-                      badge={{
-                        type: "success",
-                        message: "Paga"
-                      }}
-                    />
-                    <QuotaShow
-                      badge={{
-                        type: "success",
-                        message: "Paga"
-                      }}
-                    />
-                    <QuotaShow
-                      badge={{
-                        type: "success",
-                        message: "Paga"
-                      }}
-                    />
-                    <QuotaShow
-                      badge={{
-                        type: "success",
-                        message: "Paga"
-                      }}
-                    />
-                    <QuotaShow
-                      badge={{
-                        type: "success",
-                        message: "Paga"
-                      }}
-                    />
-                    <QuotaShow
-                      badge={{
-                        type: "success",
-                        message: "Paga"
-                      }}
-                    />
-                    <QuotaShow
-                      badge={{
-                        type: "success",
-                        message: "Paga"
-                      }}
-                    />
+                    {project.Remuneracao.map((item: {
+                      id: string
+                      porcentagemPagaNoMes: string,
+                      vencimento: string,
+                      idRemuneracao: number,
+                    }) => (
+                      <QuotaShow
+                        key={item.id}
+                        juros={item.porcentagemPagaNoMes}
+                        parcela={item.idRemuneracao}
+                        valor={'0,00'}
+                        vencimento={item.vencimento}
+                        badge={{
+                          type: "success",
+                          message: "Paga"
+                        }}
+                        />
+                    ))}
+
                   </div>
                 </div>
               </Column>
@@ -496,7 +427,7 @@ const ProjectPage = () => {
                 />
                 <Paragrah
                   id='emissor-description'
-                  text={project.Emissor.descricao}
+                  text={project.emissor.descricaoEmissor}
                   className="py-4"
                   color='#000000'
                   hidden={false}
@@ -504,7 +435,7 @@ const ProjectPage = () => {
                   size={18}
                 />
                 {
-                  project.Emissor.Link && (
+                  project.emissor.linkEmissor && (
                     <Button
                       id='emissor-cta'
                       text={Data.emissor.button.text}
@@ -512,14 +443,14 @@ const ProjectPage = () => {
                       hidden={false}
                       disabled={false}
                       onClick={() => {
-                        window.open(project.Emissor.Link)
+                        window.open(project.emissor.linkEmissor)
                       }}
                     />
                   )
                 }
-                {project.Emissor.logo && (
+                {project.emissor.logo && (
                   <Image
-                    src={project.Emissor.logo.url}
+                    src={project.emissor.logoUrl}
                     width={200}
                     height={100}
                     alt='SBCrédito logo'

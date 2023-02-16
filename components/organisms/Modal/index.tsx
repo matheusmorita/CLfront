@@ -115,8 +115,8 @@ function Modal() {
                     setConditionalBuy(e.target.id)
                   }
                   setRealValue('0')
-                  setLote(item.lotes[item.lotes.length - 1])
-                  setValorToken(item.lotes[item.lotes.length - 1].valorDoToken)
+                  setLote(item?.lotes[item.lotes.length - 1])
+                  setValorToken(item?.lotes[item.lotes.length - 1]?.valorDoToken)
                   setProjectSelected(item)
                   setHiddenBuy(!hiddenBuy)
                 }}

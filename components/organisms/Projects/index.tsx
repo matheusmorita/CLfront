@@ -21,6 +21,7 @@ const Projects = () => {
           return (
             <Project
             id={item.acronimo}
+            idProject={item.id}
             name={item.nome}
             src={item.logoUrl}
             dataLanc={item.dataLancamento}
