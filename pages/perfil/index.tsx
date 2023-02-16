@@ -17,7 +17,7 @@ const Perfil = () => {
   const [walletState, setWalletState] = React.useState(0)
   const [balance, setBalance] = React.useState<number>(0);
   const [dataUser, setDataUser] = React.useState<object>();
-  const [historyUser, setHistoryUser] = React.useState<any[]>([1,2,3])
+  const [historyUser, setHistoryUser] = React.useState<any[]>([1, 2, 3])
 
 
   const projecardMock = [
@@ -79,18 +79,20 @@ const Perfil = () => {
               </div>
               <div className={Styles.profile__body}>
                 <ul className={Styles.actions}>
-                  <li className={Styles.actions__item}>
+                  {/* <li className={Styles.actions__item}>
                     <Link
                       className={Styles.actions__link}
                       href={'/recuperar-senha'}
                     >Mudar minha senha</Link>
-                  </li>
-                  <li className={Styles.actions__item}>
-                    <Link
-                      className={Styles.actions__link}
-                      href={'#'}
-                    >Preciso de ajuda</Link>
-                  </li>
+                  </li> */}
+                  <a
+                    className={Styles.actions__link}
+                    href="mailto:faleconosco@coinlivre.com.br"
+                  >
+                    <li className={Styles.actions__item}>
+                      Preciso de ajuda
+                    </li>
+                  </a>
                   <li className={Styles.actions__item}>
                     <Link
                       className={Styles.actions__link}
