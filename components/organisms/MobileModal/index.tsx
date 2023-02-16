@@ -27,6 +27,7 @@ function MobileModal() {
   const [balance, setBalance] = React.useState<number>(0)
   const [valorToken, setValorToken] = React.useState<string>('')
   const [lote, setLote] = React.useState<object>();
+  const [dataUser, setDataUser] = React.useState<object>();
 
 
 
@@ -39,7 +40,7 @@ function MobileModal() {
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
     fetchDataAxios("4", setProjects)
-    fetchDataUserInfo(accessToken, setBalance)
+    fetchDataUserInfo(accessToken, setBalance, setDataUser)
   }, [balance])
 
   return (
