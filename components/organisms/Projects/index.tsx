@@ -3,7 +3,6 @@ import React from 'react'
 import Row from '@/molecules/Row'
 import Project from '@/molecules/Project'
 
-import axios from 'axios';
 import { fetchDataAxios } from '@/utils/fetchDataAxios';
 
 const Projects = () => {
