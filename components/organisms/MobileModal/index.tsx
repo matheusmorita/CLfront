@@ -15,6 +15,7 @@ import UserContext from '@/context/UserContext';
 import InvestCard from '@/components/molecules/InvestCard';
 import Projecard from '@/components/molecules/Projecard';
 import { fetchDataAxios, fetchDataUserInfo } from '@/utils/fetchDataAxios';
+import { useRouter } from 'next/router';
 
 function MobileModal() {
   const [projects, setProjects] = React.useState<any>([])
@@ -29,7 +30,7 @@ function MobileModal() {
   const [lote, setLote] = React.useState<object>();
   const [dataUser, setDataUser] = React.useState<object>();
 
-
+  const router = useRouter();
 
   const { loggedIn } = React.useContext(UserContext)
 
@@ -58,7 +59,7 @@ function MobileModal() {
           </div>
 
           {hiddenBuyCoinLivre ? <BuyCoinLivreMobile balance={balance} conditionalBuy={conditionalBuy} /> : ''}
-          <HeaderModalMobile 
+          <HeaderModalMobile
             balance={balance}
           />
           {hiddenBuy ? (
@@ -91,6 +92,10 @@ function MobileModal() {
                 text="Comprar"
                 onClick={(e: any) => {
                   e.preventDefault()
+                  if (loggedIn) {
+                    // localStorage.setItem('beforePath', router.asPath)
+                    return router.push('/login')
+                  }
                   if (e.target.id) {
                     setConditionalBuy(e.target.id)
                   }
@@ -114,6 +119,10 @@ function MobileModal() {
                   className={Styles.buttonStyle}
                   onClick={(e: any) => {
                     e.preventDefault();
+                    if (loggedIn) {
+                      // localStorage.setItem('beforePath', router.asPath)
+                      return router.push('/login')
+                    }
                     if (e.target.id) {
                       setConditionalBuy(e.target.id)
                     }

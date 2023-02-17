@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { getPageTopDistance } from '@/assets/js/util/scroll'
 import { getWindowInnerWidth } from '@/assets/js/util/responsive'
 import Styles from './styles.module.scss'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   hideLinks: boolean
@@ -21,6 +22,10 @@ const Header = ({ hideLinks }: Props) => {
   const { userInfo, loggedIn } = React.useContext(UserContext)
   const [info, setUserInfo] = userInfo
   const [logged, setLoggedIn] = loggedIn
+
+  const { t } = useTranslation();
+
+  const { locale } = React.useContext(UserContext)
 
 
   const handleHeaderChange = () => {
@@ -77,7 +82,7 @@ const Header = ({ hideLinks }: Props) => {
             }
             <Button
               id="header-cta"
-              text="Cadastro/Login"
+              text={locale === 'en-US' ? t("Cadastro/Login") : "Cadastro/Login"} 
               label="Clique e cadastre-se na Lista VIP"
               className="ms-3"
               hidden={false}

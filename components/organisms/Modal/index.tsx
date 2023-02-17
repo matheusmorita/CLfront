@@ -16,6 +16,7 @@ import { fetchDataAxios, fetchDataUserInfo } from '@/utils/fetchDataAxios';
 import UserContext from "@/context/UserContext";
 import BuyProject from "../BuyProject";
 import ModalContext from "@/context/ModalContext";
+import { useRouter } from "next/router";
 
 function Modal() {
   const [hiddenBuy, setHiddenBuy] = React.useState<boolean>(false);
@@ -32,8 +33,9 @@ function Modal() {
   const [lote, setLote] = React.useState<object>();
   const [dataUser, setDataUser] = React.useState<object>();
 
+  const router = useRouter()
 
-  const { loggedIn } = React.useContext(UserContext)
+  const { loggedIn, setPathProject } = React.useContext(UserContext)
 
   const { modalControl: [, setShowModal] } = React.useContext(ModalContext)
 
@@ -92,6 +94,10 @@ function Modal() {
               text="Comprar"
               onClick={(e: any) => {
                 e.preventDefault()
+                if (loggedIn) {
+                  // localStorage.setItem('beforePath', router.asPath)
+                  return router.push('/login')
+                }
                 if (e.target.id) {
                   setConditionalBuy(e.target.id)
                 }
@@ -112,6 +118,10 @@ function Modal() {
                 text='Comprar'
                 onClick={(e: any) => {
                   e.preventDefault()
+                  if (loggedIn) {
+                    // localStorage.setItem('beforePath', router.asPath)
+                    return router.push('/login')
+                  }
                   if (e.target.id) {
                     setConditionalBuy(e.target.id)
                   }

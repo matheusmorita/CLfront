@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function fetchDataAxios(limit, setProjects) {
-  const response = await axios.get(`https://coinlivre.blocklize.io/projeto/retornar?limit=${limit}`,
+  const response = await axios.get(`${process.env.PROJETO_URL}limit=${limit}`,
     {
       headers: {
         "Content-Type": "application/json"
@@ -12,7 +12,7 @@ export async function fetchDataAxios(limit, setProjects) {
 }
 
 export async function fetchDataIdAxios(id, setProject) {
-  const response = await axios.get(`https://coinlivre.blocklize.io/projeto/retornar/${id}`, {
+  const response = await axios.get(`${process.env.PROJETO_ID_URL}${id}`, {
     headers: {
       "Content-Type": "application/json"
     }
@@ -30,7 +30,7 @@ export async function fetchDataUserInfo (accessToken, setBalance, setDataUser) {
     },
   };
   
-  const response = await fetch("https://coinlivre.blocklize.io/usuario/getUserInfo", config)
+  const response = await fetch(process.env.GET_USER_INFO, config)
   
   const data = await response.json()
   setDataUser(data)
@@ -47,7 +47,7 @@ export async function fetchUserHistoryinfo (accessToken, setHistoryUser, history
     },
   };
   
-  const response = await fetch("https://coinlivre.blocklize.io/token/findTransactions", config)
+  const response = await fetch(process.env.GET_TRANSACTIONS, config)
   
   const data = await response.json()
   console.log(data)
@@ -74,7 +74,7 @@ export async function fetchRequestPix (accessToken, quantity) {
     body: dataBody
   };
   
-  const response = await fetch("https://coinlivre.blocklize.io/token/criar-ordem-pix", config)
+  const response = await fetch(process.env.GERAR_PIX, config)
   
   const dataResponse = await response.json()
   return {
@@ -105,7 +105,7 @@ export async function requestBuyToken (accessToken, quantity, loteId) {
     body: dataBody
   }
 
-  const response = await fetch("https://coinlivre.blocklize.io/token/comprar-token", config)
+  const response = await fetch(process.env.COMPRAR_TOKEN, config)
 
   const dataResponse = await response.json()
 

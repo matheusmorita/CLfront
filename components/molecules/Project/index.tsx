@@ -3,6 +3,8 @@ import Image from 'next/image'
 import Styles from './styles.module.scss'
 import Column from '@/components/molecules/Column'
 import Button from '@/components/atoms/Button'
+import { useTranslation } from 'react-i18next'
+import UserContext from '@/context/UserContext'
 
 type Props = {
   id: string,
@@ -17,6 +19,9 @@ type Props = {
 }
 
 const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idProject }: Props) => {
+  const { t } = useTranslation();
+
+  const { locale } = React.useContext(UserContext)
 
   const callRentText = () => {
     if (rent) {
@@ -63,9 +68,14 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
               id={`project-description-${id}`}
               className={Styles.project__details}
             >
-              Data de lançamento <b>{dataLanc}</b> <br />
-              Emitido por <b>{emissor}</b> <br />
-              { showOrNot ? <span className={Styles.project__details}>Rentabilidade estimada de até <b>{callRentText()}</b></span> : ''}
+              {locale === 'en-US' ? t('Data de lançamento') : 'Data de lançamento'}  <b>{dataLanc}</b> <br />
+              {locale === 'en-US' ? t('Emitido por') : 'Emitido por'} <b>{emissor}</b> <br />
+              { showOrNot ? (
+                <span className={Styles.project__details}>
+                  {locale === 'en-US' ? t('Rentabilidade estimada de até ') : 'Rentabilidade estimada de até '}
+                  <b>{callRentText()}</b>
+                </span>
+                ) : ''}
             </p>
           </div>
         </div>
@@ -76,11 +86,11 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
           <div>
             <Button
               id={`project-cta-${id}`}
-              text="SAIBA MAIS"
+              text={locale === 'en-US' ? t('SAIBA MAIS') : 'SAIBA MAIS'}
               label="Clique e veja mais sobre o projeto"
               className="w-100 mb-3"
               hidden={false}
-              disabled={false}
+              disabled={name.includes('Recebíveis') || name.includes('Influenciadores')}
               onClick={() => {
                 localStorage.setItem('idProject', idProject)
                 location.href = `projeto/${path}`

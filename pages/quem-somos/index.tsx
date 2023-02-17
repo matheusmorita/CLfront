@@ -20,11 +20,20 @@ import WaitingList from '@/components/organisms/WaitingList'
 
 import { useTranslation } from 'react-i18next';
 import UserContext from '@/context/UserContext'
+import { useRouter } from 'next/router'
 
 const QuemSomos = () => {
   const { t } = useTranslation();
 
   const { locale } = React.useContext(UserContext)
+
+  const router = useRouter();
+
+  
+  // React.useEffect(() => {
+    // const beforePath = localStorage.getItem('beforePath')
+    // router.push(`${beforePath}`)
+  // })
 
   return (
     <main style={{color: 'white'}}>
@@ -160,7 +169,7 @@ const QuemSomos = () => {
       >
         <Title
           id='faq-title'
-          text="Ficou alguma dúvida?"
+          text={locale === 'en-US' ? t("Ficou alguma dúvida?") : "Ficou alguma dúvida?"}
           className='fw-bold'
           color='#00ee8d'
           hidden={false}

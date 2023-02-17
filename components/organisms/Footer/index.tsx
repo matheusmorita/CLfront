@@ -13,8 +13,13 @@ import Logo from '@/assets/img/logo-white.webp'
 import Metacast from '@/assets/img/metacast.webp'
 import Networks from '@/molecules/Networks'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
+import UserContext from '@/context/UserContext'
 
 const Footer = () => {
+  const { t } = useTranslation();
+
+  const { locale } = React.useContext(UserContext)
   return (
     <footer>
       <Section
@@ -45,59 +50,59 @@ const Footer = () => {
         }}>
           <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-              A coinlivre
+            {locale === 'en-US' ? t('A Coinlivre') : 'A Coinlivre'}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="#">quem somos</a>
+                <a href="#">{locale === 'en-US' ? t('Quem somos') : 'Quem somos'}</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#projetos">nossos projetos</a>
+                <a href="#projetos">{locale === 'en-US' ? t('Nossos projetos') : 'Nossos projetoss'}</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="mailto:imprensa@coinlivre.com.br">assessoria de imprensa</a>
+                <a href="mailto:imprensa@coinlivre.com.br">{locale === 'en-US' ? t('Assessoria de imprensa') : 'Assessoria de imprensa'}</a>
               </li>
             </ul>
           </div>
 
            <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-              Jurídico
+            {locale === 'en-US' ? t('Jurídico') : 'Jurídico'}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <Link href='TERMO_DE_USO.pdf' download locale={false}>termo de uso</Link>
+                <Link href='TERMO_DE_USO.pdf' download locale={false}>{locale === 'en-US' ? t('Termo de uso') : 'Termo de uso'}</Link>
               </li>
               <li className={Styles.footer__item}>
-              <Link href='POLITICA_DE_PRIVACIDADE.pdf' download locale={false}>política de privacidade</Link>
+              <Link href='POLITICA_DE_PRIVACIDADE.pdf' download locale={false}>{locale === 'en-US' ? t('Política de privacidade') : 'Política de privacidade'}</Link>
               </li>
             </ul>
           </div>
 
           <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-              Ajuda
+            {locale === 'en-US' ? t('Ajuda') : 'Ajuda'}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="mailto:faleconosco@coinlivre.com.br">fale conosco</a>
+                <a href="mailto:faleconosco@coinlivre.com.br">{locale === 'en-US' ? t('Fale conosco') : 'Fale conosco'}</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#faq">perguntas frequentes</a>
+                <a href="#faq">{locale === 'en-US' ? t('Perguntas frequentes') : 'Perguntas frequentes'}</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#">aprenda sobre tokenização</a>
+                <a href="#">{locale === 'en-US' ? t('Aprenda sobre tokenização') : 'Aprenda sobre tokenização'}</a>
               </li>
             </ul>
           </div>
 
           <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-              Compliance
+            {locale === 'en-US' ? t('Compliance') : 'Compliance'}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="mailto:faleconosco@coinlivre.com.br">ouvidoria</a>
+                <a href="mailto:faleconosco@coinlivre.com.br">{locale === 'en-US' ? t('Ouvidoria') : 'Ouvidoria'}</a>
               </li>
             </ul>
           </div>
