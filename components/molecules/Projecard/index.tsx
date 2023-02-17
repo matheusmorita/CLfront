@@ -5,6 +5,8 @@ type Props = {
   data: Array<any>
 }
 
+// subindo pra CL-251
+
 const Projecard = ({ data }: Props) => {
   return (
     <div className={Styles.projecard}>
