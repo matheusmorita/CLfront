@@ -47,9 +47,11 @@ export async function fetchUserHistoryinfo (accessToken, setHistoryUser, history
     },
   };
   
-  const response = await fetch("https://coinlivre.blocklize.io/token/findTransactions ", config)
+  const response = await fetch("https://coinlivre.blocklize.io/token/findTransactions", config)
   
-  setHistoryUser(await response.json())
+  const data = await response.json()
+  console.log(data)
+  setHistoryUser(data)
 }
 
 export async function fetchRequestPix (accessToken, quantity) {

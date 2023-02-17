@@ -10,7 +10,9 @@ import { socket, WebSocketProvider } from '@/context/WebSocketContext'
 export default function App({ Component, pageProps }: AppProps) {
   const [userInfo, setUserInfo] = useState()
   const [loggedIn, setLoggedIn] = useState(false)
+
   const router = useRouter()
+  const { locale } = router;
 
   const handleUserSession = () => {
     let token = localStorage.getItem('accessToken')
@@ -65,7 +67,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <UserContext.Provider
         value={{
           userInfo: [userInfo, setUserInfo],
-          loggedIn: [loggedIn, setLoggedIn]
+          loggedIn: [loggedIn, setLoggedIn],
+          locale
         }}
       >
         <Component {...pageProps} />

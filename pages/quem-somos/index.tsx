@@ -18,7 +18,14 @@ import Faq from '@/components/organisms/Faq'
 import Projects from '@/components/organisms/Projects'
 import WaitingList from '@/components/organisms/WaitingList'
 
+import { useTranslation } from 'react-i18next';
+import UserContext from '@/context/UserContext'
+
 const QuemSomos = () => {
+  const { t } = useTranslation();
+
+  const { locale } = React.useContext(UserContext)
+
   return (
     <main style={{color: 'white'}}>
       <Frame
@@ -51,14 +58,14 @@ const QuemSomos = () => {
           />
           <Title
             id='introducao-title'
-            text={Data.banner.title}
+            text={locale === 'en-US' ? t(Data.banner.title) : Data.banner.title}
             hidden={false}
             width={14}
             weight={500}
           />
           <Paragrah
             id='introducao-description'
-            text={Data.banner.description}
+            text={locale === 'en-US' ? t(Data.banner.description) : Data.banner.description}
             hidden={false}
             width={24}
           />
@@ -104,7 +111,7 @@ const QuemSomos = () => {
           />
           <Paragrah
             id='sobre-description'
-            text={Data.about.paragraph}
+            text={locale === 'en-US' ? t(Data.about.paragraph) : Data.about.paragraph}
             hidden={false}
             width={30}
           />
@@ -126,14 +133,14 @@ const QuemSomos = () => {
       >
         <Title
           id='projetos-title'
-          text={Data.projects.title}
+          text={locale === 'en-US' ? t(Data.projects.title) : Data.projects.title}
           className={`${Styles.bright__title} fw-normal`}
           color='#1d3315'
           hidden={false}
         />
         <Paragrah
           id='projetos-description'
-          text={Data.projects.description}
+          text={locale === 'en-US' ? t(Data.projects.description) : Data.projects.description}
           className="pt-3 pb-5"
           color='#606060'
           hidden={false}
@@ -195,7 +202,7 @@ const QuemSomos = () => {
           />
           <Paragrah
             id='discord-description'
-            text={Data.discord.paragraph}
+            text={locale === 'en-US' ? t(Data.discord.paragraph) : Data.discord.paragraph}
             className="py-2"
             hidden={false}
             width={20}
@@ -203,7 +210,7 @@ const QuemSomos = () => {
           />
           <Button
             id='discord-cta'
-            text='ACOMPANHE NOSSOS PRÓXIMOS PASSOS'
+            text={locale === 'en-US' ? 'GET UPTODATE!' : 'ACOMPANHE NOSSOS PRÓXIMOS PASSOS'}
             label='Clique e acompanhe nossos próximos passos'
             hidden={false}
             disabled={false}

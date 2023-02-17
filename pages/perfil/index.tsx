@@ -17,7 +17,7 @@ const Perfil = () => {
   const [walletState, setWalletState] = React.useState(0)
   const [balance, setBalance] = React.useState<number>(0);
   const [dataUser, setDataUser] = React.useState<object>();
-  const [historyUser, setHistoryUser] = React.useState<any[]>([1, 2, 3])
+  const [historyUser, setHistoryUser] = React.useState<any[]>([])
 
 
   const projecardMock = [
@@ -153,8 +153,14 @@ const Perfil = () => {
               <div className={Styles.wallet__body}>
                 {walletState === 0 && (
                   <>
-                    {historyUser.map((_item: any, i: number) => (
-                      <Projecard key={i} data={projecardMock} />
+                    {historyUser.map((item: any, i: number) => (
+                      <Projecard
+                        key={i}
+                        data={projecardMock}
+                        name={item.nomeToken}
+                        montante={item.montante}
+                        emissor={'ENGLIMPA'}
+                      />
                     ))}
                     {/* <Projecard data={projecardMock} />
                     <Projecard data={projecardMock} />

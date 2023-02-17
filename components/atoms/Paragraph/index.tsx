@@ -3,7 +3,7 @@ import Styles from './styles.module.scss'
 
 type Props = {
   id?: string,
-  text?: string,
+  text?: string | any,
   className?: string,
   hidden?: boolean,
   size?: number,
