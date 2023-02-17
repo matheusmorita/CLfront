@@ -9,7 +9,6 @@ type Props = {
 }
 
 const Projecard = ({ data, name, montante, emissor }: Props) => {
-  console.log()
   return (
     <div className={Styles.projecard}>
       <div
