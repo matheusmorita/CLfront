@@ -16,9 +16,11 @@ type Props = {
   path: string,
   showOrNot?: boolean,
   idProject: string
+  text: string;
 }
 
-const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idProject }: Props) => {
+const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idProject, text }: Props) => {
+  const [projectDisabled, setProjectDisabled] = React.useState<boolean>(false)
   const { t } = useTranslation();
 
   const { locale } = React.useContext(UserContext)
@@ -31,6 +33,12 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
     return "Não informada"
   }
 
+  React.useEffect(() => {
+    if (name.includes('Recebíveis') || name.includes('Influenciadores')) {
+      setProjectDisabled(!projectDisabled)
+    }
+  }, [])
+
   return (
     <Column
       media='lg'
@@ -42,7 +50,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
         className={Styles.project}
         aria-labelledby={`project-title-${id}`}
         aria-describedby={`project-description-${id}`}
-        style={{ height: '100%'}}
+        style={{ height: '100%' }}
       >
         <div
           className={Styles.project__header}
@@ -70,25 +78,25 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
             >
               {locale === 'en-US' ? t('Data de lançamento') : 'Data de lançamento'}  <b>{dataLanc}</b> <br />
               {locale === 'en-US' ? t('Emitido por') : 'Emitido por'} <b>{emissor}</b> <br />
-              { showOrNot ? (
+              {showOrNot ? (
                 <span className={Styles.project__details}>
                   {locale === 'en-US' ? t('Rentabilidade estimada de até ') : 'Rentabilidade estimada de até '}
                   <b>{callRentText()}</b>
                 </span>
-                ) : ''}
+              ) : ''}
             </p>
           </div>
         </div>
-        
+
         <div
           className={Styles.project__info}
-          >
+        >
           <div>
             <Button
               id={`project-cta-${id}`}
-              text={locale === 'en-US' ? t('SAIBA MAIS') : 'SAIBA MAIS'}
+              text={locale === 'en-US' ? t(text) : text}
               label="Clique e veja mais sobre o projeto"
-              className="w-100 mb-3"
+              className={`w-100 mb-3 ${name.includes('Recebíveis') || name.includes('Influenciadores') ? Styles.project__button : ''}`}
               hidden={false}
               disabled={name.includes('Recebíveis') || name.includes('Influenciadores')}
               onClick={() => {

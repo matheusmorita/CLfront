@@ -4,9 +4,14 @@ import Row from '@/molecules/Row'
 import Project from '@/molecules/Project'
 
 import { fetchDataAxios } from '@/utils/fetchDataAxios';
+import { useTranslation } from 'react-i18next';
+import UserContext from '@/context/UserContext';
 
 const Projects = () => {
   const [projects, setProjects] = React.useState<any>([])
+  const { t } = useTranslation();
+
+  const { locale } = React.useContext(UserContext)
 
   React.useEffect(() => {
     fetchDataAxios("4", setProjects)
@@ -21,6 +26,7 @@ const Projects = () => {
             <Project
             id={item.acronimo}
             idProject={item.id}
+            text={(item.nome.includes('Recebíveis') || item.nome.includes('Influenciadores')) ? 'EM BREVE' : 'SAIBA MAIS'}
             name={item.nome}
             src={item.logoUrl}
             dataLanc={item.dataLancamento}

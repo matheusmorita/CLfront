@@ -210,7 +210,7 @@ const ProjectPage = () => {
                   )}
                   {project.rentabilidade ? (
                     <DataShow
-                      title={"Rentabilidade estimada"}
+                      title={"Rentabilidade"}
                       value={project.rentabilidade}
                       badge={{ type: "success", message: "NOVO" }}
                       contractLink={project.contratoToken}

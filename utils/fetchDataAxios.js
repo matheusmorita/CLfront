@@ -114,3 +114,92 @@ export async function requestBuyToken (accessToken, quantity, loteId) {
     confirm: dataResponse.confirmations
   }
 }
+
+export const handleUserRequest = async (setWaiting, setFeedback, setError, email, error) => {
+  if (email && !error) {
+    setWaiting(true)
+    const data = JSON.stringify({
+      "email": email
+    })
+
+    const config = {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: data
+    }
+
+    await fetch(process.env.REQUEST_LOGIN, config)
+      .then(resp => {
+        if (resp.ok) {
+          setWaiting(false)
+          setFeedback(true)
+        }
+      })
+  } else {
+    setError(true)
+  }
+}
+
+export const handleGetUserInfo = async (setSuccess, setPreloaded) => {
+  const token = localStorage.getItem('accessToken')
+
+  const config = {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      "Authorization": 'Bearer ' + token,
+    }
+  }
+
+  await fetch(process.env.GET_USER_CADASTRO, config)
+    .then(resp => {
+      if (resp.ok) {
+        setSuccess(true)
+        setPreloaded(true)
+        setTimeout(() => {
+          router.push('/')
+        }, 3000);
+      } else {
+        setPreloaded(true)
+      }
+    })
+}
+
+export const handleUserRequestRegister = async (setWaiting, setSuccess, name, cpf, date) => {
+  if (validation) {
+    setWaiting(true)
+    const token = localStorage.getItem('accessToken')
+    if (token && name && cpf && date) {
+      const data = JSON.stringify({
+        "nome": name,
+        "cpf": cpf,
+        "dataNascimento": date
+      })
+
+      const config = {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          "Authorization": 'Bearer ' + token,
+        },
+        body: data
+      }
+
+      await fetch(process.env.CADASTRAR_USER, config)
+        .then(resp => {
+          if (resp.ok) {
+            setWaiting(false)
+            setSuccess(true)
+            setTimeout(() => {
+              router.push('/')
+            }, 3000);
+          }
+        })
+    }
+  }
+}

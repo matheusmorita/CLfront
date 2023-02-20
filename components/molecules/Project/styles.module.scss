@@ -23,6 +23,18 @@
         text-overflow: ellipsis;
     }
 
+    &__button {
+        background-color: #FAD151;
+
+        &[disabled] {
+            cursor: not-allowed;
+    
+            &:hover {
+                background-color: #FAD151;
+            }
+        }
+    }
+
     &__title {
         color: $darker;
         font-weight: normal;
