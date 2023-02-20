@@ -199,7 +199,7 @@ function BuyProject({
                 <p className={Styles.descriptionText}>
                   Ao comprar Tokens CNLT, você receberá o equivalente
                   em Tokens da quantia escolhida, deduzida da taxa da
-                  CoinLivre (de X%) de acordo com os seus benefícios
+                  CoinLivre (de 1,5%) de acordo com os seus benefícios
                 </p>
               )}
               <div className={Styles.InputsGroupStyle}>
@@ -243,8 +243,23 @@ function BuyProject({
                   value={conditionalBuy === 'CNLT-0' ? realValue : calcValueResponse(realValue, valorToken)}
                 />
               </div>
-
-              <div className={Styles.checkboxLabel}>
+              {conditionalBuy !== 'CNLT-0' ? (
+                <div className={Styles.checkboxLabel}>
+                <input
+                  id="checkboxInput"
+                  onClick={() => setCheckoxCheck(!checkboxCheck)}
+                  type="checkbox"
+                  className={Styles.checkboxInput}
+                />
+                <label
+                  htmlFor="checkboxInput"
+                  className={Styles.descriptionTextCheckbox}
+                >
+                  Eu concordo com os termos de uso e política de privacidade da CoinLivre.
+                </label>
+              </div>
+              ) : (
+                <div className={Styles.checkboxLabel}>
                 <input
                   id="checkboxInput"
                   onClick={() => setCheckoxCheck(!checkboxCheck)}
@@ -259,6 +274,7 @@ function BuyProject({
                   Estou ciente de que a conta de origem do depósito deve estar no meu nome e CPF.
                 </label>
               </div>
+              )}
               <div className={Styles.divButtons}>
                 <Button
                   hidden={false}

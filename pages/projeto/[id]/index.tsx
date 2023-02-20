@@ -362,7 +362,7 @@ const ProjectPage = () => {
                   <div className={Styles.gradbox__header}>
                     <Title
                       id='documentos-title'
-                      text={"Remunerações"}
+                      text={"Cronograma de Retornos"}
                       hidden={false}
                       size={24}
                       height={24}

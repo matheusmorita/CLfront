@@ -98,7 +98,7 @@ function BuyProjectMobile({ setRealValue,
                 onClick={async (e: React.FormEvent<EventTarget>) => {
                   e.preventDefault()
                   const newRealValue = realValue.replace(',', '.')
-                  const {itemId, textContent} = await fetchRequestPix(accessTokenState, newRealValue)
+                  const { itemId, textContent } = await fetchRequestPix(accessTokenState, newRealValue)
                   sessionStorage.setItem('textContent', textContent)
                   sessionStorage.setItem('itemId', itemId)
                   setHiddenBuy(!hiddenBuy)
@@ -155,13 +155,13 @@ function BuyProjectMobile({ setRealValue,
               <div className={Styles.inputCheckBuy}>
                 {buyConfirmed ? (
                   <InputModal
-                  id='inputQrcode'
-                  type='string'
-                  label='Código de confirmação'
-                  disabled={false}
-                  placeholder={hashConfirm}
-                  className={Styles.inputValueBuyProject}
-                />
+                    id='inputQrcode'
+                    type='string'
+                    label='Código de confirmação'
+                    disabled={false}
+                    placeholder={hashConfirm}
+                    className={Styles.inputValueBuyProject}
+                  />
                 ) : ''}
                 <Button
                   hidden={false}
@@ -200,7 +200,7 @@ function BuyProjectMobile({ setRealValue,
               ) : (
                 <p className={Styles.descriptionText}>
                   Ao comprar Tokens CNLT, você receberá o equivalente
-                  em Tokens da quantia escolhida, deduzida da taxa da CoinLivre (de X%)
+                  em Tokens da quantia escolhida, deduzida da taxa da CoinLivre (de 1,5%)
                   de acordo com os seus benefícios
                 </p>
               )}
@@ -247,22 +247,42 @@ function BuyProjectMobile({ setRealValue,
                 />
               </div>
 
-              <div className={Styles.checkboxLabel}>
-                <input
-                  id="checkboxInput"
-                  onClick={() => setCheckoxCheck(!checkboxCheck)}
-                  type="checkbox"
-                  className={Styles.checkboxInput}
+              {conditionalBuy !== 'CNLT-0' ? (
+                <div className={Styles.checkboxLabel}>
+                  <input
+                    id="checkboxInput"
+                    onClick={() => setCheckoxCheck(!checkboxCheck)}
+                    type="checkbox"
+                    className={Styles.checkboxInput}
 
-                />
-                <label
-                  htmlFor="checkboxInput"
-                  className={Styles.descriptionTextCheckbox}
-                >
-                  Eu concordo com os termos de uso e política de privacidade da CoinLivre.
-                  Estou ciente de que a conta de origem do depósito deve estar no meu nome e CPF.
-                </label>
-              </div>
+                  />
+                  <label
+                    htmlFor="checkboxInput"
+                    className={Styles.descriptionTextCheckbox}
+                  >
+                    Eu concordo com os termos de uso e política de privacidade da CoinLivre.
+                  </label>
+                </div>
+              ) : (
+                <div className={Styles.checkboxLabel}>
+                  <input
+                    id="checkboxInput"
+                    onClick={() => setCheckoxCheck(!checkboxCheck)}
+                    type="checkbox"
+                    className={Styles.checkboxInput}
+
+                  />
+                  <label
+                    htmlFor="checkboxInput"
+                    className={Styles.descriptionTextCheckbox}
+                  >
+                    Eu concordo com os termos de uso e política de privacidade da CoinLivre.
+                    Estou ciente de que a conta de origem do depósito deve estar no meu nome e CPF.
+                  </label>
+                </div>
+              )}
+
+
               <div className={Styles.divButtons}>
                 <Button
                   hidden={false}
@@ -301,7 +321,7 @@ function BuyProjectMobile({ setRealValue,
                       const responseSaldo = checkSaldo(balance, valorToken, realValue)
                       setValueSaldo(responseSaldo)
                       if (responseSaldo) {
-                        const {confirm, hash} = await requestBuyToken(accessTokenState, realValue, lote.id)
+                        const { confirm, hash } = await requestBuyToken(accessTokenState, realValue, lote.id)
                         setHashConfirm(hash)
                         if (confirm != 0) {
                           setBuyConfirmed(!buyConfirmed)

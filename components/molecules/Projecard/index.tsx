@@ -13,13 +13,13 @@ const Projecard = ({ data, name, montante, emissor }: Props) => {
   return (
     <div className={Styles.projecard}>
       <div
-        style={{
-          background: name?.toLocaleLowerCase()?.includes('coinlivre') ? (
-            ''
-          ) : ` linear-gradient(to right, transparent, #000), url(${'src'})`,
-          width: name?.toLocaleLowerCase()?.includes('coinlivre') ? '15%' : '',
-          left: name?.toLocaleLowerCase()?.includes('coinlivre') ? '10%' : ''
-        }}
+        // style={{
+        //   background: name?.toLocaleLowerCase()?.includes('coinlivre') ? (
+        //     ''
+        //   ) : ` linear-gradient(to right, transparent, #000), url(${'src'})`,
+        //   width: name?.toLocaleLowerCase()?.includes('coinlivre') ? '10%' : '',
+        //   left: name?.toLocaleLowerCase()?.includes('coinlivre') ? '5%' : ''
+        // }}
         className={Styles.projecard__picture}
       />
       <div className={Styles.projecard__info}>

@@ -1,6 +1,10 @@
 import React from 'react'
 
-const Checkbox = () => {
+interface CheckboxInterface {
+  onClick?: any;
+}
+
+const Checkbox = ({onClick}: CheckboxInterface) => {
   return (
     <div className="form-check my-3">
       <input
@@ -8,6 +12,7 @@ const Checkbox = () => {
         type="checkbox"
         onChange={() => {}}
         id="flexCheckDefault"
+        onClick={onClick}
       />
       <label
         className="form-check-label text-start"

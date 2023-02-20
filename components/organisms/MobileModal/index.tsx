@@ -92,7 +92,7 @@ function MobileModal() {
                 text="Comprar"
                 onClick={(e: any) => {
                   e.preventDefault()
-                  if (loggedIn) {
+                  if (!loggedIn[0]) {
                     // localStorage.setItem('beforePath', router.asPath)
                     return router.push('/login')
                   }
@@ -119,7 +119,7 @@ function MobileModal() {
                   className={Styles.buttonStyle}
                   onClick={(e: any) => {
                     e.preventDefault();
-                    if (loggedIn) {
+                    if (!loggedIn[0]) {
                       // localStorage.setItem('beforePath', router.asPath)
                       return router.push('/login')
                     }

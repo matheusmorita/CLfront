@@ -50,7 +50,7 @@ const QuotaShow = ({
         </div> */}
         <div className={Styles.quotashow__data}>
           <h1 className={Styles.quotashow__title}>
-            Juros
+            Retorno
           </h1>
           <span className={Styles.quotashow__value}>
             {juros}

@@ -38,6 +38,8 @@ const Register = () => {
   const [errorCPF, setErrorCPF] = React.useState()
   const [errorDate, setErrorDate] = React.useState()
 
+  const [checked, setChecked] = React.useState<boolean>(false)
+
   const handleUserRequest = async () => {
     if (validation) {
       setWaiting(true)
@@ -190,13 +192,15 @@ const Register = () => {
                       validation={setErrorCPF}
                       error={errorCPF}
                     />
-                    <Checkbox />
+                    <Checkbox
+                      onClick={() => setChecked(!checked)}
+                    />
                     <Button
                       id="submit-button"
                       text="Continuar"
                       label="Clique continue para seu cadastro"
                       className="w-100 py-2 mt-3 fs-5"
-                      disabled={!validation}
+                      disabled={!validation || !checked}
                       hidden={false}
                       onClick={() => { handleUserRequest() }}
                     />

@@ -94,7 +94,7 @@ function Modal() {
               text="Comprar"
               onClick={(e: any) => {
                 e.preventDefault()
-                if (loggedIn) {
+                if (!loggedIn[0]) {
                   // localStorage.setItem('beforePath', router.asPath)
                   return router.push('/login')
                 }
@@ -118,7 +118,7 @@ function Modal() {
                 text='Comprar'
                 onClick={(e: any) => {
                   e.preventDefault()
-                  if (loggedIn) {
+                  if (!loggedIn[0]) {
                     // localStorage.setItem('beforePath', router.asPath)
                     return router.push('/login')
                   }
