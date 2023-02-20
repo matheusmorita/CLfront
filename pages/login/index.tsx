@@ -68,7 +68,7 @@ const Login = () => {
   }, [logged])
 
   return (
-    <main style={{ color: 'white' }}>
+    <main>
       <Frame
         id='login'
         role='main'

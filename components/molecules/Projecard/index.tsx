@@ -1,3 +1,4 @@
+import { margin } from '@mui/system';
 import React from 'react'
 import Styles from './styles.module.scss'
 
@@ -13,17 +14,11 @@ const Projecard = ({ data, name, montante, emissor }: Props) => {
     <div className={Styles.projecard}>
       <div
         style={{
-          // background: ` linear-gradient(to right, transparent, #000), url(${src})`,
-          backgroundSize: 'cover',
-          position: 'absolute',
-          width: '9%',
-          height: '100%',
-          left: '4%'
-
-          // width: id !== 'CNLT-0' ? '25%' : '18%',
-          // height: id !== 'CNLT-0' ? '' : '100%',
-          // left: id !== 'CNLT-0' ? 0 : 10,
-          // top: id !== 'CNLT-0' ? 0 : -5,
+          background: name?.toLocaleLowerCase()?.includes('coinlivre') ? (
+            ''
+          ) : ` linear-gradient(to right, transparent, #000), url(${'src'})`,
+          width: name?.toLocaleLowerCase()?.includes('coinlivre') ? '15%' : '',
+          left: name?.toLocaleLowerCase()?.includes('coinlivre') ? '10%' : ''
         }}
         className={Styles.projecard__picture}
       />

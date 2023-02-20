@@ -69,7 +69,7 @@ const ProjectPage = () => {
             <Modal />
           </section>
         ) : ''}
-        <main style={{ color: 'white' }}>
+        <main>
           <Frame
             id={`projeto-${id}`}
             role='main'

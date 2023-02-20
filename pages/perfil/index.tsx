@@ -12,6 +12,8 @@ import Switch from '@/components/molecules/Switch'
 import Projecard from '@/components/molecules/Projecard'
 import { fetchDataUserInfo, fetchUserHistoryinfo } from '@/utils/fetchDataAxios'
 import Link from 'next/link'
+import InvestCard from '@/components/molecules/InvestCard'
+import { getWindowInnerWidth } from '@/assets/js/util/responsive'
 
 const Perfil = () => {
   const [walletState, setWalletState] = React.useState(0)
@@ -35,12 +37,15 @@ const Perfil = () => {
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
 
+    const widthWindow = getWindowInnerWidth()
+
+
     fetchDataUserInfo(accessToken, setBalance, setDataUser)
     fetchUserHistoryinfo(accessToken, setHistoryUser)
   }, [])
 
   return (
-    <main style={{ color: 'white' }}>
+    <main>
       <Frame
         id='perfil'
         role='main'

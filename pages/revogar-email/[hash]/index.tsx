@@ -54,7 +54,7 @@ const RevogarEmail = () => {
 
   if (fetched) {
     return (
-      <main style={{ color: 'white' }}>
+      <main>
         <Frame
           id={`revogar-${hash}`}
           role='main'

@@ -15,7 +15,7 @@ import Image from 'next/image'
 const RecoveryPassword = () => {
   const [step, setStep] = React.useState<number>(1)
   return (
-    <main style={{color: 'white'}}>
+    <main>
       <Frame
       id='recovery'
       role='main'

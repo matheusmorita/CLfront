@@ -119,7 +119,7 @@ const Register = () => {
 
   if (preloaded) {
     return (
-      <main style={{ color: 'white' }}>
+      <main>
         <Frame
           id='register'
           role='main'
@@ -227,7 +227,7 @@ const Register = () => {
     )
   } else {
     return (
-      <main style={{ color: 'white' }}>
+      <main>
         <Frame
           id='register'
           role='main'

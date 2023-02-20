@@ -44,9 +44,12 @@
 
         @media (max-width: 992px) {
             background: linear-gradient(to bottom, transparent, #000),
-                url(../../../assets/img/BG2.webp);
-            height: 120px;
-            width: 100%;
+                url(../../../assets/img/logo.png);
+            background-color: red;
+            background-size: cover;
+            position: absolute;
+            height: 100px;
+            width: 250px;
         }
     }
 
