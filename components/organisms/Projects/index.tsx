@@ -30,7 +30,7 @@ const Projects = () => {
             id={item.acronimo}
             idProject={item.id}
             text={(item.acronimo.includes('CLDG') || item.acronimo.includes('CLMT')) ? 'EM BREVE' : 'SAIBA MAIS'}
-            name={languageBrowser === 'en-US' ? t(item.nome) : item.nome}
+            name={languageBrowser !== 'pt-BR' ? t(item.nome) : item.nome}
             src={item.logoUrl}
             dataLanc={item.dataLancamento}
             emissor={item.emissor.nomeEmissor}

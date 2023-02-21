@@ -29,7 +29,7 @@ const DataShow = ({ title, value, badge, className, highlight = false, contractL
     >
       <div className={Styles.datashow__content}>
         <h1 className={Styles.datashow__title}>
-          {languageBrowser === 'en-US' ? i18next.t(title) : title}
+          {languageBrowser !== 'pt-BR' ? i18next.t(title) : title}
         </h1>
         <span className={Styles.datashow__value}>
           {value}
@@ -48,7 +48,7 @@ const DataShow = ({ title, value, badge, className, highlight = false, contractL
           className={Styles.datashow__badge}
           data-type={badge.type}
         >
-          {languageBrowser === 'en-US' ? i18next.t(badge.message) : badge.message}
+          {languageBrowser !== 'pt-BR' ? i18next.t(badge.message) : badge.message}
         </div>
       )}
     </div>

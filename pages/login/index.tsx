@@ -18,11 +18,17 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { captureEmail } from '@/assets/js/util/validations'
 
+import i18next from '@/src/i18n';
+
+
 const Login = () => {
   const [email, setEmail] = React.useState()
   const [error, setError] = React.useState(false)
   const [waiting, setWaiting] = React.useState(false)
   const [feedback, setFeedback] = React.useState(false)
+
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
 
   const router = useRouter()
   const { userInfo, loggedIn } = React.useContext(UserContext)
@@ -62,9 +68,12 @@ const Login = () => {
   }
 
   React.useEffect(() => {
+    const language = window.navigator.language
+    setLanguageBrowser(language)
     if (logged) {
       router.push('/')
     }
+
   }, [logged])
 
   return (
@@ -75,7 +84,7 @@ const Login = () => {
         label='Página de Login'
       >
         <Head>
-          <title>CoinLivre | Login</title>
+          <title>Login</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <meta name="theme-color" content="#00ee8d" />
           <meta name="robots" content="index, follow" />
@@ -120,7 +129,7 @@ const Login = () => {
                 />
                 <Input
                   id='email'
-                  label='Digite seu e-mail'
+                  label={languageBrowser !== 'pt-BR' ? i18next.t('Digite seu e-mail') : 'Digite seu e-mail'}
                   type='email'
                   onInput={setEmail}
                   validation={setError}
@@ -134,7 +143,7 @@ const Login = () => {
                 </p>
                 <Button
                   id="submit-button"
-                  text="Entrar"
+                  text={languageBrowser !== 'pt-BR' ? i18next.t("Entrar") : "Entrar"}
                   label="Clique e faça login em sua conta CoinLivre"
                   className="w-100 py-2 mt-2 fs-5"
                   hidden={false}
@@ -159,7 +168,7 @@ const Login = () => {
                 />
                 <Paragrah
                   id='form-description'
-                  text={'Um e-mail foi encaminhado para a sua caixa de entrada.'}
+                  text={languageBrowser !== 'pt-BR' ? i18next.t('Um e-mail foi encaminhado para a sua caixa de entrada.') : 'Um e-mail foi encaminhado para a sua caixa de entrada.'}
                   hidden={false}
                   width={100}
                 />

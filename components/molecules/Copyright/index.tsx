@@ -22,12 +22,12 @@ const Copyright = () => {
     <div className={Styles.copyright}>
       <hr />
       <p className={Styles.copyright__text}>
-        {languageBrowser === 'en-US' ? <>CoinLivre&copy; 2022. {t('Todos os direitos reservados.')}</>  : (
+        {languageBrowser !== 'pt-BR' ? <>CoinLivre&copy; 2022. {t('Todos os direitos reservados.')}</>  : (
           <>CoinLivre&copy; 2022. Todos os direitos reservados.</>
         )}
       </p>
       <p className={Styles.copyright__developer}>
-        {languageBrowser === 'en-US' ? <>{t('Desenvolvido por')}&nbsp;</> : (
+        {languageBrowser !== 'pt-BR' ? <>{t('Desenvolvido por')}&nbsp;</> : (
           <>Desenvolvido por&nbsp;</>
         )}
         

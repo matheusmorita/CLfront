@@ -28,8 +28,6 @@ const QuemSomos = () => {
   const [languageBrowser, setLanguageBrowser] = React.useState<string>();
   const { t } = useTranslation();
 
-  const { locale } = React.useContext(UserContext)
-
   const router = useRouter();
 
 
@@ -58,7 +56,7 @@ const QuemSomos = () => {
           id='introducao'
           label='introducao-title'
           desc='introducao-description'
-          justify='center'
+          justify='between'
           hidden={false}
           className={`${Styles.background} min-vh-100 pt-5 pt-lg-0 d-flex align-items-center pb-5`}
         >
@@ -72,14 +70,14 @@ const QuemSomos = () => {
             />
             <Title
               id='introducao-title'
-              text={languageBrowser === 'en-US' ? t(Data.banner.title) : Data.banner.title}
+              text={languageBrowser !== 'pt-BR' ? t(Data.banner.title) : Data.banner.title}
               hidden={false}
               width={14}
               weight={500}
             />
             <Paragrah
               id='introducao-description'
-              text={languageBrowser === 'en-US' ? t(Data.banner.description) : Data.banner.description}
+              text={languageBrowser !== 'pt-BR' ? t(Data.banner.description) : Data.banner.description}
               hidden={false}
               width={24}
             />
@@ -136,7 +134,7 @@ const QuemSomos = () => {
             />
             <Paragrah
               id='sobre-description'
-              text={languageBrowser === 'en-US' ? t(Data.about.paragraph) : Data.about.paragraph}
+              text={languageBrowser !== 'pt-BR' ? t(Data.about.paragraph) : Data.about.paragraph}
               hidden={false}
               width={30}
             />
@@ -158,14 +156,14 @@ const QuemSomos = () => {
         >
           <Title
             id='projetos-title'
-            text={languageBrowser === 'en-US' ? t(Data.projects.title) : Data.projects.title}
+            text={languageBrowser !== 'pt-BR' ? t(Data.projects.title) : Data.projects.title}
             className={`${Styles.bright__title} fw-normal`}
             color='#1d3315'
             hidden={false}
           />
           <Paragrah
             id='projetos-description'
-            text={languageBrowser === 'en-US' ? t(Data.projects.description) : Data.projects.description}
+            text={languageBrowser !== 'pt-BR' ? t(Data.projects.description) : Data.projects.description}
             className="pt-3 pb-5"
             color='#606060'
             hidden={false}
@@ -185,7 +183,7 @@ const QuemSomos = () => {
         >
           <Title
             id='faq-title'
-            text={languageBrowser === 'en-US' ? t("Ficou alguma dúvida?") : "Ficou alguma dúvida?"}
+            text={languageBrowser !== 'pt-BR' ? t("Ficou alguma dúvida?") : "Ficou alguma dúvida?"}
             className='fw-bold'
             color='#00ee8d'
             hidden={false}
@@ -227,7 +225,7 @@ const QuemSomos = () => {
             />
             <Paragrah
               id='discord-description'
-              text={languageBrowser === 'en-US' ? t(Data.discord.paragraph) : Data.discord.paragraph}
+              text={languageBrowser !== 'pt-BR' ? t(Data.discord.paragraph) : Data.discord.paragraph}
               className="py-2"
               hidden={false}
               width={20}
@@ -235,7 +233,7 @@ const QuemSomos = () => {
             />
             <Button
               id='discord-cta'
-              text={languageBrowser === 'en-US' ? t('ACOMPANHE NOSSOS PRÓXIMOS PASSOS') : 'ACOMPANHE NOSSOS PRÓXIMOS PASSOS'}
+              text={languageBrowser !== 'pt-BR' ? t('ACOMPANHE NOSSOS PRÓXIMOS PASSOS') : 'ACOMPANHE NOSSOS PRÓXIMOS PASSOS'}
               label='Clique e acompanhe nossos próximos passos'
               hidden={false}
               disabled={false}

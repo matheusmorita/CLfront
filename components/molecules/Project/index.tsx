@@ -78,11 +78,11 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
               id={`project-description-${id}`}
               className={Styles.project__details}
             >
-              {languageBrowser === 'en-US' ? t('Data de lançamento') : 'Data de lançamento'}  <b>{dataLanc}</b> <br />
-              {languageBrowser === 'en-US' ? t('Emitido por') : 'Emitido por'} <b>{emissor}</b> <br />
+              {languageBrowser !== 'pt-BR' ? t('Data de lançamento') : 'Data de lançamento'}  <b>{dataLanc}</b> <br />
+              {languageBrowser !== 'pt-BR' ? t('Emitido por') : 'Emitido por'} <b>{emissor}</b> <br />
               {showOrNot ? (
                 <span className={Styles.project__details}>
-                  {languageBrowser === 'en-US' ? t('Rentabilidade estimada de até ') : 'Rentabilidade estimada de até '}
+                  {languageBrowser !== 'pt-BR' ? t('Rentabilidade estimada de até ') : 'Rentabilidade estimada de até '}
                   <b>{callRentText()}</b>
                 </span>
               ) : ''}
@@ -96,7 +96,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
           <div>
             <Button
               id={`project-cta-${id}`}
-              text={languageBrowser === 'en-US' ? t(text) : text}
+              text={languageBrowser !== 'pt-BR' ? t(text) : text}
               label="Clique e veja mais sobre o projeto"
               className={`w-100 mb-3 ${id.includes('CLDG') || id.includes('CLMT') ? Styles.project__button : ''}`}
               hidden={false}

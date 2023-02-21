@@ -90,9 +90,37 @@
           "Token Infos",
         "NOVO":
           "NEW",
+        "DESTAQUE":
+          "Prominence",
         "Contrato":
           "Contract",
         "Rentabilidade":
-          "Profitability"
+          "Profitability",
+        "Sem rentabilidade":
+          "No profitability",
+        "Lote":
+          "Batch",
+        "Valor do Token":
+          "Token price",
+        "Prazo do Lote":
+          "Batch expiration date",
+        "QTDE de Tokens":
+          "Total of Tokens",
+        "Captação":
+          "Amount invested",
+        "Benefícios entregues":
+          "Benefits delivered",
+        "Título do doc":
+          "Doc title",
+        "DOCUMENTO":
+          "DOCUMENT",
+        "ACESSE O SITE":
+          "Visit the website",
+        "Digite seu e-mail":
+          "Insert e-mail",
+        "Entrar":
+          "Login",
+        "Um e-mail foi encaminhado para a sua caixa de entrada.":
+          "An email has been forwarded to your inbox."
     }
 }

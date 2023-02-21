@@ -31,8 +31,8 @@ const Faq = ({ data }: Props) => {
         data.map((item: { ask: string; answer: string }, index: number) => (
           <Flip
             id={`${index + 1}`}
-            ask={languageBrowser === 'en-US' ? t(item.ask) : item.ask}  
-            answer={languageBrowser === 'en-US' ? t(item.answer) : item.answer}
+            ask={languageBrowser !== 'pt-BR' ? t(item.ask) : item.ask}  
+            answer={languageBrowser !== 'pt-BR' ? t(item.answer) : item.answer}
             className="my-3"
             key={index}
           />
