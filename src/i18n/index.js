@@ -5,7 +5,7 @@ import PTBR from './locales/pt/pt-br.json';
 
 const resources = {
     "en-US": ENUS,
-    "pt-BR": PTBR,
+    // "pt-BR": PTBR,
 }
 
 i18next

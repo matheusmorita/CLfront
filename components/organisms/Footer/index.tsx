@@ -17,9 +17,18 @@ import { useTranslation } from 'react-i18next'
 import UserContext from '@/context/UserContext'
 
 const Footer = () => {
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
   const { t } = useTranslation();
 
   const { locale } = React.useContext(UserContext)
+
+  React.useEffect(() => {
+    const language = window.navigator.language
+    setLanguageBrowser(language)
+  // const beforePath = localStorage.getItem('beforePath')
+  // router.push(`${beforePath}`)
+  })
   return (
     <footer>
       <Section
@@ -50,59 +59,59 @@ const Footer = () => {
         }}>
           <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-            {locale === 'en-US' ? t('A Coinlivre') : 'A Coinlivre'}
+            {languageBrowser === 'en-US' ? t('A Coinlivre') : 'A Coinlivre'}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="#">{locale === 'en-US' ? t('Quem somos') : 'Quem somos'}</a>
+                <a href="#">{languageBrowser === 'en-US' ? t('Quem somos') : 'Quem somos'}</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#projetos">{locale === 'en-US' ? t('Nossos projetos') : 'Nossos projetoss'}</a>
+                <a href="#projetos">{languageBrowser === 'en-US' ? t('Nossos projetos') : 'Nossos projetoss'}</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="mailto:imprensa@coinlivre.com.br">{locale === 'en-US' ? t('Assessoria de imprensa') : 'Assessoria de imprensa'}</a>
+                <a href="mailto:imprensa@coinlivre.com.br">{languageBrowser === 'en-US' ? t('Assessoria de imprensa') : 'Assessoria de imprensa'}</a>
               </li>
             </ul>
           </div>
 
            <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-            {locale === 'en-US' ? t('Jurídico') : 'Jurídico'}
+            {languageBrowser === 'en-US' ? t('Jurídico') : 'Jurídico'}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <Link href='TERMO_DE_USO.pdf' download locale={false}>{locale === 'en-US' ? t('Termo de uso') : 'Termo de uso'}</Link>
+                <Link href='TERMO_DE_USO.pdf' download locale={false}>{languageBrowser === 'en-US' ? t('Termo de uso') : 'Termo de uso'}</Link>
               </li>
               <li className={Styles.footer__item}>
-              <Link href='POLITICA_DE_PRIVACIDADE.pdf' download locale={false}>{locale === 'en-US' ? t('Política de privacidade') : 'Política de privacidade'}</Link>
+              <Link href='POLITICA_DE_PRIVACIDADE.pdf' download locale={false}>{languageBrowser === 'en-US' ? t('Política de privacidade') : 'Política de privacidade'}</Link>
               </li>
             </ul>
           </div>
 
           <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-            {locale === 'en-US' ? t('Ajuda') : 'Ajuda'}
+            {languageBrowser === 'en-US' ? t('Ajuda') : 'Ajuda'}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="mailto:faleconosco@coinlivre.com.br">{locale === 'en-US' ? t('Fale conosco') : 'Fale conosco'}</a>
+                <a href="mailto:faleconosco@coinlivre.com.br">{languageBrowser === 'en-US' ? t('Fale conosco') : 'Fale conosco'}</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#faq">{locale === 'en-US' ? t('Perguntas frequentes') : 'Perguntas frequentes'}</a>
+                <a href="#faq">{languageBrowser === 'en-US' ? t('Perguntas frequentes') : 'Perguntas frequentes'}</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#">{locale === 'en-US' ? t('Aprenda sobre tokenização') : 'Aprenda sobre tokenização'}</a>
+                <a href="#">{languageBrowser === 'en-US' ? t('Aprenda sobre tokenização') : 'Aprenda sobre tokenização'}</a>
               </li>
             </ul>
           </div>
 
           <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-            {locale === 'en-US' ? t('Compliance') : 'Compliance'}
+            {languageBrowser === 'en-US' ? t('Compliance') : 'Compliance'}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="mailto:faleconosco@coinlivre.com.br">{locale === 'en-US' ? t('Ouvidoria') : 'Ouvidoria'}</a>
+                <a href="mailto:faleconosco@coinlivre.com.br">{languageBrowser === 'en-US' ? t('Ouvidoria') : 'Ouvidoria'}</a>
               </li>
             </ul>
           </div>

@@ -31,6 +31,7 @@ import UserContext from '@/context/UserContext'
 import axios from 'axios'
 import { fetchDataIdAxios } from '@/utils/fetchDataAxios'
 
+import i18next from '@/src/i18n';
 
 
 const ProjectPage = () => {
@@ -42,7 +43,21 @@ const ProjectPage = () => {
   const [showMobileModal, setShowMobileModal] = React.useState<boolean>(false)
   const [lengthWindow, setLengthWindow] = React.useState<number>(0)
 
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
+
   const { loggedIn } = React.useContext(UserContext)
+
+  // const { t } = useTranslation();
+
+  const { locale } = React.useContext(UserContext)
+
+  React.useEffect(() => {
+    const language = window.navigator.language
+    setLanguageBrowser(language)
+    // const beforePath = localStorage.getItem('beforePath')
+    // router.push(`${beforePath}`)
+  })
 
 
   // fetchDataIdAxios()
@@ -103,7 +118,7 @@ const ProjectPage = () => {
                 />
                 <Title
                   id='introducao-title'
-                  text={project.nome}
+                  text={languageBrowser === 'en-US' ? i18next.t(project.nome) : project.nome}
                   hidden={false}
                   size={100}
                   height={100}
@@ -127,7 +142,7 @@ const ProjectPage = () => {
                 />
                 <Button
                   id="introducao-cta"
-                  text="Investir"
+                  text={languageBrowser === "en-US" ? i18next.t('Investir') : 'Investir'}
                   label="Clique e cadastre-se na Lista VIP"
                   hidden={false}
                   disabled={false}
@@ -148,10 +163,11 @@ const ProjectPage = () => {
 
             <TabNavigation
               links={[
-                { name: "sobre", path: "sobre" },
+                { name: "Sobre", path: "sobre" },
                 { name: "Documentos", path: "documentos" },
                 { name: "Emissor", path: "emissor" }
               ]}
+              languageBrowser={languageBrowser}
             />
 
             <Section
@@ -172,7 +188,7 @@ const ProjectPage = () => {
                 />
                 <Title
                   id='sobre-title'
-                  text={Data.sobre.title}
+                  text={languageBrowser === 'en-US' ? i18next.t(Data.sobre.title) : Data.sobre.title}
                   hidden={false}
                   size={48}
                   height={48}
@@ -199,6 +215,7 @@ const ProjectPage = () => {
                 <div className={Styles.grid}>
                   {project.criadoEm && (
                     <DataShow
+                      languageBrowser={languageBrowser}
                       title={"Data de lançamento"}
                       value={masks.getDateMask(project.criadoEm)}
                       badge={{
@@ -210,19 +227,22 @@ const ProjectPage = () => {
                   )}
                   {project.rentabilidade ? (
                     <DataShow
+                      languageBrowser={languageBrowser}
                       title={"Rentabilidade"}
                       value={project.rentabilidade}
                       badge={{ type: "success", message: "NOVO" }}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
-                      title={"Rentabilidade estimada"}
+                      languageBrowser={languageBrowser}
+                      title={"Rentabilidade"}
                       value={'N/A'}
                       contractLink={project.contratoToken}
                     />)}
 
                   {project.lotes.length > 0 ? (
                     <DataShow
+                      languageBrowser={languageBrowser}
                       title={"Lote"}
                       value={project.lotes[project.lotes.length - 1].idLote}
                       badge={{ type: "success", message: "NOVO" }}
@@ -270,6 +290,7 @@ const ProjectPage = () => {
                       contractLink={project.contratoToken}
                     />)}
                   <DataShow
+                    languageBrowser={languageBrowser}
                     title={"Contrato"}
                     value={project.contratoToken}
                     highlight={true}
@@ -314,7 +335,7 @@ const ProjectPage = () => {
                 />
                 <Title
                   id='documentos-title'
-                  text={Data.documentos.title}
+                  text={languageBrowser === 'en-US' ? i18next.t(Data.documentos.title) : Data.documentos.title}
                   hidden={false}
                   size={48}
                   height={48}
@@ -389,7 +410,7 @@ const ProjectPage = () => {
                           type: "success",
                           message: "Paga"
                         }}
-                        />
+                      />
                     ))}
 
                   </div>
@@ -486,7 +507,7 @@ const ProjectPage = () => {
                 />
                 <Paragrah
                   id='discord-description'
-                  text={Data.discord.paragraph}
+                  text={languageBrowser === 'en-US' ? i18next.t(Data.discord.paragraph) : Data.discord.paragraph}
                   className="py-2"
                   color='#000000'
                   hidden={false}
@@ -495,7 +516,7 @@ const ProjectPage = () => {
                 />
                 <Button
                   id='discord-cta'
-                  text='ACOMPANHE NOSSOS PRÓXIMOS PASSOS'
+                  text={languageBrowser === 'en-US' ? i18next.t('ACOMPANHE NOSSOS PRÓXIMOS PASSOS') : 'ACOMPANHE NOSSOS PRÓXIMOS PASSOS'}
                   label='Clique e acompanhe nossos próximos passos'
                   hidden={false}
                   disabled={false}

@@ -16,7 +16,6 @@ import Discord from '@/assets/img/discord.webp'
 import Button from '@/components/atoms/Button'
 import Faq from '@/components/organisms/Faq'
 import Projects from '@/components/organisms/Projects'
-import WaitingList from '@/components/organisms/WaitingList'
 
 import manImage from '@/assets/img/homemSorridente.png';
 
@@ -25,6 +24,7 @@ import UserContext from '@/context/UserContext'
 import { useRouter } from 'next/router'
 
 const QuemSomos = () => {
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
   const { t } = useTranslation();
 
   const { locale } = React.useContext(UserContext)
@@ -32,10 +32,12 @@ const QuemSomos = () => {
   const router = useRouter();
 
 
-  // React.useEffect(() => {
+  React.useEffect(() => {
+    const language = window.navigator.language
+    setLanguageBrowser(language)
   // const beforePath = localStorage.getItem('beforePath')
   // router.push(`${beforePath}`)
-  // })
+  })
 
   return (
     <main>
@@ -69,14 +71,14 @@ const QuemSomos = () => {
             />
             <Title
               id='introducao-title'
-              text={locale === 'en-US' ? t(Data.banner.title) : Data.banner.title}
+              text={languageBrowser === 'en-US' ? t(Data.banner.title) : Data.banner.title}
               hidden={false}
               width={14}
               weight={500}
             />
             <Paragrah
               id='introducao-description'
-              text={locale === 'en-US' ? t(Data.banner.description) : Data.banner.description}
+              text={languageBrowser === 'en-US' ? t(Data.banner.description) : Data.banner.description}
               hidden={false}
               width={24}
             />
@@ -85,14 +87,7 @@ const QuemSomos = () => {
               alt='Imagem de homem sorridente'
               src={manImage}
               className={Styles.manImage}
-            // className='img-fluid w-75 d-none d-lg-block'
             />
-          {/* <Column
-            media='lg'
-            size={4}
-          >
-            
-          </Column> */}
         </Section>
 
         <Section
@@ -128,7 +123,7 @@ const QuemSomos = () => {
             />
             <Paragrah
               id='sobre-description'
-              text={locale === 'en-US' ? t(Data.about.paragraph) : Data.about.paragraph}
+              text={languageBrowser === 'en-US' ? t(Data.about.paragraph) : Data.about.paragraph}
               hidden={false}
               width={30}
             />
@@ -150,14 +145,14 @@ const QuemSomos = () => {
         >
           <Title
             id='projetos-title'
-            text={locale === 'en-US' ? t(Data.projects.title) : Data.projects.title}
+            text={languageBrowser === 'en-US' ? t(Data.projects.title) : Data.projects.title}
             className={`${Styles.bright__title} fw-normal`}
             color='#1d3315'
             hidden={false}
           />
           <Paragrah
             id='projetos-description'
-            text={locale === 'en-US' ? t(Data.projects.description) : Data.projects.description}
+            text={languageBrowser === 'en-US' ? t(Data.projects.description) : Data.projects.description}
             className="pt-3 pb-5"
             color='#606060'
             hidden={false}
@@ -177,7 +172,7 @@ const QuemSomos = () => {
         >
           <Title
             id='faq-title'
-            text={locale === 'en-US' ? t("Ficou alguma dúvida?") : "Ficou alguma dúvida?"}
+            text={languageBrowser === 'en-US' ? t("Ficou alguma dúvida?") : "Ficou alguma dúvida?"}
             className='fw-bold'
             color='#00ee8d'
             hidden={false}
@@ -219,7 +214,7 @@ const QuemSomos = () => {
             />
             <Paragrah
               id='discord-description'
-              text={locale === 'en-US' ? t(Data.discord.paragraph) : Data.discord.paragraph}
+              text={languageBrowser === 'en-US' ? t(Data.discord.paragraph) : Data.discord.paragraph}
               className="py-2"
               hidden={false}
               width={20}
@@ -227,7 +222,7 @@ const QuemSomos = () => {
             />
             <Button
               id='discord-cta'
-              text={locale === 'en-US' ? 'GET UPTODATE!' : 'ACOMPANHE NOSSOS PRÓXIMOS PASSOS'}
+              text={languageBrowser === 'en-US' ? t('ACOMPANHE NOSSOS PRÓXIMOS PASSOS') : 'ACOMPANHE NOSSOS PRÓXIMOS PASSOS'}
               label='Clique e acompanhe nossos próximos passos'
               hidden={false}
               disabled={false}

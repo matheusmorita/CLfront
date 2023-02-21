@@ -25,7 +25,7 @@
           "CoinLivre enables, through our digital asset marketplace platform, free access to a whole set os investment categories – all with excellent financial gains, security and transparency.",
         "Fique por dentro de todas as novidades e saia na frente": "Get ahead by staying in tune with our news and releases",
         "Data de lançamento": 
-          "Launch-date",
+          "Release date",
         "Emitido por": 
           "Project Owner",
         "Rentabilidade estimada de até ": 
@@ -54,17 +54,45 @@
           "Contact info",
         "Perguntas frequentes":  
           "FAQ",
-        "Aprenda sobre tokenização": "Learn about Tokenization",
+        "Aprenda sobre tokenização": 
+          "Learn about Tokenization",
         "Compliance": 
           "nsa",
-        "Ouvidoria": "Legal contact",
-        "CoinLivre&copy; 2022. Todos os direitos reservados.": 
-          "CoinLivre 2022. All rights reserved.",
+        "Ouvidoria": 
+          "Legal contact",
+        "Todos os direitos reservados.":
+          "All rights reserved.",
         "Desenvolvido por": 
           "Developed by",
         "Cadastro/Login":
           "Sign up/Sign in",
         "EM BREVE":
-          "COMMING SOON"
+          "COMMING SOON",
+        "ACOMPANHE NOSSOS PRÓXIMOS PASSOS": 
+          "GET UP TO DATE!",
+        "Token de energia limpa":
+          "Clean Energy Token",
+        "TBK e-Sports":
+          "TBK E-sports Fan Token",
+        "Token de Recebíveis": 
+          "Private Debt Token",
+        "Fan Token de Influenciadores": 
+          "Influencers Media Fan-Token",
+        "Investir":
+          "Invest",
+        "Sobre":
+          "About",
+        "Documentos": 
+          "Documents",
+        "Emissor":
+          "Project owner",
+        "Sobre o token":
+          "Token Infos",
+        "NOVO":
+          "NEW",
+        "Contrato":
+          "Contract",
+        "Rentabilidade":
+          "Profitability"
     }
 }

@@ -6,19 +6,28 @@ import { useTranslation } from 'react-i18next'
 import UserContext from '@/context/UserContext'
 
 const Copyright = () => {
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
   const { t } = useTranslation();
 
   const { locale } = React.useContext(UserContext)
+
+  React.useEffect(() => {
+    const language = window.navigator.language
+    setLanguageBrowser(language)
+  // const beforePath = localStorage.getItem('beforePath')
+  // router.push(`${beforePath}`)
+  })
   return (
     <div className={Styles.copyright}>
       <hr />
       <p className={Styles.copyright__text}>
-        {locale === 'en-US' ? t('CoinLivre&copy; 2022. Todos os direitos reservados.') : (
+        {languageBrowser === 'en-US' ? <>CoinLivre&copy; 2022. {t('Todos os direitos reservados.')}</>  : (
           <>CoinLivre&copy; 2022. Todos os direitos reservados.</>
         )}
       </p>
       <p className={Styles.copyright__developer}>
-        {locale === 'en-US' ? <>{t('Desenvolvido por')}&nbsp;</> : (
+        {languageBrowser === 'en-US' ? <>{t('Desenvolvido por')}&nbsp;</> : (
           <>Desenvolvido por&nbsp;</>
         )}
         

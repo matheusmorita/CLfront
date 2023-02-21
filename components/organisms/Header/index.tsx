@@ -18,6 +18,7 @@ type Props = {
 const Header = ({ hideLinks }: Props) => {
   const [whiteTheme, setWhiteTheme] = React.useState<boolean>(false)
   const [responsive, setResponsive] = React.useState<boolean>(false)
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
   const { userInfo, loggedIn } = React.useContext(UserContext)
   const [info, setUserInfo] = userInfo
@@ -26,6 +27,13 @@ const Header = ({ hideLinks }: Props) => {
   const { t } = useTranslation();
 
   const { locale } = React.useContext(UserContext)
+
+  React.useEffect(() => {
+    const language = window.navigator.language
+    setLanguageBrowser(language)
+  // const beforePath = localStorage.getItem('beforePath')
+  // router.push(`${beforePath}`)
+  })
 
 
   const handleHeaderChange = () => {
@@ -82,7 +90,7 @@ const Header = ({ hideLinks }: Props) => {
             }
             <Button
               id="header-cta"
-              text={locale === 'en-US' ? t("Cadastro/Login") : "Cadastro/Login"} 
+              text={languageBrowser === 'en-US' ? t("Cadastro/Login") : "Cadastro/Login"} 
               label="Clique e cadastre-se na Lista VIP"
               className="ms-3"
               hidden={false}

@@ -9,12 +9,15 @@ import UserContext from '@/context/UserContext';
 
 const Projects = () => {
   const [projects, setProjects] = React.useState<any>([])
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
   const { t } = useTranslation();
 
   const { locale } = React.useContext(UserContext)
 
   React.useEffect(() => {
     fetchDataAxios("4", setProjects)
+    const language = window.navigator.language
+    setLanguageBrowser(language)
   }, [])
 
   return (
@@ -26,8 +29,8 @@ const Projects = () => {
             <Project
             id={item.acronimo}
             idProject={item.id}
-            text={(item.nome.includes('Recebíveis') || item.nome.includes('Influenciadores')) ? 'EM BREVE' : 'SAIBA MAIS'}
-            name={item.nome}
+            text={(item.acronimo.includes('CLDG') || item.acronimo.includes('CLMT')) ? 'EM BREVE' : 'SAIBA MAIS'}
+            name={languageBrowser === 'en-US' ? t(item.nome) : item.nome}
             src={item.logoUrl}
             dataLanc={item.dataLancamento}
             emissor={item.emissor.nomeEmissor}

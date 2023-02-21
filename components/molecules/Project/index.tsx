@@ -21,9 +21,17 @@ type Props = {
 
 const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idProject, text }: Props) => {
   const [projectDisabled, setProjectDisabled] = React.useState<boolean>(false)
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
   const { t } = useTranslation();
 
   const { locale } = React.useContext(UserContext)
+
+  React.useEffect(() => {
+    const language = window.navigator.language
+    setLanguageBrowser(language)
+  // const beforePath = localStorage.getItem('beforePath')
+  // router.push(`${beforePath}`)
+  })
 
   const callRentText = () => {
     if (rent) {
@@ -32,12 +40,6 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
 
     return "Não informada"
   }
-
-  React.useEffect(() => {
-    if (name.includes('Recebíveis') || name.includes('Influenciadores')) {
-      setProjectDisabled(!projectDisabled)
-    }
-  }, [])
 
   return (
     <Column
@@ -76,11 +78,11 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
               id={`project-description-${id}`}
               className={Styles.project__details}
             >
-              {locale === 'en-US' ? t('Data de lançamento') : 'Data de lançamento'}  <b>{dataLanc}</b> <br />
-              {locale === 'en-US' ? t('Emitido por') : 'Emitido por'} <b>{emissor}</b> <br />
+              {languageBrowser === 'en-US' ? t('Data de lançamento') : 'Data de lançamento'}  <b>{dataLanc}</b> <br />
+              {languageBrowser === 'en-US' ? t('Emitido por') : 'Emitido por'} <b>{emissor}</b> <br />
               {showOrNot ? (
                 <span className={Styles.project__details}>
-                  {locale === 'en-US' ? t('Rentabilidade estimada de até ') : 'Rentabilidade estimada de até '}
+                  {languageBrowser === 'en-US' ? t('Rentabilidade estimada de até ') : 'Rentabilidade estimada de até '}
                   <b>{callRentText()}</b>
                 </span>
               ) : ''}
@@ -94,11 +96,11 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
           <div>
             <Button
               id={`project-cta-${id}`}
-              text={locale === 'en-US' ? t(text) : text}
+              text={languageBrowser === 'en-US' ? t(text) : text}
               label="Clique e veja mais sobre o projeto"
-              className={`w-100 mb-3 ${name.includes('Recebíveis') || name.includes('Influenciadores') ? Styles.project__button : ''}`}
+              className={`w-100 mb-3 ${id.includes('CLDG') || id.includes('CLMT') ? Styles.project__button : ''}`}
               hidden={false}
-              disabled={name.includes('Recebíveis') || name.includes('Influenciadores')}
+              disabled={id.includes('CLDG') || id.includes('CLMT')}
               onClick={() => {
                 localStorage.setItem('idProject', idProject)
                 location.href = `projeto/${path}`
