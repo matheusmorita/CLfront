@@ -22,6 +22,7 @@ import manImage from '@/assets/img/homemSorridente.png';
 import { useTranslation } from 'react-i18next';
 import UserContext from '@/context/UserContext'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 const QuemSomos = () => {
   const [languageBrowser, setLanguageBrowser] = React.useState<string>();
@@ -35,8 +36,8 @@ const QuemSomos = () => {
   React.useEffect(() => {
     const language = window.navigator.language
     setLanguageBrowser(language)
-  // const beforePath = localStorage.getItem('beforePath')
-  // router.push(`${beforePath}`)
+    // const beforePath = localStorage.getItem('beforePath')
+    // router.push(`${beforePath}`)
   })
 
   return (
@@ -64,7 +65,7 @@ const QuemSomos = () => {
           <Column
             media='lg'
             size={5}
-            className="pt-5"
+            className={`pt-5 ${Styles.descriptionCoinLivre}`}
           >
             <Separator
               color='#00ee8d'
@@ -82,12 +83,24 @@ const QuemSomos = () => {
               hidden={false}
               width={24}
             />
+            <a
+              href='#projetos'
+            >
+              <Button
+                hidden={false}
+                id='buttonToProjects'
+                label='Clique aqui para ir até os projetos'
+                onClick={() => { }}
+                text='Conheça os projetos'
+                className={Styles.buttonProjects}
+              />
+            </a>
           </Column>
           <Image
-              alt='Imagem de homem sorridente'
-              src={manImage}
-              className={Styles.manImage}
-            />
+            alt='Imagem de homem sorridente'
+            src={manImage}
+            className={`${Styles.manImage}`}
+          />
         </Section>
 
         <Section
