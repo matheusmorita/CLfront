@@ -28,9 +28,6 @@ const QuemSomos = () => {
   const [languageBrowser, setLanguageBrowser] = React.useState<string>();
   const { t } = useTranslation();
 
-  const router = useRouter();
-
-
   React.useEffect(() => {
     const language = window.navigator.language
     setLanguageBrowser(language)
@@ -89,7 +86,7 @@ const QuemSomos = () => {
                 id='buttonToProjects'
                 label='Clique aqui para ir até os projetos'
                 onClick={() => { }}
-                text='Conheça os projetos'
+                text={languageBrowser !== 'pt-BR' ? t('Conheça os projetos') : 'Conheça os projetos'}
                 className={Styles.buttonProjects}
               />
             </a>
