@@ -47,7 +47,7 @@ const QuemSomos = () => {
         label='Página de sobre da CoinLivre'
       >
         <Head>
-          <title>CoinLivre | Quem Somos</title>
+          <title>CoinLivre</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <meta name="theme-color" content="#00ee8d" />
           <meta name="robots" content="index, follow" />
