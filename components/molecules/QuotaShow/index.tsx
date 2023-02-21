@@ -14,7 +14,8 @@ type Props = {
   parcela: number,
   valor: string,
   juros: string,
-  vencimento: string
+  vencimento: string;
+  project?: any;
 }
 
 const QuotaShow = ({
@@ -25,8 +26,18 @@ const QuotaShow = ({
   parcela,
   valor,
   juros,
-  vencimento
+  vencimento,
+  project,
 }: Props) => {
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
+
+  React.useEffect(() => {
+    const language = window.navigator.language
+    setLanguageBrowser(language)
+    console.log(project.id)
+  }, [])
+
   return (
     <div
       className={`${Styles.quotashow} ${className}`}
@@ -34,7 +45,7 @@ const QuotaShow = ({
       <div className={Styles.quotashow__content}>
         <div className={Styles.quotashow__data}>
           <h1 className={Styles.quotashow__title}>
-            Parcela
+          Parcela
           </h1>
           <span className={Styles.quotashow__value}>
             {parcela}

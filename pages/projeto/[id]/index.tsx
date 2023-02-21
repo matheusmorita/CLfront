@@ -407,6 +407,7 @@ const ProjectPage = () => {
                     }) => (
                       <QuotaShow
                         key={item.id}
+                        project={project}
                         juros={item.porcentagemPagaNoMes}
                         parcela={item.idRemuneracao}
                         valor={'0,00'}

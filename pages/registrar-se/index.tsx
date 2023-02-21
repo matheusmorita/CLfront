@@ -18,6 +18,8 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { captureName } from '@/assets/js/util/validations'
 
+import i18next from '@/src/i18n'
+
 const Register = () => {
   const router = useRouter()
   const { userInfo, loggedIn } = React.useContext(UserContext)
@@ -39,6 +41,9 @@ const Register = () => {
   const [errorDate, setErrorDate] = React.useState()
 
   const [checked, setChecked] = React.useState<boolean>(false)
+
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
 
   const handleUserRequest = async () => {
     if (validation) {
@@ -109,6 +114,8 @@ const Register = () => {
     if (logged) {
       handleGetUserInfo()
     }
+    const language = window.navigator.language
+    setLanguageBrowser(language)
   }, [logged])
 
   React.useEffect(() => {
@@ -128,7 +135,7 @@ const Register = () => {
           label='Página de Registro'
         >
           <Head>
-            <title>CoinLivre | Registrar</title>
+            <title>Registrar</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             <meta name="theme-color" content="#00ee8d" />
             <meta name="robots" content="index, follow" />
@@ -161,7 +168,7 @@ const Register = () => {
                 <Title
                   id='form-title'
                   className='text-center fw-normal'
-                  text='Registrar-se'
+                  text={languageBrowser !== 'pt-BR' ? i18next.t('Registrar-se') : 'Registrar-se'}
                   size={24}
                   hidden={false}
                 />
@@ -169,7 +176,7 @@ const Register = () => {
                   <>
                     <Input
                       id='name'
-                      label='Digite seu nome completo'
+                      label={languageBrowser !== 'pt-BR' ? i18next.t('Digite seu nome completo') : 'Digite seu nome completo'}
                       type='name'
                       onInput={setName}
                       validation={setErrorName}
@@ -178,7 +185,7 @@ const Register = () => {
                     />
                     <Input
                       id='birth'
-                      label='Data de nascimento'
+                      label={languageBrowser !== 'pt-BR' ? i18next.t('Data de nascimento') : 'Data de nascimento'}
                       type='date'
                       onInput={setDate}
                       validation={setErrorDate}
@@ -186,7 +193,7 @@ const Register = () => {
                     />
                     <Input
                       id='cpf'
-                      label='Digite seu CPF'
+                      label={languageBrowser !== 'pt-BR' ? i18next.t('Digite seu CPF') : 'Digite seu CPF'}
                       type='text'
                       onInput={setCpf}
                       validation={setErrorCPF}
@@ -197,7 +204,7 @@ const Register = () => {
                     />
                     <Button
                       id="submit-button"
-                      text="Continuar"
+                      text={languageBrowser !== 'pt-BR' ? i18next.t('Continuar') : 'Continuar'}
                       label="Clique continue para seu cadastro"
                       className="w-100 py-2 mt-3 fs-5"
                       disabled={!validation || !checked}
@@ -238,7 +245,7 @@ const Register = () => {
           label='Página de Registro'
         >
           <Head>
-            <title>CoinLivre | Registrar</title>
+            <title>Registrar</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             <meta name="theme-color" content="#00ee8d" />
             <meta name="robots" content="index, follow" />

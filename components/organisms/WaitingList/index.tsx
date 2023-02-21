@@ -187,7 +187,7 @@ const WaitingList = () => {
               htmlFor="flexCheckDefault"
             >
               Eu li e concordo com os termos de uso de dados, política de
-              privacidade e cookies
+              privacidade e cookies.
             </label>
           </div>
           <div className="form-check my-3">

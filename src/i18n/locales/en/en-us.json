@@ -91,7 +91,7 @@
         "NOVO":
           "NEW",
         "DESTAQUE":
-          "Prominence",
+          "Emphasis",
         "Contrato":
           "Contract",
         "Rentabilidade":
@@ -123,6 +123,22 @@
         "Um e-mail foi encaminhado para a sua caixa de entrada.":
           "An email has been forwarded to your inbox.",
         "Conheça os projetos":
-          "Discover the projects"
+          "Discover the projects",
+        "Neste momento não é necessário um cadastro para realizar o login na plataforma. Em caso de dúvidas,":
+          "At this time, registration is not required to login to the platform. In case of doubts,",
+        "Clique aqui.":
+          "Click here.",
+        "Digite seu nome completo":
+          "Full name",
+        "Registrar-se":
+          "Register",
+        "Digite seu CPF":
+          "Insert CPF",
+        "Eu li e concordo com os termos de uso de dados, política de privacidade e cookies.":
+          "I acknowledge that I have read and understood the terms, privacy and cookies policy.",
+        "Data de nascimento":
+          "Birthday",
+        "Continuar":
+          "Next"
     }
 }
