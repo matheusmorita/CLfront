@@ -33,7 +33,7 @@ const Header = ({ hideLinks }: Props) => {
     setLanguageBrowser(language)
   // const beforePath = localStorage.getItem('beforePath')
   // router.push(`${beforePath}`)
-  })
+  }, [info])
 
 
   const handleHeaderChange = () => {
@@ -103,7 +103,7 @@ const Header = ({ hideLinks }: Props) => {
         )}
         {logged && (
           <UserOptions
-            email={info.email}
+            name={info.nome}
             contrast={whiteTheme}
           />
         )}

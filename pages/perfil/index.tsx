@@ -53,7 +53,7 @@ const Perfil = () => {
         className={Styles.bottom}
       >
         <Head>
-          <title>CoinLivre | Perfil</title>
+          <title>Perfil</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <meta name="theme-color" content="#00ee8d" />
           <meta name="robots" content="no-index, no-follow" />
@@ -84,12 +84,6 @@ const Perfil = () => {
               </div>
               <div className={Styles.profile__body}>
                 <ul className={Styles.actions}>
-                  {/* <li className={Styles.actions__item}>
-                    <Link
-                      className={Styles.actions__link}
-                      href={'/recuperar-senha'}
-                    >Mudar minha senha</Link>
-                  </li> */}
                   <a
                     className={Styles.actions__link}
                     href="mailto:faleconosco@coinlivre.com.br"
@@ -139,7 +133,7 @@ const Perfil = () => {
                   value={`R$ 0`}
                 />
               </Column>
-              <Column
+              {/* <Column
                 media='lg'
                 size={4}
                 className='m-0'
@@ -147,7 +141,7 @@ const Perfil = () => {
                 <Balance
                   type='em Tokens'
                 />
-              </Column>
+              </Column> */}
             </Row>
 
             <div className={Styles.wallet}>
@@ -158,7 +152,7 @@ const Perfil = () => {
               <div className={Styles.wallet__body}>
                 {walletState === 0 && (
                   <>
-                    {historyUser.map((item: any, i: number) => (
+                    {historyUser?.map((item: any, i: number) => (
                       <Projecard
                         key={i}
                         data={projecardMock}

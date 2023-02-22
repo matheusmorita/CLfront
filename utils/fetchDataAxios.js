@@ -55,14 +55,14 @@ export async function fetchUserHistoryinfo (accessToken, setHistoryUser, history
 }
 
 export async function fetchRequestPix (accessToken, quantity) {
-  let newQuantity = ''
+  let newQuantity = quantity
   if (quantity.includes(',')) {
-    newQuantity = quantity.replace(',', '.')
-  } else {
-    newQuantity = `${quantity}.00`
+    const replaceDot = quantity.replace(',', '.')
+    newQuantity =  Number(replaceDot).toFixed(2).toString()
   }
+
   var dataBody = JSON.stringify({
-    "quantity": newQuantity
+    quantity: newQuantity,
   });
 
   var config = {
@@ -84,15 +84,15 @@ export async function fetchRequestPix (accessToken, quantity) {
 }
 
 export async function requestBuyToken (accessToken, quantity, loteId) {
-  let newQuantity = ''
-  if (quantity.includes(',')) {
-    newQuantity = quantity.replace(',', '.')
-  } else {
-    newQuantity = `${quantity}.00`
-  }
+  // let newQuantity = 
+  // if (quantity.includes(',')) {
+  //   newQuantity = quantity.replace(',', '.')
+  // } else {
+  //   newQuantity = `${quantity}.00`
+  // }
 
   const dataBody = JSON.stringify({
-    quantity: newQuantity,
+    quantity: Number(quantity).toFixed(2).toString(),
     loteId
   })
 
@@ -201,5 +201,26 @@ export const handleUserRequestRegister = async (setWaiting, setSuccess, name, cp
           }
         })
     }
+  }
+}
+
+export const handleUserSession = (setUserInfo, setLoggedIn, handleGetUserInfo, token) => {
+  if (token) {
+    var config = {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    };
+    fetch(process.env.GET_USER_INFO, config)
+      .then(async resp => resp.json())
+      .then(json => {
+        if (json.email) {
+          setUserInfo(json)
+          setLoggedIn(true)
+          handleGetUserInfo()
+        }
+      })
   }
 }

@@ -13,12 +13,17 @@ import Paragrah from '@/components/atoms/Paragraph'
 import { useRouter } from 'next/router'
 import UserContext from '@/context/UserContext'
 
+import i18next from '@/src/i18n'
+
 const TokenShare = () => {
   const router = useRouter()
   const token = router.query.token
   const { userInfo, loggedIn } = React.useContext(UserContext)
   const [info, setUserInfo] = userInfo
   const [logged, setLoggedIn] = loggedIn
+
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
 
   const fetchData = async () => {
     var data = JSON.stringify({
@@ -73,6 +78,8 @@ const TokenShare = () => {
   React.useEffect(() => {
     if (!token && localStorage.getItem('accessToken')) return
     fetchData()
+    const language = window.navigator.language
+    setLanguageBrowser(language)
   }, [router])
 
   return (
@@ -121,7 +128,7 @@ const TokenShare = () => {
             />
             <Paragrah
               id='form-description'
-              text={'Aguarde, você será redirecionado.'}
+              text={languageBrowser !== 'pt-BR' ? i18next.t('Aguarde, você será redirecionado.') : 'Aguarde, você será redirecionado.'}
               hidden={false}
               width={100}
             />

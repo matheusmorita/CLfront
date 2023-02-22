@@ -139,6 +139,16 @@
         "Data de nascimento":
           "Birthday",
         "Continuar":
-          "Next"
+          "Next",
+        "Cadastro realizado com sucesso! Aguarde, você será redirecionado.":
+          "Successfully registered! Please wait, you will be redirected.",
+        "Aguarde, você será redirecionado.":
+          "Please wait, you will be redirected.",
+        "Olá,":
+          "Hello,",
+        "Perfil":
+          "Profile",
+        "Desconectar":
+          "Disconnect"
     }
 }

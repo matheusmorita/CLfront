@@ -200,7 +200,7 @@ function BuyProjectMobile({ setRealValue,
               ) : (
                 <p className={Styles.descriptionText}>
                   Ao comprar Tokens CNLT, você receberá o equivalente
-                  em Tokens da quantia escolhida, deduzida da taxa da CoinLivre (de 1,5%)
+                  em Tokens da quantia escolhida, deduzida da taxa da CoinLivre de 1,5%
                   de acordo com os seus benefícios
                 </p>
               )}

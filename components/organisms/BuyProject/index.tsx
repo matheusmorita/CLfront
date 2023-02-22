@@ -167,13 +167,13 @@ function BuyProject({
               <div style={{ width: '90%' }}>
                 {buyConfirmed ? (
                   <InputModal
-                  id='inputQrcode'
-                  type='string'
-                  label='Código de confirmação'
-                  disabled={false}
-                  placeholder={hashConfirm}
-                  className={Styles.inputValueBuyProject}
-                />
+                    id='inputQrcode'
+                    type='string'
+                    label='Código de confirmação'
+                    disabled={false}
+                    placeholder={hashConfirm}
+                    className={Styles.inputValueBuyProject}
+                  />
                 ) : ''}
                 <Button
                   hidden={false}
@@ -199,7 +199,7 @@ function BuyProject({
                 <p className={Styles.descriptionText}>
                   Ao comprar Tokens CNLT, você receberá o equivalente
                   em Tokens da quantia escolhida, deduzida da taxa da
-                  CoinLivre (de 1,5%) de acordo com os seus benefícios
+                  CoinLivre de 1,5% de acordo com os seus benefícios
                 </p>
               )}
               <div className={Styles.InputsGroupStyle}>
@@ -245,35 +245,35 @@ function BuyProject({
               </div>
               {conditionalBuy !== 'CNLT-0' ? (
                 <div className={Styles.checkboxLabel}>
-                <input
-                  id="checkboxInput"
-                  onClick={() => setCheckoxCheck(!checkboxCheck)}
-                  type="checkbox"
-                  className={Styles.checkboxInput}
-                />
-                <label
-                  htmlFor="checkboxInput"
-                  className={Styles.descriptionTextCheckbox}
-                >
-                  Eu concordo com os termos de uso e política de privacidade da CoinLivre.
-                </label>
-              </div>
+                  <input
+                    id="checkboxInput"
+                    onClick={() => setCheckoxCheck(!checkboxCheck)}
+                    type="checkbox"
+                    className={Styles.checkboxInput}
+                  />
+                  <label
+                    htmlFor="checkboxInput"
+                    className={Styles.descriptionTextCheckbox}
+                  >
+                    Eu concordo com os termos de uso e política de privacidade da CoinLivre.
+                  </label>
+                </div>
               ) : (
                 <div className={Styles.checkboxLabel}>
-                <input
-                  id="checkboxInput"
-                  onClick={() => setCheckoxCheck(!checkboxCheck)}
-                  type="checkbox"
-                  className={Styles.checkboxInput}
-                />
-                <label
-                  htmlFor="checkboxInput"
-                  className={Styles.descriptionTextCheckbox}
-                >
-                  Eu concordo com os termos de uso e política de privacidade da CoinLivre.
-                  Estou ciente de que a conta de origem do depósito deve estar no meu nome e CPF.
-                </label>
-              </div>
+                  <input
+                    id="checkboxInput"
+                    onClick={() => setCheckoxCheck(!checkboxCheck)}
+                    type="checkbox"
+                    className={Styles.checkboxInput}
+                  />
+                  <label
+                    htmlFor="checkboxInput"
+                    className={Styles.descriptionTextCheckbox}
+                  >
+                    Eu concordo com os termos de uso e política de privacidade da CoinLivre.
+                    Estou ciente de que a conta de origem do depósito deve estar no meu nome e CPF.
+                  </label>
+                </div>
               )}
               <div className={Styles.divButtons}>
                 <Button
@@ -316,14 +316,14 @@ function BuyProject({
                       const responseSaldo = checkSaldo(balance, valorToken, realValue)
                       setValueSaldo(responseSaldo)
                       if (responseSaldo) {
-                        const {confirm, hash} = await requestBuyToken(accessTokenState, realValue, lote.id)
+                        const { confirm, hash } = await requestBuyToken(accessTokenState, realValue, lote.id)
                         setHashConfirm(hash)
                         if (confirm != 0) {
                           setBuyConfirmed(!buyConfirmed)
-                          setTimeout(() => {
-                            setBuyConfirmed(!buyConfirmed)
-                            window.location.reload()
-                          }, 2000);
+                          // setTimeout(() => {
+                          //   setBuyConfirmed(!buyConfirmed)
+                          //   window.location.reload()
+                          // }, 2000);
                         }
                       }
                       setHiddenBuyProject(!hiddenBuyProject)

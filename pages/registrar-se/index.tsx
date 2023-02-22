@@ -217,7 +217,7 @@ const Register = () => {
                   <>
                     <Paragrah
                       id='form-description'
-                      text={'Cadastro realizado com sucesso! Aguarde, você será redirecionado.'}
+                      text={languageBrowser !== 'pt-BR' ? i18next.t('Cadastro realizado com sucesso! Aguarde, você será redirecionado.') : 'Cadastro realizado com sucesso! Aguarde, você será redirecionado.' }
                       hidden={false}
                       width={100}
                     />

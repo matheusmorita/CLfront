@@ -42,7 +42,7 @@ const Projecard = ({ data, name, montante, emissor }: Props) => {
       <div className={Styles.projecard__data}>
         <div className={Styles.data}>
           <h1 className={Styles.data__title}>
-            Qtde.
+            Quantidade
           </h1>
           <span className={Styles.data__value}>
             {montante}<span>/unds</span>
