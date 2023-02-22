@@ -46,9 +46,9 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src }: Props) => {
           ) : '',
           position: 'absolute',
           backgroundSize: 'cover',
-          width: acronimo ? '100%' : '18%',
+          width: acronimo ? '100%' : '25%',
           height: acronimo ? '100px' : '110px',
-          left: acronimo ? '0' : '43%',
+          left: acronimo ? '0' : '40%',
           top: '0'
         }}
         className={Styles.projecard__picture}

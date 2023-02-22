@@ -113,12 +113,13 @@ const Perfil = () => {
             className="pt-5"
           >
 
-            <div style={{display: 'flex', justifyContent: 'space-between', gap: '1%'}}>
+            <div style={{display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1%'}}>
               <Column
                 media='lg'
                 size={4}
                 className='mb-2'
                 flex='1'
+                minWidth='350px'
               >
                 <Balance
                   type='CoinLivre'
@@ -130,6 +131,7 @@ const Perfil = () => {
                 size={4}
                 className='mb-2'
                 flex='1'
+                minWidth='350px'
               >
                 <Balance
                   type='em R$'

@@ -7,11 +7,12 @@ type Props = {
   className?: string
   flex?: string;
   margin?: string;
+  minWidth?: string;
 }
 
-const Column = ({ media, className, size, children, flex, margin }: Props) => {
+const Column = ({ media, className, size, children, flex, margin, minWidth }: Props) => {
   return (
-    <div style={{margin: `${margin || '10px 0'}`, flex: `${flex}`,}} className={`col-${media}-${size} ${className}`}>
+    <div style={{margin: `${margin || '10px 0'}`, flex: `${flex}`, minWidth: `${minWidth}`}} className={`col-${media}-${size} ${className}`}>
       {children}
     </div>
   )
