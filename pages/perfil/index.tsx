@@ -72,6 +72,7 @@ const Perfil = () => {
             media='lg'
             size={3}
             className="pt-lg-5 pt-3 d-flex align-content-center flex-wrap"
+            margin='19px 0'
           >
             <div className={Styles.profile}>
               <div className={Styles.profile__header}>
@@ -111,12 +112,13 @@ const Perfil = () => {
             size={9}
             className="pt-5"
           >
-            <Row
-              className="mb-3">
+
+            <div style={{display: 'flex', justifyContent: 'space-between', gap: '1%'}}>
               <Column
                 media='lg'
                 size={4}
-                className='m-0'
+                className='mb-2'
+                flex='1'
               >
                 <Balance
                   type='CoinLivre'
@@ -126,23 +128,15 @@ const Perfil = () => {
               <Column
                 media='lg'
                 size={4}
-                className='m-0'
+                className='mb-2'
+                flex='1'
               >
                 <Balance
                   type='em R$'
                   value={`R$ 0`}
                 />
               </Column>
-              {/* <Column
-                media='lg'
-                size={4}
-                className='m-0'
-              >
-                <Balance
-                  type='em Tokens'
-                />
-              </Column> */}
-            </Row>
+            </div>
 
             <div className={Styles.wallet}>
               <Switch
@@ -158,7 +152,9 @@ const Perfil = () => {
                         data={projecardMock}
                         name={item.nomeToken}
                         montante={item.montante}
-                        emissor={'ENGLIMPA'}
+                        emissor={item.emissorProjeto}
+                        acronimo={item.acronimoProjeto}
+                        src={item.logoProjeto}
                       />
                     ))}
                     {/* <Projecard data={projecardMock} />

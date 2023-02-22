@@ -2,29 +2,62 @@ import { margin } from '@mui/system';
 import React from 'react'
 import Styles from './styles.module.scss'
 
+
 type Props = {
   data: Array<any>
   name?: string;
   montante?: string;
   emissor?: string;
+  acronimo?: string;
+  src?: string;
 }
 
-const Projecard = ({ data, name, montante, emissor }: Props) => {
+
+
+const Projecard = ({ data, name, montante, emissor, acronimo, src }: Props) => {
+  const [windowWidth, setWindowWidth] = React.useState<number>(0)
+
+  React.useEffect(() => {
+    setWindowWidth(window.innerWidth)
+  }, [])
+
   return (
     <div className={Styles.projecard}>
-      <div
-        // style={{
-        //   background: name?.toLocaleLowerCase()?.includes('coinlivre') ? (
-        //     ''
-        //   ) : ` linear-gradient(to right, transparent, #000), url(${'src'})`,
-        //   width: name?.toLocaleLowerCase()?.includes('coinlivre') ? '10%' : '',
-        //   left: name?.toLocaleLowerCase()?.includes('coinlivre') ? '5%' : ''
-        // }}
+      {windowWidth >= 992 ? (
+        <div
+        style={{
+          background: acronimo ? (
+            `linear-gradient(to right, transparent, #000), url(${src})`
+          ) : '',
+          position: 'absolute',
+          backgroundSize: acronimo ? '' : 'cover',
+          width: acronimo ? '20%' : '15%',
+          height: '100%',
+          left: '0',
+          top: '0'
+        }}
         className={Styles.projecard__picture}
       />
+      ) : (
+        <div
+        style={{
+          background: acronimo ? (
+            `linear-gradient(to bottom, transparent, #000), url(${src})`
+          ) : '',
+          position: 'absolute',
+          backgroundSize: 'cover',
+          width: acronimo ? '100%' : '18%',
+          height: acronimo ? '100px' : '110px',
+          left: acronimo ? '0' : '43%',
+          top: '0'
+        }}
+        className={Styles.projecard__picture}
+      />
+      )}
+      
       <div className={Styles.projecard__info}>
         <div className={Styles.info}>
-          <h1 className={Styles.info__title}>{name}<span>#acronym</span></h1>
+          <h1 className={Styles.info__title}>{name}<span>#{acronimo || 'CNLT'}</span></h1>
           {name?.toLowerCase().includes('coinlivre') ? '' : (
             <p className={Styles.info__tiny}>Emitido por <b>{emissor}</b></p>
           )}

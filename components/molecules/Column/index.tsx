@@ -5,11 +5,13 @@ type Props = {
   size: number,
   children: any,
   className?: string
+  flex?: string;
+  margin?: string;
 }
 
-const Column = ({ media, className, size, children }: Props) => {
+const Column = ({ media, className, size, children, flex, margin }: Props) => {
   return (
-    <div style={{margin: '10px 0'}} className={`col-${media}-${size} ${className}`}>
+    <div style={{margin: `${margin || '10px 0'}`, flex: `${flex}`,}} className={`col-${media}-${size} ${className}`}>
       {children}
     </div>
   )
