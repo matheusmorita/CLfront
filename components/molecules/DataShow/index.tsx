@@ -22,6 +22,13 @@ type Props = {
 }
 
 const DataShow = ({ title, value, badge, className, highlight = false, contractLink, languageBrowser }: Props) => {
+  const checkLanguage = (text: string) => {
+    if (languageBrowser !== 'pt-BR') {
+      return i18next.t(text)
+    }
+    return text
+  }
+
   return (
     <div
       className={`${Styles.datashow} ${className}`}
@@ -32,7 +39,7 @@ const DataShow = ({ title, value, badge, className, highlight = false, contractL
           {languageBrowser !== 'pt-BR' ? i18next.t(title) : title}
         </h1>
         <span className={Styles.datashow__value}>
-          {value}
+          {value === 'Sem rentabilidade'  ? checkLanguage('Através de benefícios') : value}
           {title.toLocaleLowerCase().includes('contrato' || 'contract') ? (
             <Link
               target="_blank"

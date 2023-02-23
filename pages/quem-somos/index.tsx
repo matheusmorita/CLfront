@@ -67,7 +67,7 @@ const QuemSomos = () => {
             />
             <Title
               id='introducao-title'
-              text={languageBrowser !== 'pt-BR' ? t(Data.banner.title) : Data.banner.title}
+              text={languageBrowser !== 'pt-BR' ? <>{t('O seu acesso ')}<br></br>{t('à nova economia digital')}</> : Data.banner.title}
               hidden={false}
               width={14}
               weight={500}

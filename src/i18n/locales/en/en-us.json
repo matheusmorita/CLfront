@@ -1,7 +1,9 @@
 {
     "translation": {
-        "O seu acesso à nova economia digital":  
-          "Your access to the new digital economy",
+        "O seu acesso ":
+          "Your access ",
+        "à nova economia digital":
+          "to the new digital economy",
         "Invista em ativos financeiros de alta performance através da tecnologia blockchain": 
           "Invest in high-performance financial assets, through blockchain technology",
         "A CoinLivre chegou para revolucionar o acesso às multi modalidades de investimento em ativos de alta performance existentes. Do investidor iniciante ao experiente, aqui todos terão acesso aos benefícios que à nova economia digital proporciona. Por meio da tokenização de ativos reais conectamos as oportunidades do mercado financeiro tradicional a nova era digital da WEB3, tornando-os mais competitivos pela redução de intermediários e conveniências que a tecnologia Blockchain nos proporciona.": 
@@ -96,8 +98,6 @@
           "Contract",
         "Rentabilidade":
           "Profitability",
-        "Sem rentabilidade":
-          "No profitability",
         "Lote":
           "Batch",
         "Valor do Token":
@@ -149,6 +149,8 @@
         "Perfil":
           "Profile",
         "Desconectar":
-          "Disconnect"
+          "Disconnect",
+        "Através de benefícios":
+          "Through benefits"
     }
 }

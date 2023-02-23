@@ -232,7 +232,8 @@ const ProjectPage = () => {
                       title={"Rentabilidade"}
                       value={'N/A'}
                       contractLink={project.contratoToken}
-                    />)}
+                    />
+                    )}
 
                   {project.lotes.length > 0 ? (
                     <DataShow
