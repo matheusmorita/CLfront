@@ -52,6 +52,8 @@ export async function fetchUserHistoryinfo (accessToken, setHistoryUser, history
   const data = await response.json()
   console.log(data)
   setHistoryUser(data)
+
+  console.log(data)
 }
 
 export async function fetchRequestPix (accessToken, quantity) {

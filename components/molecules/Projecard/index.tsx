@@ -81,14 +81,14 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src }: Props) => {
             {montante}<span>/unds</span>
           </span>
         </div>
-        {/* <div className={Styles.data}>
+        <div className={Styles.data}>
           <h1 className={Styles.data__title}>
-            {data[1].title}
+            Valor unitário
           </h1>
           <span className={Styles.data__value}>
             <span>{data[1].value}</span>
           </span>
-        </div> */}
+        </div>
         {/* <div className={Styles.data}>
           <h1 className={Styles.data__title}>
             {data[2].title}

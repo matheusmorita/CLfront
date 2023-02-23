@@ -303,7 +303,7 @@ const ProjectPage = () => {
                     <DataShow
                       languageBrowser={languageBrowser}
                       title={"Captação"}
-                      value={project.lotes[project.lotes.length - 1].captacao}
+                      value={`${(Number(project.lotes[project.lotes.length - 1].captacao) * 100).toString()}%` || '0%'}
                       highlight={true}
                       badge={{ type: "success", message: "DESTAQUE" }}
                       contractLink={project.contratoToken}
