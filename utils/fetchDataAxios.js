@@ -84,13 +84,6 @@ export async function fetchRequestPix (accessToken, quantity) {
 }
 
 export async function requestBuyToken (accessToken, quantity, loteId) {
-  // let newQuantity = 
-  // if (quantity.includes(',')) {
-  //   newQuantity = quantity.replace(',', '.')
-  // } else {
-  //   newQuantity = `${quantity}.00`
-  // }
-
   const dataBody = JSON.stringify({
     quantity: Number(quantity).toFixed(2).toString(),
     loteId
@@ -204,7 +197,28 @@ export const handleUserRequestRegister = async (setWaiting, setSuccess, name, cp
   }
 }
 
-export const handleUserSession = (setUserInfo, setLoggedIn, handleGetUserInfo, token) => {
+export const handleGetUserInfoCadastro = async (token, router) => {
+  const config = {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      "Authorization": 'Bearer ' + token,
+    }
+  }
+
+  await fetch(process.env.GET_USER_CADASTRO, config)
+    .then(resp => {
+      if (resp.ok) {
+        return
+        router.push('/')
+      } else {
+        router.push('/registrar-se')
+      }
+    })
+}
+
+export const handleUserSession = async (setUserInfo, setLoggedIn, token, router) => {
   if (token) {
     var config = {
       method: 'post',
@@ -213,14 +227,15 @@ export const handleUserSession = (setUserInfo, setLoggedIn, handleGetUserInfo, t
         'Authorization': 'Bearer ' + token
       }
     };
-    fetch(process.env.GET_USER_INFO, config)
-      .then(async resp => resp.json())
-      .then(json => {
-        if (json.email) {
-          setUserInfo(json)
-          setLoggedIn(true)
-          handleGetUserInfo()
-        }
-      })
+    const response = await fetch(process.env.GET_USER_INFO, config)
+
+    const data = await response.json()
+
+    if (data.nome) {
+      setUserInfo(data)
+      setLoggedIn(true)
+      handleGetUserInfoCadastro(token)
+    }
+
   }
 }

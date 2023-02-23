@@ -15,33 +15,10 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const { locale } = router;
 
-  const handleGetUserInfo = async () => {
-    const token = localStorage.getItem('accessToken')
-
-    const config = {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        "Authorization": 'Bearer ' + token,
-      }
-    }
-
-    await fetch('https://coinlivre.blocklize.io/usuario/getUserCadastro', config)
-      .then(resp => {
-        if (resp.ok) {
-          return
-          // router.push('/')
-        } else {
-          // router.push('/registrar-se')
-        }
-      })
-  }
-
 
   useEffect(() => {
     let token = localStorage.getItem('accessToken')
-    handleUserSession(setUserInfo, setLoggedIn, handleGetUserInfo, token)
+    handleUserSession(setUserInfo, setLoggedIn, token, router)
   }, [])
 
   return (

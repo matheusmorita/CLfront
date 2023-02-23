@@ -101,7 +101,7 @@ const Header = ({ hideLinks }: Props) => {
             />
           </div>
         )}
-        {logged && (
+        {info && (
           <UserOptions
             name={info.nome}
             contrast={whiteTheme}

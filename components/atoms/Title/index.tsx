@@ -20,7 +20,7 @@ const Title = ({ id, className, text, hidden, width, color, size, height, weight
       aria-hidden={hidden}
       className={`${Styles.title} ${className}`}
       style={{
-        // maxWidth: `${width}ch`,
+        maxWidth: `${width}ch`,
         color: color,
         fontSize: `${size}px`,
         fontWeight: weight,

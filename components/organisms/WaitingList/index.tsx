@@ -92,19 +92,6 @@ const WaitingList = () => {
   }, [name, email, dataPolicy, mktPolicy])
 
   return (
-    // <main style={{
-    //   display: 'flex',
-    //   flexWrap: 'wrap',
-    //   justifyContent: 'center'
-    //   }}>
-    //   <Image 
-    //     alt='example image'
-    //     width={250}
-    //     height={250}
-    //     src={bgImage}
-    //     // style={{width: '100%', margin: '20% 0 0 30%'}}
-    //   />
-    // </main>
     <Form
       id='waiting-list'
       onSubmit={() => { }}

@@ -1,6 +1,8 @@
 import React from 'react'
 import Styles from './styles.module.scss'
 
+import i18next from '@/src/i18n';
+
 type Badge = {
   message: string,
   type?: "success" | "warning" | "error"
@@ -45,10 +47,10 @@ const QuotaShow = ({
       <div className={Styles.quotashow__content}>
         <div className={Styles.quotashow__data}>
           <h1 className={Styles.quotashow__title}>
-          Parcela
+          {project.acronimo !== 'CLGT' ? <>Parcela</> : <>{i18next.t('Data')}</>}
           </h1>
           <span className={Styles.quotashow__value}>
-            {parcela}
+            {project.acronimo !== 'CLGT' ? parcela : <>{i18next.t('EM BREVE')}</>}
           </span>
         </div>
         {/* <div className={Styles.quotashow__data}>
@@ -61,18 +63,18 @@ const QuotaShow = ({
         </div> */}
         <div className={Styles.quotashow__data}>
           <h1 className={Styles.quotashow__title}>
-            Retorno
+          {project.acronimo !== 'CLGT' ? <>Retorno</> : <>{i18next.t('Benefício')}</>}
           </h1>
           <span className={Styles.quotashow__value}>
-            {juros}
+          {project.acronimo !== 'CLGT' ? juros : i18next.t('EM BREVE')}
           </span>
         </div>
         <div className={Styles.quotashow__data}>
           <h1 className={Styles.quotashow__title}>
-            Venc.
+          {project.acronimo !== 'CLGT' ? <>Venc.</> : <>Status</>}
           </h1>
           <span className={Styles.quotashow__value}>
-            {vencimento}
+          {project.acronimo !== 'CLGT' ? vencimento : i18next.t('EM BREVE')}
           </span>
         </div>
       </div>

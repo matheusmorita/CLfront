@@ -151,6 +151,10 @@
         "Desconectar":
           "Disconnect",
         "Através de benefícios":
-          "Through benefits"
+          "Through benefits",
+        "Data":
+          "Date",
+        "Benefício":
+          "Benefit"
     }
 }

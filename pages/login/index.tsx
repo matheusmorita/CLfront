@@ -19,6 +19,7 @@ import { useRouter } from 'next/router'
 import { captureEmail } from '@/assets/js/util/validations'
 
 import i18next from '@/src/i18n';
+import { handleUserRequest } from '@/utils/fetchDataAxios'
 
 
 const Login = () => {
@@ -34,34 +35,6 @@ const Login = () => {
   const { userInfo, loggedIn } = React.useContext(UserContext)
   const [info, setUserInfo] = userInfo
   const [logged, setLoggedIn] = loggedIn
-
-  const handleUserRequest = async () => {
-    if (email && !error) {
-      setWaiting(true)
-      const data = JSON.stringify({
-        "email": email
-      })
-
-      const config = {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        },
-        body: data
-      }
-
-      await fetch('https://greg.blocklize.io/auth/requestLogin', config)
-        .then(resp => {
-          if (resp.ok) {
-            setWaiting(false)
-            setFeedback(true)
-          }
-        })
-    } else {
-      setError(true)
-    }
-  }
 
   const handleWaitState = () => {
     return waiting ? Styles.waiting : null
@@ -149,7 +122,7 @@ const Login = () => {
                   label="Clique e faça login em sua conta CoinLivre"
                   className="w-100 py-2 mt-2 fs-5"
                   hidden={false}
-                  onClick={() => { handleUserRequest() }}
+                  onClick={() => { handleUserRequest(setWaiting, setFeedback, setError, email, error) }}
                 />
               </Form>
             )}

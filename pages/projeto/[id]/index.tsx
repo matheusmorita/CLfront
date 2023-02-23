@@ -233,7 +233,7 @@ const ProjectPage = () => {
                       value={'N/A'}
                       contractLink={project.contratoToken}
                     />
-                    )}
+                  )}
 
                   {project.lotes.length > 0 ? (
                     <DataShow
@@ -400,26 +400,36 @@ const ProjectPage = () => {
                     />
                   </div>
                   <div className={Styles.gradbox__body}>
-                    {project.Remuneracao.map((item: {
-                      id: string
-                      porcentagemPagaNoMes: string,
-                      vencimento: string,
-                      idRemuneracao: number,
-                    }) => (
+                    {project.Remuneracao.length > 0 ? (
+                      project.Remuneracao.map((item: {
+                        id: string
+                        porcentagemPagaNoMes: string,
+                        vencimento: string,
+                        idRemuneracao: number,
+                      }) => (
+                        <QuotaShow
+                          key={item.id}
+                          project={project}
+                          juros={item.porcentagemPagaNoMes}
+                          parcela={item.idRemuneracao}
+                          valor={'0,00'}
+                          vencimento={item.vencimento}
+                          badge={{
+                            type: "success",
+                            message: "Paga"
+                          }}
+                        />
+                      ))
+                    ) : (
                       <QuotaShow
-                        key={item.id}
+                        key={'item.id'}
                         project={project}
-                        juros={item.porcentagemPagaNoMes}
-                        parcela={item.idRemuneracao}
+                        juros={'item.porcentagemPagaNoMes'}
+                        parcela={25}
                         valor={'0,00'}
-                        vencimento={item.vencimento}
-                        badge={{
-                          type: "success",
-                          message: "Paga"
-                        }}
+                        vencimento={'item.vencimento'}
                       />
-                    ))}
-
+                    )}
                   </div>
                 </div>
               </Column>
