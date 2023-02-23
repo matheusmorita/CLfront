@@ -99,9 +99,9 @@ const Perfil = () => {
                       href={'/logout'}
                     >Desconectar</Link>
                   </li>
-                  <li className={`${Styles.actions__item} ${Styles.danger}`}>
+                  {/* <li className={`${Styles.actions__item} ${Styles.danger}`}>
                     Desativar minha conta
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>

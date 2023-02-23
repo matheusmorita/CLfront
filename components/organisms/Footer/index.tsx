@@ -26,8 +26,8 @@ const Footer = () => {
   React.useEffect(() => {
     const language = window.navigator.language
     setLanguageBrowser(language)
-  // const beforePath = localStorage.getItem('beforePath')
-  // router.push(`${beforePath}`)
+    // const beforePath = localStorage.getItem('beforePath')
+    // router.push(`${beforePath}`)
   })
   return (
     <footer>
@@ -51,15 +51,15 @@ const Footer = () => {
           className='visually-hidden'
           hidden={false}
         />
-        <section style={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          alignItems: 'flex-start',
-          flexWrap: 'wrap'
+        <section className={Styles.linksStyle} style={{
+          // display: 'flex',
+          // justifyContent: 'space-around',
+          // alignItems: 'flex-start',
+          // flexWrap: 'wrap'
         }}>
           <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-            {languageBrowser !== 'pt-BR' ? t('A Coinlivre') : 'A Coinlivre'}
+              {languageBrowser !== 'pt-BR' ? t('A Coinlivre') : 'A Coinlivre'}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
@@ -74,23 +74,23 @@ const Footer = () => {
             </ul>
           </div>
 
-           <div className={Styles.footer__links}>
+          <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-            {languageBrowser !== 'pt-BR' ? t('Jurídico') : 'Jurídico'}
+              {languageBrowser !== 'pt-BR' ? t('Jurídico') : 'Jurídico'}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
                 <Link href='TERMO_DE_USO.pdf' download locale={false}>{languageBrowser !== 'pt-BR' ? t('Termo de uso') : 'Termo de uso'}</Link>
               </li>
               <li className={Styles.footer__item}>
-              <Link href='POLITICA_DE_PRIVACIDADE.pdf' download locale={false}>{languageBrowser !== 'pt-BR' ? t('Política de privacidade') : 'Política de privacidade'}</Link>
+                <Link href='POLITICA_DE_PRIVACIDADE.pdf' download locale={false}>{languageBrowser !== 'pt-BR' ? t('Política de privacidade') : 'Política de privacidade'}</Link>
               </li>
             </ul>
           </div>
 
           <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-            {languageBrowser !== 'pt-BR' ? t('Ajuda') : 'Ajuda'}
+              {languageBrowser !== 'pt-BR' ? t('Ajuda') : 'Ajuda'}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
@@ -107,7 +107,7 @@ const Footer = () => {
 
           <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-            {languageBrowser !== 'pt-BR' ? t('Compliance') : 'Compliance'}
+              {languageBrowser !== 'pt-BR' ? t('Compliance') : 'Compliance'}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
@@ -117,31 +117,31 @@ const Footer = () => {
           </div>
 
           <Column
-          media='lg'
-          size={2}
-          className='vh-lg-50 d-flex flex-wrap align-content-between justify-content-center justify-content-lg-end'
-        >
+            media='lg'
+            size={2}
+            className='vh-lg-50 d-flex flex-wrap align-content-between justify-content-center justify-content-lg-end'
+          >
 
-          <div style={{maxWidth: '200px'}} className="d-flex flex-wrap justify-content-center justify-content-lg-end">
-            <Image
-              src={Logo}
-              alt='Logomarca da CoinLivre'
-              width={200}
-              height={undefined}
+            <div style={{ maxWidth: '200px' }} className="d-flex flex-wrap justify-content-center justify-content-lg-end">
+              <Image
+                src={Logo}
+                alt='Logomarca da CoinLivre'
+                width={200}
+                height={undefined}
+              />
+              <Image
+                src={Metacast}
+                alt='Logomarca da MetaCast'
+                width={150}
+                height={undefined}
+              />
+            </div>
+            <Social
+              className='w-100 justify-content-center justify-content-lg-end pt-lg-0 pt-3'
+              label='Área de redes sociais'
+              width={25}
             />
-            <Image
-              src={Metacast}
-              alt='Logomarca da MetaCast'
-              width={150}
-              height={undefined}
-            />
-          </div>
-          <Social
-            className='w-100 justify-content-center justify-content-lg-end pt-lg-0 pt-3'
-            label='Área de redes sociais'
-            width={25}
-          />
-        </Column>
+          </Column>
 
         </section>
         <Copyright />

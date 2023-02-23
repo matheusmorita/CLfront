@@ -10,12 +10,19 @@ type Props = {
   emissor?: string;
   acronimo?: string;
   src?: string;
+  valorUnitario?: string;
 }
 
 
 
-const Projecard = ({ data, name, montante, emissor, acronimo, src }: Props) => {
+const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario }: Props) => {
   const [windowWidth, setWindowWidth] = React.useState<number>(0)
+
+  const convertMontante = (montanteValue: string | undefined) => {
+    const montanteValueConverted = Number(montanteValue)/(10**18)
+
+    return montanteValueConverted.toString()
+  }
 
   React.useEffect(() => {
     setWindowWidth(window.innerWidth)
@@ -78,7 +85,7 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src }: Props) => {
             Quantidade
           </h1>
           <span className={Styles.data__value}>
-            {montante}<span>/unds</span>
+            {convertMontante(montante)}<span>/unds</span>
           </span>
         </div>
         <div className={Styles.data}>
@@ -86,7 +93,7 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src }: Props) => {
             Valor unitário
           </h1>
           <span className={Styles.data__value}>
-            <span>{data[1].value}</span>
+            <span>{valorUnitario || '0'}</span>
           </span>
         </div>
         {/* <div className={Styles.data}>

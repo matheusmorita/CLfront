@@ -7,6 +7,7 @@
 .footer {
     &__links {
         margin-bottom: 2rem;
+        width: 150px;
     }
 
     &__subtitle {
@@ -37,4 +38,11 @@
             }
         }
     }
+}
+
+.linksStyle {
+    display: flex;
+    justify-content: space-around;
+    gap: 2%;
+    flex-wrap: wrap;
 }

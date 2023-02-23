@@ -21,7 +21,9 @@ const Projects = () => {
   }, [])
 
   return (
-    <Row>
+    <Row
+      justifyContent='center'
+    >
       {
         projects &&
         projects.map((item: any, index: number) => {

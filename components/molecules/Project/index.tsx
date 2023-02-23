@@ -45,6 +45,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
     <Column
       media='lg'
       size={3}
+      maxWidth='350px'
     >
       <div
         id={id}

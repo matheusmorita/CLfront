@@ -33,7 +33,7 @@ const QuemSomos = () => {
     setLanguageBrowser(language)
     // const beforePath = localStorage.getItem('beforePath')
     // router.push(`${beforePath}`)
-  })
+  }, [])
 
   return (
     <main>

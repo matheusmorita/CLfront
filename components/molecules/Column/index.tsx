@@ -8,11 +8,13 @@ type Props = {
   flex?: string;
   margin?: string;
   minWidth?: string;
+  maxWidth?: string;
+  justifyContent?: string;
 }
 
-const Column = ({ media, className, size, children, flex, margin, minWidth }: Props) => {
+const Column = ({ media, className, size, children, flex, margin, minWidth, maxWidth, justifyContent }: Props) => {
   return (
-    <div style={{margin: `${margin || '10px 0'}`, flex: `${flex}`, minWidth: `${minWidth}`}} className={`col-${media}-${size} ${className}`}>
+    <div style={{maxWidth: maxWidth, margin: `${margin || '10px 0'}`, flex: `${flex}`, justifyContent: justifyContent, minWidth: `${minWidth}`}} className={`col-${media}-${size} ${className}`}>
       {children}
     </div>
   )

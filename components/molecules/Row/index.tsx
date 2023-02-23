@@ -3,11 +3,12 @@ import React from 'react'
 type Props = {
   children: any,
   className?: string,
+  justifyContent?: string,
 }
 
-const Row = ({ children, className }: Props) => {
+const Row = ({ children, className, justifyContent }: Props) => {
   return (
-    <div className={`row ${className}`}>
+    <div style={{justifyContent: justifyContent}} className={`row ${className}`}>
       {children}
     </div>
   )
