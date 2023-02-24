@@ -90,7 +90,7 @@ const Header = ({ hideLinks }: Props) => {
             }
             <Button
               id="header-cta"
-              text={languageBrowser !== 'pt-BR' ? t("Cadastro/Login") : "Cadastro/Login"}
+              text={languageBrowser !== 'pt-BR' ? t("Cadastro ou Login") : "Cadastro ou Login"}
               label="Clique e cadastre-se na Lista VIP"
               className="ms-3"
               hidden={false}

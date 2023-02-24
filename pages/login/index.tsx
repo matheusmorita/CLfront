@@ -110,11 +110,12 @@ const Login = () => {
                   error={error}
                 />
                 <p className={Styles.form__desc}>
-                  {languageBrowser !== 'pt-BR' ? <>{i18next.t('Neste momento não é necessário um cadastro para realizar o login na plataforma. Em caso de dúvidas,')}</> : (
+                  {languageBrowser !== 'pt-BR' ? <>{i18next.t('Neste momento não é necessário um cadastro para realizar o login na plataforma.')}</> : (
                     <>Neste momento não é necessário um cadastro
                     para realizar o login na plataforma. Em caso
                     de dúvidas,</>
-                  )} <a href="#">{languageBrowser !== 'pt-BR' ? <>{i18next.t('Clique aqui.')}</> : <>Clique aqui.</>}</a>
+                  )} 
+                  {/* <a href="#">{languageBrowser !== 'pt-BR' ? <>{i18next.t('Clique aqui.')}</> : <>Clique aqui.</>}</a> */}
                 </p>
                 <Button
                   id="submit-button"

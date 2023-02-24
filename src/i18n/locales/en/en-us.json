@@ -66,8 +66,8 @@
           "All rights reserved.",
         "Desenvolvido por": 
           "Developed by",
-        "Cadastro/Login":
-          "Sign up/Sign in",
+        "Cadastro ou Login":
+          "Sign up or Sign in",
         "EM BREVE":
           "COMMING SOON",
         "ACOMPANHE NOSSOS PRÓXIMOS PASSOS": 
@@ -124,8 +124,8 @@
           "An email has been forwarded to your inbox.",
         "Conheça os projetos":
           "Discover the projects",
-        "Neste momento não é necessário um cadastro para realizar o login na plataforma. Em caso de dúvidas,":
-          "At this time, registration is not required to login to the platform. In case of doubts,",
+        "Neste momento não é necessário um cadastro para realizar o login na plataforma.":
+          "At this time, registration is not required to login to the platform.",
         " clique aqui.":
           " click here.",
         "Digite seu nome completo":
@@ -167,6 +167,14 @@
         "Quantidade":
           "Quantity",
         "Valor unitário":
-          "Unitary value"
+          "Unitary value",
+        "Cronograma de retornos":
+          "Return schedule",
+        "Retorno":
+          "Return",
+        "Parcela":
+          "Installment",
+        "Venc.":
+          "Payout Date"
     }
 }

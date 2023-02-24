@@ -16,8 +16,8 @@ type Props = {
   parcela: number,
   valor: string,
   juros: string,
-  vencimento: string;
-  project?: any;
+  vencimento: string,
+  project?: any,
 }
 
 const QuotaShow = ({
@@ -47,23 +47,15 @@ const QuotaShow = ({
       <div className={Styles.quotashow__content}>
         <div className={Styles.quotashow__data}>
           <h1 className={Styles.quotashow__title}>
-          {project.acronimo !== 'CLGT' ? <>Parcela</> : <>{i18next.t('Data')}</>}
+          {project.acronimo !== 'CLGT' ? <>{languageBrowser !== 'pt-BR' ?  i18next.t('Parcela') : 'Parcela'}</> : <>{i18next.t('Data')}</>}
           </h1>
           <span className={Styles.quotashow__value}>
             {project.acronimo !== 'CLGT' ? parcela : <>{i18next.t('EM BREVE')}</>}
           </span>
         </div>
-        {/* <div className={Styles.quotashow__data}>
-          <h1 className={Styles.quotashow__title}>
-            Valor
-          </h1>
-          <span className={Styles.quotashow__value}>
-            {valor}
-          </span>
-        </div> */}
         <div className={Styles.quotashow__data}>
           <h1 className={Styles.quotashow__title}>
-          {project.acronimo !== 'CLGT' ? <>Retorno</> : <>{i18next.t('Benefício')}</>}
+          {project.acronimo !== 'CLGT' ? <>{languageBrowser !== 'pt-BR' ?  i18next.t('Retorno') : 'Retorno'}</> : <>{i18next.t('Benefício')}</>}
           </h1>
           <span className={Styles.quotashow__value}>
           {project.acronimo !== 'CLGT' ? juros : i18next.t('EM BREVE')}
@@ -71,7 +63,7 @@ const QuotaShow = ({
         </div>
         <div className={Styles.quotashow__data}>
           <h1 className={Styles.quotashow__title}>
-          {project.acronimo !== 'CLGT' ? <>Venc.</> : <>Status</>}
+          {project.acronimo !== 'CLGT' ? <>{languageBrowser !== 'pt-BR' ?  i18next.t('Venc.') : 'Venc.'}</> : <>Status</>}
           </h1>
           <span className={Styles.quotashow__value}>
           {project.acronimo !== 'CLGT' ? vencimento : i18next.t('EM BREVE')}

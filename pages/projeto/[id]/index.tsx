@@ -389,7 +389,7 @@ const ProjectPage = () => {
                   <div className={Styles.gradbox__header}>
                     <Title
                       id='documentos-title'
-                      text={project.acronimo === 'CLGT' ? i18next.t("Benefícios entregues") : "Cronograma de Retornos"}
+                      text={project.acronimo === 'CLGT' ? i18next.t("Benefícios entregues") : i18next.t("Cronograma de retornos")}
                       hidden={false}
                       size={24}
                       height={24}

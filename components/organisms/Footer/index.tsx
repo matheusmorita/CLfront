@@ -63,7 +63,7 @@ const Footer = () => {
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="#">{languageBrowser !== 'pt-BR' ? t('Quem somos') : 'Quem somos'}</a>
+                <a href="#sobre__container">{languageBrowser !== 'pt-BR' ? t('Quem somos') : 'Quem somos'}</a>
               </li>
               <li className={Styles.footer__item}>
                 <a href="#projetos">{languageBrowser !== 'pt-BR' ? t('Nossos projetos') : 'Nossos projetoss'}</a>
@@ -80,10 +80,10 @@ const Footer = () => {
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <Link href='TERMO_DE_USO.pdf' download locale={false}>{languageBrowser !== 'pt-BR' ? t('Termo de uso') : 'Termo de uso'}</Link>
+                <a href='TERMO_DE_USO.pdf' download>{languageBrowser !== 'pt-BR' ? t('Termo de uso') : 'Termo de uso'}</a>
               </li>
               <li className={Styles.footer__item}>
-                <Link href='POLITICA_DE_PRIVACIDADE.pdf' download locale={false}>{languageBrowser !== 'pt-BR' ? t('Política de privacidade') : 'Política de privacidade'}</Link>
+                <a href='POLITICA_DE_PRIVACIDADE.pdf' download>{languageBrowser !== 'pt-BR' ? t('Política de privacidade') : 'Política de privacidade'}</a>
               </li>
             </ul>
           </div>
@@ -100,7 +100,10 @@ const Footer = () => {
                 <a href="#faq">{languageBrowser !== 'pt-BR' ? t('Perguntas frequentes') : 'Perguntas frequentes'}</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#">{languageBrowser !== 'pt-BR' ? t('Aprenda sobre tokenização') : 'Aprenda sobre tokenização'}</a>
+                <a
+                  rel='noreferrer'
+                  href="https://www.youtube.com/@metacast9068"
+                  target="_blank">{languageBrowser !== 'pt-BR' ? t('Aprenda sobre tokenização') : 'Aprenda sobre tokenização'}</a>
               </li>
             </ul>
           </div>

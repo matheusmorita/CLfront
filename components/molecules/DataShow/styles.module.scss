@@ -48,6 +48,11 @@
         text-overflow: ellipsis;
     }
 
+    &__content {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
     &__badge {
         top: 0;
         right: 0;
