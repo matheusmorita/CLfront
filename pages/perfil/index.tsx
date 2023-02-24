@@ -15,7 +15,12 @@ import Link from 'next/link'
 import InvestCard from '@/components/molecules/InvestCard'
 import { getWindowInnerWidth } from '@/assets/js/util/responsive'
 
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+
 import i18next from '@/src/i18n'
+
+import defaultImage from '../../assets/img/placeholder.webp'
+import Image from 'next/image'
 
 const Perfil = () => {
   const [walletState, setWalletState] = React.useState(0)
@@ -23,6 +28,11 @@ const Perfil = () => {
   const [dataUser, setDataUser] = React.useState<any>();
   const [historyUser, setHistoryUser] = React.useState<any[]>([])
   const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
+  // const [profileImage, setProfileImage] = React.useState<any>();
+  const [image, setImage] = React.useState('')
+  const [endImage, setEndImage] = React.useState('')
+
 
   const projecardMock = [
     { title: 'Qtde.', value: 16654 },
@@ -79,9 +89,42 @@ const Perfil = () => {
             margin='19px 0'
           >
             <div className={Styles.profile}>
+
               <div className={Styles.profile__header}>
                 <div className={Styles.profile__background} />
-                <div className={Styles.profile__picture} />
+                <div className={Styles.profile__picture}>
+                  {/* <label className={Styles.inputImage} htmlFor='profileImageInput'>
+                  input
+                  <input id="profileImageInput" name='image' type="file" onChange={(e: any) => {
+                    setImage(e.target.files[0])
+                  }}></input>
+                </label> */}
+                  <label className={Styles.profile__inputImage} htmlFor='profileImageInput'>
+                    <BorderColorIcon className={Styles.profile__icon} />
+                    <input id="profileImageInput" name='image' type="file" onChange={(e: any) => {
+                      setImage(e.target.files[0])
+                    }}></input>
+                  </label>
+
+                  {image ? (
+                    <Image
+                      className={Styles.profile__picture}
+                      height={100}
+                      width={100}
+                      alt='defaultImage'
+                      src={URL.createObjectURL(image)}
+                    />
+                  ) : (
+                    <Image
+                      className={Styles.profile__picture}
+                      height={100}
+                      width={100}
+                      alt='defaultImage'
+                      src={defaultImage}
+                    />
+                  )}
+                  {/* <div style={{background: `url(${image})`}} className={Styles.profile__picture} /> */}
+                </div>
                 <div className={Styles.profile__info}>
                   <span>{dataUser?.nome}</span>
                   {/* <span className={Styles.tiny}>@username</span> */}
@@ -117,7 +160,7 @@ const Perfil = () => {
             className="pt-5"
           >
 
-            <div style={{display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1%'}}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1%' }}>
               <Column
                 media='lg'
                 size={4}
