@@ -33,6 +33,7 @@ export async function fetchDataUserInfo (accessToken, setBalance, setDataUser) {
   const response = await fetch(process.env.GET_USER_INFO, config)
   
   const data = await response.json()
+  console.log(data)
   setDataUser(data)
   setBalance(data.balanceCL)
   
@@ -52,8 +53,6 @@ export async function fetchUserHistoryinfo (accessToken, setHistoryUser, history
   const data = await response.json()
   console.log(data)
   setHistoryUser(data)
-
-  console.log(data)
 }
 
 export async function fetchRequestPix (accessToken, quantity) {

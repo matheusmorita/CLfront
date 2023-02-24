@@ -93,12 +93,6 @@ const Perfil = () => {
               <div className={Styles.profile__header}>
                 <div className={Styles.profile__background} />
                 <div className={Styles.profile__picture}>
-                  {/* <label className={Styles.inputImage} htmlFor='profileImageInput'>
-                  input
-                  <input id="profileImageInput" name='image' type="file" onChange={(e: any) => {
-                    setImage(e.target.files[0])
-                  }}></input>
-                </label> */}
                   <label className={Styles.profile__inputImage} htmlFor='profileImageInput'>
                     <BorderColorIcon className={Styles.profile__icon} />
                     <input id="profileImageInput" name='image' type="file" onChange={(e: any) => {
@@ -112,7 +106,7 @@ const Perfil = () => {
                       height={100}
                       width={100}
                       alt='defaultImage'
-                      src={URL.createObjectURL(image)}
+                      src={URL.createObjectURL(image)} // Erro com typescript, é preciso ver o retorno correto para este dado na URL
                     />
                   ) : (
                     <Image
@@ -123,7 +117,6 @@ const Perfil = () => {
                       src={defaultImage}
                     />
                   )}
-                  {/* <div style={{background: `url(${image})`}} className={Styles.profile__picture} /> */}
                 </div>
                 <div className={Styles.profile__info}>
                   <span>{dataUser?.nome}</span>
@@ -204,7 +197,7 @@ const Perfil = () => {
                         emissor={item.emissorProjeto}
                         acronimo={item.acronimoProjeto}
                         src={item.logoProjeto}
-                        valorUnitario={item.valorUnitario}
+                        date={item.criadoEm}
                       />
                     ))}
                     {/* <Projecard data={projecardMock} />
@@ -217,12 +210,18 @@ const Perfil = () => {
                 )}
                 {walletState === 1 && (
                   <>
-                    <Projecard data={walletMock} />
-                    <Projecard data={walletMock} />
-                    <Projecard data={walletMock} />
-                    <Projecard data={walletMock} />
-                    <Projecard data={walletMock} />
-                    <Projecard data={walletMock} />
+                    {dataUser.balanceTokensCaptacao?.map((item: any, i: number) => (
+                      <Projecard
+                      key={`${i}-${item.acronimo}`}
+                      data={projecardMock}
+                      name={languageBrowser !== 'pt-BR' ? i18next.t(item.nomeToken) : item.nomeToken}
+                      montante={item.montante}
+                      emissor={item.emissorNome}
+                      acronimo={item.acronimo}
+                      src={item.logoProjeto}
+                      valorUnitario={item.valorUnitario}
+                    />
+                    ))}
                   </>
                 )}
               </div>

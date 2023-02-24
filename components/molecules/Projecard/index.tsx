@@ -2,6 +2,7 @@ import { margin } from '@mui/system';
 import i18next from '@/src/i18n';
 import React from 'react'
 import Styles from './styles.module.scss'
+import dayjs from 'dayjs';
 
 
 type Props = {
@@ -12,11 +13,12 @@ type Props = {
   acronimo?: string;
   src?: string;
   valorUnitario?: string;
+  date?: string;
+  total?: number;
 }
 
 
-
-const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario }: Props) => {
+const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario, date, total }: Props) => {
   const [windowWidth, setWindowWidth] = React.useState<number>(0)
   const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
@@ -24,6 +26,11 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
     const montanteValueConverted = Number(montanteValue)/(10**18)
 
     return montanteValueConverted.toString()
+  }
+
+  const formatDate = (date: any) => {
+    const formated = dayjs(date, 'YYYY-MM-DDTHH:MM:ss').format('DD/MM/YYYY')  
+    return formated
   }
 
   React.useEffect(() => {
@@ -92,7 +99,8 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
             {convertMontante(montante)}<span>/unds</span>
           </span>
         </div>
-        <div className={Styles.data}>
+        {valorUnitario ? (
+          <div className={Styles.data}>
           <h1 className={Styles.data__title}>
             {languageBrowser !== 'pt-BR' ? i18next.t('Valor unitário') : 'Valor unitário'}  
           </h1>
@@ -100,6 +108,27 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
             <span>{valorUnitario || '0'}</span>
           </span>
         </div>
+        ) : ''}
+        {date ? (
+          <div className={Styles.data}>
+          <h1 className={Styles.data__title}>
+            {languageBrowser !== 'pt-BR' ? i18next.t('Data') : 'Data'}
+          </h1>
+          <span className={Styles.data__value}>
+            <span>{formatDate(date) || '0'}</span>
+          </span>
+        </div>
+        ) : ''}
+        {total ? (
+          <div className={Styles.data}>
+          <h1 className={Styles.data__title}>
+            Total
+          </h1>
+          <span className={Styles.data__value}>
+            <span>{total || '0'}</span>
+          </span>
+        </div>
+        ) : ''}
         {/* <div className={Styles.data}>
           <h1 className={Styles.data__title}>
             {data[2].title}
