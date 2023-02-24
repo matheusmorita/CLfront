@@ -15,12 +15,14 @@ import Link from 'next/link'
 import InvestCard from '@/components/molecules/InvestCard'
 import { getWindowInnerWidth } from '@/assets/js/util/responsive'
 
+import i18next from '@/src/i18n'
+
 const Perfil = () => {
   const [walletState, setWalletState] = React.useState(0)
   const [balance, setBalance] = React.useState<number>(0);
-  const [dataUser, setDataUser] = React.useState<object>();
+  const [dataUser, setDataUser] = React.useState<any>();
   const [historyUser, setHistoryUser] = React.useState<any[]>([])
-
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
   const projecardMock = [
     { title: 'Qtde.', value: 16654 },
@@ -36,6 +38,9 @@ const Perfil = () => {
 
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
+
+    const language = window.navigator.language
+    setLanguageBrowser(language)
 
     const widthWindow = getWindowInnerWidth()
 
@@ -78,8 +83,8 @@ const Perfil = () => {
                 <div className={Styles.profile__background} />
                 <div className={Styles.profile__picture} />
                 <div className={Styles.profile__info}>
-                  <span>Nome completo</span>
-                  <span className={Styles.tiny}>@username</span>
+                  <span>{dataUser?.nome}</span>
+                  {/* <span className={Styles.tiny}>@username</span> */}
                 </div>
               </div>
               <div className={Styles.profile__body}>
@@ -89,14 +94,14 @@ const Perfil = () => {
                     href="mailto:faleconosco@coinlivre.com.br"
                   >
                     <li className={Styles.actions__item}>
-                      Preciso de ajuda
+                      {languageBrowser !== 'pt-BR' ? i18next.t('Preciso de ajuda') : 'Preciso de ajuda'}
                     </li>
                   </a>
                   <li className={Styles.actions__item}>
                     <Link
                       className={Styles.actions__link}
                       href={'/logout'}
-                    >Desconectar</Link>
+                    >{languageBrowser !== 'pt-BR' ? i18next.t('Desconectar') : 'Desconectar'}</Link>
                   </li>
                   {/* <li className={`${Styles.actions__item} ${Styles.danger}`}>
                     Desativar minha conta
@@ -133,7 +138,7 @@ const Perfil = () => {
                 minWidth='350px'
               >
                 <Balance
-                  type='em R$'
+                  type='R$'
                   value={`R$ 0`}
                 />
               </Column>
@@ -149,9 +154,9 @@ const Perfil = () => {
                   <>
                     {historyUser?.map((item: any, i: number) => (
                       <Projecard
-                        key={i}
+                        key={item.id}
                         data={projecardMock}
-                        name={item.nomeToken}
+                        name={languageBrowser !== 'pt-BR' ? i18next.t(item.nomeToken) : item.nomeToken}
                         montante={item.montante}
                         emissor={item.emissorProjeto}
                         acronimo={item.acronimoProjeto}

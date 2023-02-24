@@ -155,6 +155,18 @@
         "Data":
           "Date",
         "Benefício":
-          "Benefit"
+          "Benefit",
+        "Preciso de ajuda":
+          "Help",
+        "Histórico":
+          "Historic",
+        "Carteira":
+          "Wallet",
+        "Saldo":
+          "Balance",
+        "Quantidade":
+          "Quantity",
+        "Valor unitário":
+          "Unitary value"
     }
 }

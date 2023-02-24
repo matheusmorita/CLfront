@@ -12,14 +12,14 @@ export const handleChangeLanguage = () => {
 
 const resources = {
     "en-US": ENUS,
-    "pt-BR": PTBR,
+    // "pt-BR": PTBR,
 }
 
 i18next
     .use(initReactI18next)
     .init({
         resources,
-        lng: handleChangeLanguage(),
+        lng: 'en-US',
         interpolation: {
             escapeValue: false
         }

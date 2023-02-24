@@ -107,21 +107,6 @@ const Header = ({ hideLinks }: Props) => {
             contrast={whiteTheme}
           />
         )}
-
-        {/* <button
-          onClick={() => {
-            localStorage.setItem('language', 'pt-BR')
-            window.location = window.location
-          }}
-        >PT
-        </button>
-        <button
-          onClick={() => {
-            localStorage.setItem('language', 'en-US')
-            window.location = window.location
-          }}
-        >EN
-        </button> */}
       </div>
     </nav>
   )

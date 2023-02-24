@@ -1,4 +1,5 @@
 import { margin } from '@mui/system';
+import i18next from '@/src/i18n';
 import React from 'react'
 import Styles from './styles.module.scss'
 
@@ -17,6 +18,7 @@ type Props = {
 
 const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario }: Props) => {
   const [windowWidth, setWindowWidth] = React.useState<number>(0)
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
   const convertMontante = (montanteValue: string | undefined) => {
     const montanteValueConverted = Number(montanteValue)/(10**18)
@@ -26,6 +28,8 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
 
   React.useEffect(() => {
     setWindowWidth(window.innerWidth)
+    const language = window.navigator.language
+    setLanguageBrowser(language)
   }, [])
 
   return (
@@ -66,7 +70,7 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
         <div className={Styles.info}>
           <h1 className={Styles.info__title}>{name}<span>#{acronimo || 'CNLT'}</span></h1>
           {name?.toLowerCase().includes('coinlivre') ? '' : (
-            <p className={Styles.info__tiny}>Emitido por <b>{emissor}</b></p>
+            <p className={Styles.info__tiny}>{languageBrowser !== 'pt-BR' ? i18next.t('Emitido por') : 'Emitido por'} <b>{emissor}</b></p>
           )}
 
           {/* Progress component */}
@@ -82,7 +86,7 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
       <div className={Styles.projecard__data}>
         <div className={Styles.data}>
           <h1 className={Styles.data__title}>
-            Quantidade
+            {languageBrowser !== 'pt-BR' ? i18next.t('Quantidade') : 'Quantidade'} 
           </h1>
           <span className={Styles.data__value}>
             {convertMontante(montante)}<span>/unds</span>
@@ -90,7 +94,7 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
         </div>
         <div className={Styles.data}>
           <h1 className={Styles.data__title}>
-            Valor unitário
+            {languageBrowser !== 'pt-BR' ? i18next.t('Valor unitário') : 'Valor unitário'}  
           </h1>
           <span className={Styles.data__value}>
             <span>{valorUnitario || '0'}</span>

@@ -153,6 +153,14 @@
   "Data":
     "Data",
   "Benefício":
-    "Benefício"
+    "Benefício",
+    "Preciso de ajuda":
+      "Preciso de ajuda",
+    "Histórico":
+      "Histórico",
+    "Carteira":
+      "Carteira",
+    "Saldo ":
+      "Saldo"
   }
 }
