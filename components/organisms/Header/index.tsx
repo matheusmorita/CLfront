@@ -26,13 +26,13 @@ const Header = ({ hideLinks }: Props) => {
 
   const { t } = useTranslation();
 
-  const { locale } = React.useContext(UserContext)
-
   React.useEffect(() => {
     const language = window.navigator.language
     setLanguageBrowser(language)
-  // const beforePath = localStorage.getItem('beforePath')
-  // router.push(`${beforePath}`)
+
+    console.log(window.location.pathname)
+    // const beforePath = localStorage.getItem('beforePath')
+    // router.push(`${beforePath}`)
   }, [info])
 
 
@@ -90,7 +90,7 @@ const Header = ({ hideLinks }: Props) => {
             }
             <Button
               id="header-cta"
-              text={languageBrowser !== 'pt-BR' ? t("Cadastro/Login") : "Cadastro/Login"} 
+              text={languageBrowser !== 'pt-BR' ? t("Cadastro/Login") : "Cadastro/Login"}
               label="Clique e cadastre-se na Lista VIP"
               className="ms-3"
               hidden={false}
@@ -107,6 +107,21 @@ const Header = ({ hideLinks }: Props) => {
             contrast={whiteTheme}
           />
         )}
+
+        {/* <button
+          onClick={() => {
+            localStorage.setItem('language', 'pt-BR')
+            window.location = window.location
+          }}
+        >PT
+        </button>
+        <button
+          onClick={() => {
+            localStorage.setItem('language', 'en-US')
+            window.location = window.location
+          }}
+        >EN
+        </button> */}
       </div>
     </nav>
   )

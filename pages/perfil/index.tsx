@@ -39,7 +39,6 @@ const Perfil = () => {
 
     const widthWindow = getWindowInnerWidth()
 
-
     fetchDataUserInfo(accessToken, setBalance, setDataUser)
     fetchUserHistoryinfo(accessToken, setHistoryUser)
   }, [])
@@ -157,6 +156,7 @@ const Perfil = () => {
                         emissor={item.emissorProjeto}
                         acronimo={item.acronimoProjeto}
                         src={item.logoProjeto}
+                        valorUnitario={item.valorUnitario}
                       />
                     ))}
                     {/* <Projecard data={projecardMock} />
