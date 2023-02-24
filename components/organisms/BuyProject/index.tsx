@@ -10,6 +10,9 @@ import Logo from '@/assets/img/logo.png'
 import DataShow from '@/components/molecules/DataShow';
 import { requestBuyToken } from '@/utils/fetchDataAxios';
 
+import i18next from '@/src/i18n';
+import Loader from '@/components/atoms/Loader';
+
 interface BuyProjectInterface {
   setRealValue: any;
   realValue: string;
@@ -56,6 +59,8 @@ function BuyProject({
   const [checkboxCheck, setCheckoxCheck] = React.useState<boolean>(false);
   const [accessTokenState, setAccessTokenState] = React.useState<any>('');
   const [hashConfirm, setHashConfirm] = React.useState<string>('')
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+  const [waiting, setWaiting] = React.useState<boolean>(false)
 
   const checkSaldo = (balance: number, valorToken: string, realValue: string): boolean => {
     const multiplyValues = Number(realValue) * Number(valorToken)
@@ -75,10 +80,14 @@ function BuyProject({
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
     setAccessTokenState(accessToken)
+
+    const language = window.navigator.language
+    setLanguageBrowser(language)
   }, [])
 
   return (
     <div className={Styles.divInput}>
+      {waiting ? <Loader absolute={true} active={waiting} /> : ''}
       {(!valueSaldo && btnCheckBalance === 'continueBuyProject') ? (
         <section className={Styles.notEnoughCoins}>
           <h4 className={Styles.titleEnough}>Fundos insuficientes</h4>
@@ -92,7 +101,6 @@ function BuyProject({
             width={250}
             height={250}
           />
-
           <div className={Styles.divButtons}>
             <Button
               hidden={false}
@@ -101,7 +109,7 @@ function BuyProject({
               onClick={() => {
                 setHiddenBuy(!hiddenBuy)
               }}
-              text="Voltar"
+              text={languageBrowser !== 'pt-BR' ? i18next.t("Voltar") : "Voltar"}
               size={25}
               className={Styles.divButtons__backButton}
             />
@@ -114,7 +122,7 @@ function BuyProject({
                   e.preventDefault()
                   setHiddenBuy(!hiddenBuy)
                 }}
-                text="Gerar QR Code"
+                text={languageBrowser !== 'pt-BR' ? i18next.t("Gerar QR code") : "Gerar QR code"}
                 size={25}
                 className={Styles.divButtons__QRButton}
               />
@@ -125,9 +133,9 @@ function BuyProject({
                 label="Clique para continuar compra"
                 onClick={(e: React.FormEvent<EventTarget>) => {
                   e.preventDefault()
-                  setHiddenBuy(hiddenBuy)
+                  setHiddenBuy(!hiddenBuy)
                 }}
-                text="Continuar"
+                text={languageBrowser !== 'pt-BR' ? i18next.t("Continuar") : "Continuar"}
                 size={25}
                 className={Styles.divButtons__QRButton}
               />
@@ -281,29 +289,31 @@ function BuyProject({
                   id="backButton"
                   label="Clique para voltar"
                   onClick={() => { setHiddenBuy(!hiddenBuy) }}
-                  text="Voltar"
+                  text={languageBrowser !== 'pt-BR' ? i18next.t("Voltar") : "Voltar"}
                   size={25}
                   className={Styles.divButtons__backButton}
                 />
                 {conditionalBuy === 'CNLT-0' ? (
-                  <Button
-                    hidden={false}
-                    type='submit'
-                    id="generateQRButton"
-                    label="Clique para gerar QR code"
-                    onClick={async (e: React.FormEvent<EventTarget>) => {
-                      e.preventDefault()
-                      const { itemId, textContent } = await fetchRequestPix(accessTokenState, realValue)
-                      sessionStorage.setItem('textContent', textContent)
-                      sessionStorage.setItem('itemId', itemId)
-                      setHiddenBuy(true)
-                      setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
-                    }}
-                    disabled={!checkboxCheck || (realValue === '')}
-                    text="Gerar QR Code"
-                    size={25}
-                    className={Styles.divButtons__QRButton}
-                  />
+                  <>
+                    <Button
+                      hidden={false}
+                      type='submit'
+                      id="generateQRButton"
+                      label="Clique para gerar QR code"
+                      onClick={async (e: React.FormEvent<EventTarget>) => {
+                        e.preventDefault()
+                        const { itemId, textContent } = await fetchRequestPix(accessTokenState, realValue, setWaiting)
+                        sessionStorage.setItem('textContent', textContent)
+                        sessionStorage.setItem('itemId', itemId)
+                        setHiddenBuy(true)
+                        setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
+                      }}
+                      disabled={!checkboxCheck || (realValue === '')}
+                      text={languageBrowser !== 'pt-BR' ? i18next.t("Gerar QR code") : "Gerar QR code"}
+                      size={25}
+                      className={Styles.divButtons__QRButton}
+                    />
+                  </>
                 ) : (
                   <Button
                     hidden={false}
@@ -316,7 +326,7 @@ function BuyProject({
                       const responseSaldo = checkSaldo(balance, valorToken, realValue)
                       setValueSaldo(responseSaldo)
                       if (responseSaldo) {
-                        const { confirm, hash } = await requestBuyToken(accessTokenState, realValue, lote.id)
+                        const { confirm, hash } = await requestBuyToken(accessTokenState, realValue, lote.id, setWaiting)
                         setHashConfirm(hash)
                         if (confirm != 0) {
                           setBuyConfirmed(!buyConfirmed)
@@ -330,7 +340,7 @@ function BuyProject({
                       setBtnCheckBalance(e.target.id)
                       // setHiddenBuy(!hiddenBuy)
                     }}
-                    text="Continuar"
+                    text={languageBrowser !== 'pt-BR' ? i18next.t("Continuar") : "Continuar"}
                     size={25}
                     className={Styles.divButtons__QRButton}
                   />

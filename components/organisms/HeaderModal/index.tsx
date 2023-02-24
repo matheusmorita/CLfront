@@ -6,6 +6,8 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
+import i18next from '@/src/i18n';
+
 interface HeaderModalInterface {
   balance: number;
 }
@@ -13,6 +15,12 @@ interface HeaderModalInterface {
 function HeaderModal({ balance }: HeaderModalInterface) {
   const [checkedButton, SetCheckedButton] = React.useState<string>('comprar')
   const [hiddenBalance, setHiddenBalance] = React.useState<boolean>(true)
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
+  React.useEffect(() => {
+    const language = window.navigator.language
+    setLanguageBrowser(language)
+  }, []);
 
   return (
     <>
@@ -29,7 +37,7 @@ function HeaderModal({ balance }: HeaderModalInterface) {
                   SetCheckedButton('comprar')
                 }}
                 label="buy button"
-                text="Comprar"
+                text={languageBrowser !== 'pt-BR' ? i18next.t("Comprar") : "Comprar"} 
                 size={18}
               />
               <Button
@@ -41,7 +49,7 @@ function HeaderModal({ balance }: HeaderModalInterface) {
                   SetCheckedButton('vender')
                 }}
                 label="sell button"
-                text="Vender"
+                text={languageBrowser !== 'pt-BR' ? i18next.t("Vender") : "Vender"} 
                 size={18}
               />
             </>
@@ -56,7 +64,7 @@ function HeaderModal({ balance }: HeaderModalInterface) {
                   SetCheckedButton('comprar')
                 }}
                 label="buy button"
-                text="Comprar"
+                text={languageBrowser !== 'pt-BR' ? i18next.t("Comprar") : "Comprar"} 
                 size={18}
               />
               <Button
@@ -68,7 +76,7 @@ function HeaderModal({ balance }: HeaderModalInterface) {
                   SetCheckedButton('vender')
                 }}
                 label="sell button"
-                text="Vender"
+                text={languageBrowser !== 'pt-BR' ? i18next.t("Vender") : "Vender"} 
                 size={18}
               />
             </>

@@ -200,12 +200,6 @@ const Perfil = () => {
                         date={item.criadoEm}
                       />
                     ))}
-                    {/* <Projecard data={projecardMock} />
-                    <Projecard data={projecardMock} />
-                    <Projecard data={projecardMock} />
-                    <Projecard data={projecardMock} />
-                    <Projecard data={projecardMock} />
-                    <Projecard data={projecardMock} /> */}
                   </>
                 )}
                 {walletState === 1 && (
@@ -218,8 +212,9 @@ const Perfil = () => {
                       montante={item.montante}
                       emissor={item.emissorNome}
                       acronimo={item.acronimo}
-                      src={item.logoProjeto}
+                      src={item.logoToken}
                       valorUnitario={item.valorUnitario}
+                      totalValue={item.total}
                     />
                     ))}
                   </>

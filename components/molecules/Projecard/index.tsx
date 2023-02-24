@@ -14,22 +14,22 @@ type Props = {
   src?: string;
   valorUnitario?: string;
   date?: string;
-  total?: number;
+  totalValue?: number;
 }
 
 
-const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario, date, total }: Props) => {
+const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario, date, totalValue }: Props) => {
   const [windowWidth, setWindowWidth] = React.useState<number>(0)
   const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
   const convertMontante = (montanteValue: string | undefined) => {
-    const montanteValueConverted = Number(montanteValue)/(10**18)
+    const montanteValueConverted = Number(montanteValue) / (10 ** 18)
 
     return montanteValueConverted.toString()
   }
 
   const formatDate = (date: any) => {
-    const formated = dayjs(date, 'YYYY-MM-DDTHH:MM:ss').format('DD/MM/YYYY')  
+    const formated = dayjs(date, 'YYYY-MM-DDTHH:MM:ss').format('DD/MM/YYYY')
     return formated
   }
 
@@ -43,36 +43,36 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
     <div className={Styles.projecard}>
       {windowWidth >= 992 ? (
         <div
-        style={{
-          background: acronimo ? (
-            `linear-gradient(to right, transparent, #000), url(${src})`
-          ) : '',
-          position: 'absolute',
-          backgroundSize: acronimo ? '' : 'cover',
-          width: acronimo ? '20%' : '15%',
-          height: '100%',
-          left: '0',
-          top: '0'
-        }}
-        className={Styles.projecard__picture}
-      />
+          style={{
+            background: acronimo ? (
+              `linear-gradient(to right, transparent, #000), url(${src})`
+            ) : '',
+            position: 'absolute',
+            backgroundSize: acronimo ? '' : 'cover',
+            width: acronimo ? '20%' : '15%',
+            height: '100%',
+            left: '0',
+            top: '0'
+          }}
+          className={Styles.projecard__picture}
+        />
       ) : (
         <div
-        style={{
-          background: acronimo ? (
-            `linear-gradient(to bottom, transparent, #000), url(${src})`
-          ) : '',
-          position: 'absolute',
-          backgroundSize: 'cover',
-          width: acronimo ? '100%' : '25%',
-          height: acronimo ? '100px' : '110px',
-          left: acronimo ? '0' : '40%',
-          top: '0'
-        }}
-        className={Styles.projecard__picture}
-      />
+          style={{
+            background: acronimo ? (
+              `linear-gradient(to bottom, transparent, #000), url(${src})`
+            ) : '',
+            position: 'absolute',
+            backgroundSize: 'cover',
+            width: acronimo ? '100%' : '25%',
+            height: acronimo ? '100px' : '110px',
+            left: acronimo ? '0' : '40%',
+            top: '0'
+          }}
+          className={Styles.projecard__picture}
+        />
       )}
-      
+
       <div className={Styles.projecard__info}>
         <div className={Styles.info}>
           <h1 className={Styles.info__title}>{name}<span>#{acronimo || 'CNLT'}</span></h1>
@@ -93,7 +93,7 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
       <div className={Styles.projecard__data}>
         <div className={Styles.data}>
           <h1 className={Styles.data__title}>
-            {languageBrowser !== 'pt-BR' ? i18next.t('Quantidade') : 'Quantidade'} 
+            {languageBrowser !== 'pt-BR' ? i18next.t('Quantidade') : 'Quantidade'}
           </h1>
           <span className={Styles.data__value}>
             {convertMontante(montante)}<span>/unds</span>
@@ -101,34 +101,43 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
         </div>
         {valorUnitario ? (
           <div className={Styles.data}>
-          <h1 className={Styles.data__title}>
-            {languageBrowser !== 'pt-BR' ? i18next.t('Valor unitário') : 'Valor unitário'}  
-          </h1>
-          <span className={Styles.data__value}>
-            <span>{valorUnitario || '0'}</span>
-          </span>
-        </div>
+            <h1 className={Styles.data__title}>
+              {languageBrowser !== 'pt-BR' ? i18next.t('Valor unitário') : 'Valor unitário'}
+            </h1>
+            <span className={Styles.data__value}>
+              <span>{`R$ ${valorUnitario}` || 'R$ 0'}</span>
+            </span>
+          </div>
         ) : ''}
         {date ? (
           <div className={Styles.data}>
-          <h1 className={Styles.data__title}>
-            {languageBrowser !== 'pt-BR' ? i18next.t('Data') : 'Data'}
-          </h1>
-          <span className={Styles.data__value}>
-            <span>{formatDate(date) || '0'}</span>
-          </span>
-        </div>
+            <h1 className={Styles.data__title}>
+              {languageBrowser !== 'pt-BR' ? i18next.t('Data') : 'Data'}
+            </h1>
+            <span className={Styles.data__value}>
+              <span>{formatDate(date) || '00/00/0000'}</span>
+            </span>
+          </div>
         ) : ''}
-        {total ? (
+        {totalValue === 0 ? (
           <div className={Styles.data}>
           <h1 className={Styles.data__title}>
             Total
           </h1>
           <span className={Styles.data__value}>
-            <span>{total || '0'}</span>
+            <span>R$ 0</span>
           </span>
         </div>
-        ) : ''}
+        ) : (
+          <div className={Styles.data}>
+            <h1 className={Styles.data__title}>
+              Total
+            </h1>
+            <span className={Styles.data__value}>
+              <span>R$ {totalValue}</span>
+            </span>
+          </div>
+        )}
         {/* <div className={Styles.data}>
           <h1 className={Styles.data__title}>
             {data[2].title}

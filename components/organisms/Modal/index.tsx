@@ -11,16 +11,18 @@ import Logo from '@/assets/img/logo.png';
 
 import { fetchRequestPix } from '@/utils/fetchDataAxios';
 
-import { fetchData } from '@/utils/fetchData';
 import { fetchDataAxios, fetchDataUserInfo } from '@/utils/fetchDataAxios';
 import UserContext from "@/context/UserContext";
 import BuyProject from "../BuyProject";
 import ModalContext from "@/context/ModalContext";
 import { useRouter } from "next/router";
 
+import i18next from '@/src/i18n';
+
 function Modal() {
   const [hiddenBuy, setHiddenBuy] = React.useState<boolean>(false);
   const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
   const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
 
@@ -43,6 +45,9 @@ function Modal() {
     const accessToken = localStorage.getItem('accessToken')
     fetchDataAxios("4", setProjects)
     fetchDataUserInfo(accessToken, setBalance, setDataUser)
+
+    const language = window.navigator.language
+    setLanguageBrowser(language)
   }, [balance])
 
   return (
@@ -91,7 +96,7 @@ function Modal() {
               hidden={false}
               id={`CNLT-${0}`}
               src={Logo}
-              text="Comprar"
+              text={languageBrowser !== 'pt-BR' ? i18next.t('Comprar') : 'Comprar'}
               onClick={(e: any) => {
                 e.preventDefault()
                 if (!loggedIn[0]) {
@@ -115,7 +120,7 @@ function Modal() {
                 id={item.id}
                 name={item.nome}
                 src={item.logoUrl}
-                text='Comprar'
+                text={languageBrowser !== 'pt-BR' ? i18next.t('Comprar') : 'Comprar'} 
                 onClick={(e: any) => {
                   e.preventDefault()
                   if (!loggedIn[0]) {

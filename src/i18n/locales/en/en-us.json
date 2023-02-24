@@ -164,6 +164,8 @@
           "Wallet",
         "Saldo":
           "Balance",
+        "SALDO":
+          "BALANCE",
         "Quantidade":
           "Quantity",
         "Valor unitário":
@@ -175,6 +177,14 @@
         "Parcela":
           "Installment",
         "Venc.":
-          "Payout Date"
+          "Payout Date",
+        "Comprar":
+        "Buy",
+        "Vender":
+          "Sell",
+        "Voltar":
+          "Back",
+        "Gerar QR code":
+          "Generate QR code"
     }
 }

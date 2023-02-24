@@ -7,10 +7,16 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
-
+import i8next from '@/src/i18n'
 
 function FooterMobileModal() {
   const [checkedButton, SetCheckedButton] = React.useState<string>('comprar')
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
+  React.useEffect(() => {
+    const language = window.navigator.language
+    setLanguageBrowser(language)
+  }, []);
 
   return (
     <div className={Styles.items}>
@@ -26,7 +32,7 @@ function FooterMobileModal() {
                 SetCheckedButton('comprar')
               }}
               label="buy button"
-              text="Comprar"
+              text={languageBrowser !== 'pt-BR' ? i8next.t("Comprar") : "Comprar"}
               size={22}
             />
             <Button
@@ -38,7 +44,7 @@ function FooterMobileModal() {
                 SetCheckedButton('vender')
               }}
               label="sell button"
-              text="Vender"
+              text={languageBrowser !== 'pt-BR' ? i8next.t("Vender") : "Vender"}
               size={22}
             />
           </>
@@ -53,7 +59,7 @@ function FooterMobileModal() {
                 SetCheckedButton('comprar')
               }}
               label="buy button"
-              text="Comprar"
+              text={languageBrowser !== 'pt-BR' ? i8next.t("Comprar") : "Comprar"}
               size={22}
             />
             <Button
@@ -65,7 +71,7 @@ function FooterMobileModal() {
                 SetCheckedButton('vender')
               }}
               label="sell button"
-              text="Vender"
+              text={languageBrowser !== 'pt-BR' ? i8next.t("Vender") : "Vender"}
               size={22}
             />
           </>

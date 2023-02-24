@@ -55,7 +55,7 @@ export async function fetchUserHistoryinfo (accessToken, setHistoryUser, history
   setHistoryUser(data)
 }
 
-export async function fetchRequestPix (accessToken, quantity) {
+export async function fetchRequestPix(accessToken, quantity, setWaiting) {
   let newQuantity = quantity
   if (quantity.includes(',')) {
     const replaceDot = quantity.replace(',', '.')
@@ -74,17 +74,17 @@ export async function fetchRequestPix (accessToken, quantity) {
     },
     body: dataBody
   };
-  
+  setWaiting(true)
   const response = await fetch(process.env.GERAR_PIX, config)
-  
   const dataResponse = await response.json()
+  setWaiting(false)
   return {
     itemId: dataResponse.data.items[0].itemId,
     textContent: dataResponse.data.items[0].data.textContent
   }
 }
 
-export async function requestBuyToken (accessToken, quantity, loteId) {
+export async function requestBuyToken (accessToken, quantity, loteId, setWaiting) {
   const dataBody = JSON.stringify({
     quantity: Number(quantity).toFixed(2).toString(),
     loteId
@@ -99,9 +99,10 @@ export async function requestBuyToken (accessToken, quantity, loteId) {
     body: dataBody
   }
 
+  setWaiting(true)
   const response = await fetch(process.env.COMPRAR_TOKEN, config)
-
   const dataResponse = await response.json()
+  setWaiting(false)
 
   return {
     hash: dataResponse.transactionHash,

@@ -13,6 +13,8 @@ import HeaderModalMobile from '../HeaderModalMobile'
 import QRCode from 'react-qr-code';
 import { WebSocketContext } from '@/context/WebSocketContext';
 
+import i18next from '@/src/i18n'
+
 interface buyCoinLivreInterface {
   conditionalBuy: string;
   balance: number;
@@ -21,6 +23,12 @@ interface buyCoinLivreInterface {
 function BuyCoinLivreMobile({ conditionalBuy,balance }: buyCoinLivreInterface) {
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
   const [QRcodeUrl, SetQRcodeUrl] = React.useState<any>('')
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
+  React.useEffect(() => {
+    const language = window.navigator.language
+    setLanguageBrowser(language)
+  }, []);
 
   const {
     modalMobileControl: [, setShowMobileModal]

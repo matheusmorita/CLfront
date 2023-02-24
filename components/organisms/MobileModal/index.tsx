@@ -17,6 +17,8 @@ import Projecard from '@/components/molecules/Projecard';
 import { fetchDataAxios, fetchDataUserInfo } from '@/utils/fetchDataAxios';
 import { useRouter } from 'next/router';
 
+import i18next from '@/src/i18n';
+
 function MobileModal() {
   const [projects, setProjects] = React.useState<any>([])
   const [projectSelected, setProjectSelected] = React.useState<any>();
@@ -29,6 +31,7 @@ function MobileModal() {
   const [valorToken, setValorToken] = React.useState<string>('')
   const [lote, setLote] = React.useState<object>();
   const [dataUser, setDataUser] = React.useState<object>();
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
   const router = useRouter();
 
@@ -42,6 +45,9 @@ function MobileModal() {
     const accessToken = localStorage.getItem('accessToken')
     fetchDataAxios("4", setProjects)
     fetchDataUserInfo(accessToken, setBalance, setDataUser)
+
+    const language = window.navigator.language
+    setLanguageBrowser(language)
   }, [balance])
 
   return (
@@ -89,7 +95,7 @@ function MobileModal() {
                 hidden={false}
                 id={`CNLT-${0}`}
                 src={Logo}
-                text="Comprar"
+                text={languageBrowser !== 'pt-BR' ? i18next.t("Comprar") : "Comprar"} 
                 onClick={(e: any) => {
                   e.preventDefault()
                   if (!loggedIn[0]) {
@@ -109,7 +115,7 @@ function MobileModal() {
                   key={item.acronimo}
                   src={item.logoUrl}
                   alt='Esta é uma imagem de um projeto a ser exibido'
-                  text='Comprar'
+                  text={languageBrowser !== 'pt-BR' ? i18next.t("Comprar") : "Comprar"} 
                   acronimo={item.acronimo}
                   emissor={item.emissor.nomeEmissor}
                   name={item.nome}

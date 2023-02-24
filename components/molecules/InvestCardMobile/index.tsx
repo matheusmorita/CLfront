@@ -4,6 +4,8 @@ import Button from '@/components/atoms/Button';
 
 import Styles from './styles.module.scss';
 
+import i18next from '@/src/i18n';
+
 interface InvestCardInterface {
   text?: any;
   id: string;
@@ -33,6 +35,12 @@ function InvestCardMobile({
   hiddenButton,
   className,
 }: InvestCardInterface) {
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
+  React.useEffect(() => {
+    const language = window.navigator.language
+    setLanguageBrowser(language)
+  }, []);
   return (
     <div className={Styles.projecard}>
       <div 
@@ -51,8 +59,8 @@ function InvestCardMobile({
       <div className={Styles.infoButtonSection}>
         <div className={Styles.projecard__info}>
           <div className={Styles.info}>
-            <h1 className={Styles.info__title}>{name}<span>#{acronimo}</span></h1>
-            <p className={Styles.info__tiny}>Emitido por <b>{emissor}</b></p>
+            <h1 className={Styles.info__title}>{languageBrowser !== 'pt-BR' ? i18next.t(name) : name}<span>#{acronimo}</span></h1>
+            <p className={Styles.info__tiny}>{languageBrowser !== 'pt-BR' ? i18next.t('Emitido por') : 'Emitido por'} <b>{emissor}</b></p>
             {/* Progress component */}
             <div className={Styles.progress}>
               <div className={Styles.progress__values}>

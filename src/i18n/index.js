@@ -3,16 +3,9 @@ import { initReactI18next } from 'react-i18next';
 import ENUS from './locales/en/en-us.json';
 import PTBR from './locales/pt/pt-br.json';
 
-export const handleChangeLanguage = () => {
-    if (typeof window !== 'undefined') {
-        // Perform localStorage action
-        return localStorage.getItem('language')
-    }
-}
-
 const resources = {
     "en-US": ENUS,
-    // "pt-BR": PTBR,
+    "pt-BR": PTBR,
 }
 
 i18next

@@ -10,6 +10,9 @@ import InputModal from '@/components/molecules/InputModal';
 import InvestCardMobile from '@/components/molecules/InvestCardMobile';
 import { fetchRequestPix, requestBuyToken } from '@/utils/fetchDataAxios';
 
+import i18next from '@/src/i18n';
+import Loader from '@/components/atoms/Loader';
+
 
 interface BuyProjectInterface {
   setRealValue: any;
@@ -44,6 +47,8 @@ function BuyProjectMobile({ setRealValue,
   const [checkboxCheck, setCheckoxCheck] = React.useState<boolean>(false);
   const [accessTokenState, setAccessTokenState] = React.useState<string | null>('');
   const [hashConfirm, setHashConfirm] = React.useState<string>('')
+  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+  const [waiting, setWaiting] = React.useState<boolean>(false)
 
   const checkSaldo = (balance: number, valorToken: string, realValue: string): boolean => {
     const multiplyValues = Number(realValue) * Number(valorToken)
@@ -62,10 +67,14 @@ function BuyProjectMobile({ setRealValue,
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
     setAccessTokenState(accessToken)
+
+    const language = window.navigator.language
+    setLanguageBrowser(language)
   }, [])
 
   return (
     <div className={Styles.divInput}>
+      {waiting ? <Loader absolute={true} active={waiting} /> : ''}
       {(!valueSaldo && btnCheckBalance === 'continueBuyProject') ? (
         <section className={Styles.notEnoughCoins}>
           <h4 className={Styles.titleEnough}>Fundos insuficientes</h4>
@@ -86,7 +95,7 @@ function BuyProjectMobile({ setRealValue,
               id="backButton"
               label="Clique para voltar"
               onClick={() => { setHiddenBuy(!hiddenBuy) }}
-              text="Voltar"
+              text={languageBrowser !== 'pt-BR' ? i18next.t("Voltar") : "Voltar"} 
               size={20}
               className={Styles.divButtons__backButton}
             />
@@ -98,13 +107,13 @@ function BuyProjectMobile({ setRealValue,
                 onClick={async (e: React.FormEvent<EventTarget>) => {
                   e.preventDefault()
                   const newRealValue = realValue.replace(',', '.')
-                  const { itemId, textContent } = await fetchRequestPix(accessTokenState, newRealValue)
+                  const { itemId, textContent } = await fetchRequestPix(accessTokenState, newRealValue, setWaiting)
                   sessionStorage.setItem('textContent', textContent)
                   sessionStorage.setItem('itemId', itemId)
                   setHiddenBuy(!hiddenBuy)
                   setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                 }}
-                text="Gerar QR Code"
+                text={languageBrowser !== 'pt-BR' ? i18next.t("Gerar QR code") : "Gerar QR code"}
                 size={20}
                 className={Styles.divButtons__QRButton}
               />
@@ -117,7 +126,7 @@ function BuyProjectMobile({ setRealValue,
                   e.preventDefault()
                   setHiddenBuy(!hiddenBuy)
                 }}
-                text="Continuar"
+                text={languageBrowser !== 'pt-BR' ? i18next.t("Continuar") : "Continuar"}
                 size={20}
                 className={Styles.divButtons__QRButton}
               />
@@ -289,7 +298,7 @@ function BuyProjectMobile({ setRealValue,
                   id="backButton"
                   label="Clique para voltar"
                   onClick={() => { setHiddenBuy(!hiddenBuy) }}
-                  text="Voltar"
+                  text={languageBrowser !== 'pt-BR' ? i18next.t("Voltar") : "Voltar"} 
                   size={20}
                   className={Styles.divButtons__backButton}
                 />
@@ -300,13 +309,13 @@ function BuyProjectMobile({ setRealValue,
                     label="Clique para gerar QR code"
                     onClick={async (e: React.FormEvent<EventTarget>) => {
                       e.preventDefault()
-                      const { itemId, textContent } = await fetchRequestPix(accessTokenState, realValue)
+                      const { itemId, textContent } = await fetchRequestPix(accessTokenState, realValue, setWaiting)
                       sessionStorage.setItem('textContent', textContent)
                       sessionStorage.setItem('itemId', itemId)
                       setHiddenBuy(true)
                       setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                     }}
-                    text="Gerar QR Code"
+                    text={languageBrowser !== 'pt-BR' ? i18next.t("Gerar QR code") : "Gerar QR code"}
                     size={20}
                     disabled={!checkboxCheck || (realValue === '')}
                     className={Styles.divButtons__QRButton}
@@ -321,7 +330,7 @@ function BuyProjectMobile({ setRealValue,
                       const responseSaldo = checkSaldo(balance, valorToken, realValue)
                       setValueSaldo(responseSaldo)
                       if (responseSaldo) {
-                        const { confirm, hash } = await requestBuyToken(accessTokenState, realValue, lote.id)
+                        const { confirm, hash } = await requestBuyToken(accessTokenState, realValue, lote.id, setWaiting)
                         setHashConfirm(hash)
                         if (confirm != 0) {
                           setBuyConfirmed(!buyConfirmed)
@@ -335,7 +344,7 @@ function BuyProjectMobile({ setRealValue,
                       setBtnCheckBalance(e.target.id)
                       // setHiddenBuy(!hiddenBuy)
                     }}
-                    text="Continuar"
+                    text={languageBrowser !== 'pt-BR' ? i18next.t("Continuar") : "Continuar"}
                     size={20}
                     disabled={!checkboxCheck || (realValue === '')}
                     className={Styles.divButtons__QRButton}
