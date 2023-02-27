@@ -115,7 +115,7 @@ function Modal() {
                 key={i}
                 acronimo={item.acronimo}
                 alt='Esta é uma imagem de um projeto a ser exibido'
-                emissor={item.emissor.nomeEmissor}
+                emissor={item.emissor?.nomeEmissor}
                 hiddenButton={false}
                 id={item.id}
                 name={item.nome}

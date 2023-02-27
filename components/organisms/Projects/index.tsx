@@ -35,7 +35,7 @@ const Projects = () => {
             name={languageBrowser !== 'pt-BR' ? t(item.nome) : item.nome}
             src={item.logoUrl}
             dataLanc={item.dataLancamento}
-            emissor={item.emissor.nomeEmissor}
+            emissor={item.emissor?.nomeEmissor}
             rent={item.rentabilidade ? item.rentabilidade : null}
             path={item.idProjeto}
             key={index}

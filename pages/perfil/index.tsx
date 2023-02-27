@@ -96,7 +96,7 @@ const Perfil = () => {
                   <label className={Styles.profile__inputImage} htmlFor='profileImageInput'>
                     <BorderColorIcon className={Styles.profile__icon} />
                     <input id="profileImageInput" name='image' type="file" onChange={(e: any) => {
-                      setImage(e.target.files[0])
+                      setImage(URL.createObjectURL(e.target.files[0]))
                     }}></input>
                   </label>
 
@@ -106,7 +106,7 @@ const Perfil = () => {
                       height={100}
                       width={100}
                       alt='defaultImage'
-                      src={URL.createObjectURL(image)} // Erro com typescript, é preciso ver o retorno correto para este dado na URL
+                      src={image} // Erro com typescript, é preciso ver o retorno correto para este dado na URL
                     />
                   ) : (
                     <Image

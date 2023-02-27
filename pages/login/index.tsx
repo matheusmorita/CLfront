@@ -115,7 +115,7 @@ const Login = () => {
                     para realizar o login na plataforma. Em caso
                     de dúvidas,</>
                   )} 
-                  {/* <a href="#">{languageBrowser !== 'pt-BR' ? <>{i18next.t('Clique aqui.')}</> : <>Clique aqui.</>}</a> */}
+                  <a href="mailto:contato@coinlivre.com.br" >{languageBrowser !== 'pt-BR' ? <>{i18next.t('Clique aqui.')}</> : <>Clique aqui.</>}</a>
                 </p>
                 <Button
                   id="submit-button"

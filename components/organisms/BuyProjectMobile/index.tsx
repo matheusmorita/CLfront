@@ -143,7 +143,7 @@ function BuyProjectMobile({ setRealValue,
                   hiddenButton={true}
                   acronimo={projectSelected.acronimo}
                   alt='Esta é uma imagem de um projeto a ser exibido'
-                  emissor={projectSelected.emissor.nomeEmissor}
+                  emissor={projectSelected.emissor?.nomeEmissor}
                   id={projectSelected.acronimo}
                   name={projectSelected.nome}
                   src={projectSelected.logoUrl}
@@ -193,7 +193,7 @@ function BuyProjectMobile({ setRealValue,
                       hiddenButton={true}
                       acronimo={projectSelected.acronimo}
                       alt='Esta é uma imagem de um projeto a ser exibido'
-                      emissor={projectSelected.emissor.nomeEmissor}
+                      emissor={projectSelected.emissor?.nomeEmissor}
                       id={projectSelected.acronimo}
                       name={projectSelected.nome}
                       src={projectSelected.logoUrl}

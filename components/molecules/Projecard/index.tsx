@@ -119,16 +119,7 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
             </span>
           </div>
         ) : ''}
-        {totalValue === 0 ? (
-          <div className={Styles.data}>
-          <h1 className={Styles.data__title}>
-            Total
-          </h1>
-          <span className={Styles.data__value}>
-            <span>R$ 0</span>
-          </span>
-        </div>
-        ) : (
+        {totalValue && (
           <div className={Styles.data}>
             <h1 className={Styles.data__title}>
               Total
@@ -138,14 +129,6 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
             </span>
           </div>
         )}
-        {/* <div className={Styles.data}>
-          <h1 className={Styles.data__title}>
-            {data[2].title}
-          </h1>
-          <span className={Styles.data__value}>
-            <span>{data[2].value}</span>
-          </span>
-        </div> */}
       </div>
     </div>
   )

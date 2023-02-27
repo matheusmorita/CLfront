@@ -117,7 +117,7 @@ function MobileModal() {
                   alt='Esta é uma imagem de um projeto a ser exibido'
                   text={languageBrowser !== 'pt-BR' ? i18next.t("Comprar") : "Comprar"} 
                   acronimo={item.acronimo}
-                  emissor={item.emissor.nomeEmissor}
+                  emissor={item.emissor?.nomeEmissor}
                   name={item.nome}
                   hidden={true}
                   id={item.id}
