@@ -10,6 +10,11 @@
     "analyze": "source-map-explorer .next/static/**/*.js",
     "build:analyze": "npm run build && npm run analyze"
   },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -27,6 +32,7 @@
     "eslint-config-next": "13.0.6",
     "i18next": "^22.4.9",
     "next": "13.0.6",
+    "next-i18next": "^13.1.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-i18next": "^12.1.5",

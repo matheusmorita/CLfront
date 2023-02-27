@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 import { getPageTopDistance } from '@/assets/js/util/scroll'
 import { getWindowInnerWidth } from '@/assets/js/util/responsive'
 import Styles from './styles.module.scss'
-import { useTranslation } from 'react-i18next'
 
 
 type Props = {
@@ -25,9 +24,7 @@ const Header = ({ hideLinks }: Props) => {
   const [info, setUserInfo] = userInfo
   const [logged, setLoggedIn] = loggedIn
 
-  const { t } = useTranslation();
-
-  const { locale, locales, push } = useRouter();
+  const { locale, locales, push, asPath } = useRouter();
 
   const handleClick = (l: any) => {
     push('/login/', undefined, {
@@ -99,8 +96,8 @@ const Header = ({ hideLinks }: Props) => {
             }
             <Button
               id="header-cta"
-              text={languageBrowser !== 'pt-BR' ? t("Cadastro ou Login") : "Cadastro ou Login"}
-              label="Clique e cadastre-se na Lista VIP"
+              text={"Cadastro ou Login"}
+              label="Clique e cadastre-se"
               className="ms-3"
               hidden={false}
               disabled={false}
@@ -119,7 +116,7 @@ const Header = ({ hideLinks }: Props) => {
       </div>
       {locales?.map(l => {
         return (
-          <Link href={'/login'} key={l} locale={l}>{l}</Link>)
+          <Link href={asPath} key={l} locale={l}>{l}</Link>)
       })}
     </nav>
   )

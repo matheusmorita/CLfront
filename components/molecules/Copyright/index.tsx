@@ -2,13 +2,15 @@ import React from 'react'
 import Image from 'next/image'
 import Styles from './styles.module.scss'
 import Blocklize from '@/assets/img/blocklize.webp'
-import { useTranslation } from 'react-i18next'
 import UserContext from '@/context/UserContext'
+
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const Copyright = () => {
   const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
-  const { t } = useTranslation();
+  const { t } = useTranslation('footer');
 
   const { locale } = React.useContext(UserContext)
 
@@ -46,6 +48,14 @@ const Copyright = () => {
       </p>
     </div>
   )
+}
+
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+      props: {
+          ...(await serverSideTranslations(locale, ['footer']))
+      }
+  }
 }
 
 export default Copyright

@@ -1,6 +1,9 @@
 import React from 'react'
 import Styles from './styles.module.scss'
 
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next'
+
 type Props = {
   id: string,
   label: string,
@@ -14,6 +17,8 @@ type Props = {
 }
 
 const Button = ({ id, label, hidden, disabled, text, onClick, className, size, type }: Props) => {
+  const { t } = useTranslation('login');
+
   return (
     <button
       id={id}
@@ -25,9 +30,17 @@ const Button = ({ id, label, hidden, disabled, text, onClick, className, size, t
       style={{fontSize: size}}
       type={type}
     >
-      {text}
+      {t(text)}
     </button>
   )
+}
+
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+      props: {
+          ...(await serverSideTranslations(locale, ['login']))
+      }
+  }
 }
 
 export default Button

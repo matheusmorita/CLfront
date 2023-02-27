@@ -13,7 +13,8 @@ import Paragrah from '@/components/atoms/Paragraph'
 import { useRouter } from 'next/router'
 import UserContext from '@/context/UserContext'
 
-import i18next from '@/src/i18n'
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const TokenShare = () => {
   const router = useRouter()
@@ -22,7 +23,8 @@ const TokenShare = () => {
   const [info, setUserInfo] = userInfo
   const [logged, setLoggedIn] = loggedIn
 
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
+  const { t } = useTranslation('login')
 
 
   const fetchData = async () => {
@@ -78,8 +80,6 @@ const TokenShare = () => {
   React.useEffect(() => {
     if (!token && localStorage.getItem('accessToken')) return
     fetchData()
-    const language = window.navigator.language
-    setLanguageBrowser(language)
   }, [router])
 
   return (
@@ -128,7 +128,7 @@ const TokenShare = () => {
             />
             <Paragrah
               id='form-description'
-              text={languageBrowser !== 'pt-BR' ? i18next.t('Aguarde, você será redirecionado.') : 'Aguarde, você será redirecionado.'}
+              text={t('Aguarde, você será redirecionado.')}
               hidden={false}
               width={100}
             />
@@ -141,6 +141,14 @@ const TokenShare = () => {
       </Section>
     </Frame>
   )
+}
+
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+      props: {
+          ...(await serverSideTranslations(locale, ['login']))
+      }
+  }
 }
 
 export default TokenShare

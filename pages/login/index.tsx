@@ -18,9 +18,11 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { captureEmail } from '@/assets/js/util/validations'
 
-import i18next from '@/src/i18n';
-import { handleUserRequest } from '@/utils/fetchDataAxios'
+// translaction serverSide
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
+import { handleUserRequest } from '@/utils/fetchDataAxios'
 
 const Login = () => {
   const [email, setEmail] = React.useState()
@@ -30,6 +32,8 @@ const Login = () => {
 
   const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
+
+  const { t } = useTranslation('login');
 
   const router = useRouter()
   const { userInfo, loggedIn } = React.useContext(UserContext)
@@ -102,7 +106,7 @@ const Login = () => {
                 />
                 <Input
                   id='email'
-                  label={languageBrowser !== 'pt-BR' ? i18next.t('Digite seu e-mail') : 'Digite seu e-mail'}
+                  label={t('Digite seu e-mail')}
                   type='email'
                   onInput={setEmail}
                   validation={setError}
@@ -110,16 +114,12 @@ const Login = () => {
                   error={error}
                 />
                 <p className={Styles.form__desc}>
-                  {languageBrowser !== 'pt-BR' ? <>{i18next.t('Neste momento não é necessário um cadastro para realizar o login na plataforma.')}</> : (
-                    <>Neste momento não é necessário um cadastro
-                    para realizar o login na plataforma. Em caso
-                    de dúvidas,</>
-                  )} 
-                  <a href="mailto:contato@coinlivre.com.br" >{languageBrowser !== 'pt-BR' ? <>{i18next.t('Clique aqui.')}</> : <>Clique aqui.</>}</a>
+                  {t('Neste momento não é necessário um cadastro para realizar o login na plataforma.')} 
+                  <a href="mailto:contato@coinlivre.com.br" >{t('Clique aqui.')}</a>
                 </p>
                 <Button
                   id="submit-button"
-                  text={languageBrowser !== 'pt-BR' ? i18next.t("Entrar") : "Entrar"}
+                  text={t("Entrar")}
                   label="Clique e faça login em sua conta CoinLivre"
                   className="w-100 py-2 mt-2 fs-5"
                   hidden={false}
@@ -144,7 +144,7 @@ const Login = () => {
                 />
                 <Paragrah
                   id='form-description'
-                  text={languageBrowser !== 'pt-BR' ? i18next.t('Um e-mail foi encaminhado para a sua caixa de entrada.') : 'Um e-mail foi encaminhado para a sua caixa de entrada.'}
+                  text={t('Um e-mail foi encaminhado para a sua caixa de entrada.')}
                   hidden={false}
                   width={100}
                 />
@@ -163,6 +163,14 @@ const Login = () => {
       </Frame>
     </main>
   )
+}
+
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+      props: {
+          ...(await serverSideTranslations(locale, ['login', 'footer']))
+      }
+  }
 }
 
 export default Login

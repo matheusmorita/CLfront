@@ -19,18 +19,13 @@ import Projects from '@/components/organisms/Projects'
 
 import manImage from '@/assets/img/homemSorridente.png';
 
-import { useTranslation } from 'react-i18next';
-import UserContext from '@/context/UserContext'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const QuemSomos = () => {
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
-  const { t } = useTranslation();
+  const { t } = useTranslation('quem-somos');
 
   React.useEffect(() => {
-    const language = window.navigator.language
-    setLanguageBrowser(language)
     // const beforePath = localStorage.getItem('beforePath')
     // router.push(`${beforePath}`)
   }, [])
@@ -67,14 +62,14 @@ const QuemSomos = () => {
             />
             <Title
               id='introducao-title'
-              text={languageBrowser !== 'pt-BR' ? <>{t('O seu acesso ')}<br></br>{t('à nova economia digital')}</> : <>O seu acesso <br></br>à nova economia digital</>}
+              text={t('O seu acesso à nova economia digital')}
               hidden={false}
               width={14}
               weight={500}
             />
             <Paragrah
               id='introducao-description'
-              text={languageBrowser !== 'pt-BR' ? t(Data.banner.description) : Data.banner.description}
+              text={Data.banner.description}
               hidden={false}
               width={24}
             />
@@ -86,7 +81,7 @@ const QuemSomos = () => {
                 id='buttonToProjects'
                 label='Clique aqui para ir até os projetos'
                 onClick={() => { }}
-                text={languageBrowser !== 'pt-BR' ? t('Conheça os projetos') : 'Conheça os projetos'}
+                text={t('Conheça os projetos')}
                 className={Styles.buttonProjects}
               />
             </a>
@@ -131,7 +126,7 @@ const QuemSomos = () => {
             />
             <Paragrah
               id='sobre-description'
-              text={languageBrowser !== 'pt-BR' ? t(Data.about.paragraph) : Data.about.paragraph}
+              text={t(Data.about.paragraph)}
               hidden={false}
               width={30}
             />
@@ -153,14 +148,14 @@ const QuemSomos = () => {
         >
           <Title
             id='projetos-title'
-            text={languageBrowser !== 'pt-BR' ? t(Data.projects.title) : Data.projects.title}
+            text={t(Data.projects.title)}
             className={`${Styles.bright__title} fw-normal`}
             color='#1d3315'
             hidden={false}
           />
           <Paragrah
             id='projetos-description'
-            text={languageBrowser !== 'pt-BR' ? t(Data.projects.description) : Data.projects.description}
+            text={t(Data.projects.description)}
             className="pt-3 pb-5"
             color='#606060'
             hidden={false}
@@ -180,7 +175,7 @@ const QuemSomos = () => {
         >
           <Title
             id='faq-title'
-            text={languageBrowser !== 'pt-BR' ? t("Ficou alguma dúvida?") : "Ficou alguma dúvida?"}
+            text={t("Ficou alguma dúvida?")}
             className='fw-bold'
             color='#00ee8d'
             hidden={false}
@@ -222,7 +217,7 @@ const QuemSomos = () => {
             />
             <Paragrah
               id='discord-description'
-              text={languageBrowser !== 'pt-BR' ? t(Data.discord.paragraph) : Data.discord.paragraph}
+              text={t(Data.discord.paragraph)}
               className="py-2"
               hidden={false}
               width={20}
@@ -230,7 +225,7 @@ const QuemSomos = () => {
             />
             <Button
               id='discord-cta'
-              text={languageBrowser !== 'pt-BR' ? t('ACOMPANHE NOSSOS PRÓXIMOS PASSOS') : 'ACOMPANHE NOSSOS PRÓXIMOS PASSOS'}
+              text={t('ACOMPANHE NOSSOS PRÓXIMOS PASSOS')}
               label='Clique e acompanhe nossos próximos passos'
               hidden={false}
               disabled={false}
@@ -243,6 +238,14 @@ const QuemSomos = () => {
       </Frame>
     </main>
   )
+}
+
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+      props: {
+          ...(await serverSideTranslations(locale, ['quem-somos', 'footer']))
+      }
+  }
 }
 
 export default QuemSomos
