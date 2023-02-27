@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const { i18n } = require('./next-i18next.config');
+
 const nextConfig = {
   env: {
     PROJETO_URL: 'https://coinlivre.blocklize.io/projeto/retornar?',
@@ -14,10 +16,7 @@ const nextConfig = {
   productionBrowserSourceMaps: true,
   reactStrictMode: true,
   swcMinify: true,
-  i18n: {
-    locales: ["pt-BR", 'en-US'],
-    defaultLocale: "pt-BR",
-  },
+  i18n,
   images: {
     domains: ["parsefiles.back4app.com"],
   },

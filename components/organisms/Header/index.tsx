@@ -11,6 +11,7 @@ import { getWindowInnerWidth } from '@/assets/js/util/responsive'
 import Styles from './styles.module.scss'
 import { useTranslation } from 'react-i18next'
 
+
 type Props = {
   hideLinks: boolean
 }
@@ -25,6 +26,14 @@ const Header = ({ hideLinks }: Props) => {
   const [logged, setLoggedIn] = loggedIn
 
   const { t } = useTranslation();
+
+  const { locale, locales, push } = useRouter();
+
+  const handleClick = (l: any) => {
+    push('/login/', undefined, {
+      locale: l
+    })
+  }
 
   React.useEffect(() => {
     const language = window.navigator.language
@@ -108,6 +117,10 @@ const Header = ({ hideLinks }: Props) => {
           />
         )}
       </div>
+      {locales?.map(l => {
+        return (
+          <Link href={'/login'} key={l} locale={l}>{l}</Link>)
+      })}
     </nav>
   )
 }
