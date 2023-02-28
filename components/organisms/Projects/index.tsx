@@ -4,20 +4,23 @@ import Row from '@/molecules/Row'
 import Project from '@/molecules/Project'
 
 import { fetchDataAxios } from '@/utils/fetchDataAxios';
-import { useTranslation } from 'react-i18next';
-import UserContext from '@/context/UserContext';
+
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+import { useRouter } from 'next/router';
 
 const Projects = () => {
   const [projects, setProjects] = React.useState<any>([])
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
-  const { t } = useTranslation();
 
-  const { locale } = React.useContext(UserContext)
+  const router = useRouter();
+
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt
 
   React.useEffect(() => {
     fetchDataAxios("4", setProjects)
-    const language = window.navigator.language
-    setLanguageBrowser(language)
   }, [])
 
   return (
@@ -32,7 +35,7 @@ const Projects = () => {
             id={item.acronimo}
             idProject={item.id}
             text={(item.acronimo.includes('CLDG') || item.acronimo.includes('CLMT')) ? 'EM BREVE' : 'SAIBA MAIS'}
-            name={languageBrowser !== 'pt-BR' ? t(item.nome) : item.nome}
+            name={item.nome}
             src={item.logoUrl}
             dataLanc={item.dataLancamento}
             emissor={item.emissor?.nomeEmissor}

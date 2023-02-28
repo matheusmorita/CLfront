@@ -19,11 +19,17 @@ import Projects from '@/components/organisms/Projects'
 
 import manImage from '@/assets/img/homemSorridente.png';
 
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+import { useRouter } from 'next/router'
 
 const QuemSomos = () => {
-  const { t } = useTranslation('quem-somos');
+  const router = useRouter();
+
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt
 
   React.useEffect(() => {
     // const beforePath = localStorage.getItem('beforePath')
@@ -62,14 +68,14 @@ const QuemSomos = () => {
             />
             <Title
               id='introducao-title'
-              text={t('O seu acesso à nova economia digital')}
+              text={t.yourAcessNewEconomy}
               hidden={false}
               width={14}
               weight={500}
             />
             <Paragrah
               id='introducao-description'
-              text={Data.banner.description}
+              text={t.descriptionInvest}
               hidden={false}
               width={24}
             />
@@ -81,7 +87,7 @@ const QuemSomos = () => {
                 id='buttonToProjects'
                 label='Clique aqui para ir até os projetos'
                 onClick={() => { }}
-                text={t('Conheça os projetos')}
+                text={t.meetProjects}
                 className={Styles.buttonProjects}
               />
             </a>
@@ -126,7 +132,7 @@ const QuemSomos = () => {
             />
             <Paragrah
               id='sobre-description'
-              text={t(Data.about.paragraph)}
+              text={t.coinlivreRevolution}
               hidden={false}
               width={30}
             />
@@ -148,14 +154,14 @@ const QuemSomos = () => {
         >
           <Title
             id='projetos-title'
-            text={t(Data.projects.title)}
+            text={t.coinlivreLaunchs}
             className={`${Styles.bright__title} fw-normal`}
             color='#1d3315'
             hidden={false}
           />
           <Paragrah
             id='projetos-description'
-            text={t(Data.projects.description)}
+            text={t.coinlivreViability}
             className="pt-3 pb-5"
             color='#606060'
             hidden={false}
@@ -175,7 +181,7 @@ const QuemSomos = () => {
         >
           <Title
             id='faq-title'
-            text={t("Ficou alguma dúvida?")}
+            text={t.anyQuestion}
             className='fw-bold'
             color='#00ee8d'
             hidden={false}
@@ -186,7 +192,7 @@ const QuemSomos = () => {
             className='my-5 d-block align-items-center justify-content-start flex-wrap'
           >
             <Faq
-              data={Data.faq}
+              data={t.questionsAndAnswers}
             />
           </Column>
         </Section>
@@ -217,7 +223,7 @@ const QuemSomos = () => {
             />
             <Paragrah
               id='discord-description'
-              text={t(Data.discord.paragraph)}
+              text={t.discordNews}
               className="py-2"
               hidden={false}
               width={20}
@@ -225,7 +231,7 @@ const QuemSomos = () => {
             />
             <Button
               id='discord-cta'
-              text={t('ACOMPANHE NOSSOS PRÓXIMOS PASSOS')}
+              text={t.nextSteps}
               label='Clique e acompanhe nossos próximos passos'
               hidden={false}
               disabled={false}
@@ -238,14 +244,6 @@ const QuemSomos = () => {
       </Frame>
     </main>
   )
-}
-
-export async function getStaticProps({ locale }: { locale: string }) {
-  return {
-      props: {
-          ...(await serverSideTranslations(locale, ['quem-somos', 'footer']))
-      }
-  }
 }
 
 export default QuemSomos

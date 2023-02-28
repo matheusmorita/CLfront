@@ -10,6 +10,9 @@ import { getPageTopDistance } from '@/assets/js/util/scroll'
 import { getWindowInnerWidth } from '@/assets/js/util/responsive'
 import Styles from './styles.module.scss'
 
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
 
 type Props = {
   hideLinks: boolean
@@ -18,13 +21,14 @@ type Props = {
 const Header = ({ hideLinks }: Props) => {
   const [whiteTheme, setWhiteTheme] = React.useState<boolean>(false)
   const [responsive, setResponsive] = React.useState<boolean>(false)
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
   const { userInfo, loggedIn } = React.useContext(UserContext)
   const [info, setUserInfo] = userInfo
   const [logged, setLoggedIn] = loggedIn
 
   const { locale, locales, push, asPath } = useRouter();
+
+  const t = locale === 'en' ? en : pt
 
   const handleClick = (l: any) => {
     push('/login/', undefined, {
@@ -33,9 +37,6 @@ const Header = ({ hideLinks }: Props) => {
   }
 
   React.useEffect(() => {
-    const language = window.navigator.language
-    setLanguageBrowser(language)
-
     console.log(window.location.pathname)
     // const beforePath = localStorage.getItem('beforePath')
     // router.push(`${beforePath}`)
@@ -96,7 +97,7 @@ const Header = ({ hideLinks }: Props) => {
             }
             <Button
               id="header-cta"
-              text={"Cadastro ou Login"}
+              text={t.registerOrLogin}
               label="Clique e cadastre-se"
               className="ms-3"
               hidden={false}

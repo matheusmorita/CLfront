@@ -1,190 +1,97 @@
 {
-    "translation": {
-        "O seu acesso ":
-          "Your access ",
-        "à nova economia digital":
-          "to the new digital economy",
-        "Invista em ativos financeiros de alta performance através da tecnologia blockchain": 
-          "Invest in high-performance financial assets, through blockchain technology",
-        "A CoinLivre chegou para revolucionar o acesso às multi modalidades de investimento em ativos de alta performance existentes. Do investidor iniciante ao experiente, aqui todos terão acesso aos benefícios que à nova economia digital proporciona. Por meio da tokenização de ativos reais conectamos as oportunidades do mercado financeiro tradicional a nova era digital da WEB3, tornando-os mais competitivos pela redução de intermediários e conveniências que a tecnologia Blockchain nos proporciona.": 
-          "CoinLivre intends to revolutionize the access to multi-investment categories on high performance assets. From beginner to expert, investors will all have access to the benefits the Digital Economy unlocks. Through real assets Tokenization, we connect opportunities from the traditional Brazilian financial market to WEB3’s new age opportunities, making them more competitive and accessible – due to both the reduction of middlemen and the advanced technology the Blockchain has to offer.",
-        "Fique por dentro de todas as novidades e saia na frente": 
-          "Get ahead by staying in tune with our news and releases",
-        "O que a CoinLivre faz?": "What does coinlivre do?",
-        "Transformamos ativos reais em ativos digitais, através da tecnologia Blockchain aproximamos os investidores aos donos dos Ativos, somos o meio, o Marketplace que possibilita distribuir ativos fracionados digitalmente, os chamados tokens.":
-          "We transform real live assets into digital assets, through Blockchain technology. We bond investors to asset owners. We are the bridge, the marketplace that enables the distribution of digitally fractioned assets, which are called Tokens.",
-        "Como fazemos?": 
-          "How do we do it?",
-        "Através de uma estruturação jurídica, definimos as regras para a emissão dos Tokens, após transferimos essa informação e são criados os Smart Contracts, espelhos digitais dos contratos reais, dessa maneira forma-se um vínculo jurídico entre o ativo e o token, tudo isso de forma automática, sem interferência humana, após o Smart Contract é registrado na Blockchain tornando-se imutável, auditável e público, por fim é listado e distribuído no Marketplace da CoinLivre ganhando mercados globais 24x7 que não fecham nunca e mercado secundário através do P2P (peer to peer).":
-          "After legal structuring, we define the rules upon which all tokens are published. Once that information is transferred, the SmartContracts are created – which are digital mirrors of physical contracts. That way, we form a digital and legal bond between the real-life asset and its Token, all automatically and without human interference. After it is on the Blockchain, it becomes immutable, pro-audit and public. Finally, it is listed and distributed exclusively through our 24/7 marketplace, globally, and P2P-friendly (peer-to-peer) via our Wallet.",
-        "Por que fazemos?": 
-          "Why do we do it?",
-        "Somos a conexão para a nova economia, para o dono do ativo tokenizado, esse processo possibilita captar recursos muito mais rápido e com custos muito menores comparado aos processos tradicionais como Bancos e ou Mercado de Capitais, com maior liquidez gerando novas oportunidades de negócios. Além de possibilitar apoio financeiro a projetos com grande potencial e a expansão de novos negócios. Para o investidor abre-se novas oportunidades para diversificar seu portifólio em ativos de alta performance com segurança jurídica e tecnológica. Alcançando produtos que até então eram restritos a investidores qualificados e ou profissionais.":
-          "We are the connection to the new economy. To the asset-owner, our process enables investment gathering in a much faster and cheaper way – compared to the traditional Banking system -, with higher liquidity which, on itself, brings new business opportunities. Not to mention the ability of getting access to new ways of project funding with huge potential of expansion. To the investors, on the other end, we provide and market new investment options, so they can diversify their portfolio on high performance assets with high tech and legal safety. Needless to say, those options were restricted only to professional qualified investors before we arrived. ",
-        "Acompanhe nossos lançamentos": 
-          "Keep up with our Token launches",
-        "A CoinLivre viabiliza, através da sua plataforma de negociação de ativos digitais, o livre acesso às mais variadas modalidades de investimentos -  com excelentes resultados financeiros, segurança e transparência.":
-          "CoinLivre enables, through our digital asset marketplace platform, free access to a whole set os investment categories – all with excellent financial gains, security and transparency.",
-        "Fique por dentro de todas as novidades e saia na frente": "Get ahead by staying in tune with our news and releases",
-        "Data de lançamento": 
-          "Release date",
-        "Emitido por": 
-          "Project Owner",
-        "Rentabilidade estimada de até ": 
-          "Projected profitability ",
-        "SAIBA MAIS": 
-          "MORE INFO",
-        "Ficou alguma dúvida?": 
-          "Any questions so far?",
-        "A Coinlivre": 
-          "Coinlivre",
-        "Quem somos": 
-          "About us",
-        "Nossos projetos":
-          "Our projects",
-        "Assessoria de imprensa":
-          "Press release",
-        "Jurídico": 
-          "Legal",
-        "Termo de uso": 
-          "Terms of use",
-        "Política de privacidade":
-          "privacy policy",
-        "Ajuda": 
-          "help",
-        "Fale conosco": 
-          "Contact info",
-        "Perguntas frequentes":  
-          "FAQ",
-        "Aprenda sobre tokenização": 
-          "Learn about Tokenization",
-        "Compliance": 
-          "nsa",
-        "Ouvidoria": 
-          "Legal contact",
-        "Todos os direitos reservados.":
-          "All rights reserved.",
-        "Desenvolvido por": 
-          "Developed by",
-        "Cadastro ou Login":
-          "Sign up or Sign in",
-        "EM BREVE":
-          "COMMING SOON",
-        "ACOMPANHE NOSSOS PRÓXIMOS PASSOS": 
-          "GET UP TO DATE!",
-        "Token de energia limpa":
-          "Clean Energy Token",
-        "TBK e-Sports":
-          "TBK E-sports Fan Token",
-        "Token de Recebíveis": 
-          "Private Debt Token",
-        "Fan Token de Influenciadores": 
-          "Influencers Media Fan-Token",
-        "Investir":
-          "Invest",
-        "Sobre":
-          "About",
-        "Documentos": 
-          "Documents",
-        "Emissor":
-          "Project owner",
-        "Sobre o token":
-          "Token Infos",
-        "NOVO":
-          "NEW",
-        "DESTAQUE":
-          "Emphasis",
-        "Contrato":
-          "Contract",
-        "Rentabilidade":
-          "Profitability",
-        "Lote":
-          "Batch",
-        "Valor do Token":
-          "Token price",
-        "Prazo do Lote":
-          "Batch expiration date",
-        "QTDE de Tokens":
-          "Total of Tokens",
-        "Captação":
-          "Amount invested",
-        "Benefícios entregues":
-          "Benefits delivered",
-        "Título do doc":
-          "Doc title",
-        "DOCUMENTO":
-          "DOCUMENT",
-        "ACESSE O SITE":
-          "Visit the website",
-        "Digite seu e-mail":
-          "Insert e-mail",
-        "Entrar":
-          "Login",
-        "Um e-mail foi encaminhado para a sua caixa de entrada.":
-          "An email has been forwarded to your inbox.",
-        "Conheça os projetos":
-          "Discover the projects",
-        "Neste momento não é necessário um cadastro para realizar o login na plataforma.":
-          "At this time, registration is not required to login to the platform.",
-        "Clique aqui.":
-          "Click here.",
-        "Digite seu nome completo":
-          "Full name",
-        "Registrar-se":
-          "Register",
-        "Digite seu CPF":
-          "Insert CPF",
-        "Eu li e concordo com os termos de uso de dados, política de privacidade e cookies.":
-          "I acknowledge that I have read and understood the terms, privacy and cookies policy.",
-        "Data de nascimento":
-          "Birthday",
-        "Continuar":
-          "Next",
-        "Cadastro realizado com sucesso! Aguarde, você será redirecionado.":
-          "Successfully registered! Please wait, you will be redirected.",
-        "Aguarde, você será redirecionado.":
-          "Please wait, you will be redirected.",
-        "Olá,":
-          "Hello,",
-        "Perfil":
-          "Profile",
-        "Desconectar":
-          "Disconnect",
-        "Através de benefícios":
-          "Through benefits",
-        "Data":
-          "Date",
-        "Benefício":
-          "Benefit",
-        "Preciso de ajuda":
-          "Help",
-        "Histórico":
-          "Historic",
-        "Carteira":
-          "Wallet",
-        "Saldo":
-          "Balance",
-        "SALDO":
-          "BALANCE",
-        "Quantidade":
-          "Quantity",
-        "Valor unitário":
-          "Unitary value",
-        "Cronograma de retornos":
-          "Return schedule",
-        "Retorno":
-          "Return",
-        "Parcela":
-          "Installment",
-        "Venc.":
-          "Payout Date",
-        "Comprar":
-        "Buy",
-        "Vender":
-          "Sell",
-        "Voltar":
-          "Back",
-        "Gerar QR code":
-          "Generate QR code"
-    }
+  "translation": {
+    "O seu acesso ": "Your access ",
+    "à nova economia digital": "to the new digital economy",
+    "Invista em ativos financeiros de alta performance através da tecnologia blockchain": "Invest in high-performance financial assets, through blockchain technology",
+    "A CoinLivre chegou para revolucionar o acesso às multi modalidades de investimento em ativos de alta performance existentes. Do investidor iniciante ao experiente, aqui todos terão acesso aos benefícios que à nova economia digital proporciona. Por meio da tokenização de ativos reais conectamos as oportunidades do mercado financeiro tradicional a nova era digital da WEB3, tornando-os mais competitivos pela redução de intermediários e conveniências que a tecnologia Blockchain nos proporciona.": "CoinLivre intends to revolutionize the access to multi-investment categories on high performance assets. From beginner to expert, investors will all have access to the benefits the Digital Economy unlocks. Through real assets Tokenization, we connect opportunities from the traditional Brazilian financial market to WEB3’s new age opportunities, making them more competitive and accessible – due to both the reduction of middlemen and the advanced technology the Blockchain has to offer.",
+    "Fique por dentro de todas as novidades e saia na frente": "Get ahead by staying in tune with our news and releases",
+    "O que a CoinLivre faz?": "What does coinlivre do?",
+    "Transformamos ativos reais em ativos digitais, através da tecnologia Blockchain aproximamos os investidores aos donos dos Ativos, somos o meio, o Marketplace que possibilita distribuir ativos fracionados digitalmente, os chamados tokens.": "We transform real live assets into digital assets, through Blockchain technology. We bond investors to asset owners. We are the bridge, the marketplace that enables the distribution of digitally fractioned assets, which are called Tokens.",
+    "Como fazemos?": "How do we do it?",
+    "Através de uma estruturação jurídica, definimos as regras para a emissão dos Tokens, após transferimos essa informação e são criados os Smart Contracts, espelhos digitais dos contratos reais, dessa maneira forma-se um vínculo jurídico entre o ativo e o token, tudo isso de forma automática, sem interferência humana, após o Smart Contract é registrado na Blockchain tornando-se imutável, auditável e público, por fim é listado e distribuído no Marketplace da CoinLivre ganhando mercados globais 24x7 que não fecham nunca e mercado secundário através do P2P (peer to peer).": "After legal structuring, we define the rules upon which all tokens are published. Once that information is transferred, the SmartContracts are created – which are digital mirrors of physical contracts. That way, we form a digital and legal bond between the real-life asset and its Token, all automatically and without human interference. After it is on the Blockchain, it becomes immutable, pro-audit and public. Finally, it is listed and distributed exclusively through our 24/7 marketplace, globally, and P2P-friendly (peer-to-peer) via our Wallet.",
+    "Por que fazemos?": "Why do we do it?",
+    "Somos a conexão para a nova economia, para o dono do ativo tokenizado, esse processo possibilita captar recursos muito mais rápido e com custos muito menores comparado aos processos tradicionais como Bancos e ou Mercado de Capitais, com maior liquidez gerando novas oportunidades de negócios. Além de possibilitar apoio financeiro a projetos com grande potencial e a expansão de novos negócios. Para o investidor abre-se novas oportunidades para diversificar seu portifólio em ativos de alta performance com segurança jurídica e tecnológica. Alcançando produtos que até então eram restritos a investidores qualificados e ou profissionais.": "We are the connection to the new economy. To the asset-owner, our process enables investment gathering in a much faster and cheaper way – compared to the traditional Banking system -, with higher liquidity which, on itself, brings new business opportunities. Not to mention the ability of getting access to new ways of project funding with huge potential of expansion. To the investors, on the other end, we provide and market new investment options, so they can diversify their portfolio on high performance assets with high tech and legal safety. Needless to say, those options were restricted only to professional qualified investors before we arrived.",
+    "Acompanhe nossos lançamentos": "Keep up with our Token launches",
+    "A CoinLivre viabiliza, através da sua plataforma de negociação de ativos digitais, o livre acesso às mais variadas modalidades de investimentos -  com excelentes resultados financeiros, segurança e transparência.": "CoinLivre enables, through our digital asset marketplace platform, free access to a whole set os investment categories – all with excellent financial gains, security and transparency.",
+    "Data de lançamento": "Release date",
+    "Emitido por": "Project Owner",
+    "Rentabilidade estimada de até ": "Projected profitability ",
+    "SAIBA MAIS": "MORE INFO",
+    "Ficou alguma dúvida?": "Any questions so far?",
+    "A Coinlivre": "Coinlivre",
+    "Quem somos": "About us",
+    "Nossos projetos": "Our projects",
+    "Assessoria de imprensa": "Press release",
+    "Jurídico": "Legal",
+    "Termo de uso": "Terms of use",
+    "Política de privacidade": "privacy policy",
+    "Ajuda": "help",
+    "Fale conosco": "Contact info",
+    "Perguntas frequentes": "FAQ",
+    "Aprenda sobre tokenização": "Learn about Tokenization",
+    "Compliance": "nsa",
+    "Ouvidoria": "Legal contact",
+    "Todos os direitos reservados.": "All rights reserved.",
+    "Desenvolvido por": "Developed by",
+    "Cadastro ou Login": "Sign up or Sign in",
+    "EM BREVE": "COMMING SOON",
+    "ACOMPANHE NOSSOS PRÓXIMOS PASSOS": "GET UP TO DATE!",
+    "Token de energia limpa": "Clean Energy Token",
+    "TBK e-Sports": "TBK E-sports Fan Token",
+    "Token de Recebíveis": "Private Debt Token",
+    "Fan Token de Influenciadores": "Influencers Media Fan-Token",
+    "Investir": "Invest",
+    "Sobre": "About",
+    "Documentos": "Documents",
+    "Emissor": "Project owner",
+    "Sobre o token": "Token Infos",
+    "NOVO": "NEW",
+    "DESTAQUE": "Emphasis",
+    "Contrato": "Contract",
+    "Rentabilidade": "Profitability",
+    "Lote": "Batch",
+    "Valor do Token": "Token price",
+    "Prazo do Lote": "Batch expiration date",
+    "QTDE de Tokens": "Total of Tokens",
+    "Captação": "Amount invested",
+    "Benefícios entregues": "Benefits delivered",
+    "Título do doc": "Doc title",
+    "DOCUMENTO": "DOCUMENT",
+    "ACESSE O SITE": "Visit the website",
+    "Digite seu e-mail": "Insert e-mail",
+    "Entrar": "Login",
+    "Um e-mail foi encaminhado para a sua caixa de entrada.": "An email has been forwarded to your inbox.",
+    "Conheça os projetos": "Discover the projects",
+    "Neste momento não é necessário um cadastro para realizar o login na plataforma.": "At this time, registration is not required to login to the platform.",
+    "Clique aqui.": "Click here.",
+    "Digite seu nome completo": "Full name",
+    "Registrar-se": "Register",
+    "Digite seu CPF": "Insert CPF",
+    "Eu li e concordo com os termos de uso de dados, política de privacidade e cookies.": "I acknowledge that I have read and understood the terms, privacy and cookies policy.",
+    "Data de nascimento": "Birthday",
+    "Continuar": "Next",
+    "Cadastro realizado com sucesso! Aguarde, você será redirecionado.": "Successfully registered! Please wait, you will be redirected.",
+    "Aguarde, você será redirecionado.": "Please wait, you will be redirected.",
+    "Olá,": "Hello,",
+    "Perfil": "Profile",
+    "Desconectar": "Disconnect",
+    "Através de benefícios": "Through benefits",
+    "Data": "Date",
+    "Benefício": "Benefit",
+    "Preciso de ajuda": "Help",
+    "Histórico": "Historic",
+    "Carteira": "Wallet",
+    "Saldo": "Balance",
+    "SALDO": "BALANCE",
+    "Quantidade": "Quantity",
+    "Valor unitário": "Unitary value",
+    "Cronograma de retornos": "Return schedule",
+    "Retorno": "Return",
+    "Parcela": "Installment",
+    "Venc.": "Payout Date",
+    "Comprar": "Buy",
+    "Vender": "Sell",
+    "Voltar": "Back",
+    "Gerar QR code": "Generate QR code"
+  }
 }

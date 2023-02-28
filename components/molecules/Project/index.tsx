@@ -5,6 +5,11 @@ import Column from '@/components/molecules/Column'
 import Button from '@/components/atoms/Button'
 import { useTranslation } from 'react-i18next'
 import UserContext from '@/context/UserContext'
+import { useRouter } from 'next/router'
+
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
 
 type Props = {
   id: string,
@@ -21,14 +26,14 @@ type Props = {
 
 const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idProject, text }: Props) => {
   const [projectDisabled, setProjectDisabled] = React.useState<boolean>(false)
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
-  const { t } = useTranslation();
 
-  const { locale } = React.useContext(UserContext)
+  const router = useRouter();
+
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt
 
   React.useEffect(() => {
-    const language = window.navigator.language
-    setLanguageBrowser(language)
   // const beforePath = localStorage.getItem('beforePath')
   // router.push(`${beforePath}`)
   })
@@ -79,11 +84,11 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
               id={`project-description-${id}`}
               className={Styles.project__details}
             >
-              {languageBrowser !== 'pt-BR' ? t('Data de lançamento') : 'Data de lançamento'}  <b>{dataLanc}</b> <br />
-              {languageBrowser !== 'pt-BR' ? t('Emitido por') : 'Emitido por'} <b>{emissor}</b> <br />
+              {t.launchDate}<b> {dataLanc}</b> <br />
+              {t.projectOwner} <b> {emissor}</b> <br />
               {showOrNot ? (
                 <span className={Styles.project__details}>
-                  {languageBrowser !== 'pt-BR' ? t('Rentabilidade estimada de até ') : 'Rentabilidade estimada de até '}
+                  {t.profitability}
                   <b>{callRentText()}</b>
                 </span>
               ) : ''}
@@ -97,7 +102,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
           <div>
             <Button
               id={`project-cta-${id}`}
-              text={languageBrowser !== 'pt-BR' ? t(text) : text}
+              text={t.seeMore}
               label="Clique e veja mais sobre o projeto"
               className={`w-100 mb-3 ${id.includes('CLDG') || id.includes('CLMT') ? Styles.project__button : ''}`}
               hidden={false}

@@ -4,19 +4,21 @@ import Styles from './styles.module.scss'
 import Blocklize from '@/assets/img/blocklize.webp'
 import UserContext from '@/context/UserContext'
 
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+import { useRouter } from 'next/router'
 
 const Copyright = () => {
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
-  const { t } = useTranslation('footer');
+  const router = useRouter();
 
-  const { locale } = React.useContext(UserContext)
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt
 
   React.useEffect(() => {
-    const language = window.navigator.language
-    setLanguageBrowser(language)
   // const beforePath = localStorage.getItem('beforePath')
   // router.push(`${beforePath}`)
   })
@@ -24,14 +26,10 @@ const Copyright = () => {
     <div className={Styles.copyright}>
       <hr />
       <p className={Styles.copyright__text}>
-        {languageBrowser !== 'pt-BR' ? <>CoinLivre&copy; 2022. {t('Todos os direitos reservados.')}</>  : (
-          <>CoinLivre&copy; 2022. Todos os direitos reservados.</>
-        )}
+        {<>CoinLivre&copy; 2022. {t.reserved}</>}
       </p>
       <p className={Styles.copyright__developer}>
-        {languageBrowser !== 'pt-BR' ? <>{t('Desenvolvido por')}&nbsp;</> : (
-          <>Desenvolvido por&nbsp;</>
-        )}
+        {<>{t.developedBy}&nbsp;</>}
         
         <a
           href="https://blocklize.io"
@@ -48,14 +46,6 @@ const Copyright = () => {
       </p>
     </div>
   )
-}
-
-export async function getStaticProps({ locale }: { locale: string }) {
-  return {
-      props: {
-          ...(await serverSideTranslations(locale, ['footer']))
-      }
-  }
 }
 
 export default Copyright

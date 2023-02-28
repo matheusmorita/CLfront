@@ -31,7 +31,10 @@ import UserContext from '@/context/UserContext'
 import axios from 'axios'
 import { fetchDataIdAxios } from '@/utils/fetchDataAxios'
 
-import i18next from '@/src/i18n';
+// import i18next from '@/src/i18n';
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 
 
 const ProjectPage = () => {
@@ -44,6 +47,8 @@ const ProjectPage = () => {
   const [lengthWindow, setLengthWindow] = React.useState<number>(0)
 
   const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
+  const { t } = useTranslation('project');
 
 
   const { loggedIn } = React.useContext(UserContext)
@@ -112,7 +117,7 @@ const ProjectPage = () => {
                 />
                 <Title
                   id='introducao-title'
-                  text={languageBrowser !== 'pt-BR' ? i18next.t(project.nome) : project.nome}
+                  text={t(project.nome)}
                   hidden={false}
                   size={100}
                   height={100}
@@ -136,7 +141,7 @@ const ProjectPage = () => {
                 />
                 <Button
                   id="introducao-cta"
-                  text={languageBrowser === "en-US" ? i18next.t('Investir') : 'Investir'}
+                  text={t('Investir')}
                   label="Clique e escolha um projeto para investir"
                   hidden={false}
                   disabled={false}
@@ -182,7 +187,7 @@ const ProjectPage = () => {
                 />
                 <Title
                   id='sobre-title'
-                  text={languageBrowser !== 'pt-BR' ? i18next.t(Data.sobre.title) : Data.sobre.title}
+                  text={t(Data.sobre.title)}
                   hidden={false}
                   size={48}
                   height={48}
@@ -223,7 +228,7 @@ const ProjectPage = () => {
                     <DataShow
                       languageBrowser={languageBrowser}
                       title={"Rentabilidade"}
-                      value={languageBrowser !== 'pt-BR' ? i18next.t(project.rentabilidade) : project.rentabilidade}
+                      value={'t(project.rentabilidade)'} // alterar essa parte
                       badge={{ type: "success", message: "NOVO" }}
                       contractLink={project.contratoToken}
                     />) : (
@@ -339,7 +344,7 @@ const ProjectPage = () => {
                 />
                 <Title
                   id='documentos-title'
-                  text={languageBrowser !== 'pt-BR' ? i18next.t(Data.documentos.title) : Data.documentos.title}
+                  text={t(Data.documentos.title)}
                   hidden={false}
                   size={48}
                   height={48}
@@ -375,7 +380,7 @@ const ProjectPage = () => {
                   value={"NOME_DO_ARQUIVO.PDF"}
                   badge={{
                     type: "success",
-                    message: i18next.t("DOCUMENTO")
+                    message: t("DOCUMENTO")
                   }}
                   contractLink={project.contratoToken}
                 />
@@ -389,7 +394,7 @@ const ProjectPage = () => {
                   <div className={Styles.gradbox__header}>
                     <Title
                       id='documentos-title'
-                      text={project.acronimo === 'CLGT' ? i18next.t("Benefícios entregues") : i18next.t("Cronograma de retornos")}
+                      text={project.acronimo === 'CLGT' ? t("Benefícios entregues") : t("Cronograma de retornos")}
                       hidden={false}
                       size={24}
                       height={24}
@@ -454,7 +459,7 @@ const ProjectPage = () => {
                 />
                 <Title
                   id='documentos-title'
-                  text={languageBrowser !== 'pt-BR' ? i18next.t(Data.emissor.title) : Data.emissor.title}
+                  text={t(Data.emissor.title)}
                   hidden={false}
                   size={48}
                   height={48}
@@ -476,7 +481,7 @@ const ProjectPage = () => {
                   project.emissor.linkEmissor && (
                     <Button
                       id='emissor-cta'
-                      text={languageBrowser !== 'pt-BR' ? i18next.t(Data.emissor.button.text) : Data.emissor.button.text}
+                      text={t(Data.emissor.button.text)}
                       label={Data.emissor.button.label}
                       hidden={false}
                       disabled={false}
@@ -524,7 +529,7 @@ const ProjectPage = () => {
                 />
                 <Paragrah
                   id='discord-description'
-                  text={languageBrowser !== 'pt-BR' ? i18next.t(Data.discord.paragraph) : Data.discord.paragraph}
+                  text={t(Data.discord.paragraph)}
                   className="py-2"
                   color='#000000'
                   hidden={false}
@@ -533,7 +538,7 @@ const ProjectPage = () => {
                 />
                 <Button
                   id='discord-cta'
-                  text={languageBrowser !== 'pt-BR' ? i18next.t('ACOMPANHE NOSSOS PRÓXIMOS PASSOS') : 'ACOMPANHE NOSSOS PRÓXIMOS PASSOS'}
+                  text={t('ACOMPANHE NOSSOS PRÓXIMOS PASSOS')}
                   label='Clique e acompanhe nossos próximos passos'
                   hidden={false}
                   disabled={false}
@@ -549,5 +554,24 @@ const ProjectPage = () => {
     )
   }
 }
+
+export async function getServerSideProps({
+  locale,
+}: GetServerSidePropsContext): Promise<GetServerSidePropsResult<Record<string, unknown>>> {
+
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'pt-BR', ['project', 'footer'])),
+    },
+  }
+}
+
+// export async function getStaticProps({ locale }: { locale: string }) {
+//   return {
+//       props: {
+//           ...(await serverSideTranslations(locale, ['project', 'footer']))
+//       }
+//   }
+// }
 
 export default ProjectPage

@@ -13,12 +13,19 @@ import Logo from '@/assets/img/logo-white.webp'
 import Metacast from '@/assets/img/metacast.webp'
 import Networks from '@/molecules/Networks'
 
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useRouter } from 'next/router'
 
 const Footer = () => {
+  const router = useRouter()
+  const { locale } = router;
 
-  const { t } = useTranslation('footer');
+  const t = locale === 'en' ? en : pt
 
   React.useEffect(() => {
     // const beforePath = localStorage.getItem('beforePath')
@@ -54,62 +61,62 @@ const Footer = () => {
         }}>
           <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-              {t('A Coinlivre')}
+              {t.coinlivre}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="#sobre__container">{t('Quem somos')}</a>
+                <a href="#sobre__container">{t.aboutUs}</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#projetos">{t('Nossos projetos')}</a>
+                <a href="#projetos">{t.ourProjects}</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="mailto:imprensa@coinlivre.com.br">{t('Assessoria de imprensa')}</a>
+                <a href="mailto:imprensa@coinlivre.com.br">{t.release}</a>
               </li>
             </ul>
           </div>
 
           <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-              {t('Jurídico')}
+              {t.legal}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href='TERMO_DE_USO.pdf' download>{t('Termo de uso')}</a>
+                <a href='TERMO_DE_USO.pdf' download>{t.terms}</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href='POLITICA_DE_PRIVACIDADE.pdf' download>{t('Política de privacidade')}</a>
+                <a href='POLITICA_DE_PRIVACIDADE.pdf' download>{t.policy}</a>
               </li>
             </ul>
           </div>
 
           <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-              {t('Ajuda')}
+              {t.help}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="mailto:faleconosco@coinlivre.com.br">{t('Fale conosco')}</a>
+                <a href="mailto:faleconosco@coinlivre.com.br">{t.contactUs}</a>
               </li>
               <li className={Styles.footer__item}>
-                <a href="#faq">{t('Perguntas frequentes')}</a>
+                <a href="#faq">{t.faq}</a>
               </li>
               <li className={Styles.footer__item}>
                 <a
                   rel='noreferrer'
                   href="https://www.youtube.com/@metacast9068"
-                  target="_blank">{t('Aprenda sobre tokenização')}</a>
+                  target="_blank">{t.tokenization}</a>
               </li>
             </ul>
           </div>
 
           <div className={Styles.footer__links}>
             <h1 className={Styles.footer__subtitle}>
-              {t('Compliance')}
+              {t.compliance}
             </h1>
             <ul className={Styles.footer__list}>
               <li className={Styles.footer__item}>
-                <a href="mailto:faleconosco@coinlivre.com.br">{t('Ouvidoria')}</a>
+                <a href="mailto:faleconosco@coinlivre.com.br">{t.ouvidoria}</a>
               </li>
             </ul>
           </div>

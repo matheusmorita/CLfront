@@ -1,6 +1,10 @@
 import React from 'react'
 import Styles from './styles.module.scss'
 
+import {useTranslation} from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
+
 type Props = {
   id?: string,
   text?: string | any,
@@ -14,6 +18,7 @@ type Props = {
 }
 
 const Title = ({ id, className, text, hidden, width, color, size, height, weight }: Props) => {
+  const { t } = useTranslation('common')
   return (
     <h1
       id={id}
@@ -27,9 +32,20 @@ const Title = ({ id, className, text, hidden, width, color, size, height, weight
         lineHeight: `${height}px`
       }}
     >
-      {text}
+      {t(text)}
     </h1>
   )
 }
+
+export async function getServerSideProps({
+  locale,
+  }: GetServerSidePropsContext): Promise<GetServerSidePropsResult<Record<string, unknown>>> {
+  
+  return {
+      props: {
+          ...(await serverSideTranslations(locale || 'pt-BR', ['common', 'login', 'footer'])),
+      },
+    }
+  }
 
 export default Title

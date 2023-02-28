@@ -9,6 +9,7 @@ import { socket, WebSocketProvider } from '@/context/WebSocketContext'
 import { handleUserSession } from '@/utils/fetchDataAxios'
 
 import { appWithTranslation } from 'next-i18next';
+import nextI18NextConfig from '../next-i18next.config.js';
 
 function App({ Component, pageProps }: AppProps) {
   const [userInfo, setUserInfo] = useState()
@@ -38,4 +39,4 @@ function App({ Component, pageProps }: AppProps) {
   )
 }
 
-export default appWithTranslation(App)
+export default appWithTranslation(App, nextI18NextConfig)

@@ -4,6 +4,9 @@ import Styles from './styles.module.scss'
 import { useRouter } from "next/router"
 
 import i18next from '@/src/i18n'
+// import { useTranslation } from 'next-i18next'
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 type Link = {
   name: string,
@@ -21,6 +24,8 @@ const TabNavigation = ({ links, languageBrowser }: Props) => {
     return router.asPath.includes(path) ? Styles.active : ""
   }
 
+  // const { t } = useTranslation('login');
+
   return (
     <div className={Styles.tabnavigation}>
       {
@@ -32,7 +37,7 @@ const TabNavigation = ({ links, languageBrowser }: Props) => {
             className={`${Styles.tabnavigation__link} ${handleActiveLink(link.path)}`}
           >
             <span className='d-inline-block'>
-              {languageBrowser === "en-US" ? i18next.t(link.name) : link.name}
+              {i18next.t(link.name)}
             </span>
           </Link>
         ))
@@ -40,5 +45,24 @@ const TabNavigation = ({ links, languageBrowser }: Props) => {
     </div>
   )
 }
+
+export async function getStaticProps({ locale }: { locale: string }) {
+  return {
+      props: {
+          ...(await serverSideTranslations(locale, ['common']))
+      }
+  }
+}
+
+// export async function getServerSideProps({
+//   locale,
+// }: GetServerSidePropsContext): Promise<GetServerSidePropsResult<Record<string, unknown>>> {
+
+//   return {
+//     props: {
+//       ...(await serverSideTranslations(locale || 'pt-BR', ['login', 'footer'])),
+//     },
+//   }
+// }
 
 export default TabNavigation
