@@ -4,7 +4,10 @@ import Styles from './styles.module.scss'
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import Link from 'next/link';
 
-import i18next from '@/src/i18n'
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+import { useRouter } from 'next/router';
 
 type Badge = {
   message: string,
@@ -19,15 +22,14 @@ type Props = {
   className?: string,
   contractLink: string;
   languageBrowser?: string;
+  linkTrue?: boolean
 }
 
-const DataShow = ({ title, value, badge, className, highlight = false, contractLink, languageBrowser }: Props) => {
-  const checkLanguage = (text: string) => {
-    if (languageBrowser !== 'pt-BR') {
-      return i18next.t(text)
-    }
-    return text
-  }
+const DataShow = ({ title, value, badge, className, highlight = false, contractLink, linkTrue }: Props) => {
+  const router = useRouter();
+  const { locale } = router;
+  
+  const t = locale === 'en' ? en : pt;
 
   return (
     <div
@@ -36,18 +38,26 @@ const DataShow = ({ title, value, badge, className, highlight = false, contractL
     >
       <div className={Styles.datashow__content}>
         <h1 className={Styles.datashow__title}>
-          {languageBrowser !== 'pt-BR' ? i18next.t(title) : title}
+          {title}
         </h1>
         <span className={Styles.datashow__value}>
-          {value === 'Sem rentabilidade'  ? checkLanguage('Através de benefícios') : value}
-          {title.toLocaleLowerCase().includes('contrato' || 'contract') ? (
+          {value === 'Sem rentabilidade'  ? t.throughBenefits : value}
+          {linkTrue && (
+            <Link
+            target="_blank"
+            href={`https://etherscan.io/address/${contractLink}`}
+          >
+            <OpenInNewIcon className={Styles.datashow__iconStyle} />
+          </Link>
+          )}
+          {/* {title.toLocaleLowerCase().includes('contrato' || 'contract') ? (
             <Link
               target="_blank"
               href={`https://etherscan.io/address/${contractLink}`}
             >
               <OpenInNewIcon className={Styles.datashow__iconStyle} />
             </Link>
-          ) : ''}
+          ) : ''} */}
         </span>
       </div>
       {badge && (
@@ -55,7 +65,7 @@ const DataShow = ({ title, value, badge, className, highlight = false, contractL
           className={Styles.datashow__badge}
           data-type={badge.type}
         >
-          {languageBrowser !== 'pt-BR' ? i18next.t(badge.message) : badge.message}
+          {badge.message}
         </div>
       )}
     </div>

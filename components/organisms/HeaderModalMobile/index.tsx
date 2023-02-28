@@ -6,7 +6,10 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
-import i18next from '@/src/i18n';
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+import { useRouter } from 'next/router';
 
 interface HeaderModalInterface {
   balance: number;
@@ -15,17 +18,17 @@ interface HeaderModalInterface {
 function HeaderModalMobile({balance}: HeaderModalInterface) {
   const [checkedButton, SetCheckedButton] = React.useState<string>('comprar')
   const [hiddenBalance, setHiddenBalance] = React.useState<boolean>(true)
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
-  React.useEffect(() => {
-    const language = window.navigator.language
-    setLanguageBrowser(language)
-  }, []);
+  const router = useRouter();
+
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt;
 
   return (
     <>
       <div className={Styles.items}>
-        <b style={{fontWeight: '600'}}>{languageBrowser !== 'pt-BR' ? i18next.t('SALDO') : 'SALDO'}</b>
+        <b style={{fontWeight: '600'}}>{t.BALANCE}</b>
         <div className={Styles.balanceValue}>
           <button
             style={{ border: 'none' }}

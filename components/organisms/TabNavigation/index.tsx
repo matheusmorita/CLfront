@@ -37,21 +37,13 @@ const TabNavigation = ({ links, languageBrowser }: Props) => {
             className={`${Styles.tabnavigation__link} ${handleActiveLink(link.path)}`}
           >
             <span className='d-inline-block'>
-              {i18next.t(link.name)}
+              {link.name}
             </span>
           </Link>
         ))
       }
     </div>
   )
-}
-
-export async function getStaticProps({ locale }: { locale: string }) {
-  return {
-      props: {
-          ...(await serverSideTranslations(locale, ['common']))
-      }
-  }
 }
 
 // export async function getServerSideProps({

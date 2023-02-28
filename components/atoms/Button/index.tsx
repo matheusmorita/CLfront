@@ -14,9 +14,10 @@ type Props = {
   className?: string,
   size?: number;
   type?: any;
+  width?: string;
 }
 
-const Button = ({ id, label, hidden, disabled, text, onClick, className, size, type }: Props) => {
+const Button = ({ id, label, hidden, disabled, text, onClick, className, size, type, width }: Props) => {
   const { t } = useTranslation('login');
 
   return (
@@ -27,7 +28,7 @@ const Button = ({ id, label, hidden, disabled, text, onClick, className, size, t
       disabled={disabled}
       onClick={onClick}
       className={`${Styles.button} ${className}`}
-      style={{fontSize: size}}
+      style={{fontSize: size, width}}
       type={type}
     >
       {t(text)}

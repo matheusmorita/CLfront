@@ -17,12 +17,14 @@ import BuyProject from "../BuyProject";
 import ModalContext from "@/context/ModalContext";
 import { useRouter } from "next/router";
 
-import i18next from '@/src/i18n';
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+
 
 function Modal() {
   const [hiddenBuy, setHiddenBuy] = React.useState<boolean>(false);
   const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
   const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
 
@@ -37,6 +39,10 @@ function Modal() {
 
   const router = useRouter()
 
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt;
+
   const { loggedIn, setPathProject } = React.useContext(UserContext)
 
   const { modalControl: [, setShowModal] } = React.useContext(ModalContext)
@@ -46,8 +52,6 @@ function Modal() {
     fetchDataAxios("4", setProjects)
     fetchDataUserInfo(accessToken, setBalance, setDataUser)
 
-    const language = window.navigator.language
-    setLanguageBrowser(language)
   }, [balance])
 
   return (
@@ -96,7 +100,7 @@ function Modal() {
               hidden={false}
               id={`CNLT-${0}`}
               src={Logo}
-              text={languageBrowser !== 'pt-BR' ? i18next.t('Comprar') : 'Comprar'}
+              text={t.buy}
               onClick={(e: any) => {
                 e.preventDefault()
                 if (!loggedIn[0]) {
@@ -120,7 +124,7 @@ function Modal() {
                 id={item.id}
                 name={item.nome}
                 src={item.logoUrl}
-                text={languageBrowser !== 'pt-BR' ? i18next.t('Comprar') : 'Comprar'} 
+                text={t.buy} 
                 onClick={(e: any) => {
                   e.preventDefault()
                   if (!loggedIn[0]) {

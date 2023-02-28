@@ -10,6 +10,8 @@ import { getPageTopDistance } from '@/assets/js/util/scroll'
 import { getWindowInnerWidth } from '@/assets/js/util/responsive'
 import Styles from './styles.module.scss'
 
+import LanguageIcon from '@mui/icons-material/Language';
+
 // languages
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
@@ -21,24 +23,22 @@ type Props = {
 const Header = ({ hideLinks }: Props) => {
   const [whiteTheme, setWhiteTheme] = React.useState<boolean>(false)
   const [responsive, setResponsive] = React.useState<boolean>(false)
+  const [showLanguages, setShowLanguages] = React.useState<boolean>(false)
 
   const { userInfo, loggedIn } = React.useContext(UserContext)
   const [info, setUserInfo] = userInfo
   const [logged, setLoggedIn] = loggedIn
 
-  const { locale, locales, push, asPath } = useRouter();
+  const { locale, locales, push, asPath, pathname } = useRouter();
 
   const t = locale === 'en' ? en : pt
 
-  const handleClick = (l: any) => {
-    push('/login/', undefined, {
-      locale: l
-    })
+  function handleChangeLanguage(e: any) {
+    router.push(`/${pathname}`)
   }
 
   React.useEffect(() => {
     console.log(window.location.pathname)
-    // const beforePath = localStorage.getItem('beforePath')
     // router.push(`${beforePath}`)
   }, [info])
 
@@ -74,13 +74,14 @@ const Header = ({ hideLinks }: Props) => {
 
   return (
     <nav className={`${Styles.navbar} ${whiteTheme ? Styles.white : ''}`}>
-      <div className={`${Styles.navbar__wrapper} container`}>
+      <div className={`${Styles.navbar__wrapper}`}>
         <Logo
           redirect={true}
           white={!whiteTheme}
           responsive={responsive}
         />
-        {!logged && (
+        <div style={{display: 'flex'}}>
+          {!logged && (
           <div className="d-flex align-items-center justify-content-center">
             {
               routes &&
@@ -95,17 +96,20 @@ const Header = ({ hideLinks }: Props) => {
                 </Link>
               ))
             }
+
             <Button
               id="header-cta"
               text={t.registerOrLogin}
+              width='200px'
               label="Clique e cadastre-se"
               className="ms-3"
               hidden={false}
               disabled={false}
               onClick={() => {
-                location.href = "/login"
+                push('/login')
               }}
             />
+
           </div>
         )}
         {info && (
@@ -114,11 +118,32 @@ const Header = ({ hideLinks }: Props) => {
             contrast={whiteTheme}
           />
         )}
+        <section className={Styles.sectionLanguage}>
+          {showLanguages && (
+            locales?.map(l => {
+              return (
+                <div key={l} className={Styles.linksDiv}>
+                  <Link
+                    className={Styles.linkLanguageStyle}
+                    href={asPath}
+                    key={l}
+                    locale={l}
+                  >
+                    <b style={{color: '#00EE8D'}}>
+                      {l}
+                    </b>
+                  </Link>
+                </div>
+              )
+            })
+          )}
+          <button className={Styles.buttonIcon} onClick={() => setShowLanguages(!showLanguages)}>
+            <LanguageIcon width={250} height={250} className={Styles.languageIcon} />
+          </button>
+        </section>
+        </div>
       </div>
-      {locales?.map(l => {
-        return (
-          <Link href={asPath} key={l} locale={l}>{l}</Link>)
-      })}
+
     </nav>
   )
 }

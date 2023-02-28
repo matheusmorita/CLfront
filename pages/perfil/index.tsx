@@ -17,10 +17,16 @@ import { getWindowInnerWidth } from '@/assets/js/util/responsive'
 
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 
-import i18next from '@/src/i18n'
-
 import defaultImage from '../../assets/img/placeholder.webp'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
+import { useTranslation } from 'next-i18next'
 
 const Perfil = () => {
   const [walletState, setWalletState] = React.useState(0)
@@ -32,6 +38,14 @@ const Perfil = () => {
   // const [profileImage, setProfileImage] = React.useState<any>();
   const [image, setImage] = React.useState('')
   const [endImage, setEndImage] = React.useState('')
+
+  const router = useRouter();
+
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt;
+
+  const { t: translate } = useTranslation('project');
 
 
   const projecardMock = [
@@ -46,11 +60,10 @@ const Perfil = () => {
     { title: 'Total', value: '3.99663431' }
   ]
 
+
+
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
-
-    const language = window.navigator.language
-    setLanguageBrowser(language)
 
     const widthWindow = getWindowInnerWidth()
 
@@ -67,7 +80,7 @@ const Perfil = () => {
         className={Styles.bottom}
       >
         <Head>
-          <title>{languageBrowser !== 'pt-BR' ? i18next.t('Perfil') : 'Perfil'}</title>
+          <title>{t.profile}</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <meta name="theme-color" content="#00ee8d" />
           <meta name="robots" content="no-index, no-follow" />
@@ -130,14 +143,14 @@ const Perfil = () => {
                     href="mailto:faleconosco@coinlivre.com.br"
                   >
                     <li className={Styles.actions__item}>
-                      {languageBrowser !== 'pt-BR' ? i18next.t('Preciso de ajuda') : 'Preciso de ajuda'}
+                      {t.help}
                     </li>
                   </a>
                   <li className={Styles.actions__item}>
                     <Link
                       className={Styles.actions__link}
                       href={'/logout'}
-                    >{languageBrowser !== 'pt-BR' ? i18next.t('Desconectar') : 'Desconectar'}</Link>
+                    >{t.disconnect}</Link>
                   </li>
                   {/* <li className={`${Styles.actions__item} ${Styles.danger}`}>
                     Desativar minha conta
@@ -183,7 +196,7 @@ const Perfil = () => {
             <div className={Styles.wallet}>
               <Switch
                 setState={setWalletState}
-                options={['Histórico', 'Carteira']}
+                options={[t.historic, t.wallet]}
               />
               <div className={Styles.wallet__body}>
                 {walletState === 0 && (
@@ -192,7 +205,7 @@ const Perfil = () => {
                       <Projecard
                         key={item.id}
                         data={projecardMock}
-                        name={languageBrowser !== 'pt-BR' ? i18next.t(item.nomeToken) : item.nomeToken}
+                        name={item.nomeToken}
                         montante={item.montante}
                         emissor={item.emissorProjeto}
                         acronimo={item.acronimoProjeto}
@@ -208,7 +221,7 @@ const Perfil = () => {
                       <Projecard
                       key={`${i}-${item.acronimo}`}
                       data={projecardMock}
-                      name={languageBrowser !== 'pt-BR' ? i18next.t(item.nomeToken) : item.nomeToken}
+                      name={item.nomeToken}
                       montante={item.montante}
                       emissor={item.emissorNome}
                       acronimo={item.acronimo}

@@ -6,7 +6,10 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
-import i18next from '@/src/i18n';
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+import { useRouter } from 'next/router';
 
 interface HeaderModalInterface {
   balance: number;
@@ -17,6 +20,12 @@ function HeaderModal({ balance }: HeaderModalInterface) {
   const [hiddenBalance, setHiddenBalance] = React.useState<boolean>(true)
   const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
+  const router = useRouter();
+
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt;
+  
   React.useEffect(() => {
     const language = window.navigator.language
     setLanguageBrowser(language)
@@ -37,7 +46,7 @@ function HeaderModal({ balance }: HeaderModalInterface) {
                   SetCheckedButton('comprar')
                 }}
                 label="buy button"
-                text={languageBrowser !== 'pt-BR' ? i18next.t("Comprar") : "Comprar"} 
+                text={t.buy} 
                 size={18}
               />
               <Button
@@ -49,7 +58,7 @@ function HeaderModal({ balance }: HeaderModalInterface) {
                   SetCheckedButton('vender')
                 }}
                 label="sell button"
-                text={languageBrowser !== 'pt-BR' ? i18next.t("Vender") : "Vender"} 
+                text={t.sell} 
                 size={18}
               />
             </>
@@ -64,7 +73,7 @@ function HeaderModal({ balance }: HeaderModalInterface) {
                   SetCheckedButton('comprar')
                 }}
                 label="buy button"
-                text={languageBrowser !== 'pt-BR' ? i18next.t("Comprar") : "Comprar"} 
+                text={t.buy} 
                 size={18}
               />
               <Button
@@ -76,7 +85,7 @@ function HeaderModal({ balance }: HeaderModalInterface) {
                   SetCheckedButton('vender')
                 }}
                 label="sell button"
-                text={languageBrowser !== 'pt-BR' ? i18next.t("Vender") : "Vender"} 
+                text={t.sell} 
                 size={18}
               />
             </>

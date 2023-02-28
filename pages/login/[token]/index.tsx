@@ -13,8 +13,9 @@ import Paragrah from '@/components/atoms/Paragraph'
 import { useRouter } from 'next/router'
 import UserContext from '@/context/UserContext'
 
-import { useTranslation } from 'next-i18next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
 
 const TokenShare = () => {
   const router = useRouter()
@@ -23,8 +24,9 @@ const TokenShare = () => {
   const [info, setUserInfo] = userInfo
   const [logged, setLoggedIn] = loggedIn
 
+  const { locale } = router;
 
-  const { t } = useTranslation('login')
+  const t = locale === 'en' ? en : pt;
 
 
   const fetchData = async () => {
@@ -128,7 +130,7 @@ const TokenShare = () => {
             />
             <Paragrah
               id='form-description'
-              text={t('Aguarde, você será redirecionado.')}
+              text={t.waitRedirect}
               hidden={false}
               width={100}
             />
@@ -141,14 +143,6 @@ const TokenShare = () => {
       </Section>
     </Frame>
   )
-}
-
-export async function getStaticProps({ locale }: { locale: string }) {
-  return {
-      props: {
-          ...(await serverSideTranslations(locale, ['login']))
-      }
-  }
 }
 
 export default TokenShare

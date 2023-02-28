@@ -4,6 +4,11 @@ import Styles from './styles.module.scss'
 
 import i18next from '@/src/i18n'
 
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+import { useRouter } from 'next/router';
+
 type Props = {
   name: string,
   contrast?: boolean
@@ -11,7 +16,12 @@ type Props = {
 
 const UserOptions = ({ name, contrast = false }: Props) => {
   const [open, setOpen] = React.useState<boolean>(false)
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
+  const router = useRouter();
+
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt;
 
   const handleWhiteTheme = () => {
     return contrast ? Styles.white : undefined
@@ -24,18 +34,12 @@ const UserOptions = ({ name, contrast = false }: Props) => {
   const handleMenuToggle = () => {
     setOpen(!open)
   }
-
-  React.useEffect(() => {
-    const language = window.navigator.language
-    setLanguageBrowser(language)
-  }, [])
-
   return (
     <div
       className={`${Styles.user} ${handleWhiteTheme()}`}
       onClick={() => { handleMenuToggle() }}
     >
-      <p className={Styles.user__phrase}>{languageBrowser !== 'pt-BR' ? <>{i18next.t('Olá,')}</> : <>Olá,</>} {name}</p>
+      <p className={Styles.user__phrase}>{t.hello} {name}</p>
       <div className={Styles.user__picture}
         onClick={() => { handleMenuToggle() }}
       />
@@ -43,12 +47,12 @@ const UserOptions = ({ name, contrast = false }: Props) => {
         <ul className={Styles.user__list}>
           <Link href="/perfil">
             <li className={Styles.user__item}>
-              {languageBrowser !== 'pt-BR' ? i18next.t('Perfil') : <>Perfil</>}
+              {t.profile}
             </li>
           </Link>
           <Link href='/logout'>
             <li className={Styles.user__item}>
-              {languageBrowser !== 'pt-BR' ? i18next.t('Disconnect') : <>Desconectar</>}
+              {t.disconnect}
               
             </li>
           </Link>

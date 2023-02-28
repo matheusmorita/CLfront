@@ -4,7 +4,10 @@ import EyeOff from '@/assets/img/eye-off.webp'
 import Eye from '@/assets/img/eye.webp'
 import Styles from './styles.module.scss'
 
-import i18next from '@/src/i18n'
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+import { useRouter } from 'next/router'
 
 type Props = {
   value?: string,
@@ -13,7 +16,6 @@ type Props = {
 
 const Balance = ({ value = '0', type }: Props) => {
   const [hidden, setHidden] = React.useState<boolean>(true)
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
   const handleIcon = () => {
     return !hidden ? Eye : EyeOff
@@ -31,15 +33,15 @@ const Balance = ({ value = '0', type }: Props) => {
     setHidden(!hidden)
   }
 
-  React.useEffect(() => {
-    const language = window.navigator.language
-    setLanguageBrowser(language)
-  }, [])
+  const router = useRouter();
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt
 
   return (
     <div className={Styles.balance}>
       <h1 className={Styles.balance__title}>
-        {languageBrowser !== 'pt-BR' ? i18next.t('Saldo') : 'Saldo'} {type}
+        {t.balance} {type}
       </h1>
       <div className={Styles.balance__value}>
         <span className={handleClass()}>{handleValue()}</span>

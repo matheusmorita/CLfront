@@ -68,7 +68,7 @@
     "Developed by",
   "registerOrLogin":
     "Sign up or Sign in",
-  "EM BREVE":
+  "commingSoon":
     "COMMING SOON",
   "nextSteps": 
     "GET UP TO DATE!",
@@ -80,41 +80,41 @@
     "Private Debt Token",
   "Fan Token de Influenciadores": 
     "Influencers Media Fan-Token",
-  "Investir":
+  "invest":
     "Invest",
-  "Sobre":
+  "about":
     "About",
-  "Documentos": 
+  "documents": 
     "Documents",
-  "Emissor":
+  "projectOwnerMenu":
     "Project owner",
-  "Sobre o token":
+  "aboutTokenTitle":
     "Token Infos",
-  "NOVO":
+  "NEW":
     "NEW",
-  "DESTAQUE":
+  "emphasis":
     "Emphasis",
-  "Contrato":
+  "contract":
     "Contract",
   "Rentabilidade":
     "Profitability",
-  "Lote":
+  "batch":
     "Batch",
-  "Valor do Token":
+  "tokenValue":
     "Token price",
-  "Prazo do Lote":
+  "batchExpiration":
     "Batch expiration date",
-  "QTDE de Tokens":
+  "totalTokens":
     "Total of Tokens",
-  "Captação":
+  "amountInvest":
     "Amount invested",
-  "Benefícios entregues":
+  "benefitsDelivered":
     "Benefits delivered",
-  "Título do doc":
+  "docTitle":
     "Doc title",
-  "DOCUMENTO":
+  "DOCUMENT":
     "DOCUMENT",
-  "ACESSE O SITE":
+  "accessTheSite":
     "Visit the website",
   "inputEmail":
     "Insert e-mail",
@@ -142,7 +142,7 @@
     "Next",
   "Cadastro realizado com sucesso! Aguarde, você será redirecionado.":
     "Successfully registered! Please wait, you will be redirected.",
-  "Aguarde, você será redirecionado.":
+  "waitRedirect":
     "Please wait, you will be redirected.",
   "questionsAndAnswers": [
       {
@@ -158,43 +158,41 @@
           "answer": "We are the connection to the new economy. To the asset-owner, our process enables investment gathering in a much faster and cheaper way – compared to the traditional Banking system -, with higher liquidity which, on itself, brings new business opportunities. Not to mention the ability of getting access to new ways of project funding with huge potential of expansion. To the investors, on the other end, we provide and market new investment options, so they can diversify their portfolio on high performance assets with high tech and legal safety. Needless to say, those options were restricted only to professional qualified investors before we arrived."
       }
   ],
-  "Olá,":
+  "hello":
     "Hello,",
-  "Perfil":
+  "profile":
     "Profile",
-  "Desconectar":
+  "disconnect":
     "Disconnect",
-  "Através de benefícios":
+  "throughBenefits":
     "Through benefits",
-  "Data":
+  "date":
     "Date",
-  "Benefício":
+  "benefit":
     "Benefit",
-  "Preciso de ajuda":
-    "Help",
-  "Histórico":
+  "historic":
     "Historic",
-  "Carteira":
+  "wallet":
     "Wallet",
-  "Saldo":
+  "balance":
     "Balance",
-  "SALDO":
+  "BALANCE":
     "BALANCE",
-  "Quantidade":
+  "quantity":
     "Quantity",
-  "Valor unitário":
+  "unitaryValue":
     "Unitary value",
-  "Cronograma de retornos":
+  "returnSchedule":
     "Return schedule",
-  "Retorno":
+  "return":
     "Return",
-  "Parcela":
+  "installment":
     "Installment",
-  "Venc.":
+  "payoutDate":
     "Payout Date",
-  "Comprar":
+  "buy":
   "Buy",
-  "Vender":
+  "sell":
     "Sell",
   "Voltar":
     "Back",

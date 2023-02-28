@@ -31,8 +31,6 @@ const Login = () => {
   const [waiting, setWaiting] = React.useState(false)
   const [feedback, setFeedback] = React.useState(false)
 
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
-
   const router = useRouter()
   const { locale } = router;
 
@@ -47,8 +45,6 @@ const Login = () => {
   }
 
   React.useEffect(() => {
-    const language = window.navigator.language
-    setLanguageBrowser(language)
     if (logged) {
       router.push('/')
     }

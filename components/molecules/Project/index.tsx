@@ -3,9 +3,10 @@ import Image from 'next/image'
 import Styles from './styles.module.scss'
 import Column from '@/components/molecules/Column'
 import Button from '@/components/atoms/Button'
-import { useTranslation } from 'react-i18next'
 import UserContext from '@/context/UserContext'
 import { useRouter } from 'next/router'
+
+import i18next from '@/src/i18n'
 
 // languages
 import en from '@/public/locales/en/common.json';
@@ -29,7 +30,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
 
   const router = useRouter();
 
-  const { locale } = router;
+  const { locale, push } = router;
 
   const t = locale === 'en' ? en : pt
 
@@ -109,7 +110,8 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
               disabled={id.includes('CLDG') || id.includes('CLMT')}
               onClick={() => {
                 localStorage.setItem('idProject', idProject)
-                location.href = `projeto/${path}`
+                // location.href = `projeto/${path}`
+                push(`projeto/${path}`)
               }}
             />
           </div>

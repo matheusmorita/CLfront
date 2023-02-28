@@ -1,7 +1,11 @@
 import React from 'react'
 import Styles from './styles.module.scss'
 
-import i18next from '@/src/i18n';
+import { useRouter } from 'next/router';
+
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
 
 type Badge = {
   message: string,
@@ -31,14 +35,13 @@ const QuotaShow = ({
   vencimento,
   project,
 }: Props) => {
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
 
-  React.useEffect(() => {
-    const language = window.navigator.language
-    setLanguageBrowser(language)
-    console.log(project.id)
-  }, [])
+  const router = useRouter();
+
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt
 
   return (
     <div
@@ -47,26 +50,26 @@ const QuotaShow = ({
       <div className={Styles.quotashow__content}>
         <div className={Styles.quotashow__data}>
           <h1 className={Styles.quotashow__title}>
-          {project.acronimo !== 'CLGT' ? <>{languageBrowser !== 'pt-BR' ?  i18next.t('Parcela') : 'Parcela'}</> : <>{i18next.t('Data')}</>}
+          {project.acronimo !== 'CLGT' ?  t.installment : t.date }
           </h1>
           <span className={Styles.quotashow__value}>
-            {project.acronimo !== 'CLGT' ? parcela : <>{i18next.t('EM BREVE')}</>}
+            {project.acronimo !== 'CLGT' ? parcela : t.commingSoon }
           </span>
         </div>
         <div className={Styles.quotashow__data}>
           <h1 className={Styles.quotashow__title}>
-          {project.acronimo !== 'CLGT' ? <>{languageBrowser !== 'pt-BR' ?  i18next.t('Retorno') : 'Retorno'}</> : <>{i18next.t('Benefício')}</>}
+          {project.acronimo !== 'CLGT' ? t.return : t.benefit}
           </h1>
           <span className={Styles.quotashow__value}>
-          {project.acronimo !== 'CLGT' ? juros : i18next.t('EM BREVE')}
+          {project.acronimo !== 'CLGT' ? juros : t.commingSoon}
           </span>
         </div>
         <div className={Styles.quotashow__data}>
           <h1 className={Styles.quotashow__title}>
-          {project.acronimo !== 'CLGT' ? <>{languageBrowser !== 'pt-BR' ?  i18next.t('Venc.') : 'Venc.'}</> : <>Status</>}
+          {project.acronimo !== 'CLGT' ? t.payoutDate : <>Status</>}
           </h1>
           <span className={Styles.quotashow__value}>
-          {project.acronimo !== 'CLGT' ? vencimento : i18next.t('EM BREVE')}
+          {project.acronimo !== 'CLGT' ? vencimento : t.commingSoon}
           </span>
         </div>
       </div>

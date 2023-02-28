@@ -37,6 +37,10 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 
 
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+
 const ProjectPage = () => {
   const router = useRouter()
   const id = router.query.id
@@ -48,7 +52,12 @@ const ProjectPage = () => {
 
   const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
-  const { t } = useTranslation('project');
+  const { t: translate } = useTranslation('project');
+
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt
+  
 
 
   const { loggedIn } = React.useContext(UserContext)
@@ -117,7 +126,7 @@ const ProjectPage = () => {
                 />
                 <Title
                   id='introducao-title'
-                  text={t(project.nome)}
+                  text={translate(project.nome)}
                   hidden={false}
                   size={100}
                   height={100}
@@ -141,7 +150,7 @@ const ProjectPage = () => {
                 />
                 <Button
                   id="introducao-cta"
-                  text={t('Investir')}
+                  text={t.invest}
                   label="Clique e escolha um projeto para investir"
                   hidden={false}
                   disabled={false}
@@ -162,9 +171,9 @@ const ProjectPage = () => {
 
             <TabNavigation
               links={[
-                { name: "Sobre", path: "sobre" },
-                { name: "Documentos", path: "documentos" },
-                { name: "Emissor", path: "emissor" }
+                { name: t.about, path: "sobre" },
+                { name: t.documents, path: "documentos" },
+                { name: t.projectOwnerMenu, path: "emissor" }
               ]}
               languageBrowser={languageBrowser}
             />
@@ -187,7 +196,7 @@ const ProjectPage = () => {
                 />
                 <Title
                   id='sobre-title'
-                  text={t(Data.sobre.title)}
+                  text={t.aboutTokenTitle}
                   hidden={false}
                   size={48}
                   height={48}
@@ -215,11 +224,11 @@ const ProjectPage = () => {
                   {project.criadoEm && (
                     <DataShow
                       languageBrowser={languageBrowser}
-                      title={"Data de lançamento"}
+                      title={t.launchDate}
                       value={masks.getDateMask(project.criadoEm)}
                       badge={{
                         type: "success",
-                        message: "NOVO"
+                        message: t.NEW
                       }}
                       contractLink={project.contratoToken}
                     />
@@ -227,14 +236,14 @@ const ProjectPage = () => {
                   {project.rentabilidade ? (
                     <DataShow
                       languageBrowser={languageBrowser}
-                      title={"Rentabilidade"}
-                      value={'t(project.rentabilidade)'} // alterar essa parte
-                      badge={{ type: "success", message: "NOVO" }}
+                      title={t.profitability}
+                      value={project.rentabilidade} // alterar essa parte
+                      badge={{ type: "success", message: t.NEW }}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
                       languageBrowser={languageBrowser}
-                      title={"Rentabilidade"}
+                      title={t.profitability}
                       value={'N/A'}
                       contractLink={project.contratoToken}
                     />
@@ -243,14 +252,14 @@ const ProjectPage = () => {
                   {project.lotes.length > 0 ? (
                     <DataShow
                       languageBrowser={languageBrowser}
-                      title={"Lote"}
+                      title={t.batch}
                       value={project.lotes[project.lotes.length - 1].idLote}
-                      badge={{ type: "success", message: "NOVO" }}
+                      badge={{ type: "success", message: t.NEW }}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
                       languageBrowser={languageBrowser}
-                      title={"Lote"}
+                      title={t.batch}
                       value={'N/A'}
                       contractLink={project.contratoToken}
                     />)}
@@ -258,13 +267,13 @@ const ProjectPage = () => {
                   {project.lotes.length > 0 ? (
                     <DataShow
                       languageBrowser={languageBrowser}
-                      title={"Valor do Token"}
+                      title={t.tokenValue}
                       value={masks.getCurrencyMask(project.lotes[project.lotes.length - 1].valorDoToken)}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
                       languageBrowser={languageBrowser}
-                      title={"Valor do Token"}
+                      title={t.tokenValue}
                       value={'N/A'}
                       contractLink={project.contratoToken}
                     />)}
@@ -272,13 +281,13 @@ const ProjectPage = () => {
                   {project.lotes.length > 0 ? (
                     <DataShow
                       languageBrowser={languageBrowser}
-                      title={"Prazo do Lote"}
+                      title={t.batchExpiration}
                       value={project.lotes[project.lotes.length - 1].prazoDoLote}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
                       languageBrowser={languageBrowser}
-                      title={"Prazo do Lote"}
+                      title={t.batchExpiration}
                       value={'00/00/0000'}
                       contractLink={project.contratoToken}
                     />)}
@@ -286,39 +295,40 @@ const ProjectPage = () => {
                   {project.lotes.length > 0 ? (
                     <DataShow
                       languageBrowser={languageBrowser}
-                      title={"QTDE de Tokens"}
+                      title={t.totalTokens}
                       value={masks.getQuantityMask(project.lotes[project.lotes.length - 1].qtdeDeTokens)}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
                       languageBrowser={languageBrowser}
-                      title={"QTDE de Tokens"}
+                      title={t.totalTokens}
                       value={'N/A'}
                       contractLink={project.contratoToken}
                     />)}
                   <DataShow
                     languageBrowser={languageBrowser}
-                    title={"Contrato"}
+                    title={t.contract}
                     value={project.contratoToken}
                     highlight={true}
-                    badge={{ type: "success", message: "DESTAQUE" }}
+                    badge={{ type: "success", message: t.emphasis }}
+                    linkTrue={true}
                     contractLink={project.contratoToken}
                   />
                   {project.lotes.length > 0 ? (
                     <DataShow
                       languageBrowser={languageBrowser}
-                      title={"Captação"}
+                      title={t.amountInvest}
                       value={`${(Number(project.lotes[project.lotes.length - 1].captacao) * 100).toString()}%` || '0%'}
                       highlight={true}
-                      badge={{ type: "success", message: "DESTAQUE" }}
+                      badge={{ type: "success", message: t.emphasis }}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
                       languageBrowser={languageBrowser}
-                      title={"Captação"}
+                      title={t.amountInvest}
                       value={'N/A'}
                       highlight={true}
-                      badge={{ type: "success", message: "DESTAQUE" }}
+                      badge={{ type: "success", message: t.emphasis }}
                       contractLink={project.contratoToken}
                     />
                   )}
@@ -344,7 +354,7 @@ const ProjectPage = () => {
                 />
                 <Title
                   id='documentos-title'
-                  text={t(Data.documentos.title)}
+                  text={t.documents}
                   hidden={false}
                   size={48}
                   height={48}
@@ -365,22 +375,22 @@ const ProjectPage = () => {
                 />
                 <DataShow
                   languageBrowser={languageBrowser}
-                  title={"Título do doc"}
+                  title={t.docTitle}
                   value={"NOME_DO_ARQUIVO.PDF"}
                   className="mb-3"
                   badge={{
                     type: "success",
-                    message: "DOCUMENTO"
+                    message: t.DOCUMENT
                   }}
                   contractLink={project.contratoToken}
                 />
                 <DataShow
                   languageBrowser={languageBrowser}
-                  title={"Título do doc"}
+                  title={t.docTitle}
                   value={"NOME_DO_ARQUIVO.PDF"}
                   badge={{
                     type: "success",
-                    message: t("DOCUMENTO")
+                    message: t.DOCUMENT
                   }}
                   contractLink={project.contratoToken}
                 />
@@ -394,7 +404,7 @@ const ProjectPage = () => {
                   <div className={Styles.gradbox__header}>
                     <Title
                       id='documentos-title'
-                      text={project.acronimo === 'CLGT' ? t("Benefícios entregues") : t("Cronograma de retornos")}
+                      text={project.acronimo === 'CLGT' ? t.benefitsDelivered : t.returnSchedule}
                       hidden={false}
                       size={24}
                       height={24}
@@ -459,7 +469,7 @@ const ProjectPage = () => {
                 />
                 <Title
                   id='documentos-title'
-                  text={t(Data.emissor.title)}
+                  text={t.projectOwnerMenu}
                   hidden={false}
                   size={48}
                   height={48}
@@ -481,7 +491,7 @@ const ProjectPage = () => {
                   project.emissor.linkEmissor && (
                     <Button
                       id='emissor-cta'
-                      text={t(Data.emissor.button.text)}
+                      text={t.accessTheSite}
                       label={Data.emissor.button.label}
                       hidden={false}
                       disabled={false}
@@ -529,7 +539,7 @@ const ProjectPage = () => {
                 />
                 <Paragrah
                   id='discord-description'
-                  text={t(Data.discord.paragraph)}
+                  text={t.discordNews}
                   className="py-2"
                   color='#000000'
                   hidden={false}
@@ -538,7 +548,7 @@ const ProjectPage = () => {
                 />
                 <Button
                   id='discord-cta'
-                  text={t('ACOMPANHE NOSSOS PRÓXIMOS PASSOS')}
+                  text={t.nextSteps}
                   label='Clique e acompanhe nossos próximos passos'
                   hidden={false}
                   disabled={false}
@@ -561,7 +571,7 @@ export async function getServerSideProps({
 
   return {
     props: {
-      ...(await serverSideTranslations(locale || 'pt-BR', ['project', 'footer'])),
+      ...(await serverSideTranslations(locale || 'pt-BR', ['project'])),
     },
   }
 }

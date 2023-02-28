@@ -13,6 +13,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin: 0 5%;
     }
 
     &.white {
@@ -33,6 +34,38 @@
         .user__phrase {
             color: $gray;
         }
+    }
+}
+
+.sectionLanguage {
+    display: flex;
+    justify-content: flex-end;
+    margin: 2%;
+}
+
+.buttonIcon {
+    right: 1%;
+    top: 18%;
+    margin: 0;
+    border: none;
+}
+
+.languageIcon {
+    width: 50px !important;
+    height: 50px!important;
+    fill: $primary !important;
+    border: 2px solid $primary;
+    border-radius: 50%;
+}
+
+.linkLanguageStyle {
+    text-decoration: none;
+    color: $primary;
+    margin: 10px;
+    font-size: 2rem;
+
+    &:hover {
+        color: $primary
     }
 }
 

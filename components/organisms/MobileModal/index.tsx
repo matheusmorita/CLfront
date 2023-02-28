@@ -17,7 +17,10 @@ import Projecard from '@/components/molecules/Projecard';
 import { fetchDataAxios, fetchDataUserInfo } from '@/utils/fetchDataAxios';
 import { useRouter } from 'next/router';
 
-import i18next from '@/src/i18n';
+
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
 
 function MobileModal() {
   const [projects, setProjects] = React.useState<any>([])
@@ -34,6 +37,10 @@ function MobileModal() {
   const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
   const router = useRouter();
+
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt;
 
   const { loggedIn } = React.useContext(UserContext)
 
@@ -95,7 +102,7 @@ function MobileModal() {
                 hidden={false}
                 id={`CNLT-${0}`}
                 src={Logo}
-                text={languageBrowser !== 'pt-BR' ? i18next.t("Comprar") : "Comprar"} 
+                text={t.buy} 
                 onClick={(e: any) => {
                   e.preventDefault()
                   if (!loggedIn[0]) {
@@ -115,7 +122,7 @@ function MobileModal() {
                   key={item.acronimo}
                   src={item.logoUrl}
                   alt='Esta é uma imagem de um projeto a ser exibido'
-                  text={languageBrowser !== 'pt-BR' ? i18next.t("Comprar") : "Comprar"} 
+                  text={t.buy} 
                   acronimo={item.acronimo}
                   emissor={item.emissor?.nomeEmissor}
                   name={item.nome}

@@ -4,6 +4,15 @@ import React from 'react'
 import Styles from './styles.module.scss'
 import dayjs from 'dayjs';
 
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
+import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router';
+
 
 type Props = {
   data: Array<any>
@@ -20,8 +29,15 @@ type Props = {
 
 const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario, date, totalValue }: Props) => {
   const [windowWidth, setWindowWidth] = React.useState<number>(0)
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
+  const router = useRouter();
+
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt;
+
+  const { t: translate } = useTranslation('project');
+  
   const convertMontante = (montanteValue: string | undefined) => {
     const montanteValueConverted = Number(montanteValue) / (10 ** 18)
 
@@ -35,8 +51,6 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
 
   React.useEffect(() => {
     setWindowWidth(window.innerWidth)
-    const language = window.navigator.language
-    setLanguageBrowser(language)
   }, [])
 
   return (
@@ -75,9 +89,9 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
 
       <div className={Styles.projecard__info}>
         <div className={Styles.info}>
-          <h1 className={Styles.info__title}>{name}<span>#{acronimo || 'CNLT'}</span></h1>
+          <h1 className={Styles.info__title}>{name ? translate(name) : name }<span>#{acronimo || 'CNLT'}</span></h1>
           {name?.toLowerCase().includes('coinlivre') ? '' : (
-            <p className={Styles.info__tiny}>{languageBrowser !== 'pt-BR' ? i18next.t('Emitido por') : 'Emitido por'} <b>{emissor}</b></p>
+            <p className={Styles.info__tiny}>{t.projectOwner} <b>{emissor}</b></p>
           )}
 
           {/* Progress component */}
@@ -93,7 +107,7 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
       <div className={Styles.projecard__data}>
         <div className={Styles.data}>
           <h1 className={Styles.data__title}>
-            {languageBrowser !== 'pt-BR' ? i18next.t('Quantidade') : 'Quantidade'}
+            {t.quantity}
           </h1>
           <span className={Styles.data__value}>
             {convertMontante(montante)}<span>/unds</span>
@@ -102,7 +116,7 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
         {valorUnitario ? (
           <div className={Styles.data}>
             <h1 className={Styles.data__title}>
-              {languageBrowser !== 'pt-BR' ? i18next.t('Valor unitário') : 'Valor unitário'}
+              {t.unitaryValue}
             </h1>
             <span className={Styles.data__value}>
               <span>{`R$ ${valorUnitario}` || 'R$ 0'}</span>
@@ -112,7 +126,7 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
         {date ? (
           <div className={Styles.data}>
             <h1 className={Styles.data__title}>
-              {languageBrowser !== 'pt-BR' ? i18next.t('Data') : 'Data'}
+              {t.date}
             </h1>
             <span className={Styles.data__value}>
               <span>{formatDate(date) || '00/00/0000'}</span>
@@ -132,6 +146,17 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps({
+  locale,
+}: GetServerSidePropsContext): Promise<GetServerSidePropsResult<Record<string, unknown>>> {
+
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'pt-BR', ['project'])),
+    },
+  }
 }
 
 export default Projecard

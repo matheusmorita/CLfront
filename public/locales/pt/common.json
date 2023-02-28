@@ -20,7 +20,7 @@
   "projectOwner": 
     "Emitido por",
   "profitability": 
-    "Rentabilidade estimada de até ",
+    "Rentabilidade",
   "seeMore": 
     "SAIBA MAIS",
   "anyQuestion": 
@@ -57,7 +57,7 @@
     "Desenvolvido por",
   "registerOrLogin":
     "Cadastro ou Login",
-  "EM BREVE":
+  "commingSoon":
     "EM BREVE",
   "nextSteps": 
     "ACOMPANHE NOSSOS PRÓXIMOS PASSOS",
@@ -69,41 +69,41 @@
     "Token de Recebíveis",
   "Fan Token de Influenciadores": 
     "Fan Token de Influenciadores",
-  "Investir":
+  "invest":
     "Investir",
-  "Sobre":
+  "about":
     "Sobre",
-  "Documentos": 
+  "documents": 
     "Documentos",
-  "Emissor":
+  "projectOwnerMenu":
     "Emissor",
-  "Sobre o token":
+  "aboutTokenTitle":
     "Sobre o token",
-  "NOVO":
+  "NEW":
     "NOVO",
-  "DESTAQUE":
+  "emphasis":
     "DESTAQUE",
-  "Contrato":
+  "contract":
     "Contrato",
   "Rentabilidade":
     "Rentabilidade",
-  "Lote":
+  "batch":
     "Lote",
-  "Valor do Token":
+  "tokenValue":
     "Valor do Token",
-  "Prazo do Lote":
+  "batchExpiration":
     "Prazo do Lote",
-  "QTDE de Tokens":
+  "totalTokens":
     "QTDE de Tokens",
-  "Captação":
+  "amountInvest":
     "Captação",
-  "Benefícios entregues":
+  "benefitsDelivered":
     "Benefícios entregues",
-  "Título do doc":
+  "docTitle":
     "Título do doc",
-  "DOCUMENTO":
+  "DOCUMENT":
     "DOCUMENTO",
-  "ACESSE O SITE":
+  "accessTheSite":
     "ACESSE O SITE",
   "inputEmail":
     "Digite seu e-mail",
@@ -131,7 +131,7 @@
     "Continuar",
   "Cadastro realizado com sucesso! Aguarde, você será redirecionado.":
     "Cadastro realizado com sucesso! Aguarde, você será redirecionado.",
-  "Aguarde, você será redirecionado.":
+  "waitRedirect":
     "Aguarde, você será redirecionado.",
   "questionsAndAnswers": [
       {
@@ -147,43 +147,41 @@
           "answer": "Somos a conexão para a nova economia, para o dono do ativo tokenizado, esse processo possibilita captar recursos muito mais rápido e com custos muito menores comparado aos processos tradicionais como Bancos e ou Mercado de Capitais, com maior liquidez gerando novas oportunidades de negócios. Além de possibilitar apoio financeiro a projetos com grande potencial e a expansão de novos negócios. Para o investidor abre-se novas oportunidades para diversificar seu portifólio em ativos de alta performance com segurança jurídica e tecnológica. Alcançando produtos que até então eram restritos a investidores qualificados e ou profissionais."
       }
   ],
-  "Olá,":
+  "hello":
     "Olá,",
-  "Perfil":
+  "profile":
     "Perfil",
-  "Desconectar":
+  "disconnect":
     "Desconectar",
-  "Através de benefícios":
+  "throughBenefits":
     "Através de benefícios",
-  "Data":
+  "date":
     "Data",
-  "Benefício":
+  "benefit":
     "Benefício",
-  "Preciso de ajuda":
-    "Preciso de ajuda",
-  "Histórico":
+  "historic":
     "Histórico",
-  "Carteira":
+  "wallet":
     "Carteira",
-  "Saldo":
+  "balance":
     "Saldo",
-  "SALDO":
+  "BALANCE":
     "SALDO",
-  "Quantidade":
+  "quantity":
     "Quantidade",
-  "Valor unitário":
+  "unitaryValue":
     "Valor unitário",
-  "Cronograma de retornos":
+  "returnSchedule":
     "Cronograma de retornos",
-  "Retorno":
+  "return":
     "Retorno",
-  "Parcela":
+  "installment":
     "Parcela",
-  "Venc.":
+  "payoutDate":
     "Venc.",
-  "Comprar":
+  "buy":
   "Comprar",
-  "Vender":
+  "sell":
     "Vender",
   "Voltar":
     "Voltar",

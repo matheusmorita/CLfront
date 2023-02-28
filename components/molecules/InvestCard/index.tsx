@@ -4,7 +4,16 @@ import Button from '@/components/atoms/Button';
 import Image from 'next/image';
 import ProgressBar from '../ProgressBar';
 
-import i18next from '@/src/i18n'
+// import i18next from '@/src/i18n'
+
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+
+import { useRouter } from 'next/router';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
+import { useTranslation } from 'next-i18next';
 
 interface InvestCardInterface {
   text?: any;
@@ -35,12 +44,12 @@ function InvestCard({
   hiddenButton,
   className,
 }: InvestCardInterface) {
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+  const router = useRouter();
+  const { locale } = router;
+  
+  const t = locale === 'en' ? en : pt;
 
-  React.useEffect(() => {
-    const language = window.navigator.language
-    setLanguageBrowser(language)
-  }, []);
+  const { t: translate } = useTranslation('project');
   return (
     <div className={Styles.projecard}>
       <div 
@@ -56,8 +65,8 @@ function InvestCard({
         className={Styles.projecard__picture} />
       <div className={Styles.projecard__info}>
         <div className={Styles.info}>
-          <h1 className={Styles.info__title}>{languageBrowser !== 'pt-BR' ? i18next.t(name) : name}<span>#{acronimo}</span></h1>
-          <p className={Styles.info__tiny}>{languageBrowser !== 'pt-BR' ? i18next.t('Emitido por') : 'Emitido por'} <b>{emissor}</b></p>
+          <h1 className={Styles.info__title}>{translate(name)}<span>#{acronimo}</span></h1>
+          <p className={Styles.info__tiny}>{t.projectOwner} <b>{emissor}</b></p>
           {/* Progress component */}
           <div className={Styles.progress}>
             <div className={Styles.progress__values}>
@@ -79,38 +88,18 @@ function InvestCard({
       />
       ) : ''}
     </div>
-
-
-
-
-    // <div className={className}>
-    //   <div className={Styles.divImgDescription}>
-    //     <Image
-    //       src={src}
-    //       alt={alt}
-    //       width={150}
-    //       height={110}
-    //       className={Styles.projectImage}
-    //     />
-    //     <div className={Styles.divImgDescription__letters}>
-    //       <div>
-    //         <h5 style={{ margin: '0' }}>
-    //           {name}
-    //           <span className={Styles.divImgDescription__span}>
-    //             {`#${acronimo}`}
-    //           </span>
-    //         </h5>
-    //         <p>Emitido por <b>{emissor}</b></p>
-    //       </div>
-    //       <ProgressBar
-    //         bgColor='#00EE8D'
-    //         height={10}
-    //         progress='50'
-    //       />
-    //     </div>
-    //   </div>      
-    // </div>
   )
+}
+
+export async function getServerSideProps({
+  locale,
+}: GetServerSidePropsContext): Promise<GetServerSidePropsResult<Record<string, unknown>>> {
+
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'pt-BR', ['project'])),
+    },
+  }
 }
 
 export default InvestCard;
