@@ -27,13 +27,13 @@ import pt from '@/public/locales/pt/common.json';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import { useTranslation } from 'next-i18next'
+import Modal from '@/components/organisms/Modal'
+import MobileModal from '@/components/organisms/MobileModal'
 
 const Perfil = () => {
   const [walletState, setWalletState] = React.useState(0)
-  const [balance, setBalance] = React.useState<number>(0);
   const [dataUser, setDataUser] = React.useState<any>();
   const [historyUser, setHistoryUser] = React.useState<any[]>([])
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
   // const [profileImage, setProfileImage] = React.useState<any>();
   const [image, setImage] = React.useState('')
@@ -67,7 +67,7 @@ const Perfil = () => {
 
     const widthWindow = getWindowInnerWidth()
 
-    fetchDataUserInfo(accessToken, setBalance, setDataUser)
+    fetchDataUserInfo(accessToken, setDataUser)
     fetchUserHistoryinfo(accessToken, setHistoryUser)
   }, [])
 
@@ -132,7 +132,7 @@ const Perfil = () => {
                   )}
                 </div>
                 <div className={Styles.profile__info}>
-                  <span>{dataUser?.nome}</span>
+                  <span><b>{dataUser?.nome}</b></span>
                   {/* <span className={Styles.tiny}>@username</span> */}
                 </div>
               </div>
@@ -176,7 +176,7 @@ const Perfil = () => {
               >
                 <Balance
                   type='CoinLivre'
-                  value={`CNLT ${balance}`}
+                  value={`CNLT ${dataUser?.balanceCL}`}
                 />
               </Column>
               <Column
@@ -188,7 +188,7 @@ const Perfil = () => {
               >
                 <Balance
                   type='R$'
-                  value={`R$ 0`}
+                  value={`R$ ${dataUser?.saldoReais}`}
                 />
               </Column>
             </div>
@@ -198,6 +198,7 @@ const Perfil = () => {
                 setState={setWalletState}
                 options={[t.historic, t.wallet]}
               />
+              
               <div className={Styles.wallet__body}>
                 {walletState === 0 && (
                   <>
@@ -211,6 +212,8 @@ const Perfil = () => {
                         acronimo={item.acronimoProjeto}
                         src={item.logoProjeto}
                         date={item.criadoEm}
+                        valorUnitario={item.valorUnitario}
+                        tokenBalance={item.tokenBalance}
                       />
                     ))}
                   </>
@@ -219,16 +222,18 @@ const Perfil = () => {
                   <>
                     {dataUser.balanceTokensCaptacao?.map((item: any, i: number) => (
                       <Projecard
-                      key={`${i}-${item.acronimo}`}
-                      data={projecardMock}
-                      name={item.nomeToken}
-                      montante={item.montante}
-                      emissor={item.emissorNome}
-                      acronimo={item.acronimo}
-                      src={item.logoToken}
-                      valorUnitario={item.valorUnitario}
-                      totalValue={item.total}
-                    />
+                        key={`${i}-${item.acronimo}`}
+                        data={projecardMock}
+                        name={item.nomeToken}
+                        montante={item.montante}
+                        emissor={item.emissorNome}
+                        acronimo={item.acronimo}
+                        src={item.logoToken}
+                        valorUnitario={item.valorUnitario}
+                        totalValue={item.total}
+                        showTotalValue={true}
+                        showUnitaryValue={true}
+                      />
                     ))}
                   </>
                 )}

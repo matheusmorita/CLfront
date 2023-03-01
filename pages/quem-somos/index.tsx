@@ -60,7 +60,7 @@ const QuemSomos = () => {
         >
           <Column
             media='lg'
-            size={5}
+            size={7}
             className={`pt-5 ${Styles.descriptionCoinLivre}`}
           >
             <Separator
@@ -68,7 +68,7 @@ const QuemSomos = () => {
             />
             <Title
               id='introducao-title'
-              text={t.yourAcessNewEconomy}
+              text={`${t.yourAccess} ${t.newEconomy}`}
               hidden={false}
               width={14}
               weight={500}

@@ -40,6 +40,7 @@
 .sectionLanguage {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     margin: 2%;
 }
 
@@ -58,11 +59,16 @@
     border-radius: 50%;
 }
 
+.linksDiv {
+    display: flex;
+    flex-direction: column;
+}
+
 .linkLanguageStyle {
     text-decoration: none;
     color: $primary;
     margin: 10px;
-    font-size: 2rem;
+    font-size: 1.2rem;
 
     &:hover {
         color: $primary

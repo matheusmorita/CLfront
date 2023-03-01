@@ -21,13 +21,28 @@ type Props = {
   emissor?: string;
   acronimo?: string;
   src?: string;
-  valorUnitario?: string;
+  valorUnitario?: any;
   date?: string;
   totalValue?: number;
+  tokenBalance?: number;
+  showTotalValue?: boolean;
+  showUnitaryValue?: boolean;
 }
 
 
-const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario, date, totalValue }: Props) => {
+const Projecard = ({
+  name,
+  montante,
+  emissor,
+  acronimo,
+  src,
+  valorUnitario,
+  date,
+  totalValue,
+  tokenBalance,
+  showTotalValue,
+  showUnitaryValue
+}: Props) => {
   const [windowWidth, setWindowWidth] = React.useState<number>(0)
 
   const router = useRouter();
@@ -37,7 +52,7 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
   const t = locale === 'en' ? en : pt;
 
   const { t: translate } = useTranslation('project');
-  
+
   const convertMontante = (montanteValue: string | undefined) => {
     const montanteValueConverted = Number(montanteValue) / (10 ** 18)
 
@@ -89,19 +104,19 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
 
       <div className={Styles.projecard__info}>
         <div className={Styles.info}>
-          <h1 className={Styles.info__title}>{name ? translate(name) : name }<span>#{acronimo || 'CNLT'}</span></h1>
+          <h1 className={Styles.info__title}>{name ? translate(name) : name}<span>#{acronimo || 'CNLT'}</span></h1>
           {name?.toLowerCase().includes('coinlivre') ? '' : (
             <p className={Styles.info__tiny}>{t.projectOwner} <b>{emissor}</b></p>
           )}
 
           {/* Progress component */}
-          <div className={Styles.progress}>
+          {/* <div className={Styles.progress}>
             <div className={Styles.progress__values}>
               <span>R$ 217.563.232,11</span>
               <span>R$ 302.562.132,18</span>
             </div>
             <div className={Styles.progress__bar} />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className={Styles.projecard__data}>
@@ -113,16 +128,30 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
             {convertMontante(montante)}<span>/unds</span>
           </span>
         </div>
-        {valorUnitario ? (
+        {showUnitaryValue && (
+          valorUnitario ? (
+            <div className={Styles.data}>
+              <h1 className={Styles.data__title}>
+                {t.unitaryValue}
+              </h1>
+              <span className={Styles.data__value}>
+                <span>{`R$ ${valorUnitario}.00` || 'R$ 0.00'}</span>
+              </span>
+            </div>
+          ) : ''
+        )}
+
+        {tokenBalance && (
           <div className={Styles.data}>
             <h1 className={Styles.data__title}>
-              {t.unitaryValue}
+              {t.balance}
             </h1>
             <span className={Styles.data__value}>
-              <span>{`R$ ${valorUnitario}` || 'R$ 0'}</span>
+              <span>{`R$ ${(valorUnitario * tokenBalance) / (10 ** 18)}` || 'R$ 0.00'}</span>
             </span>
           </div>
-        ) : ''}
+        )}
+
         {date ? (
           <div className={Styles.data}>
             <h1 className={Styles.data__title}>
@@ -133,16 +162,28 @@ const Projecard = ({ data, name, montante, emissor, acronimo, src, valorUnitario
             </span>
           </div>
         ) : ''}
-        {totalValue && (
-          <div className={Styles.data}>
-            <h1 className={Styles.data__title}>
-              Total
-            </h1>
-            <span className={Styles.data__value}>
-              <span>R$ {totalValue}</span>
-            </span>
-          </div>
+        {showTotalValue && (
+          totalValue ? (
+            <div className={Styles.data}>
+              <h1 className={Styles.data__title}>
+                Total
+              </h1>
+              <span className={Styles.data__value}>
+                <span>R$ {totalValue}</span>
+              </span>
+            </div>
+          ) : (
+            <div className={Styles.data}>
+              <h1 className={Styles.data__title}>
+                Total
+              </h1>
+              <span className={Styles.data__value}>
+                <span>R$ 0</span>
+              </span>
+            </div>
+          )
         )}
+
       </div>
     </div>
   )

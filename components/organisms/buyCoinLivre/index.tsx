@@ -35,7 +35,7 @@ function BuyCoinLivre({ conditionalBuy, balance }: buyCoinLivreInterface) {
         setBuyConfirmed(true)
         setTimeout(() => {
           window.location.reload()
-        }, 1500);
+        }, 2000);
       }
     })
   }, [])

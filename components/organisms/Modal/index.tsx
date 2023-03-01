@@ -50,7 +50,7 @@ function Modal() {
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
     fetchDataAxios("4", setProjects)
-    fetchDataUserInfo(accessToken, setBalance, setDataUser)
+    fetchDataUserInfo(accessToken, setDataUser)
 
   }, [balance])
 

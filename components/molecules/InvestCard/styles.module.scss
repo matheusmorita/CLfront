@@ -52,6 +52,20 @@
         }
     }
 
+    &__button {
+
+        &[disabled] {
+            background-color: #FAD151;
+            cursor: not-allowed;
+            box-shadow: 0 5px 15px rgb(250, 209, 81, .3);
+    
+            &:hover {
+                background-color: #FAD151;
+                box-shadow: 0 5px 15px rgb(250, 209, 81, .3);
+            }
+        }
+    }
+
     &__data {
         flex: 1;
         display: flex;

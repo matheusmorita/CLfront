@@ -9,7 +9,7 @@ const nextConfig = {
     GET_TRANSACTIONS: 'https://coinlivre.blocklize.io/token/findTransactions/',
     GERAR_PIX: 'https://coinlivre.blocklize.io/token/criar-ordem-pix/',
     COMPRAR_TOKEN: 'https://coinlivre.blocklize.io/token/comprar-token/',
-    REQUEST_LOGIN: 'https://greg.blocklize.io/auth/requestLogin/',
+    REQUEST_LOGIN: 'https://coinlivre.blocklize.io/usuario/requestLogin/', 
     CADASTRAR_USER: 'https://coinlivre.blocklize.io/usuario/cadastrarUser/',
     GET_USER_CADASTRO: 'https://coinlivre.blocklize.io/usuario/getUserCadastro/',
   },

@@ -35,7 +35,7 @@ function HeaderModal({ balance }: HeaderModalInterface) {
     <>
       <div className={Styles.items}>
         <div className={Styles.buttons}>
-          {checkedButton === 'comprar' ? (
+          {/* {checkedButton === 'comprar' ? (
             <>
               <Button
                 id="buy"
@@ -89,8 +89,8 @@ function HeaderModal({ balance }: HeaderModalInterface) {
                 size={18}
               />
             </>
-          )}
-
+          )} */}
+          <b style={{color: '#00EE8D'}}>Disponível somente para compras atualmente</b>
         </div>
         <div className={Styles.balanceValue}>
           <button

@@ -21,7 +21,7 @@ export async function fetchDataIdAxios(id, setProject) {
 }
 
 
-export async function fetchDataUserInfo (accessToken, setBalance, setDataUser) {
+export async function fetchDataUserInfo (accessToken, setDataUser) {
   var config = {
     method: "post",
     headers: {
@@ -35,8 +35,6 @@ export async function fetchDataUserInfo (accessToken, setBalance, setDataUser) {
   const data = await response.json()
   console.log(data)
   setDataUser(data)
-  setBalance(data.balanceCL)
-  
 }
 
 export async function fetchUserHistoryinfo (accessToken, setHistoryUser, historyUser) {
@@ -191,7 +189,7 @@ export const handleUserRequestRegister = async (setWaiting, setSuccess, name, cp
             setWaiting(false)
             setSuccess(true)
             setTimeout(() => {
-              router.push('/')
+              router.push('/perfil')
             }, 3000);
           }
         })

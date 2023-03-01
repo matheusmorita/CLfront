@@ -37,7 +37,7 @@ const Projects = () => {
             text={(item.acronimo.includes('CLDG') || item.acronimo.includes('CLMT')) ? 'EM BREVE' : 'SAIBA MAIS'}
             name={item.nome}
             src={item.logoUrl}
-            dataLanc={item.dataLancamento}
+            dataLanc={(item.acronimo.includes('CLDG') || item.acronimo.includes('CLMT')) ? 'EM BREVE' : item.dataLancamento}
             emissor={item.emissor?.nomeEmissor}
             rent={item.rentabilidade ? item.rentabilidade : null}
             path={item.idProjeto}

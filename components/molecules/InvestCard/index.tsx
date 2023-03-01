@@ -68,13 +68,13 @@ function InvestCard({
           <h1 className={Styles.info__title}>{translate(name)}<span>#{acronimo}</span></h1>
           <p className={Styles.info__tiny}>{t.projectOwner} <b>{emissor}</b></p>
           {/* Progress component */}
-          <div className={Styles.progress}>
+          {/* <div className={Styles.progress}>
             <div className={Styles.progress__values}>
               <span>R$ 217.563.232,11</span>
               <span>R$ 302.562.132,18</span>
             </div>
             <div className={Styles.progress__bar} />
-          </div>
+          </div> */}
         </div>
       </div>
       {!hiddenButton ? (
@@ -84,7 +84,8 @@ function InvestCard({
         label={label}
         onClick={onClick}
         text={text}
-        className={className}
+        className={`${className} ${Styles.projecard__button}`}
+        disabled={acronimo.includes('CLDG') || acronimo.includes('CLMT')}
       />
       ) : ''}
     </div>

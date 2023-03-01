@@ -72,7 +72,7 @@ const Register = () => {
               setWaiting(false)
               setSuccess(true)
               setTimeout(() => {
-                router.push('/')
+                router.push('/perfil')
               }, 3000);
             }
           })

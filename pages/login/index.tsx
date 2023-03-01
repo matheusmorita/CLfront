@@ -46,7 +46,7 @@ const Login = () => {
 
   React.useEffect(() => {
     if (logged) {
-      router.push('/')
+      router.push('/perfil')
     }
 
   }, [logged])

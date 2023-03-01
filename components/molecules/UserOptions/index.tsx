@@ -39,7 +39,10 @@ const UserOptions = ({ name, contrast = false }: Props) => {
       className={`${Styles.user} ${handleWhiteTheme()}`}
       onClick={() => { handleMenuToggle() }}
     >
-      <p className={Styles.user__phrase}>{t.hello} {name}</p>
+      <div style={{display: 'flex', gap: '2%'}}>
+        <p className={Styles.user__phrase}>{t.hello}</p>
+        <p className={Styles.user__phrase}>{name}</p>
+      </div>
       <div className={Styles.user__picture}
         onClick={() => { handleMenuToggle() }}
       />
@@ -53,7 +56,7 @@ const UserOptions = ({ name, contrast = false }: Props) => {
           <Link href='/logout'>
             <li className={Styles.user__item}>
               {t.disconnect}
-              
+
             </li>
           </Link>
         </ul>
