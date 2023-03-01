@@ -29,13 +29,12 @@ function Modal() {
   const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
 
   const [realValue, setRealValue] = React.useState<string>('0');
-  const [balance, setBalance] = React.useState<number>(0)
   const [projects, setProjects] = React.useState<any>([])
   const [projectSelected, setProjectSelected] = React.useState<any>();
   const [requestPixValue, setRequestPixValue] = React.useState<string>('')
   const [valorToken, setValorToken] = React.useState<string>('')
   const [lote, setLote] = React.useState<object>();
-  const [dataUser, setDataUser] = React.useState<object>();
+  const [dataUser, setDataUser] = React.useState<any>();
 
   const router = useRouter()
 
@@ -52,7 +51,7 @@ function Modal() {
     fetchDataAxios("4", setProjects)
     fetchDataUserInfo(accessToken, setDataUser)
 
-  }, [balance])
+  }, [dataUser])
 
   return (
     <form className={Styles.form}>
@@ -66,8 +65,8 @@ function Modal() {
         />
       </div>
 
-      {hiddenBuyCoinLivre ? <BuyCoinLivre balance={balance} conditionalBuy={conditionalBuy} /> : ''}
-      <HeaderModal balance={balance} />
+      {hiddenBuyCoinLivre ? <BuyCoinLivre balance={dataUser?.balanceCL} conditionalBuy={conditionalBuy} /> : ''}
+      <HeaderModal balance={dataUser?.balanceCL} />
       {hiddenBuy ? (
         <BuyProject
           setHiddenBuy={setHiddenBuy}
@@ -84,7 +83,7 @@ function Modal() {
           setRequestPixValue={setRequestPixValue}
           requestPixValue={requestPixValue}
           valorToken={valorToken}
-          balance={balance}
+          balance={dataUser?.balanceCL}
           lote={lote}
         />
       ) : (

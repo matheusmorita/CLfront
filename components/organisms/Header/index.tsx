@@ -138,7 +138,7 @@ const Header = ({ hideLinks }: Props) => {
                         key={l}
                         locale={l}
                       >
-                        <b style={{ color: '#00EE8D' }}>
+                        <b style={{ color: '#00EE8D', }}>
                           {l.toLocaleUpperCase()}
                         </b>
                       </Link>

@@ -1,8 +1,11 @@
-import { margin } from '@mui/system';
-import i18next from '@/src/i18n';
 import React from 'react'
 import Styles from './styles.module.scss'
+
+import { formatDate } from '@/utils/formatDate';
+
+//dayjs
 import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 // languages
 import en from '@/public/locales/en/common.json';
@@ -46,9 +49,7 @@ const Projecard = ({
   const [windowWidth, setWindowWidth] = React.useState<number>(0)
 
   const router = useRouter();
-
   const { locale } = router;
-
   const t = locale === 'en' ? en : pt;
 
   const { t: translate } = useTranslation('project');
@@ -59,14 +60,30 @@ const Projecard = ({
     return montanteValueConverted.toString()
   }
 
-  const formatDate = (date: any) => {
-    const formated = dayjs(date, 'YYYY-MM-DDTHH:MM:ss').format('DD/MM/YYYY')
-    return formated
+  const formatBalanceValue = (valorUnitario: number, tokenBalance: number) => {
+    const valueResult = (valorUnitario * tokenBalance) / (10 ** 18)
+    let valueResultString = valueResult.toString()
+    if (valueResultString.includes('.')) {
+      valueResultString = valueResultString.replace('.', ',')
+      return valueResultString;
+    }
+    return `${valueResultString},00`
+  }
+
+  const formatDotString = (value: number | string) => {
+    let valueResultString = value.toString()
+    if (valueResultString.includes('.')) {
+      valueResultString = valueResultString.replace('.', ',')
+      return valueResultString;
+    }
+    return `${valueResultString},00`
   }
 
   React.useEffect(() => {
     setWindowWidth(window.innerWidth)
   }, [])
+
+  dayjs.extend(relativeTime)
 
   return (
     <div className={Styles.projecard}>
@@ -135,7 +152,7 @@ const Projecard = ({
                 {t.unitaryValue}
               </h1>
               <span className={Styles.data__value}>
-                <span>{`R$ ${valorUnitario}.00` || 'R$ 0.00'}</span>
+                <span>{`R$ ${valorUnitario},00` || 'R$ 0,00'}</span>
               </span>
             </div>
           ) : ''
@@ -147,7 +164,7 @@ const Projecard = ({
               {t.balance}
             </h1>
             <span className={Styles.data__value}>
-              <span>{`R$ ${(valorUnitario * tokenBalance) / (10 ** 18)}` || 'R$ 0.00'}</span>
+              <span>{`R$ ${formatBalanceValue(valorUnitario, tokenBalance)}` || 'R$ 0,00'}</span>
             </span>
           </div>
         )}
@@ -158,7 +175,7 @@ const Projecard = ({
               {t.date}
             </h1>
             <span className={Styles.data__value}>
-              <span>{formatDate(date) || '00/00/0000'}</span>
+              <span>{formatDate(date) || '00/00/0000 - 00:00:00'}</span>
             </span>
           </div>
         ) : ''}
@@ -169,7 +186,7 @@ const Projecard = ({
                 Total
               </h1>
               <span className={Styles.data__value}>
-                <span>R$ {totalValue}</span>
+                <span>R$ {formatDotString(totalValue)}</span>
               </span>
             </div>
           ) : (
@@ -178,7 +195,7 @@ const Projecard = ({
                 Total
               </h1>
               <span className={Styles.data__value}>
-                <span>R$ 0</span>
+                <span>R$ 0,00</span>
               </span>
             </div>
           )

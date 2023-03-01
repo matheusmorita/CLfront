@@ -21,7 +21,7 @@
 
     &[disabled] {
         opacity: .4;
-        cursor: default;
+        cursor: not-allowed;
 
         &:hover {
             background: $primary;

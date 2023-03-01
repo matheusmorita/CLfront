@@ -57,6 +57,13 @@
     fill: $primary !important;
     border: 2px solid $primary;
     border-radius: 50%;
+    transition: .5s;
+
+
+    &:hover {
+        transition: .5s;
+        box-shadow: 0 5px 15px rgba($color: $primary, $alpha: .3);
+    }
 }
 
 .linksDiv {
