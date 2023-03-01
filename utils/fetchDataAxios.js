@@ -17,6 +17,7 @@ export async function fetchDataIdAxios(id, setProject) {
       "Content-Type": "application/json"
     }
   })
+  console.log(response.data)
   setProject(response.data)
 }
 

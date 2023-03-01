@@ -59,7 +59,6 @@ const ProjectPage = () => {
   const t = locale === 'en' ? en : pt
   
 
-
   const { loggedIn } = React.useContext(UserContext)
 
   // fetchDataIdAxios()
@@ -225,7 +224,7 @@ const ProjectPage = () => {
                     <DataShow
                       languageBrowser={languageBrowser}
                       title={t.launchDate}
-                      value={masks.getDateMask(project.criadoEm)}
+                      value={masks.getDateMask(project.dataLancamento)}
                       badge={{
                         type: "success",
                         message: t.NEW

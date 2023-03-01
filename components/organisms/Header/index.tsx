@@ -26,7 +26,6 @@ const Header = ({ hideLinks }: Props) => {
   const [responsive, setResponsive] = React.useState<boolean>(false)
   const [showLanguages, setShowLanguages] = React.useState<boolean>(false)
 
-  const [balance, setBalance] = React.useState<number>(0);
   const [dataUser, setDataUser] = React.useState<any>();
 
   const { userInfo, loggedIn } = React.useContext(UserContext)
@@ -138,7 +137,7 @@ const Header = ({ hideLinks }: Props) => {
                         key={l}
                         locale={l}
                       >
-                        <b style={{ color: '#00EE8D', }}>
+                        <b className={Styles.languageItem}>
                           {l.toLocaleUpperCase()}
                         </b>
                       </Link>

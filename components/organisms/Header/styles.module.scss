@@ -66,6 +66,16 @@
     }
 }
 
+.languageItem {
+    color: #00EE8D;
+    border-bottom: 3px solid transparent;
+
+    &:hover {
+        transition: .5s;
+        border-bottom: 3px solid $primary;
+    }
+}
+
 .linksDiv {
     display: flex;
     flex-direction: column;

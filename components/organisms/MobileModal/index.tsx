@@ -30,10 +30,9 @@ function MobileModal() {
   const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
   const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
   const [realValue, setRealValue] = React.useState<string>('');
-  const [balance, setBalance] = React.useState<number>(0)
   const [valorToken, setValorToken] = React.useState<string>('')
   const [lote, setLote] = React.useState<object>();
-  const [dataUser, setDataUser] = React.useState<object>();
+  const [dataUser, setDataUser] = React.useState<any>();
   const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
   const router = useRouter();
@@ -51,11 +50,11 @@ function MobileModal() {
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
     fetchDataAxios("4", setProjects)
-    fetchDataUserInfo(accessToken, setBalance, setDataUser)
+    fetchDataUserInfo(accessToken, setDataUser)
 
     const language = window.navigator.language
     setLanguageBrowser(language)
-  }, [balance])
+  }, [dataUser])
 
   return (
     <>
@@ -71,9 +70,9 @@ function MobileModal() {
             />
           </div>
 
-          {hiddenBuyCoinLivre ? <BuyCoinLivreMobile balance={balance} conditionalBuy={conditionalBuy} /> : ''}
+          {hiddenBuyCoinLivre ? <BuyCoinLivreMobile balance={dataUser?.balanceCL} conditionalBuy={conditionalBuy} /> : ''}
           <HeaderModalMobile
-            balance={balance}
+            balance={dataUser?.balanceCL}
           />
           {hiddenBuy ? (
             <BuyProjectMobile
@@ -86,7 +85,7 @@ function MobileModal() {
               conditionalBuy={conditionalBuy}
               projectSelected={projectSelected}
               valorToken={valorToken}
-              balance={balance}
+              balance={dataUser?.balanceCL}
               lote={lote}
             />
           ) : (
