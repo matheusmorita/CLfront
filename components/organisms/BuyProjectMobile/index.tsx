@@ -52,6 +52,7 @@ function BuyProjectMobile({ setRealValue,
   const [accessTokenState, setAccessTokenState] = React.useState<string | null>('');
   const [hashConfirm, setHashConfirm] = React.useState<string>('')
   const [waiting, setWaiting] = React.useState<boolean>(false)
+  const [responseCode, setResponseCode] = React.useState<number>()
 
   const router = useRouter();
   const { locale } = router;
@@ -100,7 +101,7 @@ function BuyProjectMobile({ setRealValue,
               id="backButton"
               label="Clique para voltar"
               onClick={() => { setHiddenBuy(!hiddenBuy) }}
-              text={t.back} 
+              text={t.back}
               size={20}
               className={Styles.divButtons__backButton}
             />
@@ -142,53 +143,104 @@ function BuyProjectMobile({ setRealValue,
       ) : (
         <section className={Styles.successBuyProject}>
           {hiddenBuyProject ? (
-            <main className={Styles.buyCoinLivre}>
-              <div className={Styles.divInput__investCardExib}>
-                <InvestCardMobile
-                  hiddenButton={true}
-                  acronimo={projectSelected.acronimo}
-                  alt='Esta é uma imagem de um projeto a ser exibido'
-                  emissor={projectSelected.emissor?.nomeEmissor}
-                  id={projectSelected.acronimo}
-                  name={projectSelected.nome}
-                  src={projectSelected.logoUrl}
-                  className={Styles.div}
-                />
-              </div>
-              <p className={Styles.descriptionText}>
-                Muito obrigado por investir neste projeto. Seus Tokens estarão
-                na sua carteira em alguns instantes e poderão ser visualizados
-                na aba Histórico, além de contabilizarem no seu Saldo.
-              </p>
-              <Image
-                width={200}
-                height={200}
-                alt='Imagem de QR code'
-                src={Logo}
-              />
-              <div className={Styles.inputCheckBuy}>
-                {buyConfirmed ? (
-                  <InputModal
-                    id='inputQrcode'
-                    type='string'
-                    label='Código de confirmação'
-                    disabled={false}
-                    placeholder={hashConfirm}
-                    className={Styles.inputValueBuyProject}
+            responseCode === 500 || responseCode === 400 ? (
+              <>
+                <main className={Styles.buyCoinLivre}>
+                  <div className={Styles.divInput__investCardExib}>
+                    <InvestCardMobile
+                      hiddenButton={true}
+                      acronimo={projectSelected.acronimo}
+                      alt='Esta é uma imagem de um projeto a ser exibido'
+                      emissor={projectSelected.emissor?.nomeEmissor}
+                      id={projectSelected.acronimo}
+                      name={projectSelected.nome}
+                      src={projectSelected.logoUrl}
+                      className={Styles.div}
+                    />
+                  </div>
+                  <p className={Styles.descriptionTextFailed}>
+                    Houve um problema ao tentar comprar este projeto, por favor, tente novamente
+                    mais tarde.
+                  </p>
+                  <Image
+                    width={200}
+                    height={200}
+                    alt='Imagem de QR code'
+                    src={Logo}
                   />
-                ) : ''}
-                <Button
-                  hidden={false}
-                  id={'paymentQRcodeBtn'}
-                  label="Escaneie para efetuar o pagamento"
-                  onClick={() => { }}
-                  text={buyConfirmed ? "Sucesso" : "Aguardando"}
-                  disabled={true}
-                  className={Styles.btnPayQrCode}
-                  size={20}
+                  <div className={Styles.inputCheckBuy}>
+                    {buyConfirmed ? (
+                      <InputModal
+                        id='inputQrcode'
+                        type='string'
+                        label='Código de confirmação'
+                        disabled={false}
+                        placeholder={hashConfirm}
+                        className={Styles.inputValueBuyProject}
+                      />
+                    ) : ''}
+                    <Button
+                      hidden={false}
+                      id={'paymentQRcodeBtn'}
+                      label="Escaneie para efetuar o pagamento"
+                      onClick={() => { }}
+                      text={buyConfirmed ? "Sucesso" : "Aguardando"}
+                      disabled={true}
+                      className={Styles.btnPayQrCode}
+                      size={20}
+                    />
+                  </div>
+                </main>
+              </>
+            ) : (
+              <main className={Styles.buyCoinLivre}>
+                <div className={Styles.divInput__investCardExib}>
+                  <InvestCardMobile
+                    hiddenButton={true}
+                    acronimo={projectSelected.acronimo}
+                    alt='Esta é uma imagem de um projeto a ser exibido'
+                    emissor={projectSelected.emissor?.nomeEmissor}
+                    id={projectSelected.acronimo}
+                    name={projectSelected.nome}
+                    src={projectSelected.logoUrl}
+                    className={Styles.div}
+                  />
+                </div>
+                <p className={Styles.descriptionText}>
+                  Muito obrigado por investir neste projeto. Seus Tokens estarão
+                  na sua carteira em alguns instantes e poderão ser visualizados
+                  na aba Histórico, além de contabilizarem no seu Saldo.
+                </p>
+                <Image
+                  width={200}
+                  height={200}
+                  alt='Imagem de QR code'
+                  src={Logo}
                 />
-              </div>
-            </main>
+                <div className={Styles.inputCheckBuy}>
+                  {buyConfirmed ? (
+                    <InputModal
+                      id='inputQrcode'
+                      type='string'
+                      label='Código de confirmação'
+                      disabled={false}
+                      placeholder={hashConfirm}
+                      className={Styles.inputValueBuyProject}
+                    />
+                  ) : ''}
+                  <Button
+                    hidden={false}
+                    id={'paymentQRcodeBtn'}
+                    label="Escaneie para efetuar o pagamento"
+                    onClick={() => { }}
+                    text={buyConfirmed ? "Sucesso" : "Aguardando"}
+                    disabled={true}
+                    className={Styles.btnPayQrCode}
+                    size={20}
+                  />
+                </div>
+              </main>
+            )
           ) : (
             <main className={Styles.buyCoinLivre}>
               {conditionalBuy !== 'CNLT-0' ? (
@@ -303,7 +355,7 @@ function BuyProjectMobile({ setRealValue,
                   id="backButton"
                   label="Clique para voltar"
                   onClick={() => { setHiddenBuy(!hiddenBuy) }}
-                  text={t.back} 
+                  text={t.back}
                   size={20}
                   className={Styles.divButtons__backButton}
                 />
@@ -335,14 +387,14 @@ function BuyProjectMobile({ setRealValue,
                       const responseSaldo = checkSaldo(balance, valorToken, realValue)
                       setValueSaldo(responseSaldo)
                       if (responseSaldo) {
-                        const { confirm, hash } = await requestBuyToken(accessTokenState, realValue, lote.id, setWaiting)
+                        const { confirm, hash } = await requestBuyToken(accessTokenState, realValue, lote.id, setWaiting, setResponseCode)
                         setHashConfirm(hash)
-                        if (confirm != 0) {
+                        if (responseCode === 200) {
                           setBuyConfirmed(!buyConfirmed)
-                          setTimeout(() => {
-                            setBuyConfirmed(!buyConfirmed)
-                            window.location.reload()
-                          }, 2000);
+                          // setTimeout(() => {
+                          //   setBuyConfirmed(!buyConfirmed)
+                          //   window.location.reload()
+                          // }, 2000);
                         }
                       }
                       setHiddenBuyProject(!hiddenBuyProject)

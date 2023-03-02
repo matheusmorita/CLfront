@@ -10,7 +10,7 @@ import Row from '@/components/molecules/Row'
 import Balance from '@/components/molecules/Balance'
 import Switch from '@/components/molecules/Switch'
 import Projecard from '@/components/molecules/Projecard'
-import { fetchDataUserInfo, fetchUserHistoryinfo } from '@/utils/fetchDataAxios'
+import { fetchDataUserInfo, fetchUserHistoryinfo, uploadProfilePhoto } from '@/utils/fetchDataAxios'
 import Link from 'next/link'
 import InvestCard from '@/components/molecules/InvestCard'
 import { getWindowInnerWidth } from '@/assets/js/util/responsive'
@@ -20,6 +20,8 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import defaultImage from '../../assets/img/placeholder.webp'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+
+import { formatValueBalance } from '@/utils/formatBalance'
 
 // languages
 import en from '@/public/locales/en/common.json';
@@ -46,7 +48,6 @@ const Perfil = () => {
   const t = locale === 'en' ? en : pt;
 
   const { t: translate } = useTranslation('project');
-
 
   const projecardMock = [
     { title: 'Qtde.', value: 16654 },
@@ -109,6 +110,7 @@ const Perfil = () => {
                   <label className={Styles.profile__inputImage} htmlFor='profileImageInput'>
                     <BorderColorIcon className={Styles.profile__icon} />
                     <input id="profileImageInput" name='image' type="file" onChange={(e: any) => {
+                      // uploadProfilePhoto(e.target.files[0], 'accesstokenuserupload')
                       setImage(URL.createObjectURL(e.target.files[0]))
                     }}></input>
                   </label>
@@ -176,7 +178,7 @@ const Perfil = () => {
               >
                 <Balance
                   type='CoinLivre'
-                  value={`CNLT ${dataUser?.balanceCL}`}
+                  value={`CNLT ${formatValueBalance(dataUser?.balanceCL)}`}
                 />
               </Column>
               <Column
@@ -188,7 +190,7 @@ const Perfil = () => {
               >
                 <Balance
                   type='R$'
-                  value={`R$ ${dataUser?.saldoReais}`}
+                  value={`R$ ${formatValueBalance(dataUser?.saldoReais)}`}
                 />
               </Column>
             </div>

@@ -64,6 +64,7 @@ function BuyProject({
   const [accessTokenState, setAccessTokenState] = React.useState<any>('');
   const [hashConfirm, setHashConfirm] = React.useState<string>('')
   const [waiting, setWaiting] = React.useState<boolean>(false)
+  const [responseCode, setResponseCode] = React.useState<number>()
 
   const checkSaldo = (balance: number, valorToken: string, realValue: string): boolean => {
     const multiplyValues = Number(realValue) * Number(valorToken)
@@ -166,41 +167,78 @@ function BuyProject({
             </div>
           ) : ''}
           {hiddenBuyProject ? (
-            <>
-              <p className={Styles.descriptionText}>
-                Muito obrigado por investir neste projeto. Seus Tokens estarão na sua carteira
-                em alguns instantes e poderão ser visualizados na aba Histórico,
-                além de contabilizarem no seu Saldo.
-              </p>
-              <Image
-                width={200}
-                height={200}
-                alt='Imagem de QR code'
-                src={Logo}
-              />
-              <div style={{ width: '90%' }}>
-                {buyConfirmed ? (
-                  <InputModal
-                    id='inputQrcode'
-                    type='string'
-                    label='Código de confirmação'
-                    disabled={false}
-                    placeholder={hashConfirm}
-                    className={Styles.inputValueBuyProject}
-                  />
-                ) : ''}
-                <Button
-                  hidden={false}
-                  id={'paymentQRcodeBtn'}
-                  label="Escaneie para efetuar o pagamento"
-                  onClick={() => { }}
-                  text={buyConfirmed ? "Pagamento realizado com sucesso" : "Aguardando confirmação do pagamento"}
-                  disabled={true}
-                  className={Styles.btnPayQrCode}
-                  size={25}
+            responseCode === 500 || responseCode === 400 ? (
+              <>
+                <p className={Styles.descriptionTextFailed}>
+                  Houve um problema ao tentar comprar este projeto, por favor, tente novamente
+                  mais tarde.
+                </p>
+                <Image
+                  width={200}
+                  height={200}
+                  alt='Imagem de QR code'
+                  src={Logo}
                 />
-              </div>
-            </>
+                <div style={{ width: '90%' }}>
+                  {buyConfirmed ? (
+                    <InputModal
+                      id='inputQrcode'
+                      type='string'
+                      label='Código de confirmação'
+                      disabled={false}
+                      placeholder={hashConfirm}
+                      className={Styles.inputValueBuyProject}
+                    />
+                  ) : ''}
+                  <Button
+                    hidden={false}
+                    id={'paymentQRcodeBtn'}
+                    label="Escaneie para efetuar o pagamento"
+                    onClick={() => { }}
+                    text={buyConfirmed ? "Pagamento realizado com sucesso" : "Aguardando confirmação do pagamento"}
+                    disabled={true}
+                    className={Styles.btnPayQrCode}
+                    size={25}
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <p className={Styles.descriptionText}>
+                  Muito obrigado por investir neste projeto. Seus Tokens estarão na sua carteira
+                  em alguns instantes e poderão ser visualizados na aba Histórico,
+                  além de contabilizarem no seu Saldo.
+                </p>
+                <Image
+                  width={200}
+                  height={200}
+                  alt='Imagem da logo'
+                  src={Logo}
+                />
+                <div style={{ width: '90%' }}>
+                  {buyConfirmed ? (
+                    <InputModal
+                      id='inputQrcode'
+                      type='string'
+                      label='Código de confirmação'
+                      disabled={false}
+                      placeholder={hashConfirm}
+                      className={Styles.inputValueBuyProject}
+                    />
+                  ) : ''}
+                  <Button
+                    hidden={false}
+                    id={'paymentQRcodeBtn'}
+                    label="Escaneie para efetuar o pagamento"
+                    onClick={() => { }}
+                    text={buyConfirmed ? "Pagamento realizado com sucesso" : "Aguardando confirmação do pagamento"}
+                    disabled={true}
+                    className={Styles.btnPayQrCode}
+                    size={25}
+                  />
+                </div>
+              </>
+            )
           ) : (
             <>
               {conditionalBuy !== 'CNLT-0' ? (
@@ -332,9 +370,9 @@ function BuyProject({
                       const responseSaldo = checkSaldo(balance, valorToken, realValue)
                       setValueSaldo(responseSaldo)
                       if (responseSaldo) {
-                        const { confirm, hash } = await requestBuyToken(accessTokenState, realValue, lote.id, setWaiting)
+                        const { confirm, hash } = await requestBuyToken(accessTokenState, realValue, lote.id, setWaiting, setResponseCode)
                         setHashConfirm(hash)
-                        if (confirm != 0) {
+                        if (responseCode === 200) {
                           setBuyConfirmed(!buyConfirmed)
                           // setTimeout(() => {
                           //   setBuyConfirmed(!buyConfirmed)

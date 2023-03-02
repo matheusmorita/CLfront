@@ -22,7 +22,7 @@ export async function fetchDataIdAxios(id, setProject) {
 }
 
 
-export async function fetchDataUserInfo (accessToken, setDataUser) {
+export async function fetchDataUserInfo(accessToken, setDataUser) {
   var config = {
     method: "post",
     headers: {
@@ -30,15 +30,15 @@ export async function fetchDataUserInfo (accessToken, setDataUser) {
       "Content-Type": "application/json"
     },
   };
-  
+
   const response = await fetch(process.env.GET_USER_INFO, config)
-  
+
   const data = await response.json()
   console.log(data)
   setDataUser(data)
 }
 
-export async function fetchUserHistoryinfo (accessToken, setHistoryUser, historyUser) {
+export async function fetchUserHistoryinfo(accessToken, setHistoryUser, historyUser) {
   var config = {
     method: "post",
     headers: {
@@ -46,9 +46,9 @@ export async function fetchUserHistoryinfo (accessToken, setHistoryUser, history
       "Content-Type": "application/json"
     },
   };
-  
+
   const response = await fetch(process.env.GET_TRANSACTIONS, config)
-  
+
   const data = await response.json()
   console.log(data)
   setHistoryUser(data)
@@ -58,7 +58,7 @@ export async function fetchRequestPix(accessToken, quantity, setWaiting) {
   let newQuantity = quantity
   if (quantity.includes(',')) {
     const replaceDot = quantity.replace(',', '.')
-    newQuantity =  Number(replaceDot).toFixed(2).toString()
+    newQuantity = Number(replaceDot).toFixed(2).toString()
   }
 
   var dataBody = JSON.stringify({
@@ -83,7 +83,7 @@ export async function fetchRequestPix(accessToken, quantity, setWaiting) {
   }
 }
 
-export async function requestBuyToken (accessToken, quantity, loteId, setWaiting) {
+export async function requestBuyToken(accessToken, quantity, loteId, setWaiting, setResponseCode) {
   const dataBody = JSON.stringify({
     quantity: Number(quantity).toFixed(2).toString(),
     loteId
@@ -100,6 +100,7 @@ export async function requestBuyToken (accessToken, quantity, loteId, setWaiting
 
   setWaiting(true)
   const response = await fetch(process.env.COMPRAR_TOKEN, config)
+  setResponseCode(response.status)
   const dataResponse = await response.json()
   setWaiting(false)
 
@@ -239,4 +240,15 @@ export const handleUserSession = async (setUserInfo, setLoggedIn, token, router)
     }
 
   }
+}
+
+export const uploadProfilePhoto = (photoFile, idUser) => {
+  let formData = new FormData();
+  formData.append("file", photoFile);
+
+  axios.patch(`https://coinlivre.blocklize.io/usuario/upload-foto/${idUser}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    }
+  });
 }

@@ -26,6 +26,10 @@
   }
 }
 
+.descriptionTextFailed {
+  color: $error;
+}
+
 .enoughCoinDiv {
   display: flex;
   flex-direction: column;
