@@ -18,7 +18,9 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { captureName } from '@/assets/js/util/validations'
 
-import i18next from '@/src/i18n'
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
 
 const Register = () => {
   const router = useRouter()
@@ -42,8 +44,9 @@ const Register = () => {
 
   const [checked, setChecked] = React.useState<boolean>(false)
 
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+  const { locale } = router;
 
+  const t = locale === 'en' ? en : pt
 
   const handleUserRequest = async () => {
     if (validation) {
@@ -114,8 +117,6 @@ const Register = () => {
     if (logged) {
       handleGetUserInfo()
     }
-    const language = window.navigator.language
-    setLanguageBrowser(language)
   }, [logged])
 
   React.useEffect(() => {
@@ -168,7 +169,7 @@ const Register = () => {
                 <Title
                   id='form-title'
                   className='text-center fw-normal'
-                  text={languageBrowser !== 'pt-BR' ? i18next.t('Registrar-se') : 'Registrar-se'}
+                  text={t.register}
                   size={24}
                   hidden={false}
                 />
@@ -176,7 +177,7 @@ const Register = () => {
                   <>
                     <Input
                       id='name'
-                      label={languageBrowser !== 'pt-BR' ? i18next.t('Digite seu nome completo') : 'Digite seu nome completo'}
+                      label={t.insertFullName}
                       type='name'
                       onInput={setName}
                       validation={setErrorName}
@@ -185,7 +186,7 @@ const Register = () => {
                     />
                     <Input
                       id='birth'
-                      label={languageBrowser !== 'pt-BR' ? i18next.t('Data de nascimento') : 'Data de nascimento'}
+                      label={t.birthday}
                       type='date'
                       onInput={setDate}
                       validation={setErrorDate}
@@ -193,7 +194,7 @@ const Register = () => {
                     />
                     <Input
                       id='cpf'
-                      label={languageBrowser !== 'pt-BR' ? i18next.t('Digite seu CPF') : 'Digite seu CPF'}
+                      label={t.insertCpf}
                       type='text'
                       onInput={setCpf}
                       validation={setErrorCPF}
@@ -204,7 +205,7 @@ const Register = () => {
                     />
                     <Button
                       id="submit-button"
-                      text={languageBrowser !== 'pt-BR' ? i18next.t('Continuar') : 'Continuar'}
+                      text={t.next}
                       label="Clique continue para seu cadastro"
                       className="w-100 py-2 mt-3 fs-5"
                       disabled={!validation || !checked}
@@ -217,7 +218,7 @@ const Register = () => {
                   <>
                     <Paragrah
                       id='form-description'
-                      text={languageBrowser !== 'pt-BR' ? i18next.t('Cadastro realizado com sucesso! Aguarde, você será redirecionado.') : 'Cadastro realizado com sucesso! Aguarde, você será redirecionado.' }
+                      text={t.confirmedRegisterRedirect}
                       hidden={false}
                       width={100}
                     />

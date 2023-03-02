@@ -2,8 +2,6 @@ import Link from 'next/link'
 import React from 'react'
 import Styles from './styles.module.scss'
 
-import i18next from '@/src/i18n'
-
 // languages
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';

@@ -10,8 +10,12 @@ import Logo from '@/assets/img/logo.png'
 import DataShow from '@/components/molecules/DataShow';
 import { requestBuyToken } from '@/utils/fetchDataAxios';
 
-import i18next from '@/src/i18n';
 import Loader from '@/components/atoms/Loader';
+
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+import { useRouter } from 'next/router';
 
 interface BuyProjectInterface {
   setRealValue: any;
@@ -59,7 +63,6 @@ function BuyProject({
   const [checkboxCheck, setCheckoxCheck] = React.useState<boolean>(false);
   const [accessTokenState, setAccessTokenState] = React.useState<any>('');
   const [hashConfirm, setHashConfirm] = React.useState<string>('')
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
   const [waiting, setWaiting] = React.useState<boolean>(false)
 
   const checkSaldo = (balance: number, valorToken: string, realValue: string): boolean => {
@@ -76,13 +79,16 @@ function BuyProject({
     return responseReplaced
   }
 
+  const router = useRouter();
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt
+
 
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
     setAccessTokenState(accessToken)
 
-    const language = window.navigator.language
-    setLanguageBrowser(language)
   }, [])
 
   return (
@@ -109,7 +115,7 @@ function BuyProject({
               onClick={() => {
                 setHiddenBuy(!hiddenBuy)
               }}
-              text={languageBrowser !== 'pt-BR' ? i18next.t("Voltar") : "Voltar"}
+              text={t.back}
               size={25}
               className={Styles.divButtons__backButton}
             />
@@ -122,7 +128,7 @@ function BuyProject({
                   e.preventDefault()
                   setHiddenBuy(!hiddenBuy)
                 }}
-                text={languageBrowser !== 'pt-BR' ? i18next.t("Gerar QR code") : "Gerar QR code"}
+                text={t.generateQrCode}
                 size={25}
                 className={Styles.divButtons__QRButton}
               />
@@ -135,7 +141,7 @@ function BuyProject({
                   e.preventDefault()
                   setHiddenBuy(!hiddenBuy)
                 }}
-                text={languageBrowser !== 'pt-BR' ? i18next.t("Continuar") : "Continuar"}
+                text={t.next}
                 size={25}
                 className={Styles.divButtons__QRButton}
               />
@@ -289,7 +295,7 @@ function BuyProject({
                   id="backButton"
                   label="Clique para voltar"
                   onClick={() => { setHiddenBuy(!hiddenBuy) }}
-                  text={languageBrowser !== 'pt-BR' ? i18next.t("Voltar") : "Voltar"}
+                  text={t.back}
                   size={25}
                   className={Styles.divButtons__backButton}
                 />
@@ -309,7 +315,7 @@ function BuyProject({
                         setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                       }}
                       disabled={!checkboxCheck || (realValue === '')}
-                      text={languageBrowser !== 'pt-BR' ? i18next.t("Gerar QR code") : "Gerar QR code"}
+                      text={t.generateQrCode}
                       size={25}
                       className={Styles.divButtons__QRButton}
                     />
@@ -340,7 +346,7 @@ function BuyProject({
                       setBtnCheckBalance(e.target.id)
                       // setHiddenBuy(!hiddenBuy)
                     }}
-                    text={languageBrowser !== 'pt-BR' ? i18next.t("Continuar") : "Continuar"}
+                    text={t.next}
                     size={25}
                     className={Styles.divButtons__QRButton}
                   />

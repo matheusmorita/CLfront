@@ -15,6 +15,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 // languages
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
+
 import { fetchDataUserInfo } from '@/utils/fetchDataAxios'
 
 type Props = {

@@ -10,8 +10,12 @@ import InputModal from '@/components/molecules/InputModal';
 import InvestCardMobile from '@/components/molecules/InvestCardMobile';
 import { fetchRequestPix, requestBuyToken } from '@/utils/fetchDataAxios';
 
-import i18next from '@/src/i18n';
 import Loader from '@/components/atoms/Loader';
+
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+import { useRouter } from 'next/router';
 
 
 interface BuyProjectInterface {
@@ -47,8 +51,12 @@ function BuyProjectMobile({ setRealValue,
   const [checkboxCheck, setCheckoxCheck] = React.useState<boolean>(false);
   const [accessTokenState, setAccessTokenState] = React.useState<string | null>('');
   const [hashConfirm, setHashConfirm] = React.useState<string>('')
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
   const [waiting, setWaiting] = React.useState<boolean>(false)
+
+  const router = useRouter();
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt
 
   const checkSaldo = (balance: number, valorToken: string, realValue: string): boolean => {
     const multiplyValues = Number(realValue) * Number(valorToken)
@@ -67,9 +75,6 @@ function BuyProjectMobile({ setRealValue,
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
     setAccessTokenState(accessToken)
-
-    const language = window.navigator.language
-    setLanguageBrowser(language)
   }, [])
 
   return (
@@ -95,7 +100,7 @@ function BuyProjectMobile({ setRealValue,
               id="backButton"
               label="Clique para voltar"
               onClick={() => { setHiddenBuy(!hiddenBuy) }}
-              text={languageBrowser !== 'pt-BR' ? i18next.t("Voltar") : "Voltar"} 
+              text={t.back} 
               size={20}
               className={Styles.divButtons__backButton}
             />
@@ -113,7 +118,7 @@ function BuyProjectMobile({ setRealValue,
                   setHiddenBuy(!hiddenBuy)
                   setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                 }}
-                text={languageBrowser !== 'pt-BR' ? i18next.t("Gerar QR code") : "Gerar QR code"}
+                text={t.generateQrCode}
                 size={20}
                 className={Styles.divButtons__QRButton}
               />
@@ -126,7 +131,7 @@ function BuyProjectMobile({ setRealValue,
                   e.preventDefault()
                   setHiddenBuy(!hiddenBuy)
                 }}
-                text={languageBrowser !== 'pt-BR' ? i18next.t("Continuar") : "Continuar"}
+                text={t.next}
                 size={20}
                 className={Styles.divButtons__QRButton}
               />
@@ -298,7 +303,7 @@ function BuyProjectMobile({ setRealValue,
                   id="backButton"
                   label="Clique para voltar"
                   onClick={() => { setHiddenBuy(!hiddenBuy) }}
-                  text={languageBrowser !== 'pt-BR' ? i18next.t("Voltar") : "Voltar"} 
+                  text={t.back} 
                   size={20}
                   className={Styles.divButtons__backButton}
                 />
@@ -315,7 +320,7 @@ function BuyProjectMobile({ setRealValue,
                       setHiddenBuy(true)
                       setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                     }}
-                    text={languageBrowser !== 'pt-BR' ? i18next.t("Gerar QR code") : "Gerar QR code"}
+                    text={t.generateQrCode}
                     size={20}
                     disabled={!checkboxCheck || (realValue === '')}
                     className={Styles.divButtons__QRButton}
@@ -344,7 +349,7 @@ function BuyProjectMobile({ setRealValue,
                       setBtnCheckBalance(e.target.id)
                       // setHiddenBuy(!hiddenBuy)
                     }}
-                    text={languageBrowser !== 'pt-BR' ? i18next.t("Continuar") : "Continuar"}
+                    text={t.next}
                     size={20}
                     disabled={!checkboxCheck || (realValue === '')}
                     className={Styles.divButtons__QRButton}

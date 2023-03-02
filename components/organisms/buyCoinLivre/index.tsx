@@ -13,6 +13,11 @@ import ModalContext from '@/context/ModalContext'
 import QRCode from 'react-qr-code'
 import { WebSocketContext } from '@/context/WebSocketContext';
 
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+import { useRouter } from 'next/router';
+
 interface buyCoinLivreInterface {
   conditionalBuy: any;
   balance: number;
@@ -21,6 +26,12 @@ interface buyCoinLivreInterface {
 function BuyCoinLivre({ conditionalBuy, balance }: buyCoinLivreInterface) {
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
   const [QRcodeUrl, SetQRcodeUrl] = React.useState<any>('')
+
+  const router = useRouter();
+
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt
 
   const { modalControl: [, setShowModal] } = React.useContext(ModalContext)
 
@@ -38,7 +49,7 @@ function BuyCoinLivre({ conditionalBuy, balance }: buyCoinLivreInterface) {
         }, 2000);
       }
     })
-  }, [])
+  }, [socket])
 
   return (
     <div className={Styles.divBuy}>
@@ -100,9 +111,9 @@ function BuyCoinLivre({ conditionalBuy, balance }: buyCoinLivreInterface) {
         <Button
           hidden={false}
           id={'paymentQRcodeBtn'}
-          label="Escaneie para efetuar o pagamento"
+          label={t.scanQrPay}
           onClick={() => { }}
-          text={buyConfirmed ? "Pagamento realizado com sucesso" : "Aguardando confirmação do pagamento"}
+          text={buyConfirmed ? t.confirmedPaymentQrCode : t.waitingPayQrCode}
           disabled={true}
           className={Styles.divBuy__btnPayQrCode}
           size={25}

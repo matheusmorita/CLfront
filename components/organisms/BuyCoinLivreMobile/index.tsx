@@ -8,12 +8,15 @@ import Button from '@/components/atoms/Button'
 import InputModal from '@/components/molecules/InputModal'
 import CloseButton from '@/components/atoms/CloseButton'
 
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+
 import ModalContext from '@/context/ModalContext'
 import HeaderModalMobile from '../HeaderModalMobile'
 import QRCode from 'react-qr-code';
 import { WebSocketContext } from '@/context/WebSocketContext';
-
-import i18next from '@/src/i18n'
+import { useRouter } from 'next/router';
 
 interface buyCoinLivreInterface {
   conditionalBuy: string;
@@ -23,12 +26,11 @@ interface buyCoinLivreInterface {
 function BuyCoinLivreMobile({ conditionalBuy,balance }: buyCoinLivreInterface) {
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
   const [QRcodeUrl, SetQRcodeUrl] = React.useState<any>('')
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
 
-  React.useEffect(() => {
-    const language = window.navigator.language
-    setLanguageBrowser(language)
-  }, []);
+  const router = useRouter();
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt
 
   const {
     modalMobileControl: [, setShowMobileModal]
@@ -48,7 +50,7 @@ function BuyCoinLivreMobile({ conditionalBuy,balance }: buyCoinLivreInterface) {
         }, 1500);
       }
     })
-  }, [])
+  }, [socket])
 
   return (
     <div className={Styles.divBuy}>
@@ -115,9 +117,9 @@ function BuyCoinLivreMobile({ conditionalBuy,balance }: buyCoinLivreInterface) {
         <Button
           hidden={false}
           id={'paymentQRcodeBtn'}
-          label="Escaneie para efetuar o pagamento"
+          label={t.scanQrPay}
           onClick={() => { }}
-          text={buyConfirmed ? "Sucesso" : "Aguardando"}
+          text={buyConfirmed ? t.success : t.waiting}
           disabled={true}
           className={Styles.divBuy__btnPayQrCode}
           size={25}

@@ -48,8 +48,14 @@
     "Legal",
   "terms": 
     "Terms of use",
+  "scanQrPay":
+    "Scan the QR code to make the payment",
   "policy":
-    "privacy policy",
+    "Privacy policy",
+  "success":
+    "Success",
+  "waiting":
+    "Waiting",
   "help": 
     "help",
   "contactUs": 
@@ -128,19 +134,19 @@
     "At this time, registration is not required to login to the platform.",
   "clickHere":
     "Click here.",
-  "Digite seu nome completo":
+  "insertFullName":
     "Full name",
-  "Registrar-se":
+  "register":
     "Register",
-  "Digite seu CPF":
+  "insertCpf":
     "Insert CPF",
   "Eu li e concordo com os termos de uso de dados, política de privacidade e cookies.":
     "I acknowledge that I have read and understood the terms, privacy and cookies policy.",
-  "Data de nascimento":
+  "birthday":
     "Birthday",
-  "Continuar":
+  "next":
     "Next",
-  "Cadastro realizado com sucesso! Aguarde, você será redirecionado.":
+  "confirmedRegisterRedirect":
     "Successfully registered! Please wait, you will be redirected.",
   "waitRedirect":
     "Please wait, you will be redirected.",
@@ -158,6 +164,8 @@
           "answer": "We are the connection to the new economy. To the asset-owner, our process enables investment gathering in a much faster and cheaper way – compared to the traditional Banking system -, with higher liquidity which, on itself, brings new business opportunities. Not to mention the ability of getting access to new ways of project funding with huge potential of expansion. To the investors, on the other end, we provide and market new investment options, so they can diversify their portfolio on high performance assets with high tech and legal safety. Needless to say, those options were restricted only to professional qualified investors before we arrived."
       }
   ],
+  "policyPrivacy":
+   "I acknowledge that I have read and understood the terms, privacy and cookies policy.",
   "hello":
     "Hello,",
   "profile":
@@ -194,8 +202,12 @@
   "Buy",
   "sell":
     "Sell",
-  "Voltar":
+  "back":
     "Back",
-  "Gerar QR code":
-    "Generate QR code"
+  "generateQrCode":
+    "Generate QR code",
+  "confirmedPaymentQrCode":
+    "Successful payment!",
+  "waitingPayQrCode":
+    "Waiting for payment confirmation..."
 }

@@ -31,7 +31,6 @@ import UserContext from '@/context/UserContext'
 import axios from 'axios'
 import { fetchDataIdAxios } from '@/utils/fetchDataAxios'
 
-// import i18next from '@/src/i18n';
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
@@ -65,8 +64,6 @@ const ProjectPage = () => {
 
   React.useEffect(() => {
     if (!id) return
-    const language = window.navigator.language
-    setLanguageBrowser(language)
 
     const idProject = localStorage.getItem('idProject')
     fetchDataIdAxios(idProject, setProject)

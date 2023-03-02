@@ -117,19 +117,19 @@
     "Neste momento não é necessário um cadastro para realizar o login na plataforma.",
   "clickHere":
     "Clique aqui.",
-  "Digite seu nome completo":
+  "insertFullName":
     "Digite seu nome completo",
-  "Registrar-se":
+  "register":
     "Registrar-se",
-  "Digite seu CPF":
+  "insertCpf":
     "Digite seu CPF",
   "Eu li e concordo com os termos de uso de dados, política de privacidade e cookies.":
     "Eu li e concordo com os termos de uso de dados, política de privacidade e cookies.",
-  "Data de nascimento":
+  "birthday":
     "Data de nascimento",
-  "Continuar":
+  "next":
     "Continuar",
-  "Cadastro realizado com sucesso! Aguarde, você será redirecionado.":
+  "confirmedRegisterRedirect":
     "Cadastro realizado com sucesso! Aguarde, você será redirecionado.",
   "waitRedirect":
     "Aguarde, você será redirecionado.",
@@ -147,10 +147,18 @@
           "answer": "Somos a conexão para a nova economia, para o dono do ativo tokenizado, esse processo possibilita captar recursos muito mais rápido e com custos muito menores comparado aos processos tradicionais como Bancos e ou Mercado de Capitais, com maior liquidez gerando novas oportunidades de negócios. Além de possibilitar apoio financeiro a projetos com grande potencial e a expansão de novos negócios. Para o investidor abre-se novas oportunidades para diversificar seu portifólio em ativos de alta performance com segurança jurídica e tecnológica. Alcançando produtos que até então eram restritos a investidores qualificados e ou profissionais."
       }
   ],
+  "policyPrivacy":
+   "Eu li e concordo com os termos de uso de dados, política de privacidade e cookies.",
   "hello":
     "Olá,",
   "profile":
     "Perfil",
+  "scanQrPay":
+    "Escaneie para efetuar o pagamento",
+  "success":
+    "Sucesso",
+  "waiting":
+    "Aguardando",
   "disconnect":
     "Desconectar",
   "throughBenefits":
@@ -183,8 +191,12 @@
   "Comprar",
   "sell":
     "Vender",
-  "Voltar":
+  "back":
     "Voltar",
-  "Gerar QR code":
-    "Gerar QR code"
+  "generateQrCode":
+    "Gerar QR code",
+  "confirmedPaymentQrCode":
+    "Pagamento realizado com sucesso!",
+  "waitingPayQrCode":
+    "Aguardando confirmação do pagamento..."
 }

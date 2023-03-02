@@ -1,18 +1,20 @@
 import React from 'react'
 
-import i18next from '@/src/i18n'
-
 interface CheckboxInterface {
   onClick?: any;
 }
 
-const Checkbox = ({onClick}: CheckboxInterface) => {
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+// languages
+import en from '@/public/locales/en/common.json';
+import pt from '@/public/locales/pt/common.json';
+import { useRouter } from 'next/router';
 
-  React.useEffect(() => {
-    const language = window.navigator.language
-    setLanguageBrowser(language)
-  }, [])
+const Checkbox = ({onClick}: CheckboxInterface) => {
+  const router = useRouter();
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt;
+  
   return (
     <div className="form-check my-3">
       <input
@@ -26,7 +28,7 @@ const Checkbox = ({onClick}: CheckboxInterface) => {
         className="form-check-label text-start"
         htmlFor="flexCheckDefault"
       >
-        {languageBrowser !== 'pt-BR' ? i18next.t('Eu li e concordo com os termos de uso de dados, política de privacidade e cookies.') : 'Eu li e concordo com os termos de uso de dados, política de privacidade e cookies.'}
+        {t.policyPrivacy}
       </label>
     </div>
   )

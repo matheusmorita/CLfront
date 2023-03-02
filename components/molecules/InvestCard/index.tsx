@@ -4,8 +4,6 @@ import Button from '@/components/atoms/Button';
 import Image from 'next/image';
 import ProgressBar from '../ProgressBar';
 
-// import i18next from '@/src/i18n'
-
 // languages
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';

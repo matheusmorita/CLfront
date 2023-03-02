@@ -4,8 +4,6 @@ import Button from '@/components/atoms/Button';
 
 import Styles from './styles.module.scss';
 
-import i18next from '@/src/i18n';
-
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 
