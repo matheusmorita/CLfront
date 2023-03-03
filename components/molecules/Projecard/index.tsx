@@ -106,9 +106,9 @@ const Projecard = ({
         {windowWidth >= 992 ? (
           <div
             style={{
-              background: acronimo ? (
-                `linear-gradient(to right, transparent, #000), url(${src})`
-              ) : `linear-gradient(to bottom, transparent, #000), url(${logoImage})`,
+              background: (acronimo === 'CNLT') ? (
+                `linear-gradient(to bottom, transparent, #000), url(${logoImage})`
+              ) : `linear-gradient(to right, transparent, #000), url(${src})`,
               position: 'absolute',
               backgroundSize: acronimo ? '' : 'cover',
               width: acronimo ? '20%' : '15%',
@@ -116,21 +116,23 @@ const Projecard = ({
               left: '0',
               top: '0'
             }}
+            id={idProject}
             className={Styles.projecard__picture}
           />
         ) : (
           <div
             style={{
-              background: acronimo ? (
-                `linear-gradient(to bottom, transparent, #000), url(${src})`
-              ) : `linear-gradient(to bottom, transparent, #000), url(${logoImage})`,
+              background: (acronimo === 'CNLT') ? (
+                `linear-gradient(to bottom, transparent, #000), url(${logoImage})` 
+              ) : `linear-gradient(to bottom, transparent, #000), url(${src})`,
               position: 'absolute',
               backgroundSize: 'cover',
-              width: acronimo ? '100%' : '25%',
-              height: acronimo ? '100px' : '110px',
-              left: acronimo ? '0' : '40%',
+              width: (acronimo !== 'CNLT') ? '100%' : '25%',
+              height: (acronimo !== 'CNLT') ? '100px' : '110px',
+              left: (acronimo !== 'CNLT') ? '0' : '40%',
               top: '0'
             }}
+            id={idProject}
             className={Styles.projecard__picture}
           />
         )}

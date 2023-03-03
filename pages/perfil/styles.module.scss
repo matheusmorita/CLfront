@@ -27,7 +27,7 @@
         justify-content: flex-end;
         width: 100px;
         height: 100px;
-        border-radius: 8px;
+        border-radius: 50%;
         position: absolute;
         left: 5%;
         bottom: 4%;
@@ -37,8 +37,6 @@
 
     &__icon {
         fill: $primary !important;
-        background-color: black;
-        border-radius: 50px;
         opacity: .8;
         margin-bottom: 30%;
         cursor: pointer;

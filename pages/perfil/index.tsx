@@ -16,6 +16,7 @@ import InvestCard from '@/components/molecules/InvestCard'
 import { getWindowInnerWidth } from '@/assets/js/util/responsive'
 
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import FlipCameraIosIcon from '@mui/icons-material/FlipCameraIos';
 
 import defaultImage from '@/assets/img/placeholder.webp'
 import bg2 from '@/assets/img/BG2.webp';
@@ -24,6 +25,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 import { formatValueBalance } from '@/utils/formatBalance'
+import { changePosition } from '@/utils/changeOrderArray';
 
 // languages
 import en from '@/public/locales/en/common.json';
@@ -112,7 +114,7 @@ const Perfil = () => {
 
               <div className={Styles.profile__header}>
                 <label style={{position: 'absolute', right: '1%', bottom: '22%'}}  htmlFor='backgroundInputImage'>
-                  <BorderColorIcon className={Styles.profile__icon} />
+                  <FlipCameraIosIcon className={Styles.profile__icon} />
                   <input id="backgroundInputImage" name='image' type="file" onChange={(e: any) => {
                     // uploadProfilePhoto(e.target.files[0], accessToken)
                     setBGImage(URL.createObjectURL(e.target.files[0]))
@@ -121,10 +123,13 @@ const Perfil = () => {
                 <div style={{background: `url(${bg2})`}} className={Styles.profile__background} />
                 <div className={Styles.profile__picture}>
                   <label className={Styles.profile__inputImage} htmlFor='profileImageInput'>
-                    <BorderColorIcon className={Styles.profile__icon} />
+                    <FlipCameraIosIcon className={Styles.profile__icon} />
                     <input id="profileImageInput" name='image' type="file" onChange={(e: any) => {
                       uploadProfilePhoto(e.target.files[0], accessToken)
                       setImage(URL.createObjectURL(e.target.files[0]))
+                      setTimeout(() => {
+                        router.reload()
+                      }, 1500);
                     }}></input>
                   </label>
 
@@ -236,7 +241,7 @@ const Perfil = () => {
                 )}
                 {walletState === 1 && (
                   <>
-                    {dataUser.balanceTokensCaptacao?.map((item: any, i: number) => (
+                    {changePosition(dataUser.balanceTokensCaptacao, 0)?.map((item: any, i: number) => (
                       <Projecard
                         key={`${i}-${item.acronimo}`}
                         data={projecardMock}
