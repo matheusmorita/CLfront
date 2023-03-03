@@ -34,10 +34,12 @@ type Props = {
   tokenBalance?: number;
   showTotalValue?: boolean;
   showUnitaryValue?: boolean;
+  idProject?: string;
 }
 
 
 const Projecard = ({
+  idProject,
   name,
   montante,
   emissor,
@@ -60,28 +62,24 @@ const Projecard = ({
 
   const convertMontante = (montanteValue: string | undefined) => {
     const montanteValueConverted = Number(montanteValue) / (10 ** 18)
+    const montanteToFixed = montanteValueConverted.toFixed(2)
 
-    return montanteValueConverted.toString()
+    return parseFloat(montanteToFixed).toLocaleString('pt-BR', { minimumFractionDigits: 2 })
+  }
+
+  const toFixedValorUnitario = (unitaryValue: number) => {
+    const floatUnitaryValue = unitaryValue.toFixed(2)
+    return parseFloat(floatUnitaryValue).toLocaleString('pt-BR', { minimumFractionDigits: 2 })
   }
 
   const formatBalanceValue = (valorUnitario: number, tokenBalance: number) => {
     const valueResult = (valorUnitario * tokenBalance) / (10 ** 18)
     const valueResultToFixed = valueResult.toFixed(2)
-    let valueResultString = valueResultToFixed.toString()
-    if (valueResultString.includes('.')) {
-      valueResultString = valueResultString.replace('.', ',')
-      return valueResultString;
-    }
-    return `${valueResultString},00`
+    return parseFloat(valueResultToFixed).toLocaleString('pt-BR', { minimumFractionDigits: 2 })
   }
 
-  const formatDotString = (value: number | string) => {
-    let valueResultString = value.toString()
-    if (valueResultString.includes('.')) {
-      valueResultString = valueResultString.replace('.', ',')
-      return valueResultString;
-    }
-    return `${valueResultString},00`
+  const setIdProjectLocalStorage = (idProject: string) => {
+    return localStorage.setItem('idProject', idProject)
   }
 
   React.useEffect(() => {
@@ -91,7 +89,20 @@ const Projecard = ({
   dayjs.extend(relativeTime)
 
   return (
+
     <div className={Styles.projecard}>
+      <Link
+        onClick={() => setIdProjectLocalStorage(idProject || '')}
+        style={
+          {
+            textDecoration: 'none',
+            background: 'red',
+            cursor: acronimo ? 'pointer' : 'default',
+          }
+        }
+        href={acronimo ? `/projeto/${idProject}` : '#'}
+        locale={locale}
+      >
         {windowWidth >= 992 ? (
           <div
             style={{
@@ -123,90 +134,82 @@ const Projecard = ({
             className={Styles.projecard__picture}
           />
         )}
+      </Link>
 
-        <div className={Styles.projecard__info}>
-          <div className={Styles.info}>
-            <h1 className={Styles.info__title}>{name ? translate(name) : name}<span>#{acronimo || 'CNLT'}</span></h1>
-            {name?.toLowerCase().includes('coinlivre') ? '' : (
-              <p className={Styles.info__tiny}>{t.projectOwner} <b>{emissor}</b></p>
-            )}
+      <div className={Styles.projecard__info}>
+        <div className={Styles.info}>
+          <h1 className={Styles.info__title}>{name ? translate(name) : name}<span>#{acronimo || 'CNLT'}</span></h1>
+          {name?.toLowerCase().includes('coinlivre') ? '' : (
+            <p className={Styles.info__tiny}>{t.projectOwner} <b>{emissor}</b></p>
+          )}
 
-            {/* Progress component */}
-            {/* <div className={Styles.progress}>
+          {/* Progress component */}
+          {/* <div className={Styles.progress}>
             <div className={Styles.progress__values}>
               <span>R$ 217.563.232,11</span>
               <span>R$ 302.562.132,18</span>
             </div>
             <div className={Styles.progress__bar} />
           </div> */}
-          </div>
         </div>
-        <div className={Styles.projecard__data}>
+      </div>
+      <div className={Styles.projecard__data}>
+        <div className={Styles.data}>
+          <h1 className={Styles.data__title}>
+            {t.quantity}
+          </h1>
+          <span className={Styles.data__value}>
+            {convertMontante(montante)}<span>/unds</span>
+          </span>
+        </div>
+        {showUnitaryValue && (
+          valorUnitario && (
+            <div className={Styles.data}>
+              <h1 className={Styles.data__title}>
+                {t.unitaryValue}
+              </h1>
+              <span className={Styles.data__value}>
+                <span>{`R$ ${toFixedValorUnitario(valorUnitario)}` || 'R$ 0,00'}</span>
+              </span>
+            </div>
+          )
+        )}
+
+        {tokenBalance && (
           <div className={Styles.data}>
             <h1 className={Styles.data__title}>
-              {t.quantity}
+              {t.balance}
             </h1>
             <span className={Styles.data__value}>
-              {convertMontante(montante)}<span>/unds</span>
+              <span>{`R$ ${formatBalanceValue(valorUnitario, tokenBalance)}` || 'R$ 0,00'}</span>
             </span>
           </div>
-          {showUnitaryValue && (
-            valorUnitario ? (
-              <div className={Styles.data}>
-                <h1 className={Styles.data__title}>
-                  {t.unitaryValue}
-                </h1>
-                <span className={Styles.data__value}>
-                  <span>{`R$ ${valorUnitario},00` || 'R$ 0,00'}</span>
-                </span>
-              </div>
-            ) : ''
-          )}
+        )}
 
-          {tokenBalance && (
+        {date ? (
+          <div className={Styles.data}>
+            <h1 className={Styles.data__title}>
+              {t.date}
+            </h1>
+            <span className={Styles.data__value}>
+              <span>{formatDate(date) || '00/00/0000 - 00:00:00'}</span>
+            </span>
+          </div>
+        ) : ''}
+        {showTotalValue && (
+          totalValue && (
             <div className={Styles.data}>
               <h1 className={Styles.data__title}>
-                {t.balance}
+                Total
               </h1>
               <span className={Styles.data__value}>
-                <span>{`R$ ${formatBalanceValue(valorUnitario, tokenBalance)}` || 'R$ 0,00'}</span>
+                <span>R$ {totalValue || '0,00'}</span>
               </span>
             </div>
-          )}
+          )
+        )}
 
-          {date ? (
-            <div className={Styles.data}>
-              <h1 className={Styles.data__title}>
-                {t.date}
-              </h1>
-              <span className={Styles.data__value}>
-                <span>{formatDate(date) || '00/00/0000 - 00:00:00'}</span>
-              </span>
-            </div>
-          ) : ''}
-          {showTotalValue && (
-            totalValue ? (
-              <div className={Styles.data}>
-                <h1 className={Styles.data__title}>
-                  Total
-                </h1>
-                <span className={Styles.data__value}>
-                  <span>R$ {formatDotString(totalValue)}</span>
-                </span>
-              </div>
-            ) : (
-              <div className={Styles.data}>
-                <h1 className={Styles.data__title}>
-                  Total
-                </h1>
-                <span className={Styles.data__value}>
-                  <span>R$ 0,00</span>
-                </span>
-              </div>
-            )
-          )}
-
-        </div>
+      </div>
     </div>
   )
 }

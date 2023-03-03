@@ -32,7 +32,7 @@ interface BuyProjectInterface {
   requestPixValue: string;
   setRequestPixValue: any;
   valorToken: string;
-  balance: number;
+  balance: string;
   lote: any;
 }
 
@@ -66,9 +66,10 @@ function BuyProject({
   const [waiting, setWaiting] = React.useState<boolean>(false)
   const [responseCode, setResponseCode] = React.useState<number>()
 
-  const checkSaldo = (balance: number, valorToken: string, realValue: string): boolean => {
+  const checkSaldo = (balance: string, valorToken: string, realValue: string): boolean => {
+    const balanceNumber = parseFloat(balance.replace(',', '.'))
     const multiplyValues = Number(realValue) * Number(valorToken)
-    if (balance >= multiplyValues) {
+    if (balanceNumber>= multiplyValues) {
       return true
     }
     return false
@@ -372,7 +373,7 @@ function BuyProject({
                       if (responseSaldo) {
                         const { confirm, hash } = await requestBuyToken(accessTokenState, realValue, lote.id, setWaiting, setResponseCode)
                         setHashConfirm(hash)
-                        if (responseCode === 200) {
+                        if (confirm !== 0) {
                           setBuyConfirmed(!buyConfirmed)
                           // setTimeout(() => {
                           //   setBuyConfirmed(!buyConfirmed)

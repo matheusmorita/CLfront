@@ -17,7 +17,9 @@ import { getWindowInnerWidth } from '@/assets/js/util/responsive'
 
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 
-import defaultImage from '../../assets/img/placeholder.webp'
+import defaultImage from '@/assets/img/placeholder.webp'
+import bg2 from '@/assets/img/BG2.webp';
+
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
@@ -36,9 +38,11 @@ const Perfil = () => {
   const [walletState, setWalletState] = React.useState(0)
   const [dataUser, setDataUser] = React.useState<any>();
   const [historyUser, setHistoryUser] = React.useState<any[]>([])
+  const [accessToken, setAccessToken] = React.useState<string | null>()
 
   // const [profileImage, setProfileImage] = React.useState<any>();
   const [image, setImage] = React.useState('')
+  const [BGimage, setBGImage] = React.useState('')
   const [endImage, setEndImage] = React.useState('')
 
   const router = useRouter();
@@ -65,6 +69,8 @@ const Perfil = () => {
 
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
+    setAccessToken(accessToken)
+    
 
     const widthWindow = getWindowInnerWidth()
 
@@ -105,24 +111,31 @@ const Perfil = () => {
             <div className={Styles.profile}>
 
               <div className={Styles.profile__header}>
-                <div className={Styles.profile__background} />
+                <label style={{position: 'absolute', right: '1%', bottom: '22%'}}  htmlFor='backgroundInputImage'>
+                  <BorderColorIcon className={Styles.profile__icon} />
+                  <input id="backgroundInputImage" name='image' type="file" onChange={(e: any) => {
+                    // uploadProfilePhoto(e.target.files[0], accessToken)
+                    setBGImage(URL.createObjectURL(e.target.files[0]))
+                  }}></input>
+                </label>
+                <div style={{background: `url(${bg2})`}} className={Styles.profile__background} />
                 <div className={Styles.profile__picture}>
                   <label className={Styles.profile__inputImage} htmlFor='profileImageInput'>
                     <BorderColorIcon className={Styles.profile__icon} />
                     <input id="profileImageInput" name='image' type="file" onChange={(e: any) => {
-                      // uploadProfilePhoto(e.target.files[0], 'accesstokenuserupload')
+                      uploadProfilePhoto(e.target.files[0], accessToken)
                       setImage(URL.createObjectURL(e.target.files[0]))
                     }}></input>
                   </label>
 
-                  {image ? (
-                    <Image
-                      className={Styles.profile__picture}
-                      height={100}
-                      width={100}
-                      alt='defaultImage'
-                      src={image} // Erro com typescript, é preciso ver o retorno correto para este dado na URL
-                    />
+                  {dataUser?.imgPerfilUrl ? (
+                     <Image
+                     className={Styles.profile__picture}
+                     height={100}
+                     width={100}
+                     alt='defaultImage'
+                     src={dataUser?.imgPerfilUrl}
+                   />
                   ) : (
                     <Image
                       className={Styles.profile__picture}
@@ -178,7 +191,7 @@ const Perfil = () => {
               >
                 <Balance
                   type='CoinLivre'
-                  value={`CNLT ${formatValueBalance(dataUser?.balanceCL)}`}
+                  value={`CNLT ${dataUser?.balanceCL}`}
                 />
               </Column>
               <Column
@@ -190,7 +203,7 @@ const Perfil = () => {
               >
                 <Balance
                   type='R$'
-                  value={`R$ ${formatValueBalance(dataUser?.saldoReais)}`}
+                  value={`R$ ${dataUser?.saldoReais}`}
                 />
               </Column>
             </div>
@@ -200,7 +213,7 @@ const Perfil = () => {
                 setState={setWalletState}
                 options={[t.historic, t.wallet]}
               />
-              
+
               <div className={Styles.wallet__body}>
                 {walletState === 0 && (
                   <>
@@ -216,6 +229,7 @@ const Perfil = () => {
                         date={item.criadoEm}
                         valorUnitario={item.valorUnitario}
                         tokenBalance={item.tokenBalance}
+                        idProject={item.projetoId}
                       />
                     ))}
                   </>
@@ -235,6 +249,7 @@ const Perfil = () => {
                         totalValue={item.total}
                         showTotalValue={true}
                         showUnitaryValue={true}
+                        idProject={item.projetoId}
                       />
                     ))}
                   </>

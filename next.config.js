@@ -18,7 +18,10 @@ const nextConfig = {
   swcMinify: true,
   i18n,
   images: {
-    domains: ["parsefiles.back4app.com"],
+    domains: [
+      "parsefiles.back4app.com",
+      "testecoinlivre.s3.amazonaws.com"
+    ],
   },
   async redirects() {
     return [

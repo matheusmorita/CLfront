@@ -242,13 +242,14 @@ export const handleUserSession = async (setUserInfo, setLoggedIn, token, router)
   }
 }
 
-export const uploadProfilePhoto = (photoFile, idUser) => {
+export const uploadProfilePhoto = (photoFile, accessToken) => {
   let formData = new FormData();
   formData.append("file", photoFile);
 
-  axios.patch(`https://coinlivre.blocklize.io/usuario/upload-foto/${idUser}`, formData, {
+  axios.post('https://coinlivre.blocklize.io/usuario/upload-foto/', formData, {
     headers: {
       "Content-Type": "multipart/form-data",
-    }
+      "Authorization": `Bearer ${accessToken}`
+    },
   });
 }
