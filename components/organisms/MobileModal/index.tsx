@@ -22,18 +22,25 @@ import { useRouter } from 'next/router';
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 
-function MobileModal() {
-  const [projects, setProjects] = React.useState<any>([])
-  const [projectSelected, setProjectSelected] = React.useState<any>();
+interface ModalProps {
+  projectSelectedProps: any;
+  loteProps: any;
+  valorTokenProps: string;
+}
 
-  const [hiddenBuy, setHiddenBuy] = React.useState<boolean>(false);
+function MobileModal({ projectSelectedProps, loteProps, valorTokenProps }: ModalProps) {
+  const [projects, setProjects] = React.useState<any>([])
+  const [projectSelected, setProjectSelected] = React.useState<any>(projectSelectedProps);
+
+  const [hiddenBuy, setHiddenBuy] = React.useState<boolean>(true);
   const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
-  const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
+  const [conditionalBuy, setConditionalBuy] = React.useState<any>('CNLT-0');
   const [realValue, setRealValue] = React.useState<string>('');
-  const [valorToken, setValorToken] = React.useState<string>('')
-  const [lote, setLote] = React.useState<object>();
+  const [valorToken, setValorToken] = React.useState<string>(valorTokenProps)
+  const [lote, setLote] = React.useState<object>(loteProps);
   const [dataUser, setDataUser] = React.useState<any>();
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+
+  const [idProject, setIdProject] = React.useState<string | null>('');
 
   const router = useRouter();
 
@@ -52,9 +59,11 @@ function MobileModal() {
     fetchDataAxios("4", setProjects)
     fetchDataUserInfo(accessToken, setDataUser)
 
-    const language = window.navigator.language
-    setLanguageBrowser(language)
-  }, [dataUser])
+    const idProject = localStorage.getItem('idProject')
+    setConditionalBuy(idProject)
+    setIdProject(idProject)
+
+  }, [])
 
   return (
     <>
@@ -112,6 +121,7 @@ function MobileModal() {
                     setConditionalBuy(e.target.id)
                   }
                   setRealValue('')
+                  setConditionalBuy('CNLT-0')
                   setHiddenBuy(!hiddenBuy)
                 }}
               />
@@ -138,7 +148,8 @@ function MobileModal() {
                     if (e.target.id) {
                       setConditionalBuy(e.target.id)
                     }
-                    setRealValue('')
+                    setRealValue('0')
+                    setConditionalBuy(idProject)
                     setLote(item?.lotes[item.lotes.length - 1])
                     setValorToken(item?.lotes[item.lotes.length - 1]?.valorDoToken)
                     setHiddenBuy(!hiddenBuy)

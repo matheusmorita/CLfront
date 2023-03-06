@@ -21,7 +21,6 @@ type Props = {
   highlight?: boolean,
   className?: string,
   contractLink: string;
-  languageBrowser?: string;
   linkTrue?: boolean
 }
 

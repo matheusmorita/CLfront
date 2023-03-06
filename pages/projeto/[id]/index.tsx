@@ -49,16 +49,20 @@ const ProjectPage = () => {
   const [showMobileModal, setShowMobileModal] = React.useState<boolean>(false)
   const [lengthWindow, setLengthWindow] = React.useState<number>(0)
 
-  const [languageBrowser, setLanguageBrowser] = React.useState<string>();
+  const [projectSelected, setProjectSelected] = React.useState<any>([]);
 
   const { t: translate } = useTranslation('project');
 
   const { locale } = router;
 
   const t = locale === 'en' ? en : pt
-  
+
 
   const { loggedIn } = React.useContext(UserContext)
+
+  const getProjectSelected = () => {
+
+  }
 
   // fetchDataIdAxios()
 
@@ -82,10 +86,19 @@ const ProjectPage = () => {
           modalMobileControl: [showMobileModal, setShowMobileModal]
         }}
       >
-        {showMobileModal ? (<MobileModal />) : ''}
+        {showMobileModal ? (
+          <MobileModal
+            projectSelectedProps={project}
+            loteProps={project?.lotes[project.lotes.length - 1]}
+            valorTokenProps={project?.lotes[project.lotes.length - 1]?.valorDoToken}
+          />) : ''}
         {showModal ? (
           <section className={Styles.divFormModal}>
-            <Modal />
+            <Modal
+              projectSelectedProps={project}
+              loteProps={project?.lotes[project.lotes.length - 1]}
+              valorTokenProps={project?.lotes[project.lotes.length - 1]?.valorDoToken}
+            />
           </section>
         ) : ''}
         <main>
@@ -171,7 +184,6 @@ const ProjectPage = () => {
                 { name: t.documents, path: "documentos" },
                 { name: t.projectOwnerMenu, path: "emissor" }
               ]}
-              languageBrowser={languageBrowser}
             />
 
             <Section
@@ -219,7 +231,6 @@ const ProjectPage = () => {
                 <div className={Styles.grid}>
                   {project.criadoEm && (
                     <DataShow
-                      languageBrowser={languageBrowser}
                       title={t.launchDate}
                       value={masks.getDateMask(project.dataLancamento)}
                       badge={{
@@ -231,14 +242,12 @@ const ProjectPage = () => {
                   )}
                   {project.rentabilidade ? (
                     <DataShow
-                      languageBrowser={languageBrowser}
                       title={t.profitability}
                       value={project.rentabilidade} // alterar essa parte
                       badge={{ type: "success", message: t.NEW }}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
-                      languageBrowser={languageBrowser}
                       title={t.profitability}
                       value={'N/A'}
                       contractLink={project.contratoToken}
@@ -247,14 +256,12 @@ const ProjectPage = () => {
 
                   {project.lotes.length > 0 ? (
                     <DataShow
-                      languageBrowser={languageBrowser}
                       title={t.batch}
                       value={project.lotes[project.lotes.length - 1].idLote}
                       badge={{ type: "success", message: t.NEW }}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
-                      languageBrowser={languageBrowser}
                       title={t.batch}
                       value={'N/A'}
                       contractLink={project.contratoToken}
@@ -262,13 +269,11 @@ const ProjectPage = () => {
 
                   {project.lotes.length > 0 ? (
                     <DataShow
-                      languageBrowser={languageBrowser}
                       title={t.tokenValue}
                       value={masks.getCurrencyMask(project.lotes[project.lotes.length - 1].valorDoToken)}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
-                      languageBrowser={languageBrowser}
                       title={t.tokenValue}
                       value={'N/A'}
                       contractLink={project.contratoToken}
@@ -276,13 +281,11 @@ const ProjectPage = () => {
 
                   {project.lotes.length > 0 ? (
                     <DataShow
-                      languageBrowser={languageBrowser}
                       title={t.batchExpiration}
                       value={project.lotes[project.lotes.length - 1].prazoDoLote}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
-                      languageBrowser={languageBrowser}
                       title={t.batchExpiration}
                       value={'00/00/0000'}
                       contractLink={project.contratoToken}
@@ -290,19 +293,16 @@ const ProjectPage = () => {
 
                   {project.lotes.length > 0 ? (
                     <DataShow
-                      languageBrowser={languageBrowser}
                       title={t.totalTokens}
                       value={masks.getQuantityMask(project.lotes[project.lotes.length - 1].qtdeDeTokens)}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
-                      languageBrowser={languageBrowser}
                       title={t.totalTokens}
                       value={'N/A'}
                       contractLink={project.contratoToken}
                     />)}
                   <DataShow
-                    languageBrowser={languageBrowser}
                     title={t.contract}
                     value={project.contratoToken}
                     highlight={true}
@@ -312,7 +312,6 @@ const ProjectPage = () => {
                   />
                   {project.lotes.length > 0 ? (
                     <DataShow
-                      languageBrowser={languageBrowser}
                       title={t.amountInvest}
                       value={`${(Number(project.lotes[project.lotes.length - 1].captacao) * 100).toString()}%` || '0%'}
                       highlight={true}
@@ -320,7 +319,6 @@ const ProjectPage = () => {
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
-                      languageBrowser={languageBrowser}
                       title={t.amountInvest}
                       value={'N/A'}
                       highlight={true}
@@ -370,7 +368,6 @@ const ProjectPage = () => {
                   color="#6C6C6C"
                 />
                 <DataShow
-                  languageBrowser={languageBrowser}
                   title={t.docTitle}
                   value={"NOME_DO_ARQUIVO.PDF"}
                   className="mb-3"
@@ -381,7 +378,6 @@ const ProjectPage = () => {
                   contractLink={project.contratoToken}
                 />
                 <DataShow
-                  languageBrowser={languageBrowser}
                   title={t.docTitle}
                   value={"NOME_DO_ARQUIVO.PDF"}
                   badge={{

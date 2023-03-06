@@ -9,7 +9,7 @@ import CloseButton from "@/components/atoms/CloseButton";
 
 import Logo from '@/assets/img/logo.png';
 
-import { fetchRequestPix } from '@/utils/fetchDataAxios';
+import { fetchDataIdAxios, fetchRequestPix } from '@/utils/fetchDataAxios';
 
 import { fetchDataAxios, fetchDataUserInfo } from '@/utils/fetchDataAxios';
 import UserContext from "@/context/UserContext";
@@ -21,20 +21,27 @@ import { useRouter } from "next/router";
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 
+interface ModalProps {
+  projectSelectedProps: any;
+  loteProps: any;
+  valorTokenProps: string;
+}
 
-function Modal() {
-  const [hiddenBuy, setHiddenBuy] = React.useState<boolean>(false);
+function Modal({ projectSelectedProps, loteProps, valorTokenProps }: ModalProps) {
+  const [hiddenBuy, setHiddenBuy] = React.useState<boolean>(true);
   const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
 
-  const [conditionalBuy, setConditionalBuy] = React.useState<string>('');
+  const [conditionalBuy, setConditionalBuy] = React.useState<any>('CNLT-0');
 
   const [realValue, setRealValue] = React.useState<string>('0');
   const [projects, setProjects] = React.useState<any>([])
-  const [projectSelected, setProjectSelected] = React.useState<any>();
+  const [projectSelected, setProjectSelected] = React.useState<any>(projectSelectedProps);
   const [requestPixValue, setRequestPixValue] = React.useState<string>('')
-  const [valorToken, setValorToken] = React.useState<string>('')
-  const [lote, setLote] = React.useState<object>();
+  const [valorToken, setValorToken] = React.useState<string>(valorTokenProps)
+  const [lote, setLote] = React.useState<object>(loteProps);
   const [dataUser, setDataUser] = React.useState<any>();
+
+  const [idProject, setIdProject] = React.useState<string | null>('');
 
   const router = useRouter()
 
@@ -48,10 +55,13 @@ function Modal() {
 
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
+    const idProject = localStorage.getItem('idProject')
+    setIdProject(idProject)
+    setConditionalBuy(idProject)
+
     fetchDataAxios("4", setProjects)
     fetchDataUserInfo(accessToken, setDataUser)
-
-  }, [dataUser])
+  }, [])
 
   return (
     <form className={Styles.form}>
@@ -109,6 +119,7 @@ function Modal() {
                 if (e.target.id) {
                   setConditionalBuy(e.target.id)
                 }
+                setConditionalBuy('CNLT-0')
                 setRealValue('0')
                 setHiddenBuy(!hiddenBuy)
               }}
@@ -123,7 +134,7 @@ function Modal() {
                 id={item.id}
                 name={item.nome}
                 src={item.logoUrl}
-                text={t.buy} 
+                text={t.buy}
                 onClick={(e: any) => {
                   e.preventDefault()
                   if (!loggedIn[0]) {
@@ -133,6 +144,8 @@ function Modal() {
                   if (e.target.id) {
                     setConditionalBuy(e.target.id)
                   }
+                  // setProjectSelectedFunc(item, idProject)
+                  setConditionalBuy(idProject)
                   setRealValue('0')
                   setLote(item?.lotes[item.lotes.length - 1])
                   setValorToken(item?.lotes[item.lotes.length - 1]?.valorDoToken)

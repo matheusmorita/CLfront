@@ -375,10 +375,10 @@ function BuyProject({
                         setHashConfirm(hash)
                         if (confirm !== 0) {
                           setBuyConfirmed(!buyConfirmed)
-                          // setTimeout(() => {
-                          //   setBuyConfirmed(!buyConfirmed)
-                          //   window.location.reload()
-                          // }, 2000);
+                          setTimeout(() => {
+                            setBuyConfirmed(!buyConfirmed)
+                            window.location.reload()
+                          }, 2000);
                         }
                       }
                       setHiddenBuyProject(!hiddenBuyProject)

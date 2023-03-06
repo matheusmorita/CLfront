@@ -28,7 +28,7 @@ interface BuyProjectInterface {
   conditionalBuy: string;
   projectSelected: any;
   valorToken: string;
-  balance: number;
+  balance: string;
   lote: any;
 }
 
@@ -59,9 +59,10 @@ function BuyProjectMobile({ setRealValue,
 
   const t = locale === 'en' ? en : pt
 
-  const checkSaldo = (balance: number, valorToken: string, realValue: string): boolean => {
+  const checkSaldo = (balance: string, valorToken: string, realValue: string): boolean => {
+    const balanceNumber = parseFloat(balance.replace(',', '.'))
     const multiplyValues = Number(realValue) * Number(valorToken)
-    if (balance >= multiplyValues) {
+    if (balanceNumber>= multiplyValues) {
       return true
     }
     return false
@@ -389,12 +390,12 @@ function BuyProjectMobile({ setRealValue,
                       if (responseSaldo) {
                         const { confirm, hash } = await requestBuyToken(accessTokenState, realValue, lote.id, setWaiting, setResponseCode)
                         setHashConfirm(hash)
-                        if (responseCode === 200) {
+                        if (confirm !== 0) {
                           setBuyConfirmed(!buyConfirmed)
-                          // setTimeout(() => {
-                          //   setBuyConfirmed(!buyConfirmed)
-                          //   window.location.reload()
-                          // }, 2000);
+                          setTimeout(() => {
+                            setBuyConfirmed(!buyConfirmed)
+                            window.location.reload()
+                          }, 2000);
                         }
                       }
                       setHiddenBuyProject(!hiddenBuyProject)
