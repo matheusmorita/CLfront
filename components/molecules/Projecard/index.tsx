@@ -111,7 +111,7 @@ const Projecard = ({
               ) : `linear-gradient(to right, transparent, #000), url(${src})`,
               position: 'absolute',
               backgroundSize: acronimo ? '' : 'cover',
-              width: acronimo ? '20%' : '15%',
+              width: (acronimo === 'CNLT') ? '15%' : '20%',
               height: '100%',
               left: '0',
               top: '0'
