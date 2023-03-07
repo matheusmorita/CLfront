@@ -313,7 +313,8 @@ const ProjectPage = () => {
                   {project.lotes.length > 0 ? (
                     <DataShow
                       title={t.amountInvest}
-                      value={`${(Number(project.lotes[project.lotes.length - 1].captacao) * 100).toString()}%` || '0%'}
+                      value={`${(Number(project.lotes[project.lotes.length - 1].captacao) * 100)
+                        .toLocaleString('pt-BR', { minimumFractionDigits: 2 })}%` || '0%'}
                       highlight={true}
                       badge={{ type: "success", message: t.emphasis }}
                       contractLink={project.contratoToken}

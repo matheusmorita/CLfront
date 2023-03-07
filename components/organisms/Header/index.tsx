@@ -71,6 +71,7 @@ const Header = ({ hideLinks }: Props) => {
     window.addEventListener("scroll", handleHeaderChange)
     window.addEventListener("resize", handleWindowChange)
     handleWindowChange()
+
   }, [])
 
   const router = useRouter();
@@ -124,6 +125,7 @@ const Header = ({ hideLinks }: Props) => {
             <UserOptions
               name={dataUser.nome}
               contrast={whiteTheme}
+              profileImageSrc={dataUser?.imgPerfilUrl}
             />
           )}
           <section className={Styles.sectionLanguage}>

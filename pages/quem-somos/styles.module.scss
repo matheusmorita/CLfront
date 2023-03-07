@@ -1,7 +1,7 @@
 @import '@/styles/variables.scss';
 
 .background {
-    background: url(../../assets/img/background.webp);
+    background: url(../../assets/img/fundoVerde.png);
     background-repeat: no-repeat;
     background-position-y: bottom;
     background-position-x: left;
@@ -39,7 +39,7 @@
     filter: saturate(0);
     margin-top: 10%;
     mask-image: linear-gradient(to top, black 100%);
-    -webkit-mask-image: linear-gradient(to top, transparent, black 100%);
+    -webkit-mask-image: linear-gradient(to top, transparent 1%, black 100%);
 
 
     @media(max-width: 992px) {

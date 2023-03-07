@@ -6,13 +6,15 @@ import Styles from './styles.module.scss'
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 type Props = {
   name: string,
-  contrast?: boolean
+  contrast?: boolean,
+  profileImageSrc: string,
 }
 
-const UserOptions = ({ name, contrast = false }: Props) => {
+const UserOptions = ({ name, contrast = false, profileImageSrc }: Props) => {
   const [open, setOpen] = React.useState<boolean>(false)
 
   const router = useRouter();
@@ -41,17 +43,25 @@ const UserOptions = ({ name, contrast = false }: Props) => {
         <p className={Styles.user__phrase}>{t.hello}</p>
         <p className={Styles.user__phrase}>{name}</p>
       </div>
-      <div className={Styles.user__picture}
+      {/* <div className={Styles.user__picture}
+        onClick={() => { handleMenuToggle() }}
+      /> */}
+      <Image 
+        alt='Profile Picture'
+        src={profileImageSrc}
+        width={40}
+        height={40}
+        className={Styles.user__picture}
         onClick={() => { handleMenuToggle() }}
       />
       <div className={`${Styles.user__menu} ${handleMenuState()}`}>
         <ul className={Styles.user__list}>
-          <Link href="/perfil">
+          <Link href="/perfil" locale={locale}>
             <li className={Styles.user__item}>
               {t.profile}
             </li>
           </Link>
-          <Link href='/logout'>
+          <Link href='/logout' locale={locale}>
             <li className={Styles.user__item}>
               {t.disconnect}
 

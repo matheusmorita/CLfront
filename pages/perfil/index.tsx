@@ -10,7 +10,7 @@ import Row from '@/components/molecules/Row'
 import Balance from '@/components/molecules/Balance'
 import Switch from '@/components/molecules/Switch'
 import Projecard from '@/components/molecules/Projecard'
-import { fetchDataUserInfo, fetchUserHistoryinfo, uploadProfilePhoto } from '@/utils/fetchDataAxios'
+import { fetchDataUserInfo, fetchUserHistoryinfo, uploadBackgroundPhoto, uploadProfilePhoto } from '@/utils/fetchDataAxios'
 import Link from 'next/link'
 import InvestCard from '@/components/molecules/InvestCard'
 import { getWindowInnerWidth } from '@/assets/js/util/responsive'
@@ -36,6 +36,8 @@ import { useTranslation } from 'next-i18next'
 import Modal from '@/components/organisms/Modal'
 import MobileModal from '@/components/organisms/MobileModal'
 
+import bgDefaultImage from '@/assets/img/BG.webp';
+
 const Perfil = () => {
   const [walletState, setWalletState] = React.useState(0)
   const [dataUser, setDataUser] = React.useState<any>();
@@ -43,9 +45,8 @@ const Perfil = () => {
   const [accessToken, setAccessToken] = React.useState<string | null>()
 
   // const [profileImage, setProfileImage] = React.useState<any>();
-  const [image, setImage] = React.useState('')
-  const [BGimage, setBGImage] = React.useState('')
-  const [endImage, setEndImage] = React.useState('')
+
+  const [bgPhoto, setBgPhoto] = React.useState<string>('');
 
   const router = useRouter();
 
@@ -116,17 +117,35 @@ const Perfil = () => {
                 <label style={{position: 'absolute', right: '1%', bottom: '22%'}}  htmlFor='backgroundInputImage'>
                   <FlipCameraIosIcon className={Styles.profile__icon} />
                   <input id="backgroundInputImage" name='image' type="file" onChange={(e: any) => {
-                    // uploadProfilePhoto(e.target.files[0], accessToken)
-                    setBGImage(URL.createObjectURL(e.target.files[0]))
+                    uploadBackgroundPhoto(e.target.files[0], accessToken)
+                    setBgPhoto(URL.createObjectURL(e.target.files[0]))
+                    // setTimeout(() => {
+                    //   router.reload()
+                    // }, 1500);
                   }}></input>
                 </label>
-                <div style={{background: `url(${bg2})`}} className={Styles.profile__background} />
+                {dataUser?.imgBackgroundUrl ? (
+                  <Image
+                    height={150}
+                    width={1000}
+                    src={dataUser?.imgBackgroundUrl}
+                    alt='Background Image'
+                    className={Styles.profile__background}
+                  />
+                ) : (
+                  <Image
+                    height={150}
+                    width={1000}
+                    src={bgPhoto || bgDefaultImage}
+                    alt='Background Image'
+                    className={Styles.profile__background}
+                  />
+                )}
                 <div className={Styles.profile__picture}>
                   <label className={Styles.profile__inputImage} htmlFor='profileImageInput'>
                     <FlipCameraIosIcon className={Styles.profile__icon} />
                     <input id="profileImageInput" name='image' type="file" onChange={(e: any) => {
                       uploadProfilePhoto(e.target.files[0], accessToken)
-                      setImage(URL.createObjectURL(e.target.files[0]))
                       setTimeout(() => {
                         router.reload()
                       }, 1500);

@@ -253,3 +253,15 @@ export const uploadProfilePhoto = (photoFile, accessToken) => {
     },
   });
 }
+
+export const uploadBackgroundPhoto = (photoFile, accessToken) => {
+  let formData = new FormData();
+  formData.append("file", photoFile);
+
+  axios.post('https://coinlivre.blocklize.io/usuario/upload-foto-background', formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      "Authorization": `Bearer ${accessToken}`
+    },
+  });
+}
