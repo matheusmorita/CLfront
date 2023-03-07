@@ -35,18 +35,13 @@ const UserOptions = ({ name, contrast = false, profileImageSrc }: Props) => {
     setOpen(!open)
   }
   return (
+
     <div
       className={`${Styles.user} ${handleWhiteTheme()}`}
       onClick={() => { handleMenuToggle() }}
     >
-      <div style={{display: 'flex', gap: '2%'}}>
-        <p className={Styles.user__phrase}>{t.hello}</p>
-        <p className={Styles.user__phrase}>{name}</p>
-      </div>
-      {/* <div className={Styles.user__picture}
-        onClick={() => { handleMenuToggle() }}
-      /> */}
-      <Image 
+        <p className={Styles.user__phrase}>{t.hello} {name}</p>
+      <Image
         alt='Profile Picture'
         src={profileImageSrc}
         width={40}

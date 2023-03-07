@@ -89,73 +89,89 @@ const Header = ({ hideLinks }: Props) => {
           white={!whiteTheme}
           responsive={responsive}
         />
-        <div style={{ display: 'flex' }}>
-          {!logged && (
-            <div className="d-flex align-items-center justify-content-center">
-              {
-                routes &&
-                !hideLinks &&
-                routes.map((item: any, index: number) => (
-                  <Link
-                    href={item.path}
-                    key={index}
-                    className={`${handleActiveLink(item.path)} ${handleLinkDisabled(item.disabled)}`}
-                  >
-                    {item.name}
-                  </Link>
-                ))
-              }
-
-              <Button
-                id="header-cta"
-                text={t.registerOrLogin}
-                width='200px'
-                label="Clique e cadastre-se"
-                className="ms-3"
-                hidden={false}
-                disabled={false}
-                onClick={() => {
-                  push('/login')
-                }}
-              />
-
-            </div>
-          )}
-          {dataUser?.nome && (
-            <UserOptions
-              name={dataUser.nome}
-              contrast={whiteTheme}
-              profileImageSrc={dataUser?.imgPerfilUrl}
+        {!logged && (
+          <div className="d-flex align-items-center justify-content-center">
+            {
+              routes &&
+              !hideLinks &&
+              routes.map((item: any, index: number) => (
+                <Link
+                  href={item.path}
+                  key={index}
+                  className={`${handleActiveLink(item.path)} ${handleLinkDisabled(item.disabled)}`}
+                >
+                  {item.name}
+                </Link>
+              ))
+            }
+            <Button
+              id="header-cta"
+              text={t.registerOrLogin}
+              width='200px'
+              label="Clique e cadastre-se"
+              margin='2%'
+              className="ms-3"
+              hidden={false}
+              disabled={false}
+              onClick={() => {
+                push('/login')
+              }}
             />
-          )}
-          <section className={Styles.sectionLanguage}>
-            <div className={Styles.linksDiv}>
-              {showLanguages && (
-                locales?.map(l => {
-                  return (
-                    <div key={l}>
-                      <Link
-                        className={Styles.linkLanguageStyle}
-                        href={asPath}
-                        key={l}
-                        locale={l}
-                      >
-                        <b className={Styles.languageItem}>
-                          {l.toLocaleUpperCase()}
-                        </b>
-                      </Link>
-                    </div>
-                  )
-                })
-              )}
-            </div>
-            <button className={Styles.buttonIcon} onClick={() => setShowLanguages(!showLanguages)}>
-              <LanguageIcon width={250} height={250} className={Styles.languageIcon} />
-            </button>
-          </section>
-        </div>
-      </div>
+          </div>
+        )}
 
+        {logged && (
+          <div className='d-flex align-items-center justify-content-center'>
+            {
+              routes &&
+              !hideLinks &&
+              routes.map((item: any, index: number) => (
+                <Link
+                  href={item.path}
+                  key={index}
+                  className={`${handleActiveLink(item.path)} ${handleLinkDisabled(item.disabled)}`}
+                >
+                  {item.name}
+                </Link>
+              ))
+            }
+          </div>
+        )}
+
+
+        <section className={Styles.sectionLanguage}>
+          <div className={Styles.linksDiv}>
+            {showLanguages && (
+              locales?.map(l => {
+                return (
+                  <div key={l}>
+                    <Link
+                      className={Styles.linkLanguageStyle}
+                      href={asPath}
+                      key={l}
+                      locale={l}
+                    >
+                      <b className={Styles.languageItem}>
+                        {l.toLocaleUpperCase()}
+                      </b>
+                    </Link>
+                  </div>
+                )
+              })
+            )}
+          </div>
+          <button className={Styles.buttonIcon} onClick={() => setShowLanguages(!showLanguages)}>
+            <LanguageIcon width={250} height={250} className={Styles.languageIcon} />
+          </button>
+        </section>
+        {dataUser?.nome && (
+          <UserOptions
+            name={dataUser.nome}
+            contrast={whiteTheme}
+            profileImageSrc={dataUser?.imgPerfilUrl}
+          />
+        )}
+      </div>
     </nav>
   )
 }

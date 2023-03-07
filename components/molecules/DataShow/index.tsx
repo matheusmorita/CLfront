@@ -49,14 +49,6 @@ const DataShow = ({ title, value, badge, className, highlight = false, contractL
             <OpenInNewIcon className={Styles.datashow__iconStyle} />
           </Link>
           )}
-          {/* {title.toLocaleLowerCase().includes('contrato' || 'contract') ? (
-            <Link
-              target="_blank"
-              href={`https://etherscan.io/address/${contractLink}`}
-            >
-              <OpenInNewIcon className={Styles.datashow__iconStyle} />
-            </Link>
-          ) : ''} */}
         </span>
       </div>
       {badge && (
