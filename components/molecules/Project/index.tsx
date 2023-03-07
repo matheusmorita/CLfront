@@ -30,6 +30,10 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
 
   const router = useRouter();
 
+  const removeSpaceString = (string: string) => {
+    return string.replace(/\s/g, '')
+  }
+
   const { locale, push } = router;
 
   const t = locale === 'en' ? en : pt
@@ -111,7 +115,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
               onClick={() => {
                 localStorage.setItem('idProject', idProject)
                 // location.href = `projeto/${path}`
-                push(`projeto/${path}`)
+                push(`projeto/${name.replace(/\s/g, '')}`)
               }}
             />
           </div>
