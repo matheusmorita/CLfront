@@ -215,7 +215,10 @@ const Perfil = () => {
               >
                 <Balance
                   type='CoinLivre'
-                  value={`CNLT ${dataUser?.balanceCL}`}
+                  value={`CNLT ${parseFloat(dataUser?.balanceCL
+                    .replace(',','.'))
+                    .toLocaleString('pt-BR', { minimumFractionDigits: 2})}`
+                  }
                 />
               </Column>
               <Column
@@ -227,7 +230,9 @@ const Perfil = () => {
               >
                 <Balance
                   type='R$'
-                  value={`R$ ${dataUser?.saldoReais}`}
+                  value={`R$ ${parseFloat(dataUser?.saldoReais
+                    .replace(',','.'))
+                    .toLocaleString('pt-BR', { minimumFractionDigits: 2})}`}
                 />
               </Column>
             </div>

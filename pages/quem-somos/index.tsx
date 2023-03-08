@@ -62,6 +62,7 @@ const QuemSomos = () => {
             media='lg'
             size={7}
             className={`pt-5 ${Styles.descriptionCoinLivre}`}
+            maxWidth='500px'
           >
             <Separator
               color='#00ee8d'
@@ -70,7 +71,7 @@ const QuemSomos = () => {
               id='introducao-title'
               text={`${t.yourAccess} ${t.newEconomy}`}
               hidden={false}
-              width={14}
+              width={11}
               weight={500}
             />
             <Paragrah

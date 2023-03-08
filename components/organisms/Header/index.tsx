@@ -109,7 +109,7 @@ const Header = ({ hideLinks }: Props) => {
               text={t.registerOrLogin}
               width='200px'
               label="Clique e cadastre-se"
-              margin='2%'
+              margin='3%'
               className="ms-3"
               hidden={false}
               disabled={false}
@@ -137,8 +137,6 @@ const Header = ({ hideLinks }: Props) => {
             }
           </div>
         )}
-
-
         <section className={Styles.sectionLanguage}>
           <div className={Styles.linksDiv}>
             {showLanguages && (
