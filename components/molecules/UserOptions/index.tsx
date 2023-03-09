@@ -8,6 +8,8 @@ import pt from '@/public/locales/pt/common.json';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
+import defaultImage from '@/assets/img/placeholder.webp'
+
 type Props = {
   name: string,
   contrast?: boolean,
@@ -43,7 +45,7 @@ const UserOptions = ({ name, contrast = false, profileImageSrc }: Props) => {
         <p className={Styles.user__phrase}>{t.hello} {name}</p>
       <Image
         alt='Profile Picture'
-        src={profileImageSrc}
+        src={profileImageSrc ? profileImageSrc : defaultImage}
         width={40}
         height={40}
         className={Styles.user__picture}

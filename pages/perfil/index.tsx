@@ -46,8 +46,6 @@ const Perfil = () => {
 
   // const [profileImage, setProfileImage] = React.useState<any>();
 
-  const [bgPhoto, setBgPhoto] = React.useState<string>('');
-
   const router = useRouter();
 
   const { locale } = router;
@@ -118,10 +116,9 @@ const Perfil = () => {
                   <FlipCameraIosIcon className={Styles.profile__icon} />
                   <input id="backgroundInputImage" name='image' type="file" onChange={(e: any) => {
                     uploadBackgroundPhoto(e.target.files[0], accessToken)
-                    setBgPhoto(URL.createObjectURL(e.target.files[0]))
-                    // setTimeout(() => {
-                    //   router.reload()
-                    // }, 1500);
+                    setTimeout(() => {
+                      router.reload()
+                    }, 1500);
                   }}></input>
                 </label>
                 {dataUser?.imgBackgroundUrl ? (

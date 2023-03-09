@@ -214,7 +214,7 @@ export const handleGetUserInfoCadastro = async (token, router) => {
     .then(resp => {
       if (resp.ok) {
         return
-        router.push('/')
+        router.push('/perfil')
       } else {
         router.push('/registrar-se')
       }
