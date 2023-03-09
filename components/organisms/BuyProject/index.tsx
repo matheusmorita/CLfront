@@ -171,8 +171,9 @@ function BuyProject({
             responseCode === 500 || responseCode === 400 ? (
               <>
                 <p className={Styles.descriptionTextFailed}>
-                  Houve um problema ao tentar comprar este projeto, por favor, tente novamente
-                  mais tarde.
+                  Houve um problema ao tentar comprar este projeto, você pode ter excedido
+                  o limite máximo de captação, ou houve um erro interno no servidor,
+                  por favor, tente novamente mais tarde.
                 </p>
                 <Image
                   width={200}
@@ -181,24 +182,14 @@ function BuyProject({
                   src={Logo}
                 />
                 <div style={{ width: '90%' }}>
-                  {buyConfirmed ? (
-                    <InputModal
-                      id='inputQrcode'
-                      type='string'
-                      label='Código de confirmação'
-                      disabled={false}
-                      placeholder={hashConfirm}
-                      className={Styles.inputValueBuyProject}
-                    />
-                  ) : ''}
                   <Button
                     hidden={false}
                     id={'paymentQRcodeBtn'}
                     label="Escaneie para efetuar o pagamento"
-                    onClick={() => { }}
-                    text={buyConfirmed ? "Pagamento realizado com sucesso" : "Aguardando confirmação do pagamento"}
-                    disabled={true}
-                    className={Styles.btnPayQrCode}
+                    onClick={() => { setHiddenBuy(!hiddenBuy) }}
+                    text={"Voltar para o início"}
+                    disabled={false}
+                    className={Styles.buttonBackInit}
                     size={25}
                   />
                 </div>
@@ -371,9 +362,9 @@ function BuyProject({
                       const responseSaldo = checkSaldo(balance, valorToken, realValue)
                       setValueSaldo(responseSaldo)
                       if (responseSaldo) {
-                        const { confirm, hash } = await requestBuyToken(accessTokenState, realValue, lote.id, setWaiting, setResponseCode)
+                        const { hash, responseStatus } = await requestBuyToken(accessTokenState, realValue, lote.id, setWaiting, setResponseCode)
                         setHashConfirm(hash)
-                        if (confirm !== 0) {
+                        if (responseStatus === 201) {
                           setBuyConfirmed(!buyConfirmed)
                           setTimeout(() => {
                             setBuyConfirmed(!buyConfirmed)

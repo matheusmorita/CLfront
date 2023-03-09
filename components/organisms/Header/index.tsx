@@ -26,6 +26,7 @@ const Header = ({ hideLinks }: Props) => {
   const [whiteTheme, setWhiteTheme] = React.useState<boolean>(false)
   const [responsive, setResponsive] = React.useState<boolean>(false)
   const [showLanguages, setShowLanguages] = React.useState<boolean>(false)
+  const [windowWidth, setWindowWidth] = React.useState<number>(0)
 
   const [dataUser, setDataUser] = React.useState<any>();
 
@@ -37,16 +38,13 @@ const Header = ({ hideLinks }: Props) => {
 
   const t = locale === 'en' ? en : pt
 
-  function handleChangeLanguage(e: any) {
-    router.push(`/${pathname}`)
-  }
-
   React.useEffect(() => {
     console.log(window.location.pathname)
 
     const accessToken = localStorage.getItem('accessToken')
 
     fetchDataUserInfo(accessToken, setDataUser)
+
     // router.push(`${beforePath}`)
   }, [info])
 
@@ -71,6 +69,8 @@ const Header = ({ hideLinks }: Props) => {
     window.addEventListener("scroll", handleHeaderChange)
     window.addEventListener("resize", handleWindowChange)
     handleWindowChange()
+
+    setWindowWidth(window.innerWidth)
 
   }, [])
 
@@ -107,10 +107,9 @@ const Header = ({ hideLinks }: Props) => {
             <Button
               id="header-cta"
               text={t.registerOrLogin}
-              width='200px'
               label="Clique e cadastre-se"
-              margin='3%'
-              className="ms-3"
+              // margin='3%'
+              className={`ms-3 ${windowWidth <= 992 ? 'me-5' : '' }`}
               hidden={false}
               disabled={false}
               onClick={() => {
@@ -138,11 +137,13 @@ const Header = ({ hideLinks }: Props) => {
           </div>
         )}
         <section className={Styles.sectionLanguage}>
-          <div className={Styles.linksDiv}>
-            {showLanguages && (
-              locales?.map(l => {
+          <button className={Styles.buttonIcon} onClick={() => setShowLanguages(!showLanguages)}>
+            <LanguageIcon width={250} height={250} className={Styles.languageIcon} />
+          </button>
+          <div style={{visibility: showLanguages ? 'visible' : 'hidden'}} className={Styles.linksDiv}>
+            {locales?.map(l => {
                 return (
-                  <div key={l}>
+                  <div className={Styles.itemLanguage} key={l}>
                     <Link
                       className={Styles.linkLanguageStyle}
                       href={asPath}
@@ -155,12 +156,8 @@ const Header = ({ hideLinks }: Props) => {
                     </Link>
                   </div>
                 )
-              })
-            )}
+              })}
           </div>
-          <button className={Styles.buttonIcon} onClick={() => setShowLanguages(!showLanguages)}>
-            <LanguageIcon width={250} height={250} className={Styles.languageIcon} />
-          </button>
         </section>
         {dataUser?.nome && (
           <UserOptions

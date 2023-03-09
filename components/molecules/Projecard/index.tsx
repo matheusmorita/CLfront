@@ -2,7 +2,7 @@ import React from 'react'
 import Styles from './styles.module.scss'
 
 // formats
-import { formatDate } from '@/utils/formatDate';
+import { formatDate, formatDateProjecard } from '@/utils/formatDate';
 
 //dayjs
 import dayjs from 'dayjs';
@@ -106,7 +106,7 @@ const Projecard = ({
         {windowWidth >= 992 ? (
           <div
             style={{
-              background: (acronimo === 'CNLT') ? (
+              background: (acronimo === 'CNLT') || acronimo === null ? (
                 `linear-gradient(to bottom, transparent, #000), url(${logoImage})`
               ) : `linear-gradient(to right, transparent, #000), url(${src})`,
               position: 'absolute',
@@ -122,7 +122,7 @@ const Projecard = ({
         ) : (
           <div
             style={{
-              background: (acronimo === 'CNLT') ? (
+              background: (acronimo === 'CNLT') || acronimo === null ? (
                 `linear-gradient(to bottom, transparent, #000), url(${logoImage})` 
               ) : `linear-gradient(to bottom, transparent, #000), url(${src})`,
               position: 'absolute',
@@ -194,7 +194,7 @@ const Projecard = ({
               {t.date}
             </h1>
             <span className={Styles.data__value}>
-              <span>{formatDate(date) || '00/00/0000 - 00:00:00'}</span>
+              <span>{formatDateProjecard(date) || '00/00/0000 - 00:00:00'}</span>
             </span>
           </div>
         ) : ''}

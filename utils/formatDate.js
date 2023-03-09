@@ -6,3 +6,10 @@ export const formatDate = (date) => {
         return formated
     }
 }
+
+export const formatDateProjecard = (date) => {
+    if (dayjs(date).isValid()) {
+        const formated = dayjs(date).format('DD/MM/YYYY - HH:mm:ss')
+        return formated
+    }
+}

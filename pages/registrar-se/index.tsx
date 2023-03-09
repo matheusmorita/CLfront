@@ -18,6 +18,8 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { captureName } from '@/assets/js/util/validations'
 
+import { handleGetUserInfo, handleUserRequestRegister } from '@/utils/fetchDataAxios'
+
 // languages
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
@@ -42,72 +44,75 @@ const Register = () => {
   const [errorCPF, setErrorCPF] = React.useState()
   const [errorDate, setErrorDate] = React.useState()
 
+  const [valueCpf, setValueCpf] = React.useState<string>('')
+  const [valueBirth, setValueBirth] = React.useState<any>('')
+
   const [checked, setChecked] = React.useState<boolean>(false)
 
   const { locale } = router;
 
   const t = locale === 'en' ? en : pt
 
-  const handleUserRequest = async () => {
-    if (validation) {
-      setWaiting(true)
-      const token = localStorage.getItem('accessToken')
-      if (token && name && cpf && date) {
-        const data = JSON.stringify({
-          "nome": name,
-          "cpf": cpf,
-          "dataNascimento": date
-        })
+  // const handleUserRequest = async () => {
+  //   if (validation) {
+  //     setWaiting(true)
+  //     const token = localStorage.getItem('accessToken')
+  //     if (token && name && cpf && date) {
+  //       const data = JSON.stringify({
+  //         "nome": name,
+  //         "cpf": cpf,
+  //         "dataNascimento": date
+  //       })
 
-        const config = {
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            "Authorization": 'Bearer ' + token,
-          },
-          body: data
-        }
+  //       const config = {
+  //         method: 'post',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           'Access-Control-Allow-Origin': '*',
+  //           "Authorization": 'Bearer ' + token,
+  //         },
+  //         body: data
+  //       }
 
-        await fetch('https://coinlivre.blocklize.io/usuario/cadastrarUser', config)
-          .then(resp => {
-            if (resp.ok) {
-              setWaiting(false)
-              setSuccess(true)
-              setTimeout(() => {
-                router.push('/perfil')
-              }, 3000);
-            }
-          })
-      }
-    }
-  }
+  //       await fetch('https://coinlivre.blocklize.io/usuario/cadastrarUser', config)
+  //         .then(resp => {
+  //           if (resp.ok) {
+  //             setWaiting(false)
+  //             setSuccess(true)
+  //             setTimeout(() => {
+  //               router.push('/perfil')
+  //             }, 3000);
+  //           }
+  //         })
+  //     }
+  //   }
+  // }
 
-  const handleGetUserInfo = async () => {
-    const token = localStorage.getItem('accessToken')
+  // const handleGetUserInfo = async () => {
+  //   const token = localStorage.getItem('accessToken')
 
-    const config = {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        "Authorization": 'Bearer ' + token,
-      }
-    }
+  //   const config = {
+  //     method: 'post',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Access-Control-Allow-Origin': '*',
+  //       "Authorization": 'Bearer ' + token,
+  //     }
+  //   }
 
-    await fetch('https://coinlivre.blocklize.io/usuario/getUserCadastro', config)
-      .then(resp => {
-        if (resp.ok) {
-          setSuccess(true)
-          setPreloaded(true)
-          setTimeout(() => {
-            router.push('/')
-          }, 3000);
-        } else {
-          setPreloaded(true)
-        }
-      })
-  }
+  //   await fetch('https://coinlivre.blocklize.io/usuario/getUserCadastro', config)
+  //     .then(resp => {
+  //       if (resp.ok) {
+  //         setSuccess(true)
+  //         setPreloaded(true)
+  //         setTimeout(() => {
+  //           router.push('/')
+  //         }, 3000);
+  //       } else {
+  //         setPreloaded(true)
+  //       }
+  //     })
+  // }
 
   const handleWaitState = () => {
     return waiting ? Styles.waiting : null
@@ -115,7 +120,7 @@ const Register = () => {
 
   React.useEffect(() => {
     if (logged) {
-      handleGetUserInfo()
+      handleGetUserInfo(setSuccess, setPreloaded)
     }
   }, [logged])
 
@@ -191,6 +196,8 @@ const Register = () => {
                       onInput={setDate}
                       validation={setErrorDate}
                       error={errorDate}
+                      required={true}
+                      onChange={(e: any) => setValueBirth(e.target.value)}
                     />
                     <Input
                       id='cpf'
@@ -199,6 +206,9 @@ const Register = () => {
                       onInput={setCpf}
                       validation={setErrorCPF}
                       error={errorCPF}
+                      maxLength={11}
+                      required={true}
+                      onChange={(e: any) => setValueCpf(e.target.value)}
                     />
                     <Checkbox
                       onClick={() => setChecked(!checked)}
@@ -208,9 +218,9 @@ const Register = () => {
                       text={t.next}
                       label="Clique continue para seu cadastro"
                       className="w-100 py-2 mt-3 fs-5"
-                      disabled={!validation || !checked}
+                      disabled={!validation || !checked || (valueCpf === '') || (valueBirth === '')}
                       hidden={false}
-                      onClick={() => { handleUserRequest() }}
+                      onClick={() => { handleUserRequestRegister(setWaiting, setSuccess, name, cpf, date, validation, router) }}
                     />
                   </>
                 )}

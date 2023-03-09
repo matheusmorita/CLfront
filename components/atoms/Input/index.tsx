@@ -13,10 +13,11 @@ type Props = {
   minLength?: number,
   maxLength?: number,
   required?: boolean,
-  validator?: any
+  validator?: any,
+  onChange?: any,
 }
 
-const Input = ({id, type, error, onInput, disabled, className, minLength, maxLength, required, label, validation, validator}: Props) => {
+const Input = ({id, type, error, onInput, disabled, className, minLength, maxLength, required, label, validation, validator, onChange}: Props) => {
   const InputRef = React.useRef<any>(null)
 
   const handleInputValue = () => {
@@ -47,6 +48,7 @@ const Input = ({id, type, error, onInput, disabled, className, minLength, maxLen
         maxLength={maxLength}
         required={required}
         ref={InputRef}
+        onChange={onChange}
       />
       <label
         htmlFor={id}

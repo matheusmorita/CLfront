@@ -18,7 +18,6 @@ import { getWindowInnerWidth } from '@/assets/js/util/responsive'
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import FlipCameraIosIcon from '@mui/icons-material/FlipCameraIos';
 
-import defaultImage from '@/assets/img/placeholder.webp'
 import bg2 from '@/assets/img/BG2.webp';
 
 import Image from 'next/image'
@@ -36,6 +35,7 @@ import { useTranslation } from 'next-i18next'
 import Modal from '@/components/organisms/Modal'
 import MobileModal from '@/components/organisms/MobileModal'
 
+import defaultImage from '@/assets/img/placeholder.webp'
 import bgDefaultImage from '@/assets/img/BG.webp';
 
 const Perfil = () => {
@@ -136,7 +136,7 @@ const Perfil = () => {
                   <Image
                     height={150}
                     width={1000}
-                    src={bgPhoto || bgDefaultImage}
+                    src={bgDefaultImage}
                     alt='Background Image'
                     className={Styles.profile__background}
                   />
@@ -215,10 +215,7 @@ const Perfil = () => {
               >
                 <Balance
                   type='CoinLivre'
-                  value={`CNLT ${parseFloat(dataUser?.balanceCL
-                    .replace(',','.'))
-                    .toLocaleString('pt-BR', { minimumFractionDigits: 2})}`
-                  }
+                  value={`CNLT ${dataUser?.balanceCL}`}
                 />
               </Column>
               <Column
@@ -230,9 +227,7 @@ const Perfil = () => {
               >
                 <Balance
                   type='R$'
-                  value={`R$ ${parseFloat(dataUser?.saldoReais
-                    .replace(',','.'))
-                    .toLocaleString('pt-BR', { minimumFractionDigits: 2})}`}
+                  value={`R$ ${dataUser?.saldoReais}`}
                 />
               </Column>
             </div>
@@ -265,7 +260,7 @@ const Perfil = () => {
                 )}
                 {walletState === 1 && (
                   <>
-                    {changePosition(dataUser.balanceTokensCaptacao, 0)?.map((item: any, i: number) => (
+                    {changePosition(dataUser?.balanceTokensCaptacao, 0)?.map((item: any, i: number) => (
                       <Projecard
                         key={`${i}-${item.acronimo}`}
                         data={projecardMock}

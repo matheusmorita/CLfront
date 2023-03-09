@@ -123,6 +123,18 @@
   color: $light;
   width: 90%;
 }
+.buttonBackInit {
+  width: 100%;
+}
+
+.descriptionTextFailed {
+  color: $error;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 2% 0;
+  width: 90%;
+  text-align: center;
+}
 
 .checkboxLabel {
   display: flex;

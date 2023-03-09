@@ -106,7 +106,8 @@ export async function requestBuyToken(accessToken, quantity, loteId, setWaiting,
 
   return {
     hash: dataResponse.transactionHash,
-    confirm: dataResponse.confirmations
+    confirm: dataResponse.confirmations,
+    responseStatus: response.status
   }
 }
 
@@ -164,7 +165,7 @@ export const handleGetUserInfo = async (setSuccess, setPreloaded) => {
     })
 }
 
-export const handleUserRequestRegister = async (setWaiting, setSuccess, name, cpf, date) => {
+export const handleUserRequestRegister = async (setWaiting, setSuccess, name, cpf, date, validation, router) => {
   if (validation) {
     setWaiting(true)
     const token = localStorage.getItem('accessToken')
