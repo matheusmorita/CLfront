@@ -160,8 +160,8 @@ const Projecard = ({
           <h1 className={Styles.data__title}>
             {t.quantity}
           </h1>
-          <span className={Styles.data__value}>
-            {convertMontante(montante)}<span>/unds</span>
+          <span style={{color: Number(montante) < 0 ? 'red' : ''}} className={Styles.data__value}>
+            {convertMontante(montante)}<span style={{color: Number(montante) < 0 ? 'red' : ''}}>/unds</span>
           </span>
         </div>
         {showUnitaryValue && (

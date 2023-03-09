@@ -109,7 +109,7 @@ const Header = ({ hideLinks }: Props) => {
               text={t.registerOrLogin}
               label="Clique e cadastre-se"
               // margin='3%'
-              className={`ms-3 ${windowWidth <= 992 ? 'me-5' : '' }`}
+              className={`ms-3 ${windowWidth <= 992 ? 'me-5' : ''}`}
               hidden={false}
               disabled={false}
               onClick={() => {
@@ -120,7 +120,7 @@ const Header = ({ hideLinks }: Props) => {
         )}
 
         {logged && (
-          <div className='d-flex align-items-center justify-content-center'>
+          <div className={Styles.menuItemsStyle}>
             {
               routes &&
               !hideLinks &&
@@ -140,23 +140,23 @@ const Header = ({ hideLinks }: Props) => {
           <button className={Styles.buttonIcon} onClick={() => setShowLanguages(!showLanguages)}>
             <LanguageIcon width={250} height={250} className={Styles.languageIcon} />
           </button>
-          <div style={{visibility: showLanguages ? 'visible' : 'hidden'}} className={Styles.linksDiv}>
+          <div style={{ visibility: showLanguages ? 'visible' : 'hidden' }} className={Styles.linksDiv}>
             {locales?.map(l => {
-                return (
-                  <div className={Styles.itemLanguage} key={l}>
-                    <Link
-                      className={Styles.linkLanguageStyle}
-                      href={asPath}
-                      key={l}
-                      locale={l}
-                    >
-                      <b className={Styles.languageItem}>
-                        {l.toLocaleUpperCase()}
-                      </b>
-                    </Link>
-                  </div>
-                )
-              })}
+              return (
+                <div className={Styles.itemLanguage} key={l}>
+                  <Link
+                    className={Styles.linkLanguageStyle}
+                    href={asPath}
+                    key={l}
+                    locale={l}
+                  >
+                    <b className={Styles.languageItem}>
+                      {l.toLocaleUpperCase()}
+                    </b>
+                  </Link>
+                </div>
+              )
+            })}
           </div>
         </section>
         {dataUser?.nome && (

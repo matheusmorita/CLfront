@@ -13,6 +13,9 @@ import Paragrah from '@/components/atoms/Paragraph'
 import { useRouter } from 'next/router'
 import UserContext from '@/context/UserContext'
 
+// env
+import { AUTH_LOGIN, GET_USER_CADASTRO } from '../../../.env'
+
 // languages
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
@@ -42,7 +45,7 @@ const TokenShare = () => {
       body: data
     };
 
-    await fetch('https://greg.blocklize.io/auth/login', config)
+    await fetch(AUTH_LOGIN, config)
       .then(resp => resp.json())
       .then(json => {
         if (json.accessToken && json.refreshToken) {
@@ -69,7 +72,7 @@ const TokenShare = () => {
       }
     }
 
-    await fetch('https://coinlivre.blocklize.io/usuario/getUserCadastro', config)
+    await fetch(GET_USER_CADASTRO, config)
       .then(resp => {
         if (resp.ok) {
           router.push('/perfil')

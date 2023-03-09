@@ -63,7 +63,7 @@
 
 .languageIcon {
     width: 35px !important;
-    height: 35px!important;
+    height: 35px !important;
     fill: $primary !important;
     border: 2px solid $primary;
     border-radius: 50%;
@@ -84,6 +84,16 @@
     //     transition: .5s;
     //     border-bottom: 2px solid $primary;
     // }
+}
+
+.menuItemsStyle {
+    position: absolute;
+    top: 35%;
+    right: 18%;
+
+    @media (max-width: 1300px) {
+        right: 22%;
+    }
 }
 
 .linksDiv {

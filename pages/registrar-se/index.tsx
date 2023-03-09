@@ -120,7 +120,7 @@ const Register = () => {
 
   React.useEffect(() => {
     if (logged) {
-      handleGetUserInfo(setSuccess, setPreloaded)
+      handleGetUserInfo(setSuccess, setPreloaded, router)
     }
   }, [logged])
 

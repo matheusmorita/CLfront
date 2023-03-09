@@ -139,7 +139,7 @@ export const handleUserRequest = async (setWaiting, setFeedback, setError, email
   }
 }
 
-export const handleGetUserInfo = async (setSuccess, setPreloaded) => {
+export const handleGetUserInfo = async (setSuccess, setPreloaded, router) => {
   const token = localStorage.getItem('accessToken')
 
   const config = {
