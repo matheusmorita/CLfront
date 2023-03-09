@@ -140,7 +140,13 @@ const Header = ({ hideLinks }: Props) => {
           <button className={Styles.buttonIcon} onClick={() => setShowLanguages(!showLanguages)}>
             <LanguageIcon width={250} height={250} className={Styles.languageIcon} />
           </button>
-          <div style={{ visibility: showLanguages ? 'visible' : 'hidden' }} className={Styles.linksDiv}>
+          <div
+            style={{
+              visibility: showLanguages ? 'visible' : 'hidden',
+              opacity: showLanguages ? '1' : '0',
+            }}
+            className={Styles.linksDiv}
+          >
             {locales?.map(l => {
               return (
                 <div className={Styles.itemLanguage} key={l}>
