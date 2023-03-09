@@ -67,9 +67,11 @@ const ProjectPage = () => {
 
   React.useEffect(() => {
     if (!id) return
-    const nameToken = localStorage.getItem('nameToken')
+    const nameProject = localStorage.getItem('nameProject')
 
-    if (projectSelectedContext.nomeToken !== nameToken) {
+    console.log(projectSelectedContext)
+
+    if (nameProject || (projectSelectedContext.nomeToken !== nameProject)) {
       const idProject = localStorage.getItem('idProject')
       fetchDataIdAxios(idProject, setProject)
     } else {
@@ -171,9 +173,9 @@ const ProjectPage = () => {
                   size={20}
                   onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
                     e.preventDefault()
-                    // if (!loggedIn[0]) {
-                    //   return location.href = '/login'
-                    // }
+                    if (!loggedIn[0]) {
+                      return location.href = '/login'
+                    }
                     if (lengthWindow < 700) {
                       return setShowMobileModal(!showMobileModal)
                     }

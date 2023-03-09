@@ -30,6 +30,7 @@ interface BuyProjectInterface {
   valorToken: string;
   balance: string;
   lote: any;
+  setConditionalBuy: any;
 }
 
 function BuyProjectMobile({ setRealValue,
@@ -39,6 +40,7 @@ function BuyProjectMobile({ setRealValue,
   setHiddenBuyCoinLivre,
   hiddenBuyCoinLivre,
   conditionalBuy,
+  setConditionalBuy,
   projectSelected,
   valorToken,
   balance,
@@ -53,6 +55,8 @@ function BuyProjectMobile({ setRealValue,
   const [hashConfirm, setHashConfirm] = React.useState<string>('')
   const [waiting, setWaiting] = React.useState<boolean>(false)
   const [responseCode, setResponseCode] = React.useState<number>()
+
+  const [buyCoinlivre, setByCoinlivre] = React.useState<boolean>(false)
 
   const router = useRouter();
   const { locale } = router;
@@ -84,61 +88,211 @@ function BuyProjectMobile({ setRealValue,
       {waiting ? <Loader absolute={true} active={waiting} /> : ''}
       {(!valueSaldo && btnCheckBalance === 'continueBuyProject') ? (
         <section className={Styles.notEnoughCoins}>
-          <h4 className={Styles.titleEnough}>Fundos insuficientes</h4>
-          <p className={Styles.descriptionText}>
-            Para comprar a quantidade desejada de Tokens deste projeto,
-            você precisa antes comprar os Tokens CNLT, o que pode ser feito abaixo, via PIX.
-          </p>
-          <Image
-            alt='Logo image'
-            src={Logo}
-            width={200}
-            height={200}
-          />
-
-          <div className={Styles.divButtons}>
-            <Button
-              hidden={false}
-              id="backButton"
-              label="Clique para voltar"
-              onClick={() => { setHiddenBuy(!hiddenBuy) }}
-              text={t.back}
-              size={20}
-              className={Styles.divButtons__backButton}
-            />
-            {conditionalBuy === 'CNLT-0' ? (
-              <Button
+          {!buyCoinlivre ? (
+            <>
+              <h4 className={Styles.titleEnough}>Fundos insuficientes</h4>
+              <p className={Styles.descriptionText}>
+                Para comprar a quantidade desejada de Tokens deste projeto, você precisa antes
+                comprar os Tokens Coinlivre#CNLT, o que pode ser feito abaixo, via PIX.
+              </p>
+              <Image
+                alt='Logo image'
+                src={Logo}
+                width={250}
+                height={250}
+              />
+              <div className={Styles.divButtons}>
+                <Button
+                  hidden={false}
+                  id="backButton"
+                  label="Clique para voltar"
+                  onClick={() => {
+                    setHiddenBuy(!hiddenBuy)
+                  }}
+                  text={t.back}
+                  size={25}
+                  className={Styles.divButtons__backButton}
+                />
+                {conditionalBuy === 'CNLT-0' ? (
+                  <Button
+                    hidden={false}
+                    id="generateQRButton"
+                    label="Clique para gerar QR code"
+                    onClick={(e: React.FormEvent<EventTarget>) => {
+                      e.preventDefault()
+                      setHiddenBuy(!hiddenBuy)
+                    }}
+                    text={t.generateQrCode}
+                    size={25}
+                    className={Styles.divButtons__QRButton}
+                  />
+                ) : (
+                  <Button
+                    hidden={false}
+                    id="continueBuyProject"
+                    label="Clique para continuar compra"
+                    onClick={(e: React.FormEvent<EventTarget>) => {
+                      e.preventDefault()
+                      setConditionalBuy('CNLT-0')
+                      setByCoinlivre(!buyCoinlivre)
+                      setRealValue('0')
+                      setCheckoxCheck(!checkboxCheck)
+                      // setHiddenBuy(!hiddenBuy)
+                    }}
+                    text={t.next}
+                    size={25}
+                    className={Styles.divButtons__QRButton}
+                  />
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              <p className={Styles.descriptionText}>
+                Ao comprar Tokens Coinlivre#CNLT, você receberá o equivalente
+                em Tokens da quantia escolhida, deduzida da taxa da
+                CoinLivre de 1,5% de acordo com os seus benefícios
+              </p>
+              {conditionalBuy !== 'CNLT-0' ? (
+                <InputModal
+                  id="inputQtdTokens"
+                  type='number'
+                  prefix=''
+                  label={"Escolha a quantidade de Tokens"}
+                  placeholder="0"
+                  className={Styles.inputValue}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    const newStr = e.target.value.replace(/[.]/g, '')
+                    const altStr = newStr.replace(',', '.')
+                    setRealValue(altStr)
+                  }}
+                />
+              ) : (
+                <div className={Styles.InputsGroupStyle}>
+                  {conditionalBuy !== 'CNLT-0' ? (
+                    <InputModal
+                      id="inputQtdTokens"
+                      type='number'
+                      prefix=''
+                      label={"Escolha a quantidade de Tokens"}
+                      placeholder="0"
+                      className={Styles.inputValue}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        const newStr = e.target.value.replace(/[.]/g, '')
+                        const altStr = newStr.replace(',', '.')
+                        setRealValue(altStr)
+                      }}
+                    />
+                  ) : (
+                    <InputModal
+                      id="inputReal"
+                      type='number'
+                      prefix='R$ '
+                      label={conditionalBuy !== 'CNLT-0' ? "Escolha a quantidade de Tokens" : "Insira o valor em reais"}
+                      placeholder='R$ 0,00'
+                      className={Styles.inputValue}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        const strNotRs = e.target.value.replace('R$ ', '')
+                        const newStr = strNotRs.replace(/[.]/g, '')
+                        setRealValue(newStr)
+                      }}
+                    />
+                  )}
+                  <InputModal
+                    id="inputMoedaSelecionada"
+                    type='string'
+                    prefix='CNLT '
+                    label={conditionalBuy !== 'CNLT-0' ? "Valor final" : "Você receberá em CNLT"}
+                    placeholder='CNLT 0,00'
+                    className={Styles.inputValue}
+                    disabled={true}
+                    value={conditionalBuy === 'CNLT-0' ? realValue : calcValueResponse(realValue, valorToken)}
+                  />
+                </div>
+              )}
+              <div className={Styles.checkboxLabel}>
+                <input
+                  id="checkboxInput"
+                  onClick={() => setCheckoxCheck(!checkboxCheck)}
+                  type="checkbox"
+                  className={Styles.checkboxInput}
+                />
+                <label
+                  htmlFor="checkboxInput"
+                  className={Styles.descriptionTextCheckbox}
+                >
+                  Eu concordo com os termos de uso e política de privacidade da CoinLivre.
+                  Estou ciente de que a conta de origem do depósito deve estar no meu nome e CPF.
+                </label>
+              </div>
+              <div className={Styles.divButtons}>
+                <Button
+                  hidden={false}
+                  id="backButton"
+                  label="Clique para voltar"
+                  onClick={() => {
+                    setHiddenBuy(!hiddenBuy)
+                  }}
+                  text={t.back}
+                  size={25}
+                  className={Styles.divButtons__backButton}
+                />
+                {conditionalBuy === 'CNLT-0' ? (
+                  <Button
+                    hidden={false}
+                    type='submit'
+                    id="generateQRButton"
+                    label="bumbum tamtam"
+                    onClick={async (e: React.FormEvent<EventTarget>) => {
+                      e.preventDefault()
+                      const { itemId, textContent } = await fetchRequestPix(accessTokenState, realValue, setWaiting)
+                      sessionStorage.setItem('textContent', textContent)
+                      sessionStorage.setItem('itemId', itemId)
+                      setHiddenBuy(true)
+                      setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
+                    }}
+                    disabled={!checkboxCheck || (realValue === '')}
+                    text={t.generateQrCode}
+                    size={25}
+                    className={Styles.divButtons__QRButton}
+                  />
+                ) : (
+                  <Button
+                    hidden={false}
+                    id="continueBuyProject"
+                    label="Clique para continuar compra"
+                    onClick={(e: React.FormEvent<EventTarget>) => {
+                      e.preventDefault()
+                      setConditionalBuy('CNLT-0')
+                      setByCoinlivre(!buyCoinlivre)
+                      // setHiddenBuy(!hiddenBuy)
+                    }}
+                    text={t.next}
+                    size={25}
+                    className={Styles.divButtons__QRButton}
+                  />
+                )}
+              </div>
+              {/* <Button
                 hidden={false}
+                type='submit'
                 id="generateQRButton"
                 label="Clique para gerar QR code"
                 onClick={async (e: React.FormEvent<EventTarget>) => {
                   e.preventDefault()
-                  const newRealValue = realValue.replace(',', '.')
-                  const { itemId, textContent } = await fetchRequestPix(accessTokenState, newRealValue, setWaiting)
+                  const { itemId, textContent } = await fetchRequestPix(accessTokenState, realValue, setWaiting)
                   sessionStorage.setItem('textContent', textContent)
                   sessionStorage.setItem('itemId', itemId)
-                  setHiddenBuy(!hiddenBuy)
+                  setHiddenBuy(true)
                   setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                 }}
+                disabled={!checkboxCheck || (realValue === '')}
                 text={t.generateQrCode}
-                size={20}
+                size={25}
                 className={Styles.divButtons__QRButton}
-              />
-            ) : (
-              <Button
-                hidden={false}
-                id="continueBuyProject"
-                label="Clique para continuar compra"
-                onClick={(e: React.FormEvent<EventTarget>) => {
-                  e.preventDefault()
-                  setHiddenBuy(!hiddenBuy)
-                }}
-                text={t.next}
-                size={20}
-                className={Styles.divButtons__QRButton}
-              />
-            )}
-          </div>
+              /> */}
+            </>
+          )}
 
         </section>
       ) : (
@@ -257,7 +411,7 @@ function BuyProjectMobile({ setRealValue,
                 </>
               ) : (
                 <p className={Styles.descriptionText}>
-                  Ao comprar Tokens CNLT, você receberá o equivalente
+                  Ao comprar Tokens Coinlivre#CNLT, você receberá o equivalente
                   em Tokens da quantia escolhida, deduzida da taxa da CoinLivre de 1,5%
                   de acordo com os seus benefícios
                 </p>

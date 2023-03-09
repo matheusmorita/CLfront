@@ -120,7 +120,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
                 localStorage.setItem('idProject', idProject)
                 // location.href = `projeto/${path}`
                 setProjectSelectedContext(project)
-                push(`projeto/${name.replace(/\s/g, '')}`)
+                push(`projeto/${name.toLowerCase().replace(/\s/g, '-')}`)
               }}
             />
           </div>

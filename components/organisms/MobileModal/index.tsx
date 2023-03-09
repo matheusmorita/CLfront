@@ -31,6 +31,7 @@ interface ModalProps {
 function MobileModal({ projectSelectedProps, loteProps, valorTokenProps }: ModalProps) {
   const [projects, setProjects] = React.useState<any>([])
   const [projectSelected, setProjectSelected] = React.useState<any>(projectSelectedProps);
+  
 
   const [hiddenBuy, setHiddenBuy] = React.useState<boolean>(true);
   const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
@@ -87,6 +88,7 @@ function MobileModal({ projectSelectedProps, loteProps, valorTokenProps }: Modal
             <BuyProjectMobile
               setHiddenBuy={setHiddenBuy}
               hiddenBuy={hiddenBuy}
+              setConditionalBuy={setConditionalBuy}
               hiddenBuyCoinLivre={hiddenBuyCoinLivre}
               realValue={realValue}
               setHiddenBuyCoinLivre={setHiddenBuyCoinLivre}

@@ -106,7 +106,7 @@ const Projecard = ({
             cursor: acronimo ? 'pointer' : 'default',
           }
         }
-        href={acronimo ? `/projeto/${name?.replace(/\s/g, '')}` : '#'}
+        href={acronimo ? `/projeto/${name?.toLowerCase().replace(/\s/g, '-')}` : '#'}
         locale={locale}
       >
         {windowWidth >= 992 ? (
