@@ -44,6 +44,7 @@ const Projects = () => {
             key={index}
             showOrNot={
               (item.rentabilidade).toLowerCase() === 'sem rentabilidade' ? false : true }
+            project={item}
           />
           )
             })

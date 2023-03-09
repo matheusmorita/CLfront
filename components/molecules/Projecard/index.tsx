@@ -81,6 +81,9 @@ const Projecard = ({
   const setIdProjectLocalStorage = (idProject: string) => {
     return localStorage.setItem('idProject', idProject)
   }
+  const setNameProjectLocalStorage = (name: string) => {
+    return localStorage.setItem('nameProject', name)
+  }
 
   React.useEffect(() => {
     setWindowWidth(window.innerWidth)
@@ -92,7 +95,10 @@ const Projecard = ({
 
     <div className={Styles.projecard}>
       <Link
-        onClick={() => setIdProjectLocalStorage(idProject || '')}
+        onClick={() => {
+          setNameProjectLocalStorage(name || '')
+          setIdProjectLocalStorage(idProject || '')
+        }}
         style={
           {
             textDecoration: 'none',

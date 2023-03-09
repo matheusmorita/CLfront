@@ -2,11 +2,14 @@
 import '@/styles/globals.scss'
 import "bootstrap/dist/css/bootstrap.min.css"
 import type { AppProps } from 'next/app'
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { useRouter } from 'next/router'
-import UserContext from '@/context/UserContext'
 import { socket, WebSocketProvider } from '@/context/WebSocketContext'
 import { handleUserSession } from '@/utils/fetchDataAxios'
+
+//contexts
+import UserContext from '@/context/UserContext'
+import ProjectContext from '@/context/ProjectContext';
 
 import { appWithTranslation } from 'next-i18next';
 import nextI18NextConfig from '../next-i18next.config.js';
@@ -14,6 +17,7 @@ import nextI18NextConfig from '../next-i18next.config.js';
 function App({ Component, pageProps }: AppProps) {
   const [userInfo, setUserInfo] = useState()
   const [loggedIn, setLoggedIn] = useState(false)
+  const [projectSelectedContext, setProjectSelectedContext] = React.useState<any>();
 
   const router = useRouter()
   const { locale } = router;
@@ -26,15 +30,22 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <WebSocketProvider value={socket}>
-      <UserContext.Provider
+      <ProjectContext.Provider
         value={{
-          userInfo: [userInfo, setUserInfo],
-          loggedIn: [loggedIn, setLoggedIn],
-          locale
+          projectSelectedContext,
+          setProjectSelectedContext
         }}
       >
-        <Component {...pageProps} />
-      </UserContext.Provider>
+        <UserContext.Provider
+          value={{
+            userInfo: [userInfo, setUserInfo],
+            loggedIn: [loggedIn, setLoggedIn],
+            locale
+          }}
+        >
+          <Component {...pageProps} />
+        </UserContext.Provider>
+      </ProjectContext.Provider>
     </WebSocketProvider>
   )
 }

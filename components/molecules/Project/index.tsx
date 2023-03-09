@@ -11,6 +11,7 @@ import { formatDate } from '@/utils/formatDate';
 // languages
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
+import ProjectContext from '@/context/ProjectContext'
 
 type Props = {
   id: string,
@@ -23,10 +24,13 @@ type Props = {
   showOrNot?: boolean,
   idProject: string
   text: string;
+  project?: any;
 }
 
-const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idProject, text }: Props) => {
+const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idProject, text, project }: Props) => {
   const [projectDisabled, setProjectDisabled] = React.useState<boolean>(false)
+
+  const { setProjectSelectedContext } = React.useContext(ProjectContext);
 
   const router = useRouter();
 
@@ -115,6 +119,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
               onClick={() => {
                 localStorage.setItem('idProject', idProject)
                 // location.href = `projeto/${path}`
+                setProjectSelectedContext(project)
                 push(`projeto/${name.replace(/\s/g, '')}`)
               }}
             />

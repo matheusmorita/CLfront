@@ -39,6 +39,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 // languages
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
+import ProjectContext from '@/context/ProjectContext'
 
 const ProjectPage = () => {
   const router = useRouter()
@@ -51,6 +52,9 @@ const ProjectPage = () => {
 
   const [projectSelected, setProjectSelected] = React.useState<any>([]);
 
+  const { projectSelectedContext } = React.useContext(ProjectContext);
+
+
   const { t: translate } = useTranslation('project');
 
   const { locale } = router;
@@ -60,17 +64,18 @@ const ProjectPage = () => {
 
   const { loggedIn } = React.useContext(UserContext)
 
-  const getProjectSelected = () => {
-
-  }
-
-  // fetchDataIdAxios()
 
   React.useEffect(() => {
     if (!id) return
+    const nameToken = localStorage.getItem('nameToken')
 
-    const idProject = localStorage.getItem('idProject')
-    fetchDataIdAxios(idProject, setProject)
+    if (projectSelectedContext.nomeToken !== nameToken) {
+      const idProject = localStorage.getItem('idProject')
+      fetchDataIdAxios(idProject, setProject)
+    } else {
+      setProject(projectSelectedContext)
+    }
+
     const largura = window.innerWidth
     setLengthWindow(largura)
 
