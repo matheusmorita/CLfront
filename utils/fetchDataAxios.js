@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function fetchDataAxios(limit, setProjects) {
-  const response = await axios.get(`${process.env.PROJETO_URL}limit=${limit}`,
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_PROJETO_URL}limit=${limit}`,
     {
       headers: {
         "Content-Type": "application/json"
@@ -12,7 +12,7 @@ export async function fetchDataAxios(limit, setProjects) {
 }
 
 export async function fetchDataIdAxios(id, setProject) {
-  const response = await axios.get(`${process.env.PROJETO_ID_URL}${id}`, {
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_PROJETO_ID_URL}${id}`, {
     headers: {
       "Content-Type": "application/json"
     }
@@ -31,7 +31,7 @@ export async function fetchDataUserInfo(accessToken, setDataUser) {
     },
   };
 
-  const response = await fetch(process.env.GET_USER_INFO, config)
+  const response = await fetch(process.env.NEXT_PUBLIC_GET_USER_INFO, config)
 
   const data = await response.json()
   console.log(data)
@@ -47,7 +47,7 @@ export async function fetchUserHistoryinfo(accessToken, setHistoryUser, historyU
     },
   };
 
-  const response = await fetch(process.env.GET_TRANSACTIONS, config)
+  const response = await fetch(process.env.NEXT_PUBLIC_GET_TRANSACTIONS, config)
 
   const data = await response.json()
   console.log(data)
@@ -74,7 +74,7 @@ export async function fetchRequestPix(accessToken, quantity, setWaiting) {
     body: dataBody
   };
   setWaiting(true)
-  const response = await fetch(process.env.GERAR_PIX, config)
+  const response = await fetch(process.env.NEXT_PUBLIC_GERAR_PIX, config)
   const dataResponse = await response.json()
   setWaiting(false)
   return {
@@ -99,7 +99,7 @@ export async function requestBuyToken(accessToken, quantity, loteId, setWaiting,
   }
 
   setWaiting(true)
-  const response = await fetch(process.env.COMPRAR_TOKEN, config)
+  const response = await fetch(process.env.NEXT_PUBLIC_COMPRAR_TOKEN, config)
   setResponseCode(response.status)
   const dataResponse = await response.json()
   setWaiting(false)
@@ -127,7 +127,7 @@ export const handleUserRequest = async (setWaiting, setFeedback, setError, email
       body: data
     }
 
-    await fetch(process.env.REQUEST_LOGIN, config)
+    await fetch(process.env.NEXT_PUBLIC_REQUEST_LOGIN, config)
       .then(resp => {
         if (resp.ok) {
           setWaiting(false)
@@ -151,7 +151,7 @@ export const handleGetUserInfo = async (setSuccess, setPreloaded, router) => {
     }
   }
 
-  await fetch(process.env.GET_USER_CADASTRO, config)
+  await fetch(process.env.NEXT_PUBLIC_GET_USER_CADASTRO, config)
     .then(resp => {
       if (resp.ok) {
         setSuccess(true)
@@ -186,7 +186,7 @@ export const handleUserRequestRegister = async (setWaiting, setSuccess, name, cp
         body: data
       }
 
-      await fetch(process.env.CADASTRAR_USER, config)
+      await fetch(process.env.NEXT_PUBLIC_CADASTRAR_USER, config)
         .then(resp => {
           if (resp.ok) {
             setWaiting(false)
@@ -210,7 +210,7 @@ export const handleGetUserInfoCadastro = async (token, router) => {
     }
   }
 
-  await fetch(process.env.GET_USER_CADASTRO, config)
+  await fetch(process.env.NEXT_PUBLIC_GET_USER_CADASTRO, config)
     .then(resp => {
       if (resp.ok) {
         return
@@ -230,7 +230,7 @@ export const handleUserSession = async (setUserInfo, setLoggedIn, token, router)
         'Authorization': 'Bearer ' + token
       }
     };
-    const response = await fetch(process.env.GET_USER_INFO, config)
+    const response = await fetch(process.env.NEXT_PUBLIC_GET_USER_INFO, config)
 
     const data = await response.json()
 
@@ -265,4 +265,55 @@ export const uploadBackgroundPhoto = (photoFile, accessToken) => {
       "Authorization": `Bearer ${accessToken}`
     },
   });
+}
+
+
+export const handleAuthLogin = async (setUserInfo, setLoggedIn, token, router) => {
+  var data = JSON.stringify({
+    'tokenId': token
+  });
+
+  var config = {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: data
+  };
+
+  await fetch(process.env.NEXT_PUBLIC_AUTH_LOGIN, config)
+    .then(resp => resp.json())
+    .then(json => {
+      if (json.accessToken && json.refreshToken) {
+        localStorage.setItem('accessToken', json.accessToken)
+        localStorage.setItem('refreshToken', json.refreshToken)
+        setUserInfo(json.usuarioInfo)
+        setLoggedIn(true)
+      }
+    })
+    .then(() => {
+      handleGetUserCadastro(router)
+    })
+}
+
+const handleGetUserCadastro = async (router) => {
+  const token = localStorage.getItem('accessToken')
+
+  const config = {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      "Authorization": 'Bearer ' + token,
+    }
+  }
+
+  await fetch(process.env.NEXT_PUBLIC_GET_USER_CADASTRO, config)
+    .then(resp => {
+      if (resp.ok) {
+        router.push('/perfil')
+      } else {
+        router.push('/registrar-se')
+      }
+    })
 }

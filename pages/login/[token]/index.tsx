@@ -13,12 +13,10 @@ import Paragrah from '@/components/atoms/Paragraph'
 import { useRouter } from 'next/router'
 import UserContext from '@/context/UserContext'
 
-// env
-import { AUTH_LOGIN, GET_USER_CADASTRO } from '../../../.env'
-
 // languages
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
+import { handleAuthLogin } from '@/utils/fetchDataAxios'
 
 const TokenShare = () => {
   const router = useRouter()
@@ -32,59 +30,11 @@ const TokenShare = () => {
   const t = locale === 'en' ? en : pt;
 
 
-  const fetchData = async () => {
-    var data = JSON.stringify({
-      'tokenId': token
-    });
-
-    var config = {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: data
-    };
-
-    await fetch(AUTH_LOGIN, config)
-      .then(resp => resp.json())
-      .then(json => {
-        if (json.accessToken && json.refreshToken) {
-          localStorage.setItem('accessToken', json.accessToken)
-          localStorage.setItem('refreshToken', json.refreshToken)
-          setUserInfo(json.usuarioInfo)
-          setLoggedIn(true)
-        }
-      })
-      .then(() => {
-        handleGetUserInfo()
-      })
-  }
-
-  const handleGetUserInfo = async () => {
-    const token = localStorage.getItem('accessToken')
-
-    const config = {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        "Authorization": 'Bearer ' + token,
-      }
-    }
-
-    await fetch(GET_USER_CADASTRO, config)
-      .then(resp => {
-        if (resp.ok) {
-          router.push('/perfil')
-        } else {
-          router.push('/registrar-se')
-        }
-      })
-  }
+  
 
   React.useEffect(() => {
     if (!token && localStorage.getItem('accessToken')) return
-    fetchData()
+    handleAuthLogin(setUserInfo, setLoggedIn, token, router)
   }, [router])
 
   return (
