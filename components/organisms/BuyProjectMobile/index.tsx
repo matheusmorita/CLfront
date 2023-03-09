@@ -242,7 +242,7 @@ function BuyProjectMobile({ setRealValue,
                     hidden={false}
                     type='submit'
                     id="generateQRButton"
-                    label="bumbum tamtam"
+                    label={t.generateQrCode}
                     onClick={async (e: React.FormEvent<EventTarget>) => {
                       e.preventDefault()
                       const { itemId, textContent } = await fetchRequestPix(accessTokenState, realValue, setWaiting)
