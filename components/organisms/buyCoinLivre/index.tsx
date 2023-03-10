@@ -93,7 +93,9 @@ function BuyCoinLivre({ conditionalBuy, balance }: buyCoinLivreInterface) {
       )}
       <div className={Styles.buttonDivPayment}>
         <div style={{ width: '100%' }}>
+          <label className={Styles.labelInputPayPix} htmlFor='pixCode'>
           <input
+            id='pixCode'
             onClick={(e: any) => {
               const inputQrCode = e.target;
               inputQrCode.select();
@@ -105,8 +107,10 @@ function BuyCoinLivre({ conditionalBuy, balance }: buyCoinLivreInterface) {
             className={Styles.inputValue}
             value={QRcodeUrl}
             readOnly={true}
-            style={{cursor: 'pointer'}}
+            style={{cursor: 'copy'}}
           />
+          <span className={Styles.spanTextLabel}>Clique para copiar o código</span>
+          </label>
         </div>
         <Button
           hidden={false}

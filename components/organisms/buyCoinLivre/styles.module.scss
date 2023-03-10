@@ -2,7 +2,7 @@
 
 .divBuy {
     width: 100%;
-    height: 100%;
+    height: 700px;
     position: absolute;
     background-color: $gray;
     display: flex;
@@ -27,6 +27,17 @@
         background-color: $clay;
         color: $primary;
     }
+}
+
+.labelInputPayPix {
+    display: flex;
+}
+
+.spanTextLabel {
+    position: absolute;
+    color: $primary;
+    margin: .5% 1%;
+    font-size: .9em;
 }
 
 .labelValue {

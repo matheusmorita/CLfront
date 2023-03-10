@@ -196,6 +196,10 @@
   justify-content: space-between;
   height: 75vh;
   overflow-y: auto;
+
+  @media (max-width: 389px) {
+  height: 70vh;
+  }
 }
 
 

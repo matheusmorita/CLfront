@@ -105,7 +105,7 @@ function BuyProject({
               <h4 className={Styles.titleEnough}>Fundos insuficientes</h4>
               <p className={Styles.descriptionText}>
                 Para comprar a quantidade desejada de Tokens deste projeto, você precisa antes
-                comprar os <b>Tokens Coinlivre#CNLT</b>, o que pode ser feito abaixo, via PIX.
+                comprar os <b style={{color: '#00EE8D'}}>Tokens Coinlivre#CNLT</b>, o que pode ser feito abaixo, via PIX.
               </p>
               <Image
                 alt='Logo image'
@@ -161,7 +161,7 @@ function BuyProject({
           ) : (
             <>
               <p className={Styles.descriptionText}>
-                Ao comprar <b>Tokens Coinlivre#CNLT</b>, você receberá o equivalente
+                Ao comprar <b style={{color: '#00EE8D'}}>Tokens Coinlivre#CNLT</b>, você receberá o equivalente
                 em Tokens da quantia escolhida, deduzida da taxa da
                 CoinLivre de 1,5% de acordo com os seus benefícios
               </p>
@@ -285,24 +285,6 @@ function BuyProject({
                   />
                 )}
               </div>
-              {/* <Button
-                hidden={false}
-                type='submit'
-                id="generateQRButton"
-                label="Clique para gerar QR code"
-                onClick={async (e: React.FormEvent<EventTarget>) => {
-                  e.preventDefault()
-                  const { itemId, textContent } = await fetchRequestPix(accessTokenState, realValue, setWaiting)
-                  sessionStorage.setItem('textContent', textContent)
-                  sessionStorage.setItem('itemId', itemId)
-                  setHiddenBuy(true)
-                  setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
-                }}
-                disabled={!checkboxCheck || (realValue === '')}
-                text={t.generateQrCode}
-                size={25}
-                className={Styles.divButtons__QRButton}
-              /> */}
             </>
           )}
         </section>
@@ -396,7 +378,7 @@ function BuyProject({
                 </p>
               ) : (
                 <p className={Styles.descriptionText}>
-                  Ao comprar <b>Tokens Coinlivre#CNLT</b>, você receberá o equivalente
+                  Ao comprar <b style={{color: '#00EE8D'}}>Tokens Coinlivre#CNLT</b>, você receberá o equivalente
                   em Tokens da quantia escolhida, deduzida da taxa da
                   CoinLivre de 1,5% de acordo com os seus benefícios
                 </p>

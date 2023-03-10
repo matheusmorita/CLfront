@@ -23,7 +23,7 @@ interface buyCoinLivreInterface {
   balance: number;
 }
 
-function BuyCoinLivreMobile({ conditionalBuy,balance }: buyCoinLivreInterface) {
+function BuyCoinLivreMobile({ conditionalBuy, balance }: buyCoinLivreInterface) {
   const [buyConfirmed, setBuyConfirmed] = React.useState<boolean>(false)
   const [QRcodeUrl, SetQRcodeUrl] = React.useState<any>('')
 
@@ -99,20 +99,24 @@ function BuyCoinLivreMobile({ conditionalBuy,balance }: buyCoinLivreInterface) {
 
       <section className={Styles.qrConfirmButton}>
         <div style={{ width: '100%' }}>
-          <input
-            onClick={(e: any) => {
-              const inputQrCode = e.target;
-              inputQrCode.select();
-              inputQrCode.setSelectionRange(0, 99999)
-              document.execCommand("copy");
-              alert('Código copiado')
-            }}
-            type='text'
-            className={Styles.inputValue}
-            value={QRcodeUrl}
-            readOnly={true}
-            style={{ cursor: 'pointer' }}
-          />
+          <label className={Styles.labelInputPayPix} htmlFor='pixCode'>
+            <input
+              id='pixCode'
+              onClick={(e: any) => {
+                const inputQrCode = e.target;
+                inputQrCode.select();
+                inputQrCode.setSelectionRange(0, 99999)
+                document.execCommand("copy");
+                alert('Código copiado')
+              }}
+              type='text'
+              className={Styles.inputValue}
+              value={QRcodeUrl}
+              readOnly={true}
+              style={{ cursor: 'copy' }}
+            />
+            <span className={Styles.spanTextLabel}>Clique para copiar o código</span>
+          </label>
         </div>
         <Button
           hidden={false}

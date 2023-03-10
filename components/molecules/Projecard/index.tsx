@@ -103,10 +103,10 @@ const Projecard = ({
           {
             textDecoration: 'none',
             background: 'red',
-            cursor: acronimo ? 'pointer' : 'default',
+            cursor: acronimo !== 'CNLT' ? 'pointer' : 'default',
           }
         }
-        href={acronimo ? `/projeto/${name?.toLowerCase().replace(/\s/g, '-')}` : '#'}
+        href={acronimo !== 'CNLT' ? `/projeto/${name?.toLowerCase().replace(/\s/g, '-')}` : ''}
         locale={locale}
       >
         {windowWidth >= 992 ? (

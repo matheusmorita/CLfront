@@ -33,6 +33,17 @@
     }
 }
 
+.labelInputPayPix {
+    display: flex;
+}
+
+.spanTextLabel {
+    position: absolute;
+    color: $primary;
+    margin: .5% 1%;
+    font-size: .8em;
+}
+
 .qrConfirmButton {
     width: 90%;
     margin: 10px;
