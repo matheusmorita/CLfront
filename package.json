@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "analyze": "source-map-explorer .next/static/**/*.js",
-    "build:analyze": "npm run build && npm run analyze"
+    "build:analyze": "npm run build && npm run analyze",
+    "build:start": "next build && next start"
   },
   "browser": {
     "fs": false,
