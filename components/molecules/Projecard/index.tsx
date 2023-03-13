@@ -19,6 +19,7 @@ import { useRouter } from 'next/router';
 
 import logoImage from '@/assets/img/logo.png';
 import Link from 'next/link';
+import Loader from '@/components/atoms/Loader';
 
 
 type Props = {
@@ -53,9 +54,10 @@ const Projecard = ({
   showUnitaryValue
 }: Props) => {
   const [windowWidth, setWindowWidth] = React.useState<number>(0)
+  const [waiting, setWaiting] = React.useState<boolean>(false)
 
   const router = useRouter();
-  const { locale } = router;
+  const { locale, asPath } = router;
   const t = locale === 'en' ? en : pt;
 
   const { t: translate } = useTranslation('project');
@@ -84,6 +86,9 @@ const Projecard = ({
   const setNameProjectLocalStorage = (name: string) => {
     return localStorage.setItem('nameProject', name)
   }
+  const savePathProfile = () => {
+    return sessionStorage.setItem('beforePath', asPath)
+  }
 
   React.useEffect(() => {
     setWindowWidth(window.innerWidth)
@@ -98,6 +103,10 @@ const Projecard = ({
         onClick={() => {
           setNameProjectLocalStorage(name || '')
           setIdProjectLocalStorage(idProject || '')
+          savePathProfile()
+          if (acronimo !== 'CNLT') {
+            setWaiting(!waiting)
+          }
         }}
         style={
           {
@@ -109,6 +118,13 @@ const Projecard = ({
         href={acronimo !== 'CNLT' ? `/projeto/${name?.toLowerCase().replace(/\s/g, '-')}` : ''}
         locale={locale}
       >
+        <Loader style={{
+          position: 'absolute',
+          zIndex: '2000',
+          width: '50px',
+          height: '50px',
+          left: windowWidth >= 992 ? '5%' : ''
+        }} absolute={false} active={waiting} />
         {windowWidth >= 992 ? (
           <div
             style={{
@@ -129,12 +145,12 @@ const Projecard = ({
           <div
             style={{
               background: (acronimo === 'CNLT') || acronimo === null ? (
-                `linear-gradient(to bottom, transparent, #000), url(${logoImage})` 
+                `linear-gradient(to bottom, transparent, #000), url(${logoImage})`
               ) : `linear-gradient(to bottom, transparent, #000), url(${src})`,
               position: 'absolute',
               backgroundSize: 'cover',
               width: (acronimo !== 'CNLT') ? '100%' : '25%',
-              height: (acronimo !== 'CNLT') ? '100px' : '110px',
+              height: (acronimo !== 'CNLT') ? '90%' : '150px',
               left: (acronimo !== 'CNLT') ? '0' : '40%',
               top: '0'
             }}
@@ -166,8 +182,8 @@ const Projecard = ({
           <h1 className={Styles.data__title}>
             {t.quantity}
           </h1>
-          <span style={{color: Number(montante) < 0 ? 'red' : ''}} className={Styles.data__value}>
-            {convertMontante(montante)}<span style={{color: Number(montante) < 0 ? 'red' : ''}}>/unds</span>
+          <span style={{ color: Number(montante) < 0 ? 'red' : '' }} className={Styles.data__value}>
+            {convertMontante(montante)}<span style={{ color: Number(montante) < 0 ? 'red' : '' }}>/unds</span>
           </span>
         </div>
         {showUnitaryValue && (

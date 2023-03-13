@@ -3,10 +3,11 @@ import Styles from './styles.module.scss'
 
 type Props = {
   active: boolean,
-  absolute: boolean
+  absolute: boolean,
+  style?: React.CSSProperties
 }
 
-const Loader = ({ active = false, absolute = true }: Props) => {
+const Loader = ({ active = false, absolute = true, style }: Props) => {
   const handlePosition = () => {
     return absolute ? Styles.absolute : null
   }
@@ -18,7 +19,7 @@ const Loader = ({ active = false, absolute = true }: Props) => {
       className={Styles.holder}
     >
       {active && (
-        <div className={`${Styles.loader} ${handlePosition()}`}></div>
+        <div style={style} className={`${Styles.loader} ${handlePosition()}`}></div>
       )}
     </div>
   )

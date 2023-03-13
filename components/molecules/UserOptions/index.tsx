@@ -42,7 +42,7 @@ const UserOptions = ({ name, contrast = false, profileImageSrc }: Props) => {
       className={`${Styles.user} ${handleWhiteTheme()}`}
       onClick={() => { handleMenuToggle() }}
     >
-        <p className={Styles.user__phrase}>{t.hello} {name} capitanio</p>
+        <p className={Styles.user__phrase}>{t.hello} {name}</p>
       <Image
         alt='Profile Picture'
         src={profileImageSrc ? profileImageSrc : defaultImage}

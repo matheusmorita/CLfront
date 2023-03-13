@@ -66,8 +66,6 @@ const Perfil = () => {
     { title: 'Total', value: '3.99663431' }
   ]
 
-
-
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
     setAccessToken(accessToken)

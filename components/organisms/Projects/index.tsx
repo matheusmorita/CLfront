@@ -9,15 +9,16 @@ import { fetchDataAxios } from '@/utils/fetchDataAxios';
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 import { useRouter } from 'next/router';
+import ProjectContext from '@/context/ProjectContext';
 
 const Projects = () => {
   const [projects, setProjects] = React.useState<any>([])
 
   const router = useRouter();
-
   const { locale } = router;
-
   const t = locale === 'en' ? en : pt
+
+  const { setProjectSelectedContext } = React.useContext(ProjectContext);
 
   React.useEffect(() => {
     fetchDataAxios("4", setProjects)

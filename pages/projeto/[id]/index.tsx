@@ -56,9 +56,7 @@ const ProjectPage = () => {
 
 
   const { t: translate } = useTranslation('project');
-
   const { locale } = router;
-
   const t = locale === 'en' ? en : pt
 
 
@@ -67,23 +65,15 @@ const ProjectPage = () => {
 
   React.useEffect(() => {
     if (!id) return
-    const nameProject = localStorage.getItem('nameProject')
-
-    console.log(projectSelectedContext)
-
-    if (nameProject || (projectSelectedContext.nomeToken !== nameProject)) {
-      const idProject = localStorage.getItem('idProject')
-      fetchDataIdAxios(idProject, setProject)
-    } else {
-      setProject(projectSelectedContext)
-    }
+    const idProject = localStorage.getItem('idProject')
+    fetchDataIdAxios(idProject, setProject)
 
     const largura = window.innerWidth
     setLengthWindow(largura)
 
     // const beforePath = localStorage.getItem('beforePath')
     // router.push(`${beforePath}`)
-  }, [router])
+  }, [])
 
   if (project) {
     return (
@@ -320,7 +310,8 @@ const ProjectPage = () => {
                   {project.lotes.length > 0 ? (
                     <DataShow
                       title={t.amountInvest}
-                      value={`${(Number(project.lotes[project.lotes.length - 1].captacao) * 100)
+                      value={`${Number((parseFloat(project.lotes[project.lotes.length - 1].captacao) * 100)
+                        .toFixed(2))
                         .toLocaleString('pt-BR', { minimumFractionDigits: 2 })}%` || '0%'}
                       highlight={true}
                       badge={{ type: "success", message: t.emphasis }}

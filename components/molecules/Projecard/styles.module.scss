@@ -24,31 +24,9 @@
     }
 
     &__picture {
-        // background: linear-gradient(to right, transparent, #000),
-        //     url(../../../assets/img/BG2.webp);
-        // background-size: cover;
-        // position: absolute;
-        // width: 20%;
-        // height: 100%;
-        // left: 0;
-        // top: 0;
         background: linear-gradient(to right, transparent, #000),
             url(../../../assets/img/logo.png);
         background-size: cover;
-        // position: absolute;
-        // width: 25%;
-        // height: 100%;
-        // left: 0;
-        // top: 0;
-
-        // @media (max-width: 992px) {
-        //     background: linear-gradient(to bottom, transparent, #000),
-        //         url(../../../assets/img/logo.png);
-        //     background-size: cover;
-        //     position: absolute;
-        //     height: 100px;
-        //     width: 100%;
-        // }
     }
 
     &__info {
@@ -62,11 +40,13 @@
     }
 
     &__data {
+        position: relative;
         flex: 1;
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-left: 5rem;
+        z-index: 2;
 
         @media (max-width: 992px) {
             width: 100%;

@@ -12,6 +12,7 @@ import { formatDate } from '@/utils/formatDate';
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 import ProjectContext from '@/context/ProjectContext'
+import Loader from '@/components/atoms/Loader'
 
 type Props = {
   id: string,
@@ -29,22 +30,17 @@ type Props = {
 
 const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idProject, text, project }: Props) => {
   const [projectDisabled, setProjectDisabled] = React.useState<boolean>(false)
+  const [waiting, setWaiting] = React.useState<boolean>(false)
 
   const { setProjectSelectedContext } = React.useContext(ProjectContext);
 
   const router = useRouter();
-
-  const removeSpaceString = (string: string) => {
-    return string.replace(/\s/g, '')
-  }
-
-  const { locale, push } = router;
-
+  const { locale } = router;
   const t = locale === 'en' ? en : pt
 
   React.useEffect(() => {
-  // const beforePath = localStorage.getItem('beforePath')
-  // router.push(`${beforePath}`)
+    // const beforePath = localStorage.getItem('beforePath')
+    // router.push(`${beforePath}`)
   })
 
   const callRentText = () => {
@@ -80,6 +76,8 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
             className='w-100'
           />
           <div style={{ padding: '15px' }}>
+          <Loader style={{position: 'absolute'}} absolute={false} active={waiting} />
+            
             <h1
               id={`project-title-${id}`}
               className={Styles.project__title}
@@ -119,8 +117,9 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
               onClick={() => {
                 localStorage.setItem('idProject', idProject)
                 // location.href = `projeto/${path}`
-                setProjectSelectedContext(project)
-                push(`projeto/${name.toLowerCase().replace(/\s/g, '-')}`)
+                router.push(`projeto/${name.toLowerCase().replace(/\s/g, '-')}`)
+                setWaiting(!waiting)
+                // setProjectSelectedContext(project)
               }}
             />
           </div>
