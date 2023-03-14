@@ -41,6 +41,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
   React.useEffect(() => {
     // const beforePath = localStorage.getItem('beforePath')
     // router.push(`${beforePath}`)
+    console.log('acronimo' + id)
   })
 
   const callRentText = () => {
@@ -94,7 +95,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
               {t.launchDate}<b> {formatDate(dataLanc) || t.commingSoon}</b> <br />
               {t.projectOwner} <b> {emissor}</b> <br />
               {showOrNot ? (
-                <span className={Styles.project__details}>
+                <span style={{gap: '2%', display: 'flex'}} className={Styles.project__details}>
                   {t.profitability}
                   <b>{callRentText()}</b>
                 </span>
@@ -109,7 +110,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
           <div>
             <Button
               id={`project-cta-${id}`}
-              text={t.seeMore}
+              text={(id.includes('CLDG') || id.includes('CLMT')) ? t.commingSoon : t.seeMore}
               label="Clique e veja mais sobre o projeto"
               className={`w-100 mb-3 ${id.includes('CLDG') || id.includes('CLMT') ? Styles.project__button : ''}`}
               hidden={false}
