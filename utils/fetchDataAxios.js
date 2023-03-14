@@ -247,7 +247,7 @@ export const uploadProfilePhoto = (photoFile, accessToken) => {
   let formData = new FormData();
   formData.append("file", photoFile);
 
-  axios.post('https://coinlivre.blocklize.io/usuario/upload-foto/', formData, {
+  axios.post(process.env.NEXT_PUBLIC_UPLOAD_PROFILE_PHOTO, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
       "Authorization": `Bearer ${accessToken}`
@@ -259,7 +259,7 @@ export const uploadBackgroundPhoto = (photoFile, accessToken) => {
   let formData = new FormData();
   formData.append("file", photoFile);
 
-  axios.post('https://coinlivre.blocklize.io/usuario/upload-foto-background', formData, {
+  axios.post(process.env.NEXT_PUBLIC_UPLOAD_BACKGROUND_PHOTO, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
       "Authorization": `Bearer ${accessToken}`
