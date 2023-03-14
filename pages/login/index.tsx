@@ -111,10 +111,10 @@ const Login = () => {
                   validator={captureEmail}
                   error={error}
                 />
-                <p className={Styles.form__desc}>
+                {/* <p className={Styles.form__desc}>
                   {t.noLoginPlataform} 
                   <a href="mailto:contato@coinlivre.com.br" >{t.clickHere}</a>
-                </p>
+                </p> */}
                 <Button
                   id="submit-button"
                   text={t.login}

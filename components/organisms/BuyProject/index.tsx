@@ -68,6 +68,7 @@ function BuyProject({
 
   const [buyCoinlivre, setByCoinlivre] = React.useState<boolean>(false)
 
+
   const checkSaldo = (balance: string, valorToken: string, realValue: string): boolean => {
     const balanceNumber = parseFloat(balance.replace(',', '.'))
     const multiplyValues = Number(realValue) * Number(valorToken)
@@ -75,6 +76,17 @@ function BuyProject({
       return true
     }
     return false
+  }
+
+
+  const calcCoinlivreTax = (realValue: string) => {
+    const taxaCoinlivre = 1.5/100;
+
+    if (realValue.includes(',')) {
+      realValue.replace(',', '.')
+    }
+    const result = Number(realValue) - taxaCoinlivre*Number(realValue)
+    return Number(result.toFixed(2)).toLocaleString('pt-BR', { minimumFractionDigits: 2 })
   }
 
   const calcValueResponse = (realValue: string, valorToken: string) => {
@@ -218,7 +230,7 @@ function BuyProject({
                     placeholder='CNLT 0,00'
                     className={Styles.inputValue}
                     disabled={true}
-                    value={conditionalBuy === 'CNLT-0' ? realValue : calcValueResponse(realValue, valorToken)}
+                    value={conditionalBuy === 'CNLT-0' ? calcCoinlivreTax(realValue) : calcValueResponse(realValue, valorToken)}
                   />
                 </div>
               )}
@@ -421,7 +433,7 @@ function BuyProject({
                   placeholder='CNLT 0,00'
                   className={Styles.inputValue}
                   disabled={true}
-                  value={conditionalBuy === 'CNLT-0' ? realValue : calcValueResponse(realValue, valorToken)}
+                  value={conditionalBuy === 'CNLT-0' ? calcCoinlivreTax(realValue) : calcValueResponse(realValue, valorToken)}
                 />
               </div>
               {conditionalBuy !== 'CNLT-0' ? (
