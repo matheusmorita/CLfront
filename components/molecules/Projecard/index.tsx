@@ -199,7 +199,7 @@ const Projecard = ({
           )
         )}
 
-        {tokenBalance && (
+        {(tokenBalance || tokenBalance == 0) && (
           <div className={Styles.data}>
             <h1 className={Styles.data__title}>
               {t.balance}
