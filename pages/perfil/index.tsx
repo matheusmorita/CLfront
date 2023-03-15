@@ -166,7 +166,7 @@ const Perfil = () => {
                   )}
                 </div>
                 <div className={Styles.profile__info}>
-                  <span><b>{(dataUser?.nome).split(' ')[0]}</b></span>
+                  <span><b>{(dataUser?.nome)?.split(' ')[0]}</b></span>
                   {/* <span className={Styles.tiny}>@username</span> */}
                 </div>
               </div>
