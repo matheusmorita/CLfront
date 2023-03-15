@@ -247,7 +247,7 @@ const Perfil = () => {
                         src={item.logoProjeto}
                         date={item.criadoEm}
                         valorUnitario={item.valorUnitario}
-                        tokenBalance={0}
+                        tokenBalance={item.tokenBalance}
                         idProject={item.projetoId}
                       />
                     ))}
