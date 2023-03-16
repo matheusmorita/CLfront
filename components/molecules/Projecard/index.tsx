@@ -62,7 +62,7 @@ const Projecard = ({
 
   const { t: translate } = useTranslation('project');
 
-  const convertMontante = (montanteValue: string | undefined) => {
+  const convertMontante = (montanteValue: string) => {
     const montanteValueConverted = Number(montanteValue) / (10 ** 18)
     const montanteToFixed = montanteValueConverted.toFixed(2)
 
@@ -133,9 +133,9 @@ const Projecard = ({
               ) : `linear-gradient(to right, transparent, #000), url(${src})`,
               position: 'absolute',
               backgroundSize: acronimo ? '' : 'cover',
-              width: (acronimo === 'CNLT') ? '15%' : '20%',
+              width: (acronimo === 'CNLT') ? '10%' : '20%',
               height: '100%',
-              left: '0',
+              left: (acronimo === 'CNLT') ? '2%' : '0',
               top: '0'
             }}
             id={idProject}
@@ -183,7 +183,7 @@ const Projecard = ({
             {t.quantity}
           </h1>
           <span style={{ color: Number(montante) < 0 ? 'red' : '' }} className={Styles.data__value}>
-            {convertMontante(montante)}<span style={{ color: Number(montante) < 0 ? 'red' : '' }}>/unds</span>
+            {convertMontante(montante!)}<span style={{ color: Number(montante) < 0 ? 'red' : '' }}>/unds</span>
           </span>
         </div>
         {showUnitaryValue && (

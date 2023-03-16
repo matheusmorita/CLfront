@@ -209,5 +209,7 @@
   "confirmedPaymentQrCode":
     "Successful payment!",
   "waitingPayQrCode":
-    "Waiting for payment confirmation..."
+    "Waiting for payment confirmation...",
+  "nothingToSee":
+    "There's nothing to see here."
 }

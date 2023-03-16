@@ -58,6 +58,11 @@ const UserOptions = ({ name, contrast = false, profileImageSrc }: Props) => {
               {t.profile}
             </li>
           </Link>
+          {/* <Link href="/projects" locale={locale}>
+            <li className={Styles.user__item}>
+              projetos
+            </li>
+          </Link> */}
           <Link href='/logout' locale={locale}>
             <li className={Styles.user__item}>
               {t.disconnect}
