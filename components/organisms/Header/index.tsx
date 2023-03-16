@@ -17,6 +17,8 @@ import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 
 import { fetchDataUserInfo } from '@/utils/fetchDataAxios'
+import DivisionBar from '@/components/atoms/Division'
+import HamburgerMenu from '../HamburgerMenu'
 
 type Props = {
   hideLinks: boolean
@@ -27,6 +29,8 @@ const Header = ({ hideLinks }: Props) => {
   const [responsive, setResponsive] = React.useState<boolean>(false)
   const [showLanguages, setShowLanguages] = React.useState<boolean>(false)
   const [windowWidth, setWindowWidth] = React.useState<number>(0)
+
+  const [selectedLanguage, setSelectedLanguage] = React.useState('en');
 
   const [dataUser, setDataUser] = React.useState<any>();
 
@@ -65,6 +69,12 @@ const Header = ({ hideLinks }: Props) => {
     return isDisabled ? Styles.disabled : Styles.link
   }
 
+  const handleLanguageChange = (e: any) => {
+    const lang = e.target.value;
+    router.push(router.pathname, router.asPath, { locale: lang });
+    setSelectedLanguage(e.target.value);
+  };
+
   React.useEffect(() => {
     window.addEventListener("scroll", handleHeaderChange)
     window.addEventListener("resize", handleWindowChange)
@@ -89,38 +99,54 @@ const Header = ({ hideLinks }: Props) => {
           white={!whiteTheme}
           responsive={responsive}
         />
-        {!logged && (
-          <div className="d-flex align-items-center justify-content-center">
-            {
-              routes &&
-              !hideLinks &&
-              routes.map((item: any, index: number) => (
-                <Link
-                  href={item.path}
-                  key={index}
-                  className={`${handleActiveLink(item.path)} ${handleLinkDisabled(item.disabled)}`}
-                >
-                  {item.name}
-                </Link>
-              ))
-            }
-            <Button
-              id="header-cta"
-              text={t.registerOrLogin}
-              label="Clique e cadastre-se"
-              // margin='3%'
-              className={`ms-3 ${windowWidth <= 992 ? 'me-5' : ''}`}
-              hidden={false}
-              disabled={false}
-              onClick={() => {
-                push('/login')
-              }}
+        <div style={{display: 'flex', alignItems: 'center', gap: logged ? '10%' : ''}}>
+          {dataUser?.nome && (
+            <UserOptions
+              name={dataUser.nome}
+              contrast={whiteTheme}
+              profileImageSrc={dataUser?.imgPerfilUrl}
             />
-          </div>
-        )}
-
-        {logged && (
-          <div className={Styles.menuItemsStyle}>
+          )}
+          {!logged && (
+            <div className="d-flex align-items-center justify-content-center">
+              <Button
+                margin='0 5%'
+                width='220px'
+                id="header-cta"
+                text={t.registerOrLogin}
+                label="Clique e cadastre-se"
+                // margin='3%'
+                className={`ms-3 ${windowWidth <= 992 ? 'me-5' : ''}`}
+                hidden={false}
+                disabled={false}
+                onClick={() => {
+                  push('/login')
+                }}
+              />
+            </div>
+          )}
+          <HamburgerMenu />
+          {/* {
+              routes &&
+              !hideLinks &&
+              routes.map((item: any, index: number) => (
+                <Link
+                  href={item.path}
+                  key={index}
+                  className={`${handleActiveLink(item.path)} ${handleLinkDisabled(item.disabled)}`}
+                >
+                  {item.name}
+                </Link>
+              ))
+            } */}
+        </div>
+        {/* <div style={{ display: 'flex', margin: '0 3%', gap: logged ? '20%' : '', justifyContent: 'center' }}>
+          
+          <div style={{
+            display: 'flex',
+            // width: '100%',
+            alignItems: 'center',
+          }}>
             {
               routes &&
               !hideLinks &&
@@ -135,43 +161,55 @@ const Header = ({ hideLinks }: Props) => {
               ))
             }
           </div>
-        )}
-        <section className={Styles.sectionLanguage}>
-          <button className={Styles.buttonIcon} onClick={() => setShowLanguages(!showLanguages)}>
-            <LanguageIcon width={250} height={250} className={Styles.languageIcon} />
-          </button>
-          <div
-            style={{
-              visibility: showLanguages ? 'visible' : 'hidden',
-              opacity: showLanguages ? '1' : '0',
-            }}
-            className={Styles.linksDiv}
-          >
-            {locales?.map(l => {
-              return (
-                <div className={Styles.itemLanguage} key={l}>
-                  <Link
-                    className={Styles.linkLanguageStyle}
-                    href={asPath}
-                    key={l}
-                    locale={l}
-                  >
-                    <b className={Styles.languageItem}>
-                      {l.toLocaleUpperCase()}
-                    </b>
-                  </Link>
-                </div>
-              )
-            })}
-          </div>
-        </section>
-        {dataUser?.nome && (
-          <UserOptions
-            name={dataUser.nome}
-            contrast={whiteTheme}
-            profileImageSrc={dataUser?.imgPerfilUrl}
-          />
-        )}
+          {!logged && (
+            <div className="d-flex align-items-center justify-content-center">
+              <Button
+                id="header-cta"
+                text={t.registerOrLogin}
+                label="Clique e cadastre-se"
+                // margin='3%'
+                className={`ms-3 ${windowWidth <= 992 ? 'me-5' : ''}`}
+                hidden={false}
+                disabled={false}
+                onClick={() => {
+                  push('/login')
+                }}
+              />
+            </div>
+          )}
+
+          <section className={Styles.sectionLanguage}>
+            <button className={Styles.buttonIcon} onClick={() => setShowLanguages(!showLanguages)}>
+              <LanguageIcon width={250} height={250} className={Styles.languageIcon} />
+            </button>
+            <div
+              style={{
+                visibility: showLanguages ? 'visible' : 'hidden',
+                opacity: showLanguages ? '1' : '0',
+              }}
+              className={Styles.linksDiv}
+            >
+              {locales?.map(l => {
+                return (
+                  <div className={Styles.itemLanguage} key={l}>
+                    <Link
+                      className={Styles.linkLanguageStyle}
+                      href={asPath}
+                      key={l}
+                      locale={l}
+                    >
+                      <b className={Styles.languageItem}>
+                        {l.toLocaleUpperCase()}
+                      </b>
+                    </Link>
+                  </div>
+                )
+              })}
+            </div>
+          </section> */}
+
+
+        {/* </div> */}
       </div>
     </nav>
   )

@@ -13,6 +13,7 @@ import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 import ProjectContext from '@/context/ProjectContext'
 import Loader from '@/components/atoms/Loader'
+import Link from 'next/link'
 
 type Props = {
   id: string,
@@ -77,8 +78,8 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
             className='w-100'
           />
           <div style={{ padding: '15px' }}>
-          <Loader style={{position: 'absolute'}} absolute={false} active={waiting} />
-            
+            <Loader style={{ position: 'absolute' }} absolute={false} active={waiting} />
+
             <h1
               id={`project-title-${id}`}
               className={Styles.project__title}
@@ -95,7 +96,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
               {t.launchDate}<b> {formatDate(dataLanc) || t.commingSoon}</b> <br />
               {t.projectOwner} <b> {emissor}</b> <br />
               {showOrNot ? (
-                <span style={{gap: '2%', display: 'flex'}} className={Styles.project__details}>
+                <span style={{ gap: '2%', display: 'flex' }} className={Styles.project__details}>
                   {t.profitability}
                   <b>{callRentText()}</b>
                 </span>
@@ -108,21 +109,27 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
           className={Styles.project__info}
         >
           <div>
-            <Button
-              id={`project-cta-${id}`}
-              text={(id.includes('CLDG') || id.includes('CLMT')) ? t.commingSoon : t.seeMore}
-              label="Clique e veja mais sobre o projeto"
-              className={`w-100 mb-3 ${id.includes('CLDG') || id.includes('CLMT') ? Styles.project__button : ''}`}
-              hidden={false}
-              disabled={id.includes('CLDG') || id.includes('CLMT')}
-              onClick={() => {
-                localStorage.setItem('idProject', idProject)
-                // location.href = `projeto/${path}`
-                router.push(`projeto/${name.toLowerCase().replace(/\s/g, '-')}`)
-                setWaiting(!waiting)
-                // setProjectSelectedContext(project)
-              }}
-            />
+            <Link
+              key={id}
+              href={`projeto/${name.toLowerCase().replace(/\s/g, '-')}`}
+              locale={locale}
+            >
+              <Button
+                id={`project-cta-${id}`}
+                text={(id.includes('CLDG') || id.includes('CLMT')) ? t.commingSoon : t.seeMore}
+                label="Clique e veja mais sobre o projeto"
+                className={`w-100 mb-3 ${id.includes('CLDG') || id.includes('CLMT') ? Styles.project__button : ''}`}
+                hidden={false}
+                disabled={id.includes('CLDG') || id.includes('CLMT')}
+                onClick={() => {
+                  localStorage.setItem('idProject', idProject)
+                  // location.href = `projeto/${path}`
+                  // router.push(`projeto/${name.toLowerCase().replace(/\s/g, '-')}`)
+                  setWaiting(!waiting)
+                  // setProjectSelectedContext(project)
+                }}
+              />
+            </Link>
           </div>
         </div>
       </div>

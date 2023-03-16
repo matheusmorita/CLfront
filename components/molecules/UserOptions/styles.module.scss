@@ -22,6 +22,9 @@
     &__phrase {
         color: $white;
         margin-bottom: 0;
+        display: flex;
+        width: 110px;
+        flex-wrap: nowrap;
     }
 
     &__picture {

@@ -37,17 +37,20 @@
     }
 }
 
+
+
 .sectionLanguage {
     position: absolute;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    top: 25%;
-    right: 2%;
     transition: .5s;
 
     @media (max-width: 992px) {
-        top: 25%
+        right: 30%;
+    }
+
+    @media (max-width: 600px) {
+        right: 50%;
     }
 
     // @media (max-width: 600px) {
@@ -57,7 +60,6 @@
 
 .buttonIcon {
     margin: 0;
-    margin-bottom: 10px;
     border: none;
 }
 
@@ -87,9 +89,7 @@
 }
 
 .menuItemsStyle {
-    position: absolute;
-    top: 35%;
-    right: 25%;
+    background-color: red;
 
     @media (max-width: 1300px) {
         right: 30%;
