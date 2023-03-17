@@ -47,7 +47,7 @@ function BuyCoinLivreMobile({ conditionalBuy, balance }: buyCoinLivreInterface) 
         setBuyConfirmed(true)
         setTimeout(() => {
           window.location.reload()
-        }, 1500);
+        }, 5000);
       }
     })
   }, [socket])

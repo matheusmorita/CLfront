@@ -540,7 +540,7 @@ function BuyProjectMobile({ setRealValue,
                           setTimeout(() => {
                             setBuyConfirmed(!buyConfirmed)
                             window.location.reload()
-                          }, 2000);
+                          }, 5000);
                         }
                       }
                       setHiddenBuyProject(!hiddenBuyProject)
