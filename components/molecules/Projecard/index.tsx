@@ -149,9 +149,9 @@ const Projecard = ({
               ) : `linear-gradient(to bottom, transparent, #000), url(${src})`,
               position: 'absolute',
               backgroundSize: 'cover',
-              width: (acronimo !== 'CNLT') ? '100%' : '25%',
+              width: (acronimo !== 'CNLT') ? '100%' : '50%',
               height: (acronimo !== 'CNLT') ? '90%' : '150px',
-              left: (acronimo !== 'CNLT') ? '0' : '40%',
+              left: (acronimo !== 'CNLT') ? '0' : '30%',
               top: '0'
             }}
             id={idProject}
