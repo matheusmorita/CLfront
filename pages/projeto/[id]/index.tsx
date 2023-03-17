@@ -71,6 +71,14 @@ const ProjectPage = () => {
     const largura = window.innerWidth
     setLengthWindow(largura)
 
+    const beforePath = sessionStorage.getItem('beforePath')
+
+    if (beforePath?.includes('projeto')) {
+      setShowModal(true)
+      setShowMobileModal(true)
+      sessionStorage.setItem('beforePath', '')
+    }
+
     // const beforePath = localStorage.getItem('beforePath')
     // router.push(`${beforePath}`)
   }, [])

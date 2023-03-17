@@ -28,7 +28,7 @@ function BuyCoinLivreMobile({ conditionalBuy, balance }: buyCoinLivreInterface) 
   const [QRcodeUrl, SetQRcodeUrl] = React.useState<any>('')
 
   const router = useRouter();
-  const { locale } = router;
+  const { locale, asPath } = router;
 
   const t = locale === 'en' ? en : pt
 
@@ -45,12 +45,13 @@ function BuyCoinLivreMobile({ conditionalBuy, balance }: buyCoinLivreInterface) 
     socket.on('onPix', data => {
       if (data.idPix == itemId) {
         setBuyConfirmed(true)
+        sessionStorage.setItem('beforePath', asPath)
         setTimeout(() => {
           window.location.reload()
         }, 5000);
       }
     })
-  }, [socket])
+  }, [socket, asPath])
 
   return (
     <div className={Styles.divBuy}>

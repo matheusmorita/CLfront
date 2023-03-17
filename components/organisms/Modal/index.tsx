@@ -56,6 +56,7 @@ function Modal({ projectSelectedProps, loteProps, valorTokenProps }: ModalProps)
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
     const idProject = localStorage.getItem('idProject')
+
     setIdProject(idProject)
     setConditionalBuy(idProject)
 
