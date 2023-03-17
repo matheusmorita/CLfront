@@ -1,0 +1,45 @@
+@import '@/styles/variables.scss';
+
+.main {
+    margin: 0 5%;
+
+    @media (max-width: 992px) {
+        margin-top: 15%;
+    }
+}
+
+.languageIcon {
+    width: 35px !important;
+    height: 35px !important;
+    fill: $primary !important;
+    border: 2px solid $primary;
+    border-radius: 50%;
+    transition: .5s;
+    margin: 0 5%;
+    cursor: pointer;
+
+
+    &:hover {
+        transition: .5s;
+        box-shadow: 0 5px 15px rgba($color: $primary, $alpha: .3);
+    }
+}
+
+.language {
+    display: block;
+    position: absolute;
+    padding: 10px;
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    transition: .5s;
+
+
+    &__link {
+        text-decoration: none;
+    }
+
+    &__languageItem {
+        color: $primary;
+        font-size: 1.1rem;
+    }
+}

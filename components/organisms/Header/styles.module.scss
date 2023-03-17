@@ -44,6 +44,8 @@
     display: flex;
     flex-direction: column;
     transition: .5s;
+    right: 2%;
+    top: 25%;
 
     @media (max-width: 992px) {
         right: 30%;
@@ -93,6 +95,19 @@
 
     @media (max-width: 1300px) {
         right: 30%;
+    }
+}
+
+.menuLanguageStyle {
+    display: flex;
+    align-items: center;
+    gap: 20%;
+
+    @media (max-width: 992px) {
+        text-align: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+        margin-top: 20px;
     }
 }
 

@@ -10,6 +10,8 @@ import { getPageTopDistance } from '@/assets/js/util/scroll'
 import { getWindowInnerWidth } from '@/assets/js/util/responsive'
 import Styles from './styles.module.scss'
 
+import Language from '../Language'
+
 import LanguageIcon from '@mui/icons-material/Language';
 
 // languages
@@ -99,7 +101,7 @@ const Header = ({ hideLinks }: Props) => {
           white={!whiteTheme}
           responsive={responsive}
         />
-        <div style={{display: 'flex', alignItems: 'center', gap: logged ? '10%' : ''}}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: logged ? '10%' : '' }}>
           {dataUser?.nome && (
             <UserOptions
               name={dataUser.nome}
@@ -110,13 +112,13 @@ const Header = ({ hideLinks }: Props) => {
           {!logged && (
             <div className="d-flex align-items-center justify-content-center">
               <Button
-                margin='0 5%'
-                width='220px'
+                margin={windowWidth <= 992 ? '0' : '0 5%'}
+                width={windowWidth <= 992 ? '200px' : '220px'}
                 id="header-cta"
                 text={t.registerOrLogin}
                 label="Clique e cadastre-se"
                 // margin='3%'
-                className={`ms-3 ${windowWidth <= 992 ? 'me-5' : ''}`}
+                className={`ms-3 ${windowWidth <= 992 ? 'me-3' : 'me-5'}`}
                 hidden={false}
                 disabled={false}
                 onClick={() => {
@@ -125,91 +127,11 @@ const Header = ({ hideLinks }: Props) => {
               />
             </div>
           )}
-          <HamburgerMenu />
-          {/* {
-              routes &&
-              !hideLinks &&
-              routes.map((item: any, index: number) => (
-                <Link
-                  href={item.path}
-                  key={index}
-                  className={`${handleActiveLink(item.path)} ${handleLinkDisabled(item.disabled)}`}
-                >
-                  {item.name}
-                </Link>
-              ))
-            } */}
-        </div>
-        {/* <div style={{ display: 'flex', margin: '0 3%', gap: logged ? '20%' : '', justifyContent: 'center' }}>
-          
-          <div style={{
-            display: 'flex',
-            // width: '100%',
-            alignItems: 'center',
-          }}>
-            {
-              routes &&
-              !hideLinks &&
-              routes.map((item: any, index: number) => (
-                <Link
-                  href={item.path}
-                  key={index}
-                  className={`${handleActiveLink(item.path)} ${handleLinkDisabled(item.disabled)}`}
-                >
-                  {item.name}
-                </Link>
-              ))
-            }
+          <div className={Styles.menuLanguageStyle}>
+            <HamburgerMenu />
+            <Language />
           </div>
-          {!logged && (
-            <div className="d-flex align-items-center justify-content-center">
-              <Button
-                id="header-cta"
-                text={t.registerOrLogin}
-                label="Clique e cadastre-se"
-                // margin='3%'
-                className={`ms-3 ${windowWidth <= 992 ? 'me-5' : ''}`}
-                hidden={false}
-                disabled={false}
-                onClick={() => {
-                  push('/login')
-                }}
-              />
-            </div>
-          )}
-
-          <section className={Styles.sectionLanguage}>
-            <button className={Styles.buttonIcon} onClick={() => setShowLanguages(!showLanguages)}>
-              <LanguageIcon width={250} height={250} className={Styles.languageIcon} />
-            </button>
-            <div
-              style={{
-                visibility: showLanguages ? 'visible' : 'hidden',
-                opacity: showLanguages ? '1' : '0',
-              }}
-              className={Styles.linksDiv}
-            >
-              {locales?.map(l => {
-                return (
-                  <div className={Styles.itemLanguage} key={l}>
-                    <Link
-                      className={Styles.linkLanguageStyle}
-                      href={asPath}
-                      key={l}
-                      locale={l}
-                    >
-                      <b className={Styles.languageItem}>
-                        {l.toLocaleUpperCase()}
-                      </b>
-                    </Link>
-                  </div>
-                )
-              })}
-            </div>
-          </section> */}
-
-
-        {/* </div> */}
+        </div>
       </div>
     </nav>
   )
