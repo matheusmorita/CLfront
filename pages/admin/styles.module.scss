@@ -1,0 +1,48 @@
+@import '@/styles/variables.scss';
+
+.main {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    &__selections {
+        text-align: center;
+    }
+}
+
+
+.welcome {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    margin: 10% 0 2% 0;
+    padding: 10px;
+
+    @media (max-width: 992px) {
+        text-align: center;
+        flex-wrap: wrap;
+        margin: 25% 0;
+        align-items: center;
+    }
+
+
+    & h1 {
+        font-size: 3.5rem;
+        margin: 0 5%;
+    }
+
+    &__picture {
+        background-color: green;
+        width: 800px;
+        height: 400px;
+        margin: 0 5%;
+
+        @media (max-width: 992px) {
+            width: 500px;
+            height: 200px;
+        }
+
+    }
+}

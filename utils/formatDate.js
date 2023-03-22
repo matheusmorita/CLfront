@@ -7,6 +7,13 @@ export const formatDate = (date) => {
     }
 }
 
+export const formatOnlyDate = (date) => {
+    if (dayjs(date).isValid()) {
+        const formated = dayjs(date).subtract(-3, 'hour').format('DD/MM/YYYY')
+        return formated
+    }
+}
+
 export const formatDateProjecard = (date) => {
     if (dayjs(date).isValid()) {
         const formated = dayjs(date).format('DD/MM/YYYY - HH:mm:ss')

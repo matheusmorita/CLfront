@@ -14,9 +14,10 @@ type Props = {
   name: string,
   contrast?: boolean,
   profileImageSrc: string,
+  isAdmin: boolean,
 }
 
-const UserOptions = ({ name, contrast = false, profileImageSrc }: Props) => {
+const UserOptions = ({ name, contrast = false, profileImageSrc, isAdmin }: Props) => {
   const [open, setOpen] = React.useState<boolean>(false)
 
   const router = useRouter();
@@ -42,7 +43,7 @@ const UserOptions = ({ name, contrast = false, profileImageSrc }: Props) => {
       className={`${Styles.user} ${handleWhiteTheme()}`}
       onClick={() => { handleMenuToggle() }}
     >
-        <p className={Styles.user__phrase}>{t.hello} {name.split(' ')[0]}</p>
+      <p className={Styles.user__phrase}>{t.hello} {name.split(' ')[0]}</p>
       <Image
         alt='Profile Picture'
         src={profileImageSrc ? profileImageSrc : defaultImage}
@@ -58,11 +59,14 @@ const UserOptions = ({ name, contrast = false, profileImageSrc }: Props) => {
               {t.profile}
             </li>
           </Link>
-          {/* <Link href="/projects" locale={locale}>
-            <li className={Styles.user__item}>
-              projetos
-            </li>
-          </Link> */}
+          {!isAdmin && (
+            <Link href="/admin" locale={locale}>
+              <li className={Styles.user__item}>
+                Controle Admin
+              </li>
+            </Link>
+          )}
+
           <Link href='/logout' locale={locale}>
             <li className={Styles.user__item}>
               {t.disconnect}

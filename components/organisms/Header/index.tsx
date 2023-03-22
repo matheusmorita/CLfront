@@ -23,7 +23,7 @@ import DivisionBar from '@/components/atoms/Division'
 import HamburgerMenu from '../HamburgerMenu'
 
 type Props = {
-  hideLinks: boolean
+  hideLinks?: boolean
 }
 
 const Header = ({ hideLinks }: Props) => {
@@ -107,6 +107,7 @@ const Header = ({ hideLinks }: Props) => {
               name={dataUser.nome}
               contrast={whiteTheme}
               profileImageSrc={dataUser?.imgPerfilUrl}
+              isAdmin={dataUser.isAdmin}
             />
           )}
           {!logged && (

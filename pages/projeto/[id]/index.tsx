@@ -40,6 +40,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 import ProjectContext from '@/context/ProjectContext'
+import { formatOnlyDate } from '@/utils/formatDate'
 
 const ProjectPage = () => {
   const router = useRouter()
@@ -237,7 +238,7 @@ const ProjectPage = () => {
                   {project.criadoEm && (
                     <DataShow
                       title={t.launchDate}
-                      value={masks.getDateMask(project.dataLancamento)}
+                      value={formatOnlyDate(project.dataLancamento)!}
                       badge={{
                         type: "success",
                         message: t.NEW

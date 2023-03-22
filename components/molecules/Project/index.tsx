@@ -6,7 +6,7 @@ import Button from '@/components/atoms/Button'
 import UserContext from '@/context/UserContext'
 import { useRouter } from 'next/router'
 
-import { formatDate } from '@/utils/formatDate';
+import { formatDate, formatOnlyDate } from '@/utils/formatDate';
 
 // languages
 import en from '@/public/locales/en/common.json';
@@ -93,7 +93,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
               id={`project-description-${id}`}
               className={Styles.project__details}
             >
-              {t.launchDate}<b> {formatDate(dataLanc) || t.commingSoon}</b> <br />
+              {t.launchDate}<b> {formatOnlyDate(dataLanc) || t.commingSoon}</b> <br />
               {t.projectOwner} <b> {emissor}</b> <br />
               {showOrNot ? (
                 <span style={{ gap: '2%', display: 'flex' }} className={Styles.project__details}>
