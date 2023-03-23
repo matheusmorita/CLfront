@@ -78,6 +78,19 @@ function BuyProjectMobile({ setRealValue,
     return responseReplaced
   }
 
+  const calcCoinlivreTax = (realValue: string) => {
+    const taxaCoinlivre = 1.5/100;
+
+    let formatedValue = realValue
+
+    if (realValue.includes(',')) {
+      formatedValue = realValue.replace(',', '.')
+    }
+
+    const result = Number(formatedValue) - taxaCoinlivre*Number(formatedValue)
+    return Number(result.toFixed(2)).toLocaleString('pt-BR', { minimumFractionDigits: 2 })
+  }
+
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
     setAccessTokenState(accessToken)
@@ -206,7 +219,7 @@ function BuyProjectMobile({ setRealValue,
                     placeholder='CNLT 0,00'
                     className={Styles.inputValue}
                     disabled={true}
-                    value={conditionalBuy === 'CNLT-0' ? realValue : calcValueResponse(realValue, valorToken)}
+                    value={conditionalBuy === 'CNLT-0' ? calcCoinlivreTax(realValue) : calcValueResponse(realValue, valorToken)}
                   />
                 </div>
               )}
@@ -251,7 +264,7 @@ function BuyProjectMobile({ setRealValue,
                       setHiddenBuy(true)
                       setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                     }}
-                    disabled={!checkboxCheck || (realValue === '')}
+                    disabled={!checkboxCheck || realValue === '' || realValue === '0'}
                     text={t.generateQrCode}
                     size={25}
                     className={Styles.divButtons__QRButton}
@@ -430,6 +443,7 @@ function BuyProjectMobile({ setRealValue,
                       const newStr = e.target.value.replace(/[.]/g, '')
                       const altStr = newStr.replace(',', '.')
                       setRealValue(altStr)
+                      console.log(realValue)
                     }}
                   />
                 ) : (
@@ -455,7 +469,7 @@ function BuyProjectMobile({ setRealValue,
                   placeholder='CNLT 0,00'
                   className={Styles.inputValue}
                   disabled={true}
-                  value={conditionalBuy === 'CNLT-0' ? realValue : calcValueResponse(realValue, valorToken)}
+                  value={conditionalBuy === 'CNLT-0' ? calcCoinlivreTax(realValue) : calcValueResponse(realValue, valorToken)}
                 />
               </div>
 
@@ -520,7 +534,7 @@ function BuyProjectMobile({ setRealValue,
                     }}
                     text={t.generateQrCode}
                     size={20}
-                    disabled={!checkboxCheck || (realValue === '')}
+                    disabled={!checkboxCheck || realValue === '' || realValue === '0'}
                     className={Styles.divButtons__QRButton}
                   />
                 ) : (
@@ -549,7 +563,7 @@ function BuyProjectMobile({ setRealValue,
                     }}
                     text={t.next}
                     size={20}
-                    disabled={!checkboxCheck || (realValue === '')}
+                    disabled={!checkboxCheck || realValue === '' || realValue === '0'}
                     className={Styles.divButtons__QRButton}
                   />
                 )}

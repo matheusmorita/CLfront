@@ -82,10 +82,13 @@ function BuyProject({
   const calcCoinlivreTax = (realValue: string) => {
     const taxaCoinlivre = 1.5/100;
 
+    let formatedValue = realValue
+
     if (realValue.includes(',')) {
-      realValue.replace(',', '.')
+      formatedValue = realValue.replace(',', '.')
     }
-    const result = Number(realValue) - taxaCoinlivre*Number(realValue)
+
+    const result = Number(formatedValue) - taxaCoinlivre*Number(formatedValue)
     return Number(result.toFixed(2)).toLocaleString('pt-BR', { minimumFractionDigits: 2 })
   }
 
@@ -275,7 +278,7 @@ function BuyProject({
                       setHiddenBuy(true)
                       setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                     }}
-                    disabled={!checkboxCheck || (realValue === '')}
+                    disabled={!checkboxCheck || realValue === '' || realValue === '0'}
                     text={t.generateQrCode}
                     size={25}
                     className={Styles.divButtons__QRButton}
@@ -493,7 +496,7 @@ function BuyProject({
                         setHiddenBuy(true)
                         setHiddenBuyCoinLivre(!hiddenBuyCoinLivre)
                       }}
-                      disabled={!checkboxCheck || (realValue === '')}
+                      disabled={!checkboxCheck || realValue === '' || realValue === '0'}
                       text={t.generateQrCode}
                       size={25}
                       className={Styles.divButtons__QRButton}
@@ -505,7 +508,7 @@ function BuyProject({
                     type='submit'
                     id="continueBuyProject"
                     label="Clique para continuar compra"
-                    disabled={!checkboxCheck || (realValue === '')}
+                    disabled={!checkboxCheck || realValue === '' || realValue === '0'}
                     onClick={async (e: any) => {
                       e.preventDefault()
                       const responseSaldo = checkSaldo(balance, valorToken, realValue)

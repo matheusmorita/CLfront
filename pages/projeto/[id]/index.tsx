@@ -75,9 +75,12 @@ const ProjectPage = () => {
     const beforePath = sessionStorage.getItem('beforePath')
 
     if (beforePath?.includes('projeto')) {
-      setShowModal(true)
-      setShowMobileModal(true)
+      if (largura <= 700) {
+        sessionStorage.setItem('beforePath', '')
+        return setShowMobileModal(true)
+      }
       sessionStorage.setItem('beforePath', '')
+      return setShowModal(true)
     }
 
     // const beforePath = localStorage.getItem('beforePath')

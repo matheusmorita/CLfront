@@ -36,7 +36,7 @@ function MobileModal({ projectSelectedProps, loteProps, valorTokenProps }: Modal
   const [hiddenBuy, setHiddenBuy] = React.useState<boolean>(true);
   const [hiddenBuyCoinLivre, setHiddenBuyCoinLivre] = React.useState<boolean>(false);
   const [conditionalBuy, setConditionalBuy] = React.useState<any>('CNLT-0');
-  const [realValue, setRealValue] = React.useState<string>('');
+  const [realValue, setRealValue] = React.useState<string>('0');
   const [valorToken, setValorToken] = React.useState<string>(valorTokenProps)
   const [lote, setLote] = React.useState<object>(loteProps);
   const [dataUser, setDataUser] = React.useState<any>();

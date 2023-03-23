@@ -21,6 +21,7 @@ import pt from '@/public/locales/pt/common.json';
 import { fetchDataUserInfo } from '@/utils/fetchDataAxios'
 import DivisionBar from '@/components/atoms/Division'
 import HamburgerMenu from '../HamburgerMenu'
+import Overlay from '@/components/molecules/Overlay'
 
 type Props = {
   hideLinks?: boolean
@@ -31,6 +32,8 @@ const Header = ({ hideLinks }: Props) => {
   const [responsive, setResponsive] = React.useState<boolean>(false)
   const [showLanguages, setShowLanguages] = React.useState<boolean>(false)
   const [windowWidth, setWindowWidth] = React.useState<number>(0)
+
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const [selectedLanguage, setSelectedLanguage] = React.useState('en');
 
@@ -95,6 +98,7 @@ const Header = ({ hideLinks }: Props) => {
 
   return (
     <nav className={`${Styles.navbar} ${whiteTheme ? Styles.white : ''}`}>
+      {/* <Overlay /> */}
       <div className={`${Styles.navbar__wrapper}`}>
         <Logo
           redirect={true}
@@ -129,7 +133,7 @@ const Header = ({ hideLinks }: Props) => {
             </div>
           )}
           <div className={Styles.menuLanguageStyle}>
-            <HamburgerMenu />
+            <HamburgerMenu isOpen={isOpen} setIsOpen={setIsOpen} />
             <Language />
           </div>
         </div>

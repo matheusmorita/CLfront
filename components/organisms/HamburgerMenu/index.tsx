@@ -4,9 +4,12 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.scss';
 
-const HamburgerMenu = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface MenuInterface {
+  isOpen: boolean;
+  setIsOpen: any;
+}
 
+const HamburgerMenu = ({isOpen, setIsOpen}: MenuInterface) => {
   const router = useRouter();
   const { locale } = router;
 
