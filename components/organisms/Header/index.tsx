@@ -105,7 +105,7 @@ const Header = ({ hideLinks }: Props) => {
           white={!whiteTheme}
           responsive={responsive}
         />
-        <div style={{ display: 'flex', alignItems: 'center', gap: logged ? '10%' : '' }}>
+        <div style={{ display: 'flex', alignItems: 'center',  }}>
           {dataUser?.nome && (
             <UserOptions
               name={dataUser.nome}
