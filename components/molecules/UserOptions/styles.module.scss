@@ -16,7 +16,7 @@
     }
 
     @media (max-width: 600px) {
-        margin: 0 10%;
+        margin: 0 5%;
     }
 
     &__phrase {
@@ -32,9 +32,9 @@
         height: 40px;
         border-radius: 50%;
         border: 3px solid $primary;
-        margin-left: .5rem;
         background: url(../../../assets/img/BG2.webp);
         background-size: cover;
+        margin-right: 1rem;
     }
 
     &__menu {

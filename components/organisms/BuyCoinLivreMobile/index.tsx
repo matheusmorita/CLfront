@@ -42,6 +42,7 @@ function BuyCoinLivreMobile({ conditionalBuy, balance }: buyCoinLivreInterface) 
     const QRcodeUrl = sessionStorage.getItem('textContent')
     const itemId = sessionStorage.getItem('itemId')
     SetQRcodeUrl(QRcodeUrl)
+    sessionStorage.setItem('beforePath', asPath)
     socket.on('onPix', data => {
       if (data.idPix == itemId) {
         setBuyConfirmed(true)

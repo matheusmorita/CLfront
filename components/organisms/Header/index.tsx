@@ -117,7 +117,6 @@ const Header = ({ hideLinks }: Props) => {
           {!logged && (
             <div className="d-flex align-items-center justify-content-center">
               <Button
-                margin={windowWidth <= 992 ? '0' : '0 5%'}
                 width={windowWidth <= 992 ? '200px' : '220px'}
                 id="header-cta"
                 text={t.registerOrLogin}
