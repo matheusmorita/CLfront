@@ -418,7 +418,19 @@ const ProjectPage = () => {
                     />
                   </div>
                   <div className={Styles.gradbox__body}>
-                    {project.Remuneracao.length > 0 ? (
+                    <QuotaShow
+                      key={'item.id'}
+                      project={project}
+                      juros={'item.porcentagemPagaNoMes'}
+                      parcela={1}
+                      valor={'0,00'}
+                      vencimento={'item.vencimento'}
+                    // badge={{
+                    //   type: "success",
+                    //   message: "Paga"
+                    // }}
+                    />
+                    {/* {project.Remuneracao.length > 0 ? (
                       project.Remuneracao.map((item: {
                         id: string
                         porcentagemPagaNoMes: string,
@@ -432,10 +444,10 @@ const ProjectPage = () => {
                           parcela={item.idRemuneracao}
                           valor={'0,00'}
                           vencimento={item.vencimento}
-                          badge={{
-                            type: "success",
-                            message: "Paga"
-                          }}
+                          // badge={{
+                          //   type: "success",
+                          //   message: "Paga"
+                          // }}
                         />
                       ))
                     ) : (
@@ -447,7 +459,7 @@ const ProjectPage = () => {
                         valor={'0,00'}
                         vencimento={'item.vencimento'}
                       />
-                    )}
+                    )} */}
                   </div>
                 </div>
               </Column>

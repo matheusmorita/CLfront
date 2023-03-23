@@ -53,7 +53,8 @@ const QuotaShow = ({
           {project.acronimo !== 'CLGT' ?  t.installment : t.date }
           </h1>
           <span className={Styles.quotashow__value}>
-            {project.acronimo !== 'CLGT' ? parcela : t.commingSoon }
+            {/* {project.acronimo !== 'CLGT' ? parcela : t.commingSoon } */}
+            {t.commingSoon }
           </span>
         </div>
         <div className={Styles.quotashow__data}>
@@ -61,7 +62,8 @@ const QuotaShow = ({
           {project.acronimo !== 'CLGT' ? t.return : t.benefit}
           </h1>
           <span className={Styles.quotashow__value}>
-          {project.acronimo !== 'CLGT' ? juros : t.commingSoon}
+          {/* {project.acronimo !== 'CLGT' ? juros : t.commingSoon} */}
+          {t.commingSoon }
           </span>
         </div>
         <div className={Styles.quotashow__data}>
@@ -69,7 +71,8 @@ const QuotaShow = ({
           {project.acronimo !== 'CLGT' ? t.payoutDate : <>Status</>}
           </h1>
           <span className={Styles.quotashow__value}>
-          {project.acronimo !== 'CLGT' ? vencimento : t.commingSoon}
+          {/* {project.acronimo !== 'CLGT' ? vencimento : t.commingSoon} */}
+          {t.commingSoon }
           </span>
         </div>
       </div>
