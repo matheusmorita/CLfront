@@ -5,11 +5,14 @@ import React, { useState } from 'react';
 import styles from './styles.module.scss';
 
 interface MenuInterface {
-  isOpen: boolean;
-  setIsOpen: any;
+  openLink: boolean;
+  setopenLink: any;
+  menuItemIsOpen: boolean;
+  setMenuItemIsOpen: any;
+  setOpenOverlay: any
 }
 
-const HamburgerMenu = ({isOpen, setIsOpen}: MenuInterface) => {
+const HamburgerMenu = ({openLink, setopenLink, menuItemIsOpen, setMenuItemIsOpen, setOpenOverlay}: MenuInterface) => {
   const router = useRouter();
   const { locale } = router;
 
@@ -21,12 +24,23 @@ const HamburgerMenu = ({isOpen, setIsOpen}: MenuInterface) => {
 
   return (
     <div className={styles.hamburgerMenu}>
-      <div className={`${styles.menuButton} ${isOpen ? styles.open : ''}`} onClick={() => setIsOpen(!isOpen)}>
+      <div className={`${styles.menuButton} ${openLink ? styles.open : ''}`} onClick={() => {
+        setopenLink(!openLink)
+        setMenuItemIsOpen(false)
+        setOpenOverlay(true)
+        if (openLink) {
+          setOpenOverlay(false)
+        }
+        // if (isOpen) {
+        //   return setIsOpen(false)
+        // }
+        // return setIsOpen(true)
+      }}>
         <span></span>
         <span></span>
         <span></span>
       </div>
-      <ul className={`${styles.menuItems} ${isOpen ? styles.open : ''}`}>
+      <ul className={`${styles.menuItems} ${openLink ? styles.open : ''}`}>
         {routes.map((item, i) => (
         <Link className={styles.menuItems__itemMenu} key={`${item} - ${i}`} locale={locale} href={item.path}>{item.name}</Link>
         ))}

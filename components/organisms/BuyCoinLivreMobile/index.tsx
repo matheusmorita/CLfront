@@ -8,6 +8,10 @@ import Button from '@/components/atoms/Button'
 import InputModal from '@/components/molecules/InputModal'
 import CloseButton from '@/components/atoms/CloseButton'
 
+import { dispatchErrorNotification } from '@/utils/dispatchNotifications';
+
+import { toast } from 'react-toastify';
+
 // languages
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
@@ -45,6 +49,9 @@ function BuyCoinLivreMobile({ conditionalBuy, balance }: buyCoinLivreInterface) 
     sessionStorage.setItem('beforePath', asPath)
     socket.on('onPix', data => {
       if (data.idPix == itemId) {
+        if (data?.error) {
+          return dispatchErrorNotification(toast, 'Houve um erro ao efetuar esta transação, você será redirecionado.', true)
+        }
         setBuyConfirmed(true)
         sessionStorage.setItem('beforePath', asPath)
         setTimeout(() => {

@@ -9,20 +9,46 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 import defaultImage from '@/assets/img/placeholder.webp'
+import { fetchDataUserInfo } from '@/utils/fetchDataAxios';
 
 type Props = {
   name: string,
   contrast?: boolean,
   profileImageSrc: string,
   isAdmin: boolean,
+  menuItemIsOpen: boolean,
+  setMenuItemIsOpen: any,
+  setopenLink: any,
+  setOpenOverlay: any
 }
 
-const UserOptions = ({ name, contrast = false, profileImageSrc, isAdmin }: Props) => {
-  const [open, setOpen] = React.useState<boolean>(false)
+const UserOptions = ({
+  name,
+  contrast = false,
+  profileImageSrc,
+  isAdmin,
+  menuItemIsOpen,
+  setMenuItemIsOpen,
+  setopenLink,
+  setOpenOverlay
+}: Props) => {
+  const [dataUser, setDataUser] = React.useState<any>();
+  const [admin, setAdmin] = React.useState<boolean>(false);
+  // const [openMenu, setopenMenu] = React.useState<boolean>(false)
 
   const router = useRouter();
-
   const { locale } = router;
+
+  React.useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken')
+    const getUserAdmin = async () => {
+      const isAdmin = await fetchDataUserInfo(accessToken, setDataUser)
+      setAdmin(isAdmin)
+    }
+    getUserAdmin()
+  }, [router])
+
+
 
   const t = locale === 'en' ? en : pt;
 
@@ -31,11 +57,20 @@ const UserOptions = ({ name, contrast = false, profileImageSrc, isAdmin }: Props
   }
 
   const handleMenuState = () => {
-    return open ? Styles.open : undefined
+    return menuItemIsOpen ? Styles.open : undefined
   }
 
   const handleMenuToggle = () => {
-    setOpen(!open)
+    setMenuItemIsOpen(!menuItemIsOpen)
+    setopenLink(false)
+    setOpenOverlay(true)
+    if (menuItemIsOpen) {
+      setOpenOverlay(false)
+    }
+    // if (open) {
+    //   return setOpen(false)
+    // }
+    // return setOpen(true)
   }
   return (
 
@@ -60,7 +95,7 @@ const UserOptions = ({ name, contrast = false, profileImageSrc, isAdmin }: Props
             </li>
           </Link>
           {!isAdmin && (
-            <Link href="/admin" locale={locale}>
+            <Link href={!admin ? "/admin" : "/notfound"} locale={locale}>
               <li className={Styles.user__item}>
                 Controle Admin
               </li>

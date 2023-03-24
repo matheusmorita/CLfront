@@ -32,6 +32,8 @@ const QuemSomos = () => {
   const t = locale === 'en' ? en : pt
 
   React.useEffect(() => {
+    
+    
     // const beforePath = localStorage.getItem('beforePath')
     // router.push(`${beforePath}`)
   }, [])

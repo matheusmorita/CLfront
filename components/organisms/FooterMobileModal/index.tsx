@@ -22,7 +22,7 @@ function FooterMobileModal() {
     <div className={Styles.items}>
       <div className={Styles.buttons}>
         <div className={Styles.spanStyle}>
-          <b style={{ color: '#00EE8D', textAlign: 'center', fontSize: '20px' }}>Disponível somente para compras atualmente.</b>
+          <b style={{ color: '#00EE8D', textAlign: 'center', fontSize: '20px', padding: '10px' }}>Disponível somente para compras atualmente.</b>
         </div>
         {/* {checkedButton === 'comprar' ? (
           <>

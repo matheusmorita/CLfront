@@ -38,6 +38,7 @@ export async function fetchDataUserInfo(accessToken, setDataUser) {
   const data = await response.json()
   console.log(data)
   setDataUser(data)
+  return data?.isAdmin
 }
 
 export async function fetchUserHistoryinfo(accessToken, setHistoryUser, historyUser) {

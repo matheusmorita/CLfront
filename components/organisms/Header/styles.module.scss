@@ -91,8 +91,6 @@
 }
 
 .menuItemsStyle {
-    background-color: red;
-
     @media (max-width: 1300px) {
         right: 30%;
     }
@@ -102,6 +100,7 @@
     display: flex;
     align-items: center;
     gap: 20%;
+    z-index: 5;
 
     @media (max-width: 500px) {
         text-align: center;

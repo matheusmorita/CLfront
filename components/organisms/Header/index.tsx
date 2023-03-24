@@ -33,7 +33,11 @@ const Header = ({ hideLinks }: Props) => {
   const [showLanguages, setShowLanguages] = React.useState<boolean>(false)
   const [windowWidth, setWindowWidth] = React.useState<number>(0)
 
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [menuItemIsOpen, setMenuItemIsOpen] = React.useState<boolean>(false)
+  const [openLink, setopenLink] = React.useState<boolean>(false)
+
+  const [openOverlay, setOpenOverlay] = React.useState<boolean>(false);
+  
 
   const [selectedLanguage, setSelectedLanguage] = React.useState('en');
 
@@ -90,24 +94,30 @@ const Header = ({ hideLinks }: Props) => {
   }, [])
 
   const router = useRouter();
-  const routes: Array<Object> = [
-    { name: "Início", path: "/", disabled: false },
-    { name: "Tokens", path: "/tokens", disabled: true },
-    { name: "News", path: "/news", disabled: true },
-  ]
 
   return (
     <nav className={`${Styles.navbar} ${whiteTheme ? Styles.white : ''}`}>
-      {/* <Overlay /> */}
+      {openOverlay && (
+        <Overlay
+          isOpen={openOverlay}
+          setIsOpen={setOpenOverlay}
+          setMenuItemIsOpen={setMenuItemIsOpen}
+          setopenLink={setopenLink}
+        />
+      )}
       <div className={`${Styles.navbar__wrapper}`}>
         <Logo
           redirect={true}
           white={!whiteTheme}
           responsive={responsive}
         />
-        <div style={{ display: 'flex', alignItems: 'center',  }}>
+        <div style={{ display: 'flex', alignItems: 'center', zIndex: '5' }}>
           {dataUser?.nome && (
             <UserOptions
+              menuItemIsOpen={menuItemIsOpen}
+              setMenuItemIsOpen={setMenuItemIsOpen}
+              setopenLink={setopenLink}
+              setOpenOverlay={setOpenOverlay}
               name={dataUser.nome}
               contrast={whiteTheme}
               profileImageSrc={dataUser?.imgPerfilUrl}
@@ -132,7 +142,13 @@ const Header = ({ hideLinks }: Props) => {
             </div>
           )}
           <div className={Styles.menuLanguageStyle}>
-            <HamburgerMenu isOpen={isOpen} setIsOpen={setIsOpen} />
+            <HamburgerMenu 
+              openLink={openLink}
+              setopenLink={setopenLink}
+              menuItemIsOpen={menuItemIsOpen}
+              setMenuItemIsOpen={setMenuItemIsOpen}
+              setOpenOverlay={setOpenOverlay}
+            />
             <Language />
           </div>
         </div>

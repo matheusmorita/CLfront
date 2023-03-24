@@ -5,6 +5,10 @@ import Styles from './styles.module.scss'
 
 import logo from '@/assets/img/logo.png'; 
 
+import { dispatchErrorNotification } from '@/utils/dispatchNotifications';
+
+import { toast } from 'react-toastify';
+
 import Button from '@/components/atoms/Button'
 import InputModal from '@/components/molecules/InputModal'
 import CloseButton from '@/components/atoms/CloseButton'
@@ -36,12 +40,16 @@ function BuyCoinLivre({ conditionalBuy, balance }: buyCoinLivreInterface) {
   const socket = React.useContext(WebSocketContext)
 
   React.useEffect(() => {
+    console.log('entrou na tela de Qr code')
     const QRcodeUrl = sessionStorage.getItem('textContent')
     const itemId = sessionStorage.getItem('itemId')
     SetQRcodeUrl(QRcodeUrl)
     sessionStorage.setItem('beforePath', asPath)
     socket.on('onPix', data => {
       if (data.idPix == itemId) {
+        if (data?.error) {
+          return dispatchErrorNotification(toast, 'Houve um erro ao efetuar esta transação, você será redirecionado.', true)
+        }
         setBuyConfirmed(true)
         sessionStorage.setItem('beforePath', asPath)
         setTimeout(() => {

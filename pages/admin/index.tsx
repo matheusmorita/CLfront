@@ -5,6 +5,7 @@ import React from 'react';
 
 import Styles from './styles.module.scss';
 
+
 function Admin() {
   const [dataUser, setDataUser] = React.useState<any>();
 
@@ -12,34 +13,28 @@ function Admin() {
 
 
   React.useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken')
-
-    fetchDataUserInfo(accessToken, setDataUser)
   }, [])
 
   return (
     <>
-      {dataUser?.isAdmin ? (
-        <>
-          <Header />
+      <>
+        <Header />
 
-          <main className={Styles.main}>
+        <main className={Styles.main}>
+          <div className={Styles.main__backgroundImage} />
 
-            <section className={Styles.welcome}>
-              <h1>Bem-vindo(a) a tela de admin, {dataUser?.nome}</h1>
+          <section className={Styles.welcome}>
+            <h1>Bem-vindo(a) a tela de admin, {dataUser?.nome}</h1>
 
-              <div className={Styles.welcome__picture}>picture</div>
-            </section>
+            <div className={Styles.welcome__picture}>picture</div>
+          </section>
 
-            <section className={Styles.main__selections}>
-              <h1>Escolha a melhor opção</h1>
-              <div></div>
-            </section>
-          </main>
-        </>
-      ) : (
-        router.push('/notfound')
-      )}
+          <section className={Styles.main__selections}>
+            <h1>Escolha a melhor opção</h1>
+            <div></div>
+          </section>
+        </main>
+      </>
     </>
   )
 }

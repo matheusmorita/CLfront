@@ -418,6 +418,10 @@ const ProjectPage = () => {
                     />
                   </div>
                   <div className={Styles.gradbox__body}>
+                    {/*
+                      Esse QuotaShow abaixo é só provisório pra quando os dados necessários
+                      estiverem sendo retornados remover e colocar os dados corretos
+                    */} 
                     <QuotaShow
                       key={'item.id'}
                       project={project}

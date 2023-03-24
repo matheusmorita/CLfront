@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import 'react-toastify/dist/ReactToastify.css';
 import '@/styles/globals.scss'
 import "bootstrap/dist/css/bootstrap.min.css"
 import type { AppProps } from 'next/app'
@@ -6,6 +7,9 @@ import React, { useState, useEffect } from "react"
 import { useRouter } from 'next/router'
 import { socket, WebSocketProvider } from '@/context/WebSocketContext'
 import { handleUserSession } from '@/utils/fetchDataAxios'
+
+// toast
+import { ToastContainer } from 'react-toastify';
 
 //contexts
 import UserContext from '@/context/UserContext'
@@ -43,7 +47,13 @@ function App({ Component, pageProps }: AppProps) {
             locale
           }}
         >
-          <Component {...pageProps} />
+          <ToastContainer autoClose={5000} bodyStyle={{
+            background: '#333',
+            color: 'red',
+            padding: '10px',
+            borderRadius: '5px',
+          }} />
+          <Component  {...pageProps} />
         </UserContext.Provider>
       </ProjectContext.Provider>
     </WebSocketProvider>

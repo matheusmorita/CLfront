@@ -9,6 +9,17 @@
     &__selections {
         text-align: center;
     }
+
+    &__backgroundImage {
+        position: absolute;
+        background: linear-gradient(to right, $black, transparent),
+                url(../../assets/img/backgroundAdmin.png);
+        background-repeat: no-repeat;
+        background-size: cover !important;
+        width: 100vw;
+        height: 70vh;
+        z-index: 0;
+    }
 }
 
 
