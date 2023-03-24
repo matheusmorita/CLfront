@@ -405,7 +405,7 @@ function BuyProject({
                     type='number'
                     prefix=''
                     label={"Escolha a quantidade de Tokens"}
-                    placeholder="0"
+                    placeholder="0,00"
                     className={Styles.inputValue}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       const newStr = e.target.value.replace(/[.]/g, '')

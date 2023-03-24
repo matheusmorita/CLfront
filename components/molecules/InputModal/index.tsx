@@ -58,6 +58,7 @@ const Input = ({
         type='text'
         thousandSeparator="."
         decimalSeparator=','
+        allowLeadingZeros
         className={`${Styles.input} ${className}`}
         onClick={onClick}
         onChange={onChange}
