@@ -1,10 +1,16 @@
+import { CardAdmin } from '@/components/organisms/CardAdmin';
 import Header from '@/components/organisms/Header';
+import Section from '@/components/organisms/Section';
 import { fetchDataUserInfo } from '@/utils/fetchDataAxios';
 import { useRouter } from 'next/router';
 import React from 'react';
 
 import Styles from './styles.module.scss';
 
+//assets
+import bgEmissor from '../../assets/img/backgroundEmissor.png'
+import bgProjetos from '@/assets/img/backgroundProjetos.png'
+import bgInvestidor from '@/assets/img/backgroundInvestidor.png'
 
 function Admin() {
   const [dataUser, setDataUser] = React.useState<any>();
@@ -13,6 +19,9 @@ function Admin() {
 
 
   React.useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken')
+
+    fetchDataUserInfo(accessToken, setDataUser);
   }, [])
 
   return (
@@ -20,7 +29,36 @@ function Admin() {
       <>
         <Header />
 
-        <main className={Styles.main}>
+        <div className={`${Styles.background} ${Styles.intro}`} />
+
+        <section className={Styles.sectionAdmin}>
+          <h2 className={Styles.sectionAdmin__title}>Bem-vindo(a) a tela de administrador, {dataUser?.nome}</h2>
+          <p className={Styles.sectionAdmin__description}>
+            Aqui você pode realizar o gerenciamento total dos projetos,
+            definir dados de emissor, data de lançamento, término de lotes, dentre outras opções.
+          </p>
+
+          <section className={Styles.sectionAdmin__cardSection}>
+            <CardAdmin
+              title='Emissor'
+              background={bgEmissor}
+            />
+            <CardAdmin
+              title='Projetos'
+              background={bgProjetos}
+            />
+            <CardAdmin
+              title='Investidores'
+              background={bgInvestidor}
+            />
+          </section>
+
+
+        </section>
+
+
+
+        {/* <main className={Styles.main}>
           <div className={Styles.main__backgroundImage} />
 
           <section className={Styles.welcome}>
@@ -33,7 +71,7 @@ function Admin() {
             <h1>Escolha a melhor opção</h1>
             <div></div>
           </section>
-        </main>
+        </main> */}
       </>
     </>
   )

@@ -13,14 +13,89 @@
     &__backgroundImage {
         position: absolute;
         background: linear-gradient(to right, $black, transparent),
-                url(../../assets/img/backgroundAdmin.png);
+            url(../../assets/img/backgroundAdmin.png);
         background-repeat: no-repeat;
         background-size: cover !important;
         width: 100vw;
         height: 70vh;
         z-index: 0;
     }
+
+    
 }
+
+.background {
+    // À partir do momento que novos toens forem adicionados é preciso tratar essa parte do código
+    background: linear-gradient(to top, $black, transparent),
+                url(../../assets/img/backgroundAdmin.png);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover !important;
+}
+
+.intro {
+    min-height: 100vh;
+    padding: 5rem 0 !important;
+
+    &__title {
+        @media (max-width: 992px) {
+            font-size: 72px !important;
+            line-height: 60px !important;
+        }
+
+        @media (max-width: 395px) {
+            font-size: 48px !important;
+            line-height: 60px !important;
+        }
+    }
+}
+
+.sectionAdmin {
+    position: absolute !important;
+    width: 100%;
+    top: 0;
+    margin-top: 10%;
+    padding: 0 10%;
+
+
+    @media (max-width: 500px) {
+        margin-top: 35%;
+    }
+
+    &__title {
+        font-size: 4rem;
+        max-width: 600px;
+
+        @media (max-width: 1366px) {
+            font-size: 2rem;
+            max-width: 400px;
+        }
+    }
+
+    &__description {
+        max-width: 600px;
+        font-size: 1.5rem;
+
+        @media (max-width: 1366px) {
+            font-size: 1.1rem;
+            max-width: 400px;
+        }
+    }
+
+    &__cardSection {
+        margin-top: 10%;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 3%;
+
+        @media (max-width: 992px) {
+            justify-content: center;
+        }
+    }
+}
+
+
 
 
 .welcome {

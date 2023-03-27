@@ -202,7 +202,7 @@ const Register = () => {
                     <Input
                       id='cpf'
                       label={t.insertCpf}
-                      type='text'
+                      type='number'
                       onInput={setCpf}
                       validation={setErrorCPF}
                       error={errorCPF}
@@ -218,7 +218,7 @@ const Register = () => {
                       text={t.next}
                       label="Clique continue para seu cadastro"
                       className="w-100 py-2 mt-3 fs-5"
-                      disabled={!validation || !checked || (valueCpf === '') || (valueBirth === '')}
+                      disabled={!validation || !checked || (valueCpf === '' ||( valueCpf.length < 11 ||  valueCpf.length > 11)) || (valueBirth === '')}
                       hidden={false}
                       onClick={() => { handleUserRequestRegister(setWaiting, setSuccess, name, cpf, date, validation, router) }}
                     />
