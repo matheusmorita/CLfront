@@ -18,6 +18,8 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { captureName } from '@/assets/js/util/validations'
 
+import InputMask from 'react-input-mask'
+
 import { handleGetUserInfo, handleUserRequestRegister } from '@/utils/fetchDataAxios'
 
 // languages
@@ -202,11 +204,10 @@ const Register = () => {
                     <Input
                       id='cpf'
                       label={t.insertCpf}
-                      type='number'
+                      type='text'
                       onInput={setCpf}
                       validation={setErrorCPF}
                       error={errorCPF}
-                      maxLength={11}
                       required={true}
                       onChange={(e: any) => setValueCpf(e.target.value)}
                     />
@@ -218,7 +219,7 @@ const Register = () => {
                       text={t.next}
                       label="Clique continue para seu cadastro"
                       className="w-100 py-2 mt-3 fs-5"
-                      disabled={!validation || !checked || (valueCpf === '' ||( valueCpf.length < 11 ||  valueCpf.length > 11)) || (valueBirth === '')}
+                      disabled={!validation || !checked || ((valueCpf === '') || (valueCpf.length < 14)) || (valueBirth === '')}
                       hidden={false}
                       onClick={() => { handleUserRequestRegister(setWaiting, setSuccess, name, cpf, date, validation, router) }}
                     />

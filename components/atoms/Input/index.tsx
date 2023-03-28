@@ -1,6 +1,8 @@
 import React from 'react'
 import Styles from './styles.module.scss'
 
+import InputMask from 'react-input-mask'
+
 type Props = {
   id: string,
   type: string,
@@ -28,9 +30,9 @@ const Input = ({
   minLength,
   maxLength,
   required,
-  label, 
-  validation, 
-  validator, 
+  label,
+  validation,
+  validator,
   onChange,
   pattern
 }: Props) => {
@@ -52,21 +54,42 @@ const Input = ({
       className={Styles.group}
       data-error={error}
     >
-      <input
-        id={id}
-        name={id}
-        type={type}
-        disabled={disabled}
-        className={`${Styles.input} ${className}`}
-        onInput={handleInputValue}
-        placeholder=' '
-        minLength={minLength}
-        maxLength={maxLength}
-        required={required}
-        ref={InputRef}
-        onChange={onChange}
-        pattern={pattern}
-      />
+      {id === 'cpf' ? (
+        <InputMask
+          mask="999.999.999-99"
+          maskChar=''
+          alwaysShowMask={false}
+          id={id}
+          name={id}
+          type={type}
+          disabled={disabled}
+          className={`${Styles.input} ${className}`}
+          onInput={handleInputValue}
+          placeholder=' '
+          minLength={minLength}
+          maxLength={maxLength}
+          required={required}
+          ref={InputRef}
+          onChange={onChange}
+          pattern={pattern}
+        />
+      ) : (
+        <input
+          id={id}
+          name={id}
+          type={type}
+          disabled={disabled}
+          className={`${Styles.input} ${className}`}
+          onInput={handleInputValue}
+          placeholder=' '
+          minLength={minLength}
+          maxLength={maxLength}
+          required={required}
+          ref={InputRef}
+          onChange={onChange}
+          pattern={pattern}
+        />
+      )}
       <label
         htmlFor={id}
         aria-label={label}
