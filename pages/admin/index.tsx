@@ -1,6 +1,5 @@
 import { CardAdmin } from '@/components/organisms/CardAdmin';
 import Header from '@/components/organisms/Header';
-import Section from '@/components/organisms/Section';
 import { fetchDataUserInfo } from '@/utils/fetchDataAxios';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -21,8 +20,14 @@ function Admin() {
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
 
-    fetchDataUserInfo(accessToken, setDataUser);
-  }, [])
+    const getUserAdmin = async () => {
+      const isAdmin = await fetchDataUserInfo(accessToken, setDataUser)
+      // if (!isAdmin) {
+      //   router.push('/notfound')
+      // }
+    }
+    getUserAdmin()
+  }, [router])
 
   return (
     <>
@@ -52,26 +57,7 @@ function Admin() {
               background={bgInvestidor}
             />
           </section>
-
-
         </section>
-
-
-
-        {/* <main className={Styles.main}>
-          <div className={Styles.main__backgroundImage} />
-
-          <section className={Styles.welcome}>
-            <h1>Bem-vindo(a) a tela de admin, {dataUser?.nome}</h1>
-
-            <div className={Styles.welcome__picture}>picture</div>
-          </section>
-
-          <section className={Styles.main__selections}>
-            <h1>Escolha a melhor opção</h1>
-            <div></div>
-          </section>
-        </main> */}
       </>
     </>
   )
