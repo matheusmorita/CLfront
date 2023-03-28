@@ -1,0 +1,33 @@
+@import '@/styles/variables.scss';
+
+.background {
+    // À partir do momento que novos toens forem adicionados é preciso tratar essa parte do código
+    background: linear-gradient(to top, $black, transparent),
+                url('../../assets/img/backgroundProjetos.png');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover !important;
+    min-height: 100vh;
+    padding: 5rem 0 !important;
+}
+
+.main {
+    position: absolute !important;
+    background-color: red;
+    width: 100%;
+    top: 0;
+    margin-top: 15%;
+    padding: 0 10%;
+
+    @media(max-width: 800px) {
+        margin-top: 20%;
+    }
+
+    @media(max-width: 500px) {
+        margin-top: 30%;
+    }
+
+    &__description {
+        font-size: 1.5rem;
+    }
+}

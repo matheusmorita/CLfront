@@ -7,24 +7,35 @@ import logoImage from '@/assets/img/logo.png';
 //styles 
 import Styles from './styles.module.scss';
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface CardProps {
   title: string;
   background: any;
+  href: string;
 }
 
-export function CardAdmin({ title, background }: CardProps) {
+export function CardAdmin({ title, background, href }: CardProps) {
+  const router = useRouter();
+  const { locale } = router;
+
   return (
     <main
       className={`${Styles.main}`}
     >
-      <Image
-        alt="Imagem respectiva do card"
-        width={400}
-        src={background}
-        className={Styles.backgroundImage}
-      />
-      <h3 className={Styles.main__h3}>{title}</h3>
+      <Link
+        href={href}
+        locale={locale}
+      >
+        <Image
+          alt="Imagem respectiva do card"
+          width={400}
+          src={background}
+          className={Styles.backgroundImage}
+        />
+        <h3 className={Styles.main__h3}>{title}</h3>
+      </Link>
     </main>
   )
 }

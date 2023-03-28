@@ -45,14 +45,17 @@ function Admin() {
 
           <section className={Styles.sectionAdmin__cardSection}>
             <CardAdmin
+              href='#'
               title='Emissor'
               background={bgEmissor}
             />
             <CardAdmin
+              href='/projetos'
               title='Projetos'
               background={bgProjetos}
             />
             <CardAdmin
+              href='#'
               title='Investidores'
               background={bgInvestidor}
             />

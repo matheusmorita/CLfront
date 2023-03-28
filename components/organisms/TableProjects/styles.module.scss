@@ -1,0 +1,26 @@
+@import '@/styles/variables.scss';
+
+.main {
+
+    &__table {
+        // display: flex;
+        // flex-direction: column;
+        width: 100%;
+
+        & td, th {
+            color: $gray;
+        }      
+        & td {
+            background-color: white;
+            padding: 10px;
+
+        }
+        & th {
+            background-color: #F5F5F5;
+            padding: 10px;
+            font-weight: 500;
+        }
+    }
+}
+
+
