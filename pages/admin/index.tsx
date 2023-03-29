@@ -50,7 +50,7 @@ function Admin() {
               background={bgEmissor}
             />
             <CardAdmin
-              href='/projetos'
+              href='/admin/projetos'
               title='Projetos'
               background={bgProjetos}
             />
