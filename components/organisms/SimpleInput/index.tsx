@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 
 import Styles from './styles.module.scss';
 
@@ -8,6 +8,8 @@ interface Props {
   type: string;
   id: string;
   placeholder?: string;
+  maxLength?: number;
+  onChange?: any
 }
 
 export default function SimpleInput({ 
@@ -15,7 +17,9 @@ export default function SimpleInput({
   label,
   type,
   id,
-  placeholder
+  placeholder,
+  maxLength,
+  onChange
 }: Props) {
   return (
     <>
@@ -27,6 +31,8 @@ export default function SimpleInput({
           type={type}
           placeholder={placeholder}
           className={className}
+          maxLength={maxLength}
+          onChange={onChange}
         />
     </>
   )

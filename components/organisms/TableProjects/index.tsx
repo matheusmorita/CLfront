@@ -7,7 +7,12 @@ import InputMask from 'react-input-mask';
 import Input from '@/components/atoms/Input';
 import SimpleInput from '../SimpleInput';
 
-export default function TableProjects() {
+interface Props {
+  modalRegisterProject: boolean;
+  setModalRegisterProject: any;
+}
+
+export default function TableProjects({modalRegisterProject, setModalRegisterProject}: Props) {
   const [inputAll, setInputAll] = React.useState<boolean>(false)
   const [itemsSelecteds, setItemsSelecteds] = React.useState<string[]>([])
   // const [itemClicked, setItemClicked] = React.useState<string>('')
@@ -35,7 +40,7 @@ export default function TableProjects() {
               id='addProject'
               text='+ Novo projeto'
               label='Clique para adicionar novo projeto'
-              onClick={() => { }}
+              onClick={() => setModalRegisterProject(!modalRegisterProject)}
               className={Styles.main__btnProject}
             />
             <div className={Styles.main__menuInputs}>

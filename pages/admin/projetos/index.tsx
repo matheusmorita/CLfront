@@ -11,9 +11,11 @@ import bgEmissor from '@/assets/img/backgroundEmissor.png'
 import bgProjetos from '@/assets/img/backgroundProjetos.png'
 import bgInvestidor from '@/assets/img/backgroundInvestidor.png'
 import TableProjects from '@/components/organisms/TableProjects';
+import RegisterProject from '@/components/organisms/RegisterProject';
 
 export default function Projetos() {
   const [dataUser, setDataUser] = React.useState<any>();
+  const [modalRegisterProject, setModalRegisterProject] = React.useState<boolean>(false);
 
   const router = useRouter();
 
@@ -31,14 +33,21 @@ export default function Projetos() {
   }, [router])
   return (
     <>
+      {/* {modalRegisterProject && (
+        <RegisterProject />
+      )} */}
       <Header />
       <div className={`${Styles.background} ${Styles.intro}`} />
 
+      <RegisterProject />
       <main className={Styles.main}>
         <h1>Projetos</h1>
         <p className={Styles.main__description}>Tenha controle sobre todos os projetos da Coinlivre.</p>
 
-        <TableProjects />
+        <TableProjects
+          modalRegisterProject={modalRegisterProject}
+          setModalRegisterProject={setModalRegisterProject}
+        />
       </main>
 
 
