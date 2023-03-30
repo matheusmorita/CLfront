@@ -27,6 +27,7 @@ export function CardAdmin({ title, background, href }: CardProps) {
       <Link
         href={href}
         locale={locale}
+        style={{display: 'flex'}}
       >
         <Image
           alt="Imagem respectiva do card"

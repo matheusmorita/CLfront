@@ -51,20 +51,43 @@
 }
 
 .sectionAdmin {
-    position: absolute !important;
+    // position: absolute !important;
     width: 100%;
     top: 0;
     margin-top: 10%;
-    padding: 0 6%;
+    position: absolute !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
 
     @media (max-width: 500px) {
         margin-top: 35%;
     }
 
+    &__userAdminSection {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100%;
+
+        @media (max-width: 992px) {
+            justify-content: center;
+        }
+    }
+
+    &__profileImage {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        margin: 2%;
+    }
+
     &__title {
-        font-size: 4rem;
+        font-size: 3rem;
         max-width: 600px;
+        text-align: center;
 
         @media (max-width: 1366px) {
             font-size: 2rem;
@@ -75,6 +98,8 @@
     &__description {
         max-width: 600px;
         font-size: 1.5rem;
+        text-align: center;
+        padding: 0 2%;
 
         @media (max-width: 1366px) {
             font-size: 1.1rem;
@@ -83,15 +108,19 @@
     }
 
     &__cardSection {
-        margin-top: 5%;
         display: flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
         gap: 3%;
+        max-width: 992px;
+
+        // margin-top: 5%;
+        // display: flex;
+        // flex-wrap: wrap;
+        // gap: 3%;
         
 
-        @media (max-width: 800px) {
+        @media (max-width: 992px) {
             justify-content: center;
+            flex-wrap: wrap;
         }
     }
 }
