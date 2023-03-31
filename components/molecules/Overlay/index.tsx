@@ -5,8 +5,8 @@ import Styles from './styles.module.scss';
 interface MenuInterface {
   isOpen: boolean;
   setIsOpen: any;
-  setMenuItemIsOpen: any;
-  setopenLink: any;
+  setMenuItemIsOpen?: any;
+  setopenLink?: any;
 }
 
 const Overlay = ({ 

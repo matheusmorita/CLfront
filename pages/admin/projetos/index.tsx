@@ -12,10 +12,13 @@ import bgProjetos from '@/assets/img/backgroundProjetos.png'
 import bgInvestidor from '@/assets/img/backgroundInvestidor.png'
 import TableProjects from '@/components/organisms/TableProjects';
 import RegisterProject from '@/components/organisms/RegisterProject';
+import Overlay from '@/components/molecules/Overlay';
 
 export default function Projetos() {
   const [dataUser, setDataUser] = React.useState<any>();
   const [modalRegisterProject, setModalRegisterProject] = React.useState<boolean>(false);
+  const [isOpenOverlay, setIsOpenOverlay] = React.useState<boolean>(true);
+
 
   const router = useRouter();
 
@@ -39,6 +42,14 @@ export default function Projetos() {
       <Header />
       <div className={`${Styles.background} ${Styles.intro}`} />
 
+      {isOpenOverlay && (
+        <Overlay
+          isOpen={isOpenOverlay}
+          setIsOpen={setIsOpenOverlay}
+          setMenuItemIsOpen={setIsOpenOverlay}
+          setopenLink={setIsOpenOverlay}
+        />
+      )}
       <RegisterProject />
       <main className={Styles.main}>
         <h1>Projetos</h1>

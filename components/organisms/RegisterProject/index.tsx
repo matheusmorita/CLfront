@@ -5,15 +5,26 @@ import Styles from './styles.module.scss';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
+//components
 import SimpleInput from '../SimpleInput';
+import DivisionBar from '@/components/atoms/Division';
+import { NumericFormat } from 'react-number-format';
 
 export default function RegisterProject() {
   const [nameInputBackground, setNameInputBackground] = React.useState<string>('');
+  const [valueInputRentability, setValueInputRentability] = React.useState<number>(0);
 
   const handleOnChangeInput = (e: any) => {
     const file = e.target.files[0]
     setNameInputBackground(file.name)
+  }
 
+  const notAllowNegativeNumber = (e: any) => {
+    if (e.target.value < 0) {
+      setValueInputRentability(0)
+    } else {
+      setValueInputRentability(e.target.value)
+    }
   }
 
   return (
@@ -23,7 +34,7 @@ export default function RegisterProject() {
                     <CloseIcon className={Styles.closeButtonIcon} />
                 </button> */}
         <section className={Styles.mainProjectModal__registerSection}>
-          <h2 style={{ color: 'black' }}>Cadastro de projeto</h2>
+          <h2>Cadastro de projeto</h2>
 
           <section className={Styles.mainProjectModal__spaceItemsRegister}>
             <div className={Styles.mainProjectModal__divItem}>
@@ -33,6 +44,7 @@ export default function RegisterProject() {
                 id='projectName'
                 type='text'
                 maxLength={25}
+                required={true}
               />
               <p className={Styles.mainProjectModal__caracteresLength}>25 caracteres</p>
             </div>
@@ -45,8 +57,9 @@ export default function RegisterProject() {
                 type='text'
                 maxLength={6}
                 onChange={(e: any) => console.log(e.target.value.toUpperCase())}
+                required={true}
               />
-              <p className={Styles.mainProjectModal__caracteresLength}>4 caracteres</p>
+              <p className={Styles.mainProjectModal__caracteresLength}>6 caracteres</p>
             </div>
 
             <div className={Styles.mainProjectModal__divItem}>
@@ -59,7 +72,7 @@ export default function RegisterProject() {
                 </p>
               </div>
               <div className={Styles.textareaStyleDiv}>
-                <textarea maxLength={300} style={{ minHeight: '100px', resize: 'none' }} className={Styles.textareaStyle}></textarea>
+                <textarea required maxLength={300} style={{ minHeight: '100px' }} className={Styles.textareaStyle}></textarea>
                 <p className={Styles.mainProjectModal__caracteresLength}>300 caracteres</p>
               </div>
             </div>
@@ -75,7 +88,7 @@ export default function RegisterProject() {
                 </p>
               </div>
               <div className={Styles.textareaStyleDiv}>
-                <textarea maxLength={1190} style={{ minHeight: '150px', resize: 'none' }} className={Styles.textareaStyle}></textarea>
+                <textarea required maxLength={1190} style={{ minHeight: '150px' }} className={Styles.textareaStyle}></textarea>
                 <p className={Styles.mainProjectModal__caracteresLength}>1.190 caracteres</p>
               </div>
             </div>
@@ -111,7 +124,7 @@ export default function RegisterProject() {
                 </p>
               </div>
               {/* <input type='file' style={{width: '200px', height: '200px', background: 'red'}} /> */}
-              <label htmlFor='backgroundProject' className={Styles.projectNameInput}>
+              <label htmlFor='backgroundProject' className={Styles.labelInputUploadPhoto}>
                 <SimpleInput
                   type='file'
                   className=''
@@ -125,6 +138,65 @@ export default function RegisterProject() {
               </label>
             </div>
 
+            <DivisionBar
+              className={Styles.divisionBar}
+            />
+          </section>
+          <h2>Cadastro do Token</h2>
+          <section className={Styles.mainProjectModal__spaceItemsRegister}>
+            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+              <strong className={Styles.titleInputRent}>Data de lançamento: </strong>
+              <SimpleInput
+                className={Styles.inputDate}
+                id='inputDate'
+                type='date'
+              />
+            </div>
+
+            <div className={Styles.divRetornos}>
+              <strong className={Styles.titleInputRent}>Tipo de retorno: </strong>
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-around',
+                marginLeft: '5%',
+                flex: '1',
+              }}>
+                <label htmlFor='inputBeneficios' className={Styles.styleLabelRent}>
+                  <input id='inputBeneficiosCheckbox' type='checkbox' />
+                  <span>Retorno em benefícios</span>
+                </label>
+
+                <label htmlFor='inputRentabilidade' className={Styles.styleLabelRent}>
+                  <input id='inputRentabilidadeCheckbox' type='checkbox' />
+                  <span>Rentabilidade</span>
+                </label>
+              </div>
+            </div>
+
+            <div className={Styles.divRetornos}>
+              <strong className={Styles.titleInputRent}>Rentabilidade estimada: </strong>
+              <SimpleInput
+                className={Styles.inputDate}
+                id='inputRentabilidade'
+                type='number'
+                placeholder='X% a. a. do CDI'
+                min={0}
+                onChange={notAllowNegativeNumber}
+              />
+            </div>
+
+            <div className={Styles.divRetornos}>
+              <strong className={Styles.titleInputRent}>Quantidade de tokens: </strong>
+              <NumericFormat 
+                className={Styles.inputDate}
+                decimalSeparator=','
+                thousandSeparator='.'
+              />
+            </div>
+
+            <DivisionBar
+              className={Styles.divisionBar}
+            />
           </section>
         </section>
       </form>

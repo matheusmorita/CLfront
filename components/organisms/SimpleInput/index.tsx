@@ -1,6 +1,8 @@
-import React, {ChangeEvent} from 'react';
+import React, { ChangeEvent } from 'react';
 
 import Styles from './styles.module.scss';
+
+import InputMask from 'react-input-mask';
 
 interface Props {
   className: string;
@@ -9,23 +11,50 @@ interface Props {
   id: string;
   placeholder?: string;
   maxLength?: number;
-  onChange?: any
+  onChange?: any;
+  required?: boolean
+  min?: number;
 }
 
-export default function SimpleInput({ 
+export default function SimpleInput({
   className,
   label,
   type,
   id,
   placeholder,
   maxLength,
-  onChange
+  onChange,
+  required,
+  min
 }: Props) {
   return (
     <>
       <label htmlFor={id} className={Styles.label}>
-          {label}
-        </label>
+        {label}
+      </label>
+      <input
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          className={className}
+          maxLength={maxLength}
+          onChange={onChange}
+          required={required}
+          min={min}
+        />
+      {/* {type === 'number' ? (
+        <InputMask
+          mask=''
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          className={className}
+          maxLength={maxLength}
+          onChange={onChange}
+          required={required}
+          min={min}
+        />
+      ) : (
         <input
           id={id}
           type={type}
@@ -33,7 +62,11 @@ export default function SimpleInput({
           className={className}
           maxLength={maxLength}
           onChange={onChange}
+          required={required}
+          min={min}
         />
+      )} */}
+
     </>
   )
 }
