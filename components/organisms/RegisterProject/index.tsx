@@ -9,6 +9,8 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import SimpleInput from '../SimpleInput';
 import DivisionBar from '@/components/atoms/Division';
 import { NumericFormat } from 'react-number-format';
+import GenericInputInfo from '@/components/molecules/GenericInputInfo';
+import GenericInputCheckbox from '@/components/atoms/GenericInputCheckbox';
 
 export default function RegisterProject() {
   const [nameInputBackground, setNameInputBackground] = React.useState<string>('');
@@ -123,7 +125,6 @@ export default function RegisterProject() {
                   máximo do arquivo: 4 MB.
                 </p>
               </div>
-              {/* <input type='file' style={{width: '200px', height: '200px', background: 'red'}} /> */}
               <label htmlFor='backgroundProject' className={Styles.labelInputUploadPhoto}>
                 <SimpleInput
                   type='file'
@@ -142,7 +143,7 @@ export default function RegisterProject() {
               className={Styles.divisionBar}
             />
           </section>
-          <h2>Cadastro do Token</h2>
+          <h2 style={{ margin: '2% 0' }}>Cadastro do Token</h2>
           <section className={Styles.mainProjectModal__spaceItemsRegister}>
             <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
               <strong className={Styles.titleInputRent}>Data de lançamento: </strong>
@@ -161,15 +162,14 @@ export default function RegisterProject() {
                 marginLeft: '5%',
                 flex: '1',
               }}>
-                <label htmlFor='inputBeneficios' className={Styles.styleLabelRent}>
-                  <input id='inputBeneficiosCheckbox' type='checkbox' />
-                  <span>Retorno em benefícios</span>
-                </label>
-
-                <label htmlFor='inputRentabilidade' className={Styles.styleLabelRent}>
-                  <input id='inputRentabilidadeCheckbox' type='checkbox' />
-                  <span>Rentabilidade</span>
-                </label>
+                <GenericInputCheckbox
+                  id='inputBeneficiosCheckbox'
+                  text='Retorno em benefícios'
+                />
+                <GenericInputCheckbox
+                  id='inputRentabilidade'
+                  text='Rentabilidade'
+                />
               </div>
             </div>
 
@@ -187,7 +187,7 @@ export default function RegisterProject() {
 
             <div className={Styles.divRetornos}>
               <strong className={Styles.titleInputRent}>Quantidade de tokens: </strong>
-              <NumericFormat 
+              <NumericFormat
                 className={Styles.inputDate}
                 decimalSeparator=','
                 thousandSeparator='.'
@@ -197,6 +197,30 @@ export default function RegisterProject() {
             <DivisionBar
               className={Styles.divisionBar}
             />
+          </section>
+          <h2 style={{ margin: '2% 0', textAlign: 'center' }}>Regras de benefícios / Rentabilidade e token</h2>
+          <section className={Styles.mainProjectModal__spaceItemsRegister}>
+            <div className={Styles.divRegraBenefits}>
+              <strong className={Styles.titleInputRent}>Quantidade de tokens: </strong>
+              <section style={{ display: 'flex' }}>
+                <GenericInputInfo
+                  id='Data'
+                  text='Data'
+                  type='text'
+                />
+                <GenericInputInfo
+                  id='Data'
+                  text='Benefício'
+                  type='text'
+                />
+                <GenericInputInfo
+                  id='status'
+                  text='Status'
+                  type='checkbox'
+                  label='Entregue'
+                />
+              </section>
+            </div>
           </section>
         </section>
       </form>

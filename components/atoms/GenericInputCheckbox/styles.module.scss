@@ -1,0 +1,12 @@
+@import '@/styles/variables.scss';
+
+.styleLabelRent {
+    display: flex;
+    align-items: center;
+    
+
+    & span {
+        font-size: 1.2rem;
+        color: $gray;
+    }
+}

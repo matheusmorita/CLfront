@@ -32,17 +32,7 @@ export default function SimpleInput({
       <label htmlFor={id} className={Styles.label}>
         {label}
       </label>
-      <input
-          id={id}
-          type={type}
-          placeholder={placeholder}
-          className={className}
-          maxLength={maxLength}
-          onChange={onChange}
-          required={required}
-          min={min}
-        />
-      {/* {type === 'number' ? (
+      {type === 'number' ? (
         <InputMask
           mask=''
           id={id}
@@ -65,8 +55,7 @@ export default function SimpleInput({
           required={required}
           min={min}
         />
-      )} */}
-
+      )}
     </>
   )
 }

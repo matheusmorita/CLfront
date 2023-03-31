@@ -80,17 +80,11 @@
     margin: 5% 0;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.styleLabelRent {
-    display: flex;
-    align-items: center;
-    
-
-    & span {
-        font-size: 1.2rem;
-        color: $gray;
-    }
+.divRegraBenefits {
+    display: grid;
 }
 
 .closeButtonIcon {
