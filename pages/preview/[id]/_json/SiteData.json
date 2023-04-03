@@ -1,0 +1,27 @@
+{
+    "banner": {
+        "title": "PROJETO",
+        "subtitle": "SUBTÍTULO",
+        "category": "TOKEN DE ENERGIA",
+        "description": "Token de funding de maquinário industrial para produção de energia limpa, com retorno sobre o modelo de negócios de comodato para grandes empresas, e sempre após implementação dos produtos. Rentabilidade Estimada: 24,6% a.a."
+    },
+    "sobre": {
+        "title": "Sobre o token",
+        "description": "A METABLOCK, em parceria com a empresa de gestão de ativos, BRABO GESTÃO DE RECEBÍVEIS LTDA, lançam o Token BRABO 1, primeiro token de muitos! A BRABO é consultora na gestão e cobrança de recebíveis, e possui mais de 150 milhões de reais de ativos em sua carteira, a serem performados no longo prazo. O primeiro projeto que disponibilizou para tokenização na Plataforma da Metablock conta com uma antecipação de recebíveis de locação de uma unidade habitacional situada no Bairro do Cocó, na cidade de Fortaleza/CE, cujo contrato de locação foi firmado por 30 meses, com gestão realizada pela empresa, em contrato com recebíveis garantidos pela Brabo. As características da antecipação compreendem juros de 1,45% a.m. no sistema de amortização, com prazo de devolução de 12 meses."
+    },
+    "documentos": {
+        "title": "Documentos",
+        "description": ""
+    },
+    "discord": {
+        "paragraph": "Fique por dentro de todas as novidades e saia na frente"
+    },
+    "emissor": {
+        "title": "Emissor",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut urna ornare, varius nisl in, condimentum dui. Integer sit amet hendrerit lectus, nec molestie dolor. Pellentesque id sodales justo. Phasellus ac lectus ipsum. Sed sed quam nec lectus accumsan sagittis et a erat. Cras porta rhoncus libero, sed maximus massa ornare vel. Nullam non urna lobortis, ultricies risus at, mollis erat.",
+        "button": {
+            "text": "ACESSE O SITE",
+            "label": "Clique e acesse o site do emissor."
+        }
+    }
+}

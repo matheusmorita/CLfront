@@ -13,6 +13,11 @@
         width: 330px;
     }
 
+    // @media(max-width: 600px) {
+    //     width: 380px;
+    //     height: 80px;
+    // }
+
     &:hover {
         filter: saturate(1);
         transition: .5s;

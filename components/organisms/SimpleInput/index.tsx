@@ -14,6 +14,7 @@ interface Props {
   onChange?: any;
   required?: boolean
   min?: number;
+  disabled?: boolean;
 }
 
 export default function SimpleInput({
@@ -25,7 +26,8 @@ export default function SimpleInput({
   maxLength,
   onChange,
   required,
-  min
+  min,
+  disabled
 }: Props) {
   return (
     <>
@@ -43,6 +45,7 @@ export default function SimpleInput({
           onChange={onChange}
           required={required}
           min={min}
+          disabled={disabled}
         />
       ) : (
         <input
@@ -54,6 +57,7 @@ export default function SimpleInput({
           onChange={onChange}
           required={required}
           min={min}
+          disabled={disabled}
         />
       )}
     </>

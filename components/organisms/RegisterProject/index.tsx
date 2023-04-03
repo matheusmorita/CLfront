@@ -2,7 +2,6 @@ import React from 'react';
 
 //assets
 import Styles from './styles.module.scss';
-import CloseIcon from '@mui/icons-material/Close';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 //components
@@ -14,10 +13,36 @@ import GenericInputCheckbox from '@/components/atoms/GenericInputCheckbox';
 import Button from '@/components/atoms/Button';
 import TableRegister from '../TableRegister';
 import UploadFiles from '../UploadFiles';
+import { toast } from 'react-toastify'
+import CloseIcon from '@mui/icons-material/Close';
 
-export default function RegisterProject() {
+//utils
+import { verifyBeforeDate } from '@/utils/verifyBeforeDate';
+import { dispatchErrorNotification, dispatchSuccessNotification } from '@/utils/dispatchNotifications';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+interface Props {
+  modalRegisterProject: boolean;
+  setModalRegisterProject: any;
+}
+
+
+export default function RegisterProject({ modalRegisterProject, setModalRegisterProject }: Props) {
   const [nameInputBackground, setNameInputBackground] = React.useState<string>('');
   const [valueInputRentability, setValueInputRentability] = React.useState<number>(0);
+
+  //Estados de dados Input
+  const [projectName, setProjectName] = React.useState();
+  const [siglaName, setSiglaName] = React.useState();
+  const [descriptionBreve, setDescriptionBreve] = React.useState();
+  const [descriptionLonga, setDescriptionLonga] = React.useState();
+  const [checkboxRentabilidade, setCheckboxRentabilidade] = React.useState(false);
+  const [qtdTokens, setQtdTokens] = React.useState();
+
+  //router Next
+  const router = useRouter();
+  const { locale } = router
 
   const handleOnChangeInput = (e: any) => {
     const file = e.target.files[0]
@@ -32,36 +57,62 @@ export default function RegisterProject() {
     }
   }
 
+  const handleCheckDate = (e: any) => {
+    if (verifyBeforeDate(e.target.value)) {
+      dispatchErrorNotification(toast, 'A data inserida precisa ser maior ou igual a data atual', false)
+    } else {
+      dispatchSuccessNotification(toast, 'A data inserida está correta!', false)
+    }
+  }
+
+  const handleCheckbox = () => {
+    setCheckboxRentabilidade(!checkboxRentabilidade)
+  }
+
+  const handleCloseModalRegister = (e: any) => {
+    e.preventDefault()
+    setModalRegisterProject(!modalRegisterProject)
+  }
+
   return (
     <>
       <form className={Styles.mainProjectModal}>
         <section className={Styles.mainProjectModal__registerSection}>
+          <span className={Styles.mainProjectModal__closeModalButton}>
+            <CloseIcon 
+              className={Styles.closeButtonIcon}
+              onClick={handleCloseModalRegister}
+            />
+          </span>
           <h2>Cadastro de projeto</h2>
 
           <section className={Styles.mainProjectModal__spaceItemsRegister}>
             <div className={Styles.mainProjectModal__divItem}>
               <p className={Styles.mainProjectModal__titleInput}>Nome do projeto: </p>
               <SimpleInput
-                className={Styles.projectNameInput}
+                className={projectName === '' ? Styles.inputError : Styles.projectNameInput}
                 id='projectName'
                 type='text'
                 maxLength={25}
                 required={true}
+                placeholder='Nome do projeto'
+                onChange={(e: any) => setProjectName(e.target.value)}
               />
-              <p className={Styles.mainProjectModal__caracteresLength}>25 caracteres</p>
+              <p className={projectName === '' ? Styles.caracteresLengthError : Styles.mainProjectModal__caracteresLength}>25 caracteres</p>
             </div>
 
             <div className={Styles.mainProjectModal__divItem}>
               <p className={Styles.mainProjectModal__titleInput}>Sigla do projeto: </p>
               <SimpleInput
-                className={Styles.projectNameInput}
+                className={siglaName === '' ? Styles.inputError : Styles.projectNameInput}
                 id='projectSigla'
                 type='text'
                 maxLength={6}
-                onChange={(e: any) => console.log(e.target.value.toUpperCase())}
+                onChange={(e: any) => setSiglaName(e.target.value)}
                 required={true}
+                placeholder='Digite somente a SIGLA sem o "#"'
               />
-              <p className={Styles.mainProjectModal__caracteresLength}>6 caracteres</p>
+              <p className={siglaName === '' ? Styles.caracteresLengthError : Styles.mainProjectModal__caracteresLength}>6 caracteres</p>
             </div>
 
             <div className={Styles.mainProjectModal__divItem}>
@@ -74,8 +125,14 @@ export default function RegisterProject() {
                 </p>
               </div>
               <div className={Styles.textareaStyleDiv}>
-                <textarea required maxLength={300} style={{ minHeight: '100px' }} className={Styles.textareaStyle}></textarea>
-                <p className={Styles.mainProjectModal__caracteresLength}>300 caracteres</p>
+                <textarea
+                  required
+                  maxLength={300}
+                  style={{ minHeight: '100px' }}
+                  className={descriptionBreve === '' ? Styles.textareaStyleError : Styles.textareaStyle}
+                  onChange={(e: any) => setDescriptionBreve(e.target.value)}
+                ></textarea>
+                <p className={descriptionBreve === '' ? Styles.caracteresLengthError : Styles.mainProjectModal__caracteresLength}>300 caracteres</p>
               </div>
             </div>
 
@@ -90,8 +147,14 @@ export default function RegisterProject() {
                 </p>
               </div>
               <div className={Styles.textareaStyleDiv}>
-                <textarea required maxLength={1190} style={{ minHeight: '150px' }} className={Styles.textareaStyle}></textarea>
-                <p className={Styles.mainProjectModal__caracteresLength}>1.190 caracteres</p>
+                <textarea
+                  required
+                  maxLength={1190}
+                  style={{ minHeight: '150px' }}
+                  className={descriptionLonga === '' ? Styles.textareaStyleError : Styles.textareaStyle}
+                  onChange={(e: any) => setDescriptionLonga(e.target.value)}
+                ></textarea>
+                <p className={descriptionLonga === '' ? Styles.caracteresLengthError : Styles.mainProjectModal__caracteresLength}>1.190 caracteres</p>
               </div>
             </div>
 
@@ -151,6 +214,7 @@ export default function RegisterProject() {
                 className={Styles.inputDate}
                 id='inputDate'
                 type='date'
+                onChange={handleCheckDate}
               />
             </div>
 
@@ -164,12 +228,14 @@ export default function RegisterProject() {
                 <GenericInputCheckbox
                   id='inputRentabilidade'
                   text='Rentabilidade'
+                  checked={checkboxRentabilidade}
+                  onChange={handleCheckbox}
                 />
               </div>
             </div>
 
             <div className={Styles.divRetornos}>
-              <strong className={Styles.titleInputRent}>Rentabilidade estimada: </strong>
+              <strong className={checkboxRentabilidade ? Styles.titleInputRent : Styles.titleInputRentDisabled}>Rentabilidade estimada: </strong>
               <SimpleInput
                 className={Styles.inputDate}
                 id='inputRentabilidade'
@@ -177,6 +243,7 @@ export default function RegisterProject() {
                 placeholder='X% a. a. do CDI'
                 min={0}
                 onChange={notAllowNegativeNumber}
+                disabled={!checkboxRentabilidade}
               />
             </div>
 
@@ -186,6 +253,7 @@ export default function RegisterProject() {
                 className={Styles.inputDate}
                 decimalSeparator=','
                 thousandSeparator='.'
+                onChange={(e: any) => setQtdTokens(e.target.value)}
               />
             </div>
 
@@ -238,14 +306,20 @@ export default function RegisterProject() {
               </section>
             </div>
           </section>
-          <Button
-            hidden={false}
-            id='previaButton'
-            label='Clique para ver a prévia'
-            onClick={() => { }}
-            text={'Confira a prévia antes de salvar'}
-            className={Styles.buttonPrevia}
-          />
+          <Link
+            href={'/preview/ideia'}
+            locale={locale}
+            className={Styles.linkStyle}
+          >
+            <Button
+              hidden={false}
+              id='previaButton'
+              label='Clique para ver a prévia'
+              onClick={() => { }}
+              text={'Confira a prévia antes de salvar'}
+              className={Styles.buttonPrevia}
+            />
+          </Link>
 
           <div className={Styles.saveInfoSection}>
             <Button
@@ -254,7 +328,8 @@ export default function RegisterProject() {
               label='Clique para ver a prévia'
               onClick={() => { }}
               text={'Salvar informações até o momento'}
-              className={Styles.buttonPrevia}
+              className={Styles.buttonSaveInfo}
+              disabled
             />
           </div>
         </section>

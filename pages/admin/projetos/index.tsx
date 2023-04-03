@@ -44,7 +44,12 @@ export default function Projetos() {
           setopenLink={setIsOpenOverlay}
         />
       )}
-      <RegisterProject />
+      {modalRegisterProject && (
+        <RegisterProject
+          modalRegisterProject={modalRegisterProject}
+          setModalRegisterProject={setModalRegisterProject}
+        />
+      )}
       <main className={Styles.main}>
         <h1>Projetos</h1>
         <p className={Styles.main__description}>Tenha controle sobre todos os projetos da Coinlivre.</p>

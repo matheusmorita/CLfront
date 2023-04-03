@@ -27,12 +27,18 @@
     border: none;
   }
 
+  &__closeModalButton {
+    padding: 2%;
+    width: 100%;
+    text-align: end;
+  }
+
   &__registerSection {
     display: flex;
     align-items: center;
     flex-direction: column;
     background-color: white;
-    padding: 5% 0 0 0;
+    // padding: 5% 0 0 0;
     border-radius: 10px;
     max-height: 70vh;
     overflow-y: auto;
@@ -91,6 +97,11 @@
   font-size: 1.5rem;
 }
 
+.titleInputRentDisabled {
+  color: $light;
+  font-size: 1.5rem;
+}
+
 .divRetornos {
   margin: 5% 0;
   display: flex;
@@ -100,9 +111,25 @@
 
 .closeButtonIcon {
   fill: $gray;
+  cursor: pointer;
+}
+
+.linkStyle {
+  margin: 2% 0;
 }
 
 .buttonPrevia {
+  font-size: 1.5rem;
+  border-radius: 50px;
+  margin: 2%;
+  width: 100%;
+
+  @media (max-width: 600px) {
+    font-size: 1rem;
+  }
+}
+
+.buttonSaveInfo {
   font-size: 1.5rem;
   border-radius: 50px;
   margin: 2%;
@@ -141,6 +168,12 @@
   flex: 1;
   margin: 0 2%;
   min-width: 138px;
+
+  &:disabled {
+    cursor: not-allowed;
+    color: $light;
+    border: 1px solid $light;
+  }
 }
 
 .projectNameInput {
@@ -163,6 +196,11 @@
   // @media(max-width: 992px) {
   //     justify-content: flex-start;
   // }
+}
+
+.textareaStyleError {
+  outline: 1px solid red;
+  border-radius: 8px;
 }
 
 .textareaStyle {
@@ -240,4 +278,26 @@
     flex-direction: column;
     justify-content: flex-start;
   }
+}
+
+.inputError {
+  border: 1px solid $error;
+  border-radius: 8px;
+  margin-left: 2%;
+  margin-right: .5%;
+  padding: 8px 10px;
+  flex: 1;
+  color: $gray;
+
+  &:focus-within {
+    // border: 2px solid red;
+    outline: 1px solid red;
+  }
+}
+
+.caracteresLengthError {
+  color: $error;
+  font-size: .9rem;
+  align-self: flex-end;
+  max-width: 200px;
 }

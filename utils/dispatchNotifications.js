@@ -6,3 +6,12 @@ export const dispatchErrorNotification = (toast, message, redirect=true) => {
     }, 6000);
   }
 }
+
+export const dispatchSuccessNotification = (toast, message, redirect=true) => {
+  toast.success(message)
+  if (redirect) {
+    setTimeout(() => {
+      window.location.reload()
+    }, 6000);
+  }
+}

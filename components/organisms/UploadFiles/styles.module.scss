@@ -64,8 +64,8 @@
     font-weight: 500;
     margin: 10px;
 
-    & hr {
-        height: 1px;
-        background-color: $gray;
+    @media (max-width: 500px) {
+        font-size: .8rem;
     }
+
 }

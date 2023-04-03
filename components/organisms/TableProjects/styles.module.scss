@@ -11,12 +11,14 @@
 
     &__menuHeader {
         display: flex;
+        align-items: center;
     }
 
     &__menuInputs {
         display: flex;
         flex: 1;
         justify-content: flex-end;
+        flex-wrap: wrap;
     }
 
     &__btnProject {
@@ -25,7 +27,7 @@
         font-size: 1.1rem;
         min-width: 180px;
         max-height: 40px;
-        margin-right: 15%;
+        // margin-right: 15%;
 
 
         @media(max-width: 992px) {
@@ -44,7 +46,7 @@
         border: 1px solid $gray;
         border-radius: 50px;
         color: $gray;
-        margin: 0 1%;
+        margin: 1%;
         max-height: 35px;
     }
 
