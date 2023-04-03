@@ -13,6 +13,7 @@ import GenericInputInfo from '@/components/molecules/GenericInputInfo';
 import GenericInputCheckbox from '@/components/atoms/GenericInputCheckbox';
 import Button from '@/components/atoms/Button';
 import TableRegister from '../TableRegister';
+import UploadFiles from '../UploadFiles';
 
 export default function RegisterProject() {
   const [nameInputBackground, setNameInputBackground] = React.useState<string>('');
@@ -285,6 +286,8 @@ export default function RegisterProject() {
             </div>
           </div>
         </form>
+
+        <UploadFiles />
       </form>
     </>
   )

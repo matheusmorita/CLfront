@@ -5,7 +5,6 @@ import Styles from './styles.module.scss';
 //assets
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Input from '@/components/atoms/Input';
 import ConditionalAddInput from './ConditionalAddInput';
 
 export default function TableRegister() {

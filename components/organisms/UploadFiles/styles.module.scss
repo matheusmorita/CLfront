@@ -1,0 +1,71 @@
+@import '@/styles/variables.scss';
+
+.mainFormDoc {
+    background-color: white;
+    border-radius: 10px;
+    min-height: 300px;
+    padding: 50px;
+    margin-bottom: 5%;
+
+    & h2 {
+        color: $gray;
+        font-weight: 600;
+    }
+
+    &__arrowStyle {
+        fill: $primary;
+        transform: rotate(90deg);
+    }
+
+    &__labelInputUploadPhoto {
+        display: flex;
+        border: 1px solid $gray;
+        border-radius: 10px;
+        padding: 10px;
+        justify-content: flex-end;
+        flex: 1;
+        max-width: 500px;
+        color: black;
+    }
+
+    &__inputDocSection {
+        display: flex;
+        justify-content: flex-start;
+        gap: 5%;
+        flex-wrap: wrap;
+        padding: 0 5%;
+    }
+
+    &__labelDescription {
+        max-width: 500px;
+
+        & span {
+            color: $gray;
+            margin: 0 2%;
+        }
+    }
+    
+    &__sectionDocs {
+        display: flex;
+        max-width: 500px;
+        flex-wrap: wrap;
+
+        @media (max-width: 500px) {
+            justify-content: center;
+        }
+    }
+}
+
+.documentCardStyle {
+    background: $primary;
+    color: white;
+    padding: 10px;
+    border-radius: 50px;
+    font-weight: 500;
+    margin: 10px;
+
+    & hr {
+        height: 1px;
+        background-color: $gray;
+    }
+}
