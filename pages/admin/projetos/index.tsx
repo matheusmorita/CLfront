@@ -26,13 +26,7 @@ export default function Projetos() {
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
 
-    const getUserAdmin = async () => {
-      const isAdmin = await fetchDataUserInfo(accessToken, setDataUser)
-      // if (!isAdmin) {
-      //   router.push('/notfound')
-      // }
-    }
-    getUserAdmin()
+    fetchDataUserInfo(accessToken, setDataUser, router)
   }, [router])
   return (
     <>

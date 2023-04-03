@@ -33,13 +33,7 @@ function Admin() {
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
 
-    const getUserAdmin = async () => {
-      const isAdmin = await fetchDataUserInfo(accessToken, setDataUser)
-      // if (!isAdmin) {
-      //   router.push('/notfound')
-      // }
-    }
-    getUserAdmin()
+    fetchDataUserInfo(accessToken, setDataUser, router)
   }, [router])
 
   return (
@@ -53,7 +47,10 @@ function Admin() {
             <Image
               alt='Imagem do usuário Admin'
               src={dataUser?.imgPerfilUrl || defaultImage}
-              className={Styles.sectionAdmin__profileImage} />
+              className={Styles.sectionAdmin__profileImage}
+              width={250}
+              height={250}
+              />
             <div>
               <h2 className={Styles.sectionAdmin__title}>{dataUser?.nome || 'Admin'}, bem-vindo(a).</h2>
               <p className={Styles.sectionAdmin__description}>

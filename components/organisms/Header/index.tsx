@@ -49,6 +49,8 @@ const Header = ({ hideLinks }: Props) => {
 
   const { locale, locales, push, asPath, pathname } = useRouter();
 
+  const router = useRouter();
+
   const t = locale === 'en' ? en : pt
 
   React.useEffect(() => {
@@ -56,10 +58,10 @@ const Header = ({ hideLinks }: Props) => {
 
     const accessToken = localStorage.getItem('accessToken')
 
-    fetchDataUserInfo(accessToken, setDataUser)
+    fetchDataUserInfo(accessToken, setDataUser, router)
 
     // router.push(`${beforePath}`)
-  }, [info])
+  }, [info, router])
 
 
   const handleHeaderChange = () => {
@@ -93,7 +95,7 @@ const Header = ({ hideLinks }: Props) => {
 
   }, [])
 
-  const router = useRouter();
+  
 
   return (
     <nav className={`${Styles.navbar} ${whiteTheme ? Styles.white : ''}`}>

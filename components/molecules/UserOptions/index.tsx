@@ -41,11 +41,7 @@ const UserOptions = ({
 
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
-    const getUserAdmin = async () => {
-      const isAdmin = await fetchDataUserInfo(accessToken, setDataUser)
-      setAdmin(isAdmin)
-    }
-    getUserAdmin()
+    fetchDataUserInfo(accessToken, setDataUser, router)
   }, [router])
 
 

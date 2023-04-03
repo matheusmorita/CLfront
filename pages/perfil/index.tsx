@@ -73,7 +73,7 @@ const Perfil = () => {
 
     const widthWindow = getWindowInnerWidth()
 
-    fetchDataUserInfo(accessToken, setDataUser)
+    fetchDataUserInfo(accessToken, setDataUser, router)
     fetchUserHistoryinfo(accessToken, setHistoryUser)
   }, [])
 

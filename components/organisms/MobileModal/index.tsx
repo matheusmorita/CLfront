@@ -58,13 +58,13 @@ function MobileModal({ projectSelectedProps, loteProps, valorTokenProps }: Modal
   React.useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
     fetchDataAxios("4", setProjects)
-    fetchDataUserInfo(accessToken, setDataUser)
+    fetchDataUserInfo(accessToken, setDataUser, router)
 
     const idProject = localStorage.getItem('idProject')
     setConditionalBuy(idProject)
     setIdProject(idProject)
 
-  }, [])
+  }, [router])
 
   return (
     <>

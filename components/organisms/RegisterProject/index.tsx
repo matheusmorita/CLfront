@@ -11,6 +11,8 @@ import DivisionBar from '@/components/atoms/Division';
 import { NumericFormat } from 'react-number-format';
 import GenericInputInfo from '@/components/molecules/GenericInputInfo';
 import GenericInputCheckbox from '@/components/atoms/GenericInputCheckbox';
+import Button from '@/components/atoms/Button';
+import TableRegister from '../TableRegister';
 
 export default function RegisterProject() {
   const [nameInputBackground, setNameInputBackground] = React.useState<string>('');
@@ -32,9 +34,6 @@ export default function RegisterProject() {
   return (
     <>
       <form className={Styles.mainProjectModal}>
-        {/* <button className={Styles.mainProjectModal__closeButton}>
-                    <CloseIcon className={Styles.closeButtonIcon} />
-                </button> */}
         <section className={Styles.mainProjectModal__registerSection}>
           <h2>Cadastro de projeto</h2>
 
@@ -156,12 +155,7 @@ export default function RegisterProject() {
 
             <div className={Styles.divRetornos}>
               <strong className={Styles.titleInputRent}>Tipo de retorno: </strong>
-              <div style={{
-                display: 'flex',
-                justifyContent: 'space-around',
-                marginLeft: '5%',
-                flex: '1',
-              }}>
+              <div className={Styles.retornosCheckbox}>
                 <GenericInputCheckbox
                   id='inputBeneficiosCheckbox'
                   text='Retorno em benefícios'
@@ -201,15 +195,15 @@ export default function RegisterProject() {
           <h2 style={{ margin: '2% 0', textAlign: 'center' }}>Regras de benefícios / Rentabilidade e token</h2>
           <section className={Styles.mainProjectModal__spaceItemsRegister}>
             <div className={Styles.divRegraBenefits}>
-              <strong className={Styles.titleInputRent}>Quantidade de tokens: </strong>
-              <section style={{ display: 'flex' }}>
+              <strong className={Styles.titleInputRent}>Benefícios: </strong>
+              <section style={{ display: 'flex', flexWrap: 'wrap' }}>
                 <GenericInputInfo
-                  id='Data'
+                  id='data'
                   text='Data'
                   type='text'
                 />
                 <GenericInputInfo
-                  id='Data'
+                  id='beneficio'
                   text='Benefício'
                   type='text'
                 />
@@ -221,8 +215,76 @@ export default function RegisterProject() {
                 />
               </section>
             </div>
+
+            <div className={Styles.divRegraBenefits}>
+              <strong className={Styles.titleInputRent}>Rentabilidade: </strong>
+              <section style={{ display: 'flex', flexWrap: 'wrap' }}>
+                <GenericInputInfo
+                  id='parcela'
+                  text='Parcela'
+                  type='text'
+                />
+                <GenericInputInfo
+                  id='retorno'
+                  text='Retorno'
+                  type='text'
+                />
+                <GenericInputInfo
+                  id='vencimento'
+                  text='Vencimento'
+                  type='text'
+                />
+              </section>
+            </div>
           </section>
+          <Button
+            hidden={false}
+            id='previaButton'
+            label='Clique para ver a prévia'
+            onClick={() => { }}
+            text={'Confira a prévia antes de salvar'}
+            className={Styles.buttonPrevia}
+          />
+
+          <div className={Styles.saveInfoSection}>
+            <Button
+              hidden={false}
+              id='previaButton'
+              label='Clique para ver a prévia'
+              onClick={() => { }}
+              text={'Salvar informações até o momento'}
+              className={Styles.buttonPrevia}
+            />
+          </div>
         </section>
+
+        <form className={Styles.formLotes}>
+          <h2 style={{ margin: '2% 0', textAlign: 'center' }}>Lotes do projeto</h2>
+          <div className={Styles.formLotes__divInputOneLote}>
+            <label className={Styles.formLotes__labelCheckbox}>
+              <input type='checkbox' />
+              <span className={Styles.formLotes__textCheckboxLabel}>Marque esta opção caso o projeto tenha apenas um lote</span>
+            </label>
+            <div>
+              <strong className={Styles.titleInputRent}>Valor do token (R$) </strong>
+              <SimpleInput
+                className={Styles.formLotes__inputText}
+                id='valorDoLote'
+                type='text'
+              />
+            </div>
+          </div>
+
+          <div className={Styles.formLotes__divInputOneLote}>
+            <label className={Styles.formLotes__labelCheckbox}>
+              <input type='checkbox' />
+              <span className={Styles.formLotes__textCheckboxLabel}>Marque esta opção caso o projeto tenha mais de um lote</span>
+            </label>
+            <div>
+              <TableRegister />
+            </div>
+          </div>
+        </form>
       </form>
     </>
   )

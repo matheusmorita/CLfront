@@ -24,7 +24,7 @@ export async function fetchDataIdAxios(id, setProject) {
 }
 
 
-export async function fetchDataUserInfo(accessToken, setDataUser) {
+export async function fetchDataUserInfo(accessToken, setDataUser, router) {
   var config = {
     method: "post",
     headers: {
@@ -38,7 +38,9 @@ export async function fetchDataUserInfo(accessToken, setDataUser) {
   const data = await response.json()
   console.log(data)
   setDataUser(data)
-  return data?.isAdmin
+  if (data?.isAdmin) {
+    router.push('/notfound')
+  }
 }
 
 export async function fetchUserHistoryinfo(accessToken, setHistoryUser, historyUser) {

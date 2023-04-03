@@ -61,8 +61,8 @@ function Modal({ projectSelectedProps, loteProps, valorTokenProps }: ModalProps)
     setConditionalBuy(idProject)
 
     fetchDataAxios("4", setProjects)
-    fetchDataUserInfo(accessToken, setDataUser)
-  }, [])
+    fetchDataUserInfo(accessToken, setDataUser, router)
+  }, [router])
 
   return (
     <form className={Styles.form}>
