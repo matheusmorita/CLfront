@@ -9,13 +9,15 @@ import Styles from './styles.module.scss'
 import CloseIcon from '@mui/icons-material/Close';
 
 interface Props {
-    text: string
+    text: string;
+    onClick?: () => void;
+    allowClose?: boolean
 }
 
-export default function Document ({text}: Props) {
+export default function Document ({text, onClick, allowClose}: Props) {
     return (
-        <span className={Styles.documentCardStyle}>
-            {text} | <CloseIcon />
+        <span onClick={onClick} className={Styles.documentCardStyle}>
+            {text} {allowClose ? (<CloseIcon />) : ''}
         </span>
     )
 }

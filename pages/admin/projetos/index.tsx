@@ -17,7 +17,7 @@ import Overlay from '@/components/molecules/Overlay';
 export default function Projetos() {
   const [dataUser, setDataUser] = React.useState<any>();
   const [modalRegisterProject, setModalRegisterProject] = React.useState<boolean>(false);
-  const [isOpenOverlay, setIsOpenOverlay] = React.useState<boolean>(true);
+  const [isOpenOverlay, setIsOpenOverlay] = React.useState<boolean>(false);
 
 
   const router = useRouter();

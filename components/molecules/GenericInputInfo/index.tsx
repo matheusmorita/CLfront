@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import SimpleInput from "@/components/organisms/SimpleInput";
 
 //styles
@@ -10,9 +10,10 @@ interface Props {
     id: string;
     text?: string;
     label?: string;
+    onChange?: any;
 }
 
-export default function GenericInputInfo({ type, id, text, label }: Props) {
+export default function GenericInputInfo({ type, id, text, label, onChange }: Props) {
     return (
         <div className={Styles.mainDiv}>
             <span className={Styles.spanText}>{text}</span>
@@ -20,6 +21,7 @@ export default function GenericInputInfo({ type, id, text, label }: Props) {
                 <GenericInputCheckbox
                     id={id}
                     text={label}
+                    onChange={onChange}
                 />
             ) : (
                 <SimpleInput
@@ -27,6 +29,7 @@ export default function GenericInputInfo({ type, id, text, label }: Props) {
                     id={id}
                     type={type}
                     label={label}
+                    onChange={onChange}
                 />
             )}
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, MouseEvent } from 'react';
 
 //assets
 import Styles from './styles.module.scss';
@@ -21,6 +21,7 @@ import { verifyBeforeDate } from '@/utils/verifyBeforeDate';
 import { dispatchErrorNotification, dispatchSuccessNotification } from '@/utils/dispatchNotifications';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Document from '../UploadFiles/Document';
 
 interface Props {
   modalRegisterProject: boolean;
@@ -29,8 +30,6 @@ interface Props {
 
 
 export default function RegisterProject({ modalRegisterProject, setModalRegisterProject }: Props) {
-  const [nameInputBackground, setNameInputBackground] = React.useState<string>('');
-  const [valueInputRentability, setValueInputRentability] = React.useState<number>(0);
 
   //Estados de dados Input
   const [projectName, setProjectName] = React.useState();
@@ -38,13 +37,30 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   const [descriptionBreve, setDescriptionBreve] = React.useState();
   const [descriptionLonga, setDescriptionLonga] = React.useState();
   const [checkboxRentabilidade, setCheckboxRentabilidade] = React.useState(false);
+  const [nameInputBackground, setNameInputBackground] = React.useState<string>('');
+  const [launchDate, setLaunchDate] = React.useState();
+  const [valueInputRentability, setValueInputRentability] = React.useState<number>(0);
   const [qtdTokens, setQtdTokens] = React.useState();
+  const [dateBenefit, setDateBenefit] = React.useState();
+  const [benefitName, setBenefitName] = React.useState();
+  const [benefitStatus, setBenefitStatus] = React.useState('Não entregue');
+  const [parcela, setParcela] = React.useState();
+  const [returnBenefit, setReturnBenefit] = React.useState();
+  const [dateVenc, setDateVenc] = React.useState();
+
+
+  //Regras dos benefícios
+
 
   //router Next
   const router = useRouter();
   const { locale } = router
 
-  const handleOnChangeInput = (e: any) => {
+  // const handleCheckButtonSubmmitAble = () => {
+  //   return !projectName || !siglaName || !descriptionBreve || !descriptionLonga
+  // }
+
+  const handleOnChangeInputFile = (e: any) => {
     const file = e.target.files[0]
     setNameInputBackground(file.name)
   }
@@ -58,15 +74,21 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   }
 
   const handleCheckDate = (e: any) => {
-    if (verifyBeforeDate(e.target.value)) {
-      dispatchErrorNotification(toast, 'A data inserida precisa ser maior ou igual a data atual', false)
-    } else {
-      dispatchSuccessNotification(toast, 'A data inserida está correta!', false)
-    }
+    // if (verifyBeforeDate(e.target.value)) {
+    //   dispatchErrorNotification(toast, 'A data inserida precisa ser maior ou igual a data atual', false)
+    // } else {
+    //   dispatchSuccessNotification(toast, 'A data inserida está correta!', false)
+    // }
+    setLaunchDate(e.target.value)
   }
 
-  const handleCheckbox = () => {
-    setCheckboxRentabilidade(!checkboxRentabilidade)
+  const handleCheckbox = (e: any) => {
+    if (e.target.checked) {
+      setCheckboxRentabilidade(true)
+    } else {
+      setCheckboxRentabilidade(false)
+    }
+
   }
 
   const handleCloseModalRegister = (e: any) => {
@@ -74,12 +96,43 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
     setModalRegisterProject(!modalRegisterProject)
   }
 
+  const handleDateBenefit = (e: any) => {
+    setDateBenefit(e.target.value)
+  }
+
+  const handleNameBenefit = (e: any) => {
+    setBenefitName(e.target.value)
+  }
+
+  const handleBenefitStatus = (e: any) => {
+    if (e.target.checked) {
+      setBenefitStatus('Entregue')
+    } else {
+      setBenefitStatus('Não entregue')
+    }
+
+  }
+
+  const handleParcela = (e: any) => {
+    setParcela(e.target.value)
+  }
+
+  const handleReturnBenefit = (e: any) => {
+    setReturnBenefit(e.target.value)
+  }
+
+  const handleDateVenc = (e: any) => {
+    setDateVenc(e.target.value)
+  }
+
+
+
   return (
     <>
       <form className={Styles.mainProjectModal}>
         <section className={Styles.mainProjectModal__registerSection}>
           <span className={Styles.mainProjectModal__closeModalButton}>
-            <CloseIcon 
+            <CloseIcon
               className={Styles.closeButtonIcon}
               onClick={handleCloseModalRegister}
             />
@@ -88,7 +141,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
 
           <section className={Styles.mainProjectModal__spaceItemsRegister}>
             <div className={Styles.mainProjectModal__divItem}>
-              <p className={Styles.mainProjectModal__titleInput}>Nome do projeto: </p>
+              <p className={Styles.mainProjectModal__titleInput}>Nome do projeto*: </p>
               <SimpleInput
                 className={projectName === '' ? Styles.inputError : Styles.projectNameInput}
                 id='projectName'
@@ -102,7 +155,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
             </div>
 
             <div className={Styles.mainProjectModal__divItem}>
-              <p className={Styles.mainProjectModal__titleInput}>Sigla do projeto: </p>
+              <p className={Styles.mainProjectModal__titleInput}>Sigla do projeto*: </p>
               <SimpleInput
                 className={siglaName === '' ? Styles.inputError : Styles.projectNameInput}
                 id='projectSigla'
@@ -117,7 +170,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
 
             <div className={Styles.mainProjectModal__divItem}>
               <div>
-                <p className={Styles.mainProjectModal__titleInput}>Descrição breve: </p>
+                <p className={Styles.mainProjectModal__titleInput}>Descrição breve*: </p>
                 <p className={Styles.mainProjectModal__caracteresLength}>
                   Síntese do projeto junto ao
                   background. Até 300
@@ -138,7 +191,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
 
             <div className={Styles.mainProjectModal__divItem}>
               <div>
-                <p className={Styles.mainProjectModal__titleInput}>Descrição longa: </p>
+                <p className={Styles.mainProjectModal__titleInput}>Descrição longa*: </p>
                 <p className={Styles.mainProjectModal__caracteresLength}>
                   Neste espaço você pode
                   trazer com mais detalhes as
@@ -159,7 +212,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
             </div>
 
             <div className={Styles.mainProjectModal__divItem}>
-              <p className={Styles.mainProjectModal__titleInput}>Nome do Emissor: </p>
+              <p className={Styles.mainProjectModal__titleInput}>Nome do Emissor*: </p>
               <select className={Styles.projectNameInput}>
                 <option style={{ color: 'black', }} selected>Nome do emissor já cadastrado</option>
                 <option style={{ color: 'black' }} >Opção 2</option>
@@ -168,7 +221,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
             </div>
 
             <div className={Styles.mainProjectModal__divItem}>
-              <p className={Styles.mainProjectModal__titleInput}>Fase do projeto: </p>
+              <p className={Styles.mainProjectModal__titleInput}>Fase do projeto*: </p>
               <select className={Styles.projectNameInput}>
                 <option style={{ color: 'black', }} selected>Selecione a fase do projeto</option>
                 <option style={{ color: 'black' }} >Opção 2</option>
@@ -179,7 +232,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
             <div className={Styles.mainProjectModal__divItem} style={{ alignItems: 'center' }}>
               <div>
                 <span className={Styles.spanDescription}>Upload</span>
-                <p className={Styles.mainProjectModal__titleInput}>Imagem do projeto: </p>
+                <p className={Styles.mainProjectModal__titleInput}>Imagem do projeto*: </p>
                 <p className={Styles.mainProjectModal__caracteresLength}>
                   A resolução máxima
                   da imagem deve ser
@@ -188,18 +241,25 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                   máximo do arquivo: 4 MB.
                 </p>
               </div>
-              <label htmlFor='backgroundProject' className={Styles.labelInputUploadPhoto}>
-                <SimpleInput
-                  type='file'
-                  className=''
-                  id='backgroundProject'
-                  onChange={handleOnChangeInput}
-                />
-                <div className={Styles.sectionUploadImage}>
-                  {nameInputBackground || 'Selecione o arquivo'}
-                  <ArrowBackIosIcon className={Styles.arrowStyle} />
-                </div>
-              </label>
+              <div style={{ display: 'flex', flex: '1', flexDirection: 'column', alignItems: 'flex-start' }}>
+                <label htmlFor='backgroundProject' className={Styles.labelInputUploadPhoto}>
+                  <SimpleInput
+                    type='file'
+                    className=''
+                    id='backgroundProject'
+                    onChange={handleOnChangeInputFile}
+                  />
+                  <div className={Styles.sectionUploadImage}>
+                    {/* {nameInputBackground || 'Selecione o arquivo'} */}
+                    <ArrowBackIosIcon className={Styles.arrowStyle} />
+                  </div>
+                </label>
+                {nameInputBackground !== '' ? (
+                  <Document
+                    text={nameInputBackground}
+                  />
+                ) : ''}
+              </div>
             </div>
 
             <DivisionBar
@@ -215,6 +275,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                 id='inputDate'
                 type='date'
                 onChange={handleCheckDate}
+                maxLength={2}
               />
             </div>
 
@@ -236,10 +297,22 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
 
             <div className={Styles.divRetornos}>
               <strong className={checkboxRentabilidade ? Styles.titleInputRent : Styles.titleInputRentDisabled}>Rentabilidade estimada: </strong>
-              <SimpleInput
+              {/* <SimpleInput
                 className={Styles.inputDate}
                 id='inputRentabilidade'
                 type='number'
+                placeholder='X% a. a. do CDI'
+                min={0}
+                onChange={notAllowNegativeNumber}
+                disabled={!checkboxRentabilidade}
+              /> */}
+              <NumericFormat
+                thousandSeparator='.'
+                decimalSeparator=','
+                decimalScale={2}
+                fixedDecimalScale={true}
+                className={Styles.inputDate}
+                id='inputRentabilidade'
                 placeholder='X% a. a. do CDI'
                 min={0}
                 onChange={notAllowNegativeNumber}
@@ -269,18 +342,21 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                 <GenericInputInfo
                   id='data'
                   text='Data'
-                  type='text'
+                  type='date'
+                  onChange={handleDateBenefit}
                 />
                 <GenericInputInfo
                   id='beneficio'
                   text='Benefício'
                   type='text'
+                  onChange={handleNameBenefit}
                 />
                 <GenericInputInfo
                   id='status'
                   text='Status'
                   type='checkbox'
                   label='Entregue'
+                  onChange={handleBenefitStatus}
                 />
               </section>
             </div>
@@ -292,16 +368,19 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                   id='parcela'
                   text='Parcela'
                   type='text'
+                  onChange={handleParcela}
                 />
                 <GenericInputInfo
                   id='retorno'
                   text='Retorno'
                   type='text'
+                  onChange={handleReturnBenefit}
                 />
                 <GenericInputInfo
                   id='vencimento'
                   text='Vencimento'
-                  type='text'
+                  type='date'
+                  onChange={handleDateVenc}
                 />
               </section>
             </div>
@@ -324,12 +403,13 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
           <div className={Styles.saveInfoSection}>
             <Button
               hidden={false}
-              id='previaButton'
-              label='Clique para ver a prévia'
+              type='submit'
+              id='saveInfoForm'
+              label='Clique para salvar informações'
               onClick={() => { }}
               text={'Salvar informações até o momento'}
               className={Styles.buttonSaveInfo}
-              disabled
+              disabled={!projectName || !siglaName || !descriptionBreve || !descriptionLonga || !nameInputBackground || !launchDate}
             />
           </div>
         </section>
@@ -356,7 +436,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
               <input type='checkbox' />
               <span className={Styles.formLotes__textCheckboxLabel}>Marque esta opção caso o projeto tenha mais de um lote</span>
             </label>
-            <div>
+            <div className={Styles.overflowStyle}>
               <TableRegister />
             </div>
           </div>
