@@ -8,13 +8,14 @@ interface Props {
     text?: string;
     checked?: boolean;
     onChange?: any
+    disabled?: boolean;
 }
 
-export default function GenericInputCheckbox({id, text, checked, onChange}: Props) {
+export default function GenericInputCheckbox({id, text, checked, onChange, disabled}: Props) {
     return (
         <label htmlFor={id} className={Styles.styleLabelRent}>
-            <input onChange={onChange} checked={checked} id={id} type='checkbox' />
-            <span>{text}</span>
+            <input disabled={disabled} onChange={onChange} checked={checked} id={id} type='checkbox' />
+            <span >{text}</span>
         </label>
     )
 }

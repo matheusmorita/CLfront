@@ -322,3 +322,23 @@ const handleGetUserCadastro = async (router) => {
       }
     })
 }
+
+export const uploadDataFormCreateProject = (data) => {
+  axios.post(process.env.NEXT_PUBLIC_CRIAR_PROJETO, data, {
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+}
+
+export const uploadPhotoBackgroundProject = (photoFile, accessToken) => {
+  let formData = new FormData();
+  formData.append("file", photoFile);
+
+  axios.post(process.env.NEXT_PUBLIC_UPLOAD_BACKGROUND_PROJETO, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      "Authorization": `Bearer ${accessToken}`
+    },
+  });
+}
