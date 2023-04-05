@@ -52,6 +52,8 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   const [returnBenefit, setReturnBenefit] = React.useState();
   const [dateVenc, setDateVenc] = React.useState();
   const [optionPhaseProject, setOptionPhaseProject] = React.useState();
+  const [radioSelected, setRadioSelected] = React.useState();
+
 
 
   //Regras dos benefícios
@@ -64,6 +66,10 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   // const handleCheckButtonSubmmitAble = () => {
   //   return !projectName || !siglaName || !descriptionBreve || !descriptionLonga
   // }
+
+  const handleChangeInputRadio = (e: any) => {
+    setRadioSelected(e.target.id)
+  }
 
   const handleChangeCheckboxBenefit = (e: any) => {
     if (e.target.checked) {
@@ -269,7 +275,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                 <option value={'Em captação'} style={{ color: 'black' }} >Em captação</option>
                 <option value={'Em implementação'} style={{ color: 'black' }} >Em implementação</option>
                 <option value={'Ativo'} style={{ color: 'black' }} >Ativo</option>
-                
+
               </select>
             </div>
 
@@ -473,7 +479,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
               text={'Salvar informações até o momento'}
               // || !dateBenefit || !benefitName || !parcela || !returnBenefit || !dateVenc || !typeToken
               className={Styles.buttonSaveInfo}
-              disabled={!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens }
+              disabled={!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens}
             />
           </div>
         </section>
@@ -482,27 +488,31 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
           <h2 style={{ margin: '2% 0', textAlign: 'center' }}>Lotes do projeto</h2>
           <div className={Styles.formLotes__divInputOneLote}>
             <label className={Styles.formLotes__labelCheckbox}>
-              <input name='typeLote' type='radio' />
+              <input onChange={handleChangeInputRadio} id='radioUniqueToken' name='typeLote' type='radio' />
               <span className={Styles.formLotes__textCheckboxLabel}>Marque esta opção caso o projeto tenha apenas um lote</span>
             </label>
-            <div>
-              <strong className={Styles.titleInputRent}>Valor do token (R$) </strong>
-              <SimpleInput
-                className={Styles.formLotes__inputText}
-                id='valorDoLote'
-                type='text'
-              />
-            </div>
+            {radioSelected === 'radioUniqueToken' && (
+              <div>
+                <strong className={Styles.titleInputRent}>Valor do token (R$) </strong>
+                <SimpleInput
+                  className={Styles.formLotes__inputText}
+                  id='valorDoLote'
+                  type='text'
+                />
+              </div>
+            )}
           </div>
 
           <div className={Styles.formLotes__divInputOneLote}>
             <label className={Styles.formLotes__labelCheckbox}>
-              <input name='typeLote' type='radio' />
+              <input onChange={handleChangeInputRadio} id='radioMoreToken' name='typeLote' type='radio' />
               <span className={Styles.formLotes__textCheckboxLabel}>Marque esta opção caso o projeto tenha mais de um lote</span>
             </label>
-            <div className={Styles.overflowStyle}>
-              <TableRegister />
-            </div>
+            {radioSelected === 'radioMoreToken' && (
+              <div className={Styles.overflowStyle}>
+                <TableRegister />
+              </div>
+            )}
           </div>
         </form>
 

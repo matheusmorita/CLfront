@@ -6,6 +6,7 @@ import Styles from './styles.module.scss';
 import InputMask from 'react-input-mask';
 import Input from '@/components/atoms/Input';
 import SimpleInput from '../SimpleInput';
+import Filter from '@/components/molecules/Filter';
 
 interface Props {
   modalRegisterProject: boolean;
@@ -16,6 +17,9 @@ export default function TableProjects({modalRegisterProject, setModalRegisterPro
   const [inputAll, setInputAll] = React.useState<boolean>(false)
   const [itemsSelecteds, setItemsSelecteds] = React.useState<string[]>([])
   // const [itemClicked, setItemClicked] = React.useState<string>('')
+
+  const [showOrderFilter, setShowOrderFilter] = React.useState(false)
+  const [showStatusFilter, setShowStatusFilter] = React.useState(false)
 
   const handleOnChangeInputAll = () => {
     setItemsSelecteds([])
@@ -30,6 +34,15 @@ export default function TableProjects({modalRegisterProject, setModalRegisterPro
     }
     // setItemClicked(e.target.id)
   }
+
+  const handleShowAZFilter = (e: any) => {
+    setShowOrderFilter(!showOrderFilter)
+  }
+
+  const handleShowStatusFilter = (e: any) => {
+    setShowStatusFilter(!showStatusFilter)
+  }
+
   return (
     <>
       <main className={Styles.main}>
@@ -44,7 +57,19 @@ export default function TableProjects({modalRegisterProject, setModalRegisterPro
               className={Styles.main__btnProject}
             />
             <div className={Styles.main__menuInputs}>
-              <SimpleInput
+              <Filter
+                label='Projeto'
+                onClick={handleShowAZFilter}
+                showOrderFilter={showOrderFilter}
+              />
+              <Filter
+                label='Fase do Projeto'
+                onClick={handleShowStatusFilter}
+                showStatusFilter={showStatusFilter}
+              />
+              {/* <Filter />
+              <Filter /> */}
+              {/* <SimpleInput
                 id='findProject'
                 className={Styles.main__input}
                 placeholder='Projeto'
@@ -67,7 +92,7 @@ export default function TableProjects({modalRegisterProject, setModalRegisterPro
                 className={Styles.main__input}
                 placeholder='emissor'
                 type='text'
-              />
+              /> */}
             </div>
           </div>
         </header>

@@ -1,0 +1,60 @@
+@import '@/styles/variables.scss';
+
+.main {
+    max-width: 200px;
+    margin: 8px;
+
+    &__button {
+        color: $gray;
+        border: 1px solid $gray;
+        min-width: 200px;
+        padding: 8px;
+        border-radius: 50px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__iconFilterStyle {
+        fill: $gray;
+    }
+
+    &__orderIcon {
+        fill: $gray;
+    }
+
+    &__divSpec {
+        // position: absolute;
+        padding: 6px;
+        margin: 10px 0;
+        width: 200px;
+        border-radius: 8px;
+        background: $light;
+    }
+
+    &__buttonOrderAZ {
+        display: flex;
+        width: 100%;
+        margin: 10px 0;
+        align-items: center;
+        justify-content: space-around;
+        border: none;
+        color: $gray;
+    }
+
+    &__spanText {
+        color: $gray;
+    }
+
+    &__divFilterStatus {
+        padding: 6px;
+        margin: 10px 0;
+        width: 200px;
+        border-radius: 8px;
+        background: $light;
+
+        & label span {
+            color: $gray;
+            margin-left: 10px;
+        }
+    }
+}
