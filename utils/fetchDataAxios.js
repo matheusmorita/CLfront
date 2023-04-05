@@ -248,11 +248,11 @@ export const handleUserSession = async (setUserInfo, setLoggedIn, token, router)
   }
 }
 
-export const uploadProfilePhoto = (photoFile, accessToken) => {
+export const uploadProfilePhoto = async (photoFile, accessToken) => {
   let formData = new FormData();
   formData.append("file", photoFile);
 
-  axios.post(process.env.NEXT_PUBLIC_UPLOAD_PROFILE_PHOTO, formData, {
+  await axios.post(process.env.NEXT_PUBLIC_UPLOAD_PROFILE_PHOTO, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
       "Authorization": `Bearer ${accessToken}`
@@ -260,11 +260,11 @@ export const uploadProfilePhoto = (photoFile, accessToken) => {
   });
 }
 
-export const uploadBackgroundPhoto = (photoFile, accessToken) => {
+export const uploadBackgroundPhoto = async (photoFile, accessToken) => {
   let formData = new FormData();
   formData.append("file", photoFile);
 
-  axios.post(process.env.NEXT_PUBLIC_UPLOAD_BACKGROUND_PHOTO, formData, {
+  await axios.post(process.env.NEXT_PUBLIC_UPLOAD_BACKGROUND_PHOTO, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
       "Authorization": `Bearer ${accessToken}`
@@ -323,22 +323,40 @@ const handleGetUserCadastro = async (router) => {
     })
 }
 
-export const uploadDataFormCreateProject = (data) => {
-  axios.post(process.env.NEXT_PUBLIC_CRIAR_PROJETO, data, {
+export const uploadDataFormCreateProject = async (data, setWaiting) => {
+  setWaiting(true)
+  const response = await axios.post(process.env.NEXT_PUBLIC_CRIAR_PROJETO, data, {
     headers: {
       'Content-Type': 'application/json',
     }
   })
+  setWaiting(false)
+
+  return response.status
 }
 
-export const uploadPhotoBackgroundProject = (photoFile, accessToken) => {
+export const uploadPhotoBackgroundProject = async (photoFile, accessToken) => {
   let formData = new FormData();
   formData.append("file", photoFile);
 
-  axios.post(process.env.NEXT_PUBLIC_UPLOAD_BACKGROUND_PROJETO, formData, {
+  await axios.post(process.env.NEXT_PUBLIC_UPLOAD_BACKGROUND_PROJETO, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
       "Authorization": `Bearer ${accessToken}`
     },
   });
+}
+
+export const uploadDocumentsProject = async (documents, accessToken) => {
+  let formData = new FormData();
+  formData.append("file", documents);
+
+  await axios.post(process.env.NEXT_PUBLIC_UPLOAD_DOCUMENTS_PROJETO, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      "Authorization": `Bearer ${accessToken}`
+    },
+  });
+
+  // console.log('Status: ' + response.status)
 }

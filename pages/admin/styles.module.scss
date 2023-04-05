@@ -28,7 +28,7 @@
     // À partir do momento que novos toens forem adicionados é preciso tratar essa parte do código
     background: linear-gradient(to top, $black, transparent),
                 url(../../assets/img/backgroundAdmin.png);
-    background-attachment: fixed;
+    // background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover !important;
 }

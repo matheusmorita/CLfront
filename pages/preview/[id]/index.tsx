@@ -41,7 +41,6 @@ import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 import ProjectContext from '@/context/ProjectContext'
 import { formatOnlyDate } from '@/utils/formatDate'
-import PreviewContext from '@/context/PreviewContext'
 
 const ProjectPagePreview = () => {
   const router = useRouter()

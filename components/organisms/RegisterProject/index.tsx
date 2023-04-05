@@ -23,9 +23,11 @@ import { useRouter } from 'next/router';
 import Document from '../UploadFiles/Document';
 import { uploadBackgroundPhoto, uploadDataFormCreateProject, uploadPhotoBackgroundProject } from '@/utils/fetchDataAxios';
 import FormLotes from '../FormLotes';
+import { toast } from 'react-toastify';
+import Loader from '@/components/atoms/Loader';
+
 
 //contexts
-import PreviewContext from '@/context/PreviewContext';
 
 interface Props {
   modalRegisterProject: boolean;
@@ -59,8 +61,9 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   const [tokenValue, setTokenValue] = React.useState();
   const [numberLote, setNumberLote] = React.useState();
 
-  const contextPreview = React.useContext(PreviewContext);
-  const { infoProject, setInfoProject } = contextPreview;
+  const [statusCodeFormData, setStatusCodeFormData] = React.useState<number>();
+  const [waiting, setWaiting] = React.useState<boolean>(false)
+
 
 
   //router Next
@@ -153,11 +156,14 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
     setOptionPhaseProject(e.target.value)
   }
 
-  const handleSendInfoForm = (photo: any, data: any) => {
+  const handleSendInfoForm = async (photo: any, data: any) => {
     const accessToken = localStorage.getItem('accessToken');
 
-    uploadPhotoBackgroundProject(photo, accessToken)
-    uploadDataFormCreateProject(data)
+    // uploadPhotoBackgroundProject(photo, accessToken)
+    const response = await uploadDataFormCreateProject(data, setWaiting)
+    if (response === 201) {
+      dispatchSuccessNotification(toast, 'O projeto foi criado com sucesso! Esta página irá recarregar.', true)
+    }
   }
 
   const handleSaveInfoPreview = (data: any) => {
@@ -174,6 +180,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
 
   return (
     <>
+      {waiting ? <Loader absolute={true} active={waiting} /> : ''}
       <form className={Styles.mainProjectModal}>
         <section className={Styles.mainProjectModal__registerSection}>
           <span className={Styles.mainProjectModal__closeModalButton}>
@@ -506,7 +513,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
             }}
             text={'Confira a prévia antes de salvar'}
             className={Styles.buttonPrevia}
-            disabled={!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue}
+            disabled={!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || !valueInputRentability}
           />
 
           <div className={Styles.saveInfoSection}>
@@ -519,16 +526,19 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                 handleSendInfoForm(fileInputBackground, {
                   nome: projectName,
                   tipoToken: typeToken,
+                  faseDoProjeto: optionPhaseProject,
                   descricao: descriptionLonga,
                   resumo: descriptionBreve,
                   contratoToken: 'exemplo',
                   rentabilidade: valueInputRentability,
+                  nomeToken: projectName,
+                  acronimo: siglaName
                 })
               }}
               text={'Salvar informações até o momento'}
               // || !dateBenefit || !benefitName || !parcela || !returnBenefit || !dateVenc || !typeToken
               className={Styles.buttonSaveInfo}
-              disabled={!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue}
+              disabled={!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || !valueInputRentability}
             />
           </div>
         </section>

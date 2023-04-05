@@ -55,6 +55,12 @@
             justify-content: center;
         }
     }
+
+    &__divButtonSendDoc {
+        display: flex;
+        justify-content: center;
+        margin-top: 2%;
+    }
 }
 
 .documentCardStyle {

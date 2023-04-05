@@ -14,7 +14,6 @@ import { ToastContainer } from 'react-toastify';
 //contexts
 import UserContext from '@/context/UserContext'
 import ProjectContext from '@/context/ProjectContext';
-import PreviewContext from '@/context/PreviewContext'
 
 import { appWithTranslation } from 'next-i18next';
 import nextI18NextConfig from '../next-i18next.config.js';
@@ -36,12 +35,6 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <WebSocketProvider value={socket}>
-      <PreviewContext.Provider
-        value={{
-          infoProject,
-          setInfoProject
-        }}
-      >
         <ProjectContext.Provider
           value={{
             projectSelectedContext,
@@ -64,7 +57,6 @@ function App({ Component, pageProps }: AppProps) {
             <Component  {...pageProps} />
           </UserContext.Provider>
         </ProjectContext.Provider>
-      </PreviewContext.Provider>
     </WebSocketProvider>
   )
 }
