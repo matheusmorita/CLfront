@@ -57,4 +57,65 @@
             margin-left: 10px;
         }
     }
+
+    &__buttonSearch {
+        background: $primary;
+        border: 1px solid $gray;
+        border-radius: 50px;
+        color: $gray;
+    }
+
+    &__divFilterDate {
+        background-color: $light;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 10px 0;
+        padding: 8px;
+        border-radius: 8px;
+
+        & label {
+            margin: 6px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        & label span {
+            color: $gray;
+        }
+
+        & label input {
+            color: $gray;
+            max-width: 130px;
+            border: 1px solid $gray;
+            border-radius: 50px;
+            padding: 6px;
+        }
+
+        & div {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        & div label span {
+            margin-left: 6px;
+        }
+    }
+
+    &__divFilterEmissor {
+        background-color: $light;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 10px 0;
+        padding: 8px;
+        border-radius: 8px;
+
+        & label span {
+            color: $gray;
+            margin-left: 10px;
+        }
+    }
 }

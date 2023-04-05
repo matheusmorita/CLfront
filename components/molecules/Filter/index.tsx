@@ -7,12 +7,16 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import Styles from './styles.module.scss';
 import FilterAZ from './FilterAZ';
 import FilterStatus from './FilterStatus';
+import FilterDate from './FilterDate';
+import FilterEmissor from './FilterEmissor';
 
 interface Props {
   label: string;
   onClick: any;
   showOrderFilter?: boolean;
   showStatusFilter?: boolean;
+  showDateFilter?: boolean;
+  showEmissorFilter?: boolean;
 }
 
 
@@ -20,6 +24,8 @@ export default function Filter({
   onClick,
   showOrderFilter,
   showStatusFilter,
+  showDateFilter,
+  showEmissorFilter,
   label
 }: Props) {
 
@@ -42,6 +48,16 @@ export default function Filter({
       {showStatusFilter && (
         <FilterStatus />
       )}
+
+      {showDateFilter && (
+        <FilterDate />
+      )}
+
+      {showEmissorFilter && (
+        <FilterEmissor />
+      )}
+      
+
 
     </main>
   )

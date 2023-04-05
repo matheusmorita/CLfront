@@ -1,7 +1,5 @@
 import React from 'react';
 
-import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
-
 import Styles from './styles.module.scss';
 
 

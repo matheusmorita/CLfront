@@ -20,6 +20,9 @@ export default function TableProjects({modalRegisterProject, setModalRegisterPro
 
   const [showOrderFilter, setShowOrderFilter] = React.useState(false)
   const [showStatusFilter, setShowStatusFilter] = React.useState(false)
+  const [showDateFilter, setShowDateFilter] = React.useState(false)
+  const [showEmissorFilter, setShowEmissorFilter] = React.useState(false)
+
 
   const handleOnChangeInputAll = () => {
     setItemsSelecteds([])
@@ -41,6 +44,14 @@ export default function TableProjects({modalRegisterProject, setModalRegisterPro
 
   const handleShowStatusFilter = (e: any) => {
     setShowStatusFilter(!showStatusFilter)
+  }
+
+  const handleShowDateFilter = (e: any) => {
+    setShowDateFilter(!showDateFilter)
+  }
+
+  const handleShowEmissorFilter = (e: any) => {
+    setShowEmissorFilter(!showEmissorFilter)
   }
 
   return (
@@ -66,6 +77,16 @@ export default function TableProjects({modalRegisterProject, setModalRegisterPro
                 label='Fase do Projeto'
                 onClick={handleShowStatusFilter}
                 showStatusFilter={showStatusFilter}
+              />
+              <Filter
+                label='Data cadastro'
+                onClick={handleShowDateFilter}
+                showDateFilter={showDateFilter}
+              />
+              <Filter
+                label='Emissor'
+                onClick={handleShowEmissorFilter}
+                showEmissorFilter={showEmissorFilter}
               />
               {/* <Filter />
               <Filter /> */}
