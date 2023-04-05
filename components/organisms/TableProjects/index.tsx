@@ -13,7 +13,7 @@ interface Props {
   setModalRegisterProject: any;
 }
 
-export default function TableProjects({modalRegisterProject, setModalRegisterProject}: Props) {
+export default function TableProjects({ modalRegisterProject, setModalRegisterProject }: Props) {
   const [inputAll, setInputAll] = React.useState<boolean>(false)
   const [itemsSelecteds, setItemsSelecteds] = React.useState<string[]>([])
   // const [itemClicked, setItemClicked] = React.useState<string>('')
@@ -56,67 +56,42 @@ export default function TableProjects({modalRegisterProject, setModalRegisterPro
 
   return (
     <>
-      <main className={Styles.main}>
-        <header className={Styles.main__header}>
-          <div className={Styles.main__menuHeader}>
-            <Button
-              hidden={false}
-              id='addProject'
-              text='+ Novo projeto'
-              label='Clique para adicionar novo projeto'
-              onClick={() => setModalRegisterProject(!modalRegisterProject)}
-              className={Styles.main__btnProject}
+      <header className={Styles.header}>
+        <div className={Styles.header__menuHeader}>
+          <Button
+            hidden={false}
+            id='addProject'
+            text='+ Novo projeto'
+            label='Clique para adicionar novo projeto'
+            onClick={() => setModalRegisterProject(!modalRegisterProject)}
+            className={Styles.header__btnProject}
+          />
+          <div className={Styles.header__menuInputs}>
+            <Filter
+              label='Projeto'
+              onClick={handleShowAZFilter}
+              showOrderFilter={showOrderFilter}
             />
-            <div className={Styles.main__menuInputs}>
-              <Filter
-                label='Projeto'
-                onClick={handleShowAZFilter}
-                showOrderFilter={showOrderFilter}
-              />
-              <Filter
-                label='Fase do Projeto'
-                onClick={handleShowStatusFilter}
-                showStatusFilter={showStatusFilter}
-              />
-              <Filter
-                label='Data cadastro'
-                onClick={handleShowDateFilter}
-                showDateFilter={showDateFilter}
-              />
-              <Filter
-                label='Emissor'
-                onClick={handleShowEmissorFilter}
-                showEmissorFilter={showEmissorFilter}
-              />
-              {/* <Filter />
-              <Filter /> */}
-              {/* <SimpleInput
-                id='findProject'
-                className={Styles.main__input}
-                placeholder='Projeto'
-                type='text'
-              />
-              <SimpleInput
-                id='projectPhase'
-                className={Styles.main__input}
-                placeholder='Fase do projeto'
-                type='text'
-              />
-              <SimpleInput
-                id='registerDate'
-                className={Styles.main__input}
-                placeholder='Data de cadastro'
-                type='text'
-              />
-              <SimpleInput
-                id='projectOwner'
-                className={Styles.main__input}
-                placeholder='emissor'
-                type='text'
-              /> */}
-            </div>
+            <Filter
+              label='Fase do Projeto'
+              onClick={handleShowStatusFilter}
+              showStatusFilter={showStatusFilter}
+            />
+            <Filter
+              label='Data cadastro'
+              onClick={handleShowDateFilter}
+              showDateFilter={showDateFilter}
+            />
+            <Filter
+              label='Emissor'
+              onClick={handleShowEmissorFilter}
+              showEmissorFilter={showEmissorFilter}
+            />
           </div>
-        </header>
+        </div>
+      </header>
+      <main className={Styles.main}>
+
         <table className={Styles.main__table}>
           <thead>
             <tr>

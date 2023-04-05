@@ -122,7 +122,6 @@
   font-size: 1.5rem;
   border-radius: 50px;
   margin: 2%;
-  width: 100%;
 
   @media (max-width: 600px) {
     font-size: 1rem;
@@ -246,41 +245,6 @@
   width: 100%;
   height: 2px;
   background-color: $gray;
-}
-
-.formLotes {
-  background-color: white;
-  margin: 2% 0;
-  border-radius: 10px;
-
-  & h2 {
-    color: $gray !important;
-    font-weight: 600;
-  }
-
-  &__labelCheckbox {
-    display: flex;
-    gap: 10px;
-    margin: 2% 0;
-  }
-
-  &__inputText {
-    border: 1px solid $gray;
-    border-radius: 10px;
-    padding: 10px;
-    color: $gray !important;
-  }
-
-  &__textCheckboxLabel {
-    color: $gray;
-  }
-
-  &__divInputOneLote {
-    padding: 2% 5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
 }
 
 .inputError {

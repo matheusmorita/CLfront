@@ -50,15 +50,17 @@ export default function Projetos() {
           setModalRegisterProject={setModalRegisterProject}
         />
       )}
-      <main className={Styles.main}>
-        <h1>Projetos</h1>
-        <p className={Styles.main__description}>Tenha controle sobre todos os projetos da Coinlivre.</p>
+      {!modalRegisterProject && (
+        <main className={Styles.main}>
+          <h1>Projetos</h1>
+          <p className={Styles.main__description}>Tenha controle sobre todos os projetos da Coinlivre.</p>
 
-        <TableProjects
-          modalRegisterProject={modalRegisterProject}
-          setModalRegisterProject={setModalRegisterProject}
-        />
-      </main>
+          <TableProjects
+            modalRegisterProject={modalRegisterProject}
+            setModalRegisterProject={setModalRegisterProject}
+          />
+        </main>
+      )}
 
 
     </>

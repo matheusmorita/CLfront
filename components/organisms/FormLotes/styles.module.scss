@@ -1,0 +1,55 @@
+@import '@/styles/variables.scss';
+
+.formLotes {
+  background-color: white;
+  margin: 2% 0;
+  border-radius: 10px;
+
+  & h2 {
+    color: $gray !important;
+    font-weight: 600;
+  }
+
+  &__labelCheckbox {
+    display: flex;
+    gap: 10px;
+    margin: 2% 0;
+  }
+
+  &__inputText {
+    border: 1px solid $gray;
+    border-radius: 10px;
+    padding: 10px;
+    color: $gray !important;
+  }
+
+  &__textCheckboxLabel {
+    color: $gray;
+  }
+
+  &__divInputOneLote {
+    padding: 2% 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
+
+.titleInputRent {
+  color: $gray;
+  font-size: 1.5rem;
+}
+
+.overflowStyle {
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary;
+    border-radius: 3px;
+  }
+}

@@ -56,9 +56,6 @@ export default function Filter({
       {showEmissorFilter && (
         <FilterEmissor />
       )}
-      
-
-
     </main>
   )
 }

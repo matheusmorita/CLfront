@@ -41,8 +41,9 @@ import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 import ProjectContext from '@/context/ProjectContext'
 import { formatOnlyDate } from '@/utils/formatDate'
+import PreviewContext from '@/context/PreviewContext'
 
-const ProjectPage = () => {
+const ProjectPagePreview = () => {
   const router = useRouter()
   const id = router.query.id
   const [project, setProject] = React.useState<any>()
@@ -50,10 +51,12 @@ const ProjectPage = () => {
   const [showModal, setShowModal] = React.useState<boolean>(false)
   const [showMobileModal, setShowMobileModal] = React.useState<boolean>(false)
   const [lengthWindow, setLengthWindow] = React.useState<number>(0)
+  const [infoPreview, setInfoPreview] = React.useState<any>();
 
   const [projectSelected, setProjectSelected] = React.useState<any>([]);
 
   const { projectSelectedContext } = React.useContext(ProjectContext);
+
 
 
   const { t: translate } = useTranslation('project');
@@ -63,8 +66,17 @@ const ProjectPage = () => {
 
   const { loggedIn } = React.useContext(UserContext)
 
+  const handleGetInfoPreview = () => {
+    const infos = sessionStorage.getItem('infoPreview')
+    const infoParsed = JSON.parse(infos!)
+    setInfoPreview(infoParsed)
+  }
+
 
   React.useEffect(() => {
+
+    handleGetInfoPreview()
+
     if (!id) return
     const idProject = localStorage.getItem('idProject')
     fetchDataIdAxios(idProject, setProject)
@@ -95,21 +107,6 @@ const ProjectPage = () => {
           modalMobileControl: [showMobileModal, setShowMobileModal]
         }}
       >
-        {showMobileModal ? (
-          <MobileModal
-            projectSelectedProps={project}
-            loteProps={project?.lotes[project.lotes.length - 1]}
-            valorTokenProps={project?.lotes[project.lotes.length - 1]?.valorDoToken}
-          />) : ''}
-        {showModal ? (
-          <section className={Styles.divFormModal}>
-            <Modal
-              projectSelectedProps={project}
-              loteProps={project?.lotes[project.lotes.length - 1]}
-              valorTokenProps={project?.lotes[project.lotes.length - 1]?.valorDoToken}
-            />
-          </section>
-        ) : ''}
         <main>
           <Frame
             id={`projeto-${id}`}
@@ -131,7 +128,7 @@ const ProjectPage = () => {
               justify='center'
               hidden={false}
               className={`${Styles.background} ${Styles.intro} pt-5 pt-lg-0 d-flex align-items-center pb-5`}
-              bgImage={project.imgFundo}
+              bgImage={infoPreview?.backgroundURL}
             >
               <Column
                 media='lg'
@@ -139,12 +136,12 @@ const ProjectPage = () => {
                 className="pt-5"
               >
                 <Subtitle
-                  text={project.acronimo}
+                  text={infoPreview?.acronimo}
                   color="#00EE8D"
                 />
                 <Title
                   id='introducao-title'
-                  text={translate(project.nome)}
+                  text={translate(infoPreview?.nome)}
                   hidden={false}
                   size={100}
                   height={100}
@@ -154,7 +151,7 @@ const ProjectPage = () => {
                 />
                 <Paragrah
                   id='introducao-description'
-                  text={project.resumo}
+                  text={infoPreview?.descricaoBreve}
                   hidden={false}
                   width={39}
                   size={18}
@@ -163,7 +160,7 @@ const ProjectPage = () => {
                 />
                 <Category
                   iconName={"flash-sharp"}
-                  text={`${project.tipoToken}`}
+                  text={`${infoPreview?.tipoToken}`}
                   className="mt-5 mb-5"
                 />
                 <Button
@@ -175,13 +172,6 @@ const ProjectPage = () => {
                   size={20}
                   onClick={(e: React.ChangeEvent<HTMLInputElement>) => {
                     e.preventDefault()
-                    if (!loggedIn[0]) {
-                      return location.href = '/login'
-                    }
-                    if (lengthWindow < 700) {
-                      return setShowMobileModal(!showMobileModal)
-                    }
-                    return setShowModal(!showModal)
                   }}
                 />
               </Column>
@@ -224,7 +214,7 @@ const ProjectPage = () => {
                 />
                 <Paragrah
                   id='sobre-description'
-                  text={project.descricao}
+                  text={infoPreview?.descricaoLonga}
                   hidden={false}
                   width={45}
                   size={18}
@@ -241,7 +231,7 @@ const ProjectPage = () => {
                   {project.criadoEm && (
                     <DataShow
                       title={t.launchDate}
-                      value={formatOnlyDate(project.dataLancamento)!}
+                      value={formatOnlyDate(infoPreview?.dataLancamento)!}
                       badge={{
                         type: "success",
                         message: t.NEW
@@ -279,7 +269,7 @@ const ProjectPage = () => {
                   {project.lotes.length > 0 ? (
                     <DataShow
                       title={t.tokenValue}
-                      value={masks.getCurrencyMask(project.lotes[project.lotes.length - 1].valorDoToken)}
+                      value={infoPreview?.tokenValue}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
@@ -291,7 +281,7 @@ const ProjectPage = () => {
                   {project.lotes.length > 0 ? (
                     <DataShow
                       title={t.batchExpiration}
-                      value={project.lotes[project.lotes.length - 1].prazoDoLote}
+                      value={infoPreview?.dateVenc}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
@@ -303,7 +293,7 @@ const ProjectPage = () => {
                   {project.lotes.length > 0 ? (
                     <DataShow
                       title={t.totalTokens}
-                      value={masks.getQuantityMask(project.lotes[project.lotes.length - 1].qtdeDeTokens)}
+                      value={infoPreview?.qtdTokens}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
@@ -313,7 +303,7 @@ const ProjectPage = () => {
                     />)}
                   <DataShow
                     title={t.contract}
-                    value={project.contratoToken}
+                    value={'ESTE CAMPO SERÁ GERADO AUTOMATICAMENTE'}
                     highlight={true}
                     badge={{ type: "success", message: t.emphasis }}
                     linkTrue={true}
@@ -322,9 +312,7 @@ const ProjectPage = () => {
                   {project.lotes.length > 0 ? (
                     <DataShow
                       title={t.amountInvest}
-                      value={`${Number((parseFloat(project.lotes[project.lotes.length - 1].captacao) * 100)
-                        .toFixed(2))
-                        .toLocaleString('pt-BR', { minimumFractionDigits: 2 })}%` || '0%'}
+                      value={'0%'}
                       highlight={true}
                       badge={{ type: "success", message: t.emphasis }}
                       contractLink={project.contratoToken}
@@ -497,7 +485,7 @@ const ProjectPage = () => {
                   color="#404040"
                   className={`${Styles.documentos__title} mb-4`}
                 />
-                <Paragrah
+                {/* <Paragrah
                   id='emissor-description'
                   text={project.emissor.descricaoEmissor}
                   className="py-4"
@@ -505,7 +493,7 @@ const ProjectPage = () => {
                   hidden={false}
                   width={100}
                   size={18}
-                />
+                /> */}
                 {
                   project.emissor.linkEmissor && (
                     <Button
@@ -603,4 +591,4 @@ export async function getServerSideProps({
 //   }
 // }
 
-export default ProjectPage
+export default ProjectPagePreview

@@ -5,7 +5,7 @@
     border-radius: 10px;
     min-height: 300px;
     padding: 50px;
-    margin-bottom: 5%;
+    margin: 2% 0;
 
     & h2 {
         color: $gray;
@@ -47,8 +47,9 @@
     
     &__sectionDocs {
         display: flex;
-        max-width: 500px;
+        // max-width: 500px;
         flex-wrap: wrap;
+        flex: 1;
 
         @media (max-width: 500px) {
             justify-content: center;
@@ -68,4 +69,8 @@
         font-size: .8rem;
     }
 
+}
+
+.closeIcon {
+    cursor: pointer;
 }

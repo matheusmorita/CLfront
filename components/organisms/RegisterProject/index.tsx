@@ -13,7 +13,6 @@ import GenericInputCheckbox from '@/components/atoms/GenericInputCheckbox';
 import Button from '@/components/atoms/Button';
 import TableRegister from '../TableRegister';
 import UploadFiles from '../UploadFiles';
-import { toast } from 'react-toastify'
 import CloseIcon from '@mui/icons-material/Close';
 
 //utils
@@ -22,7 +21,11 @@ import { dispatchErrorNotification, dispatchSuccessNotification } from '@/utils/
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Document from '../UploadFiles/Document';
-import { uploadDataFormCreateProject, uploadPhotoBackgroundProject } from '@/utils/fetchDataAxios';
+import { uploadBackgroundPhoto, uploadDataFormCreateProject, uploadPhotoBackgroundProject } from '@/utils/fetchDataAxios';
+import FormLotes from '../FormLotes';
+
+//contexts
+import PreviewContext from '@/context/PreviewContext';
 
 interface Props {
   modalRegisterProject: boolean;
@@ -42,6 +45,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   const [checkboxBenefit, setCheckboxBenefit] = React.useState(false);
   const [nameInputBackground, setNameInputBackground] = React.useState<string>('');
   const [fileInputBackground, setFileInputBackground] = React.useState();
+  const [fileInputBackgroundURL, setFileInputBackgroundURL] = React.useState<string>();
   const [launchDate, setLaunchDate] = React.useState();
   const [valueInputRentability, setValueInputRentability] = React.useState<number>(0);
   const [qtdTokens, setQtdTokens] = React.useState();
@@ -52,11 +56,11 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   const [returnBenefit, setReturnBenefit] = React.useState();
   const [dateVenc, setDateVenc] = React.useState();
   const [optionPhaseProject, setOptionPhaseProject] = React.useState();
-  const [radioSelected, setRadioSelected] = React.useState();
+  const [tokenValue, setTokenValue] = React.useState();
+  const [numberLote, setNumberLote] = React.useState();
 
-
-
-  //Regras dos benefícios
+  const contextPreview = React.useContext(PreviewContext);
+  const { infoProject, setInfoProject } = contextPreview;
 
 
   //router Next
@@ -67,9 +71,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   //   return !projectName || !siglaName || !descriptionBreve || !descriptionLonga
   // }
 
-  const handleChangeInputRadio = (e: any) => {
-    setRadioSelected(e.target.id)
-  }
+
 
   const handleChangeCheckboxBenefit = (e: any) => {
     if (e.target.checked) {
@@ -83,7 +85,8 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
     const file = e.target.files[0]
 
     setFileInputBackground(file)
-    setNameInputBackground(file.name)
+    setNameInputBackground(file?.name)
+    setFileInputBackgroundURL(URL.createObjectURL(file))
   }
 
   const notAllowNegativeNumber = (e: any) => {
@@ -155,6 +158,16 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
 
     uploadPhotoBackgroundProject(photo, accessToken)
     uploadDataFormCreateProject(data)
+  }
+
+  const handleSaveInfoPreview = (data: any) => {
+    const infoPreview = JSON.stringify(data)
+
+    sessionStorage.setItem('infoPreview', infoPreview)
+  }
+
+  const redirectPreview = () => {
+    window.open('/preview/project', '_blank')
   }
 
 
@@ -298,6 +311,8 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                     className=''
                     id='backgroundProject'
                     onChange={handleOnChangeInputFile}
+                    accept='.jpg, .jpeg, .png'
+                    max={4096}
                   />
                   <div className={Styles.sectionUploadImage}>
                     {/* {nameInputBackground || 'Selecione o arquivo'} */}
@@ -318,7 +333,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
           </section>
           <h2 style={{ margin: '2% 0' }}>Cadastro do Token</h2>
           <section className={Styles.mainProjectModal__spaceItemsRegister}>
-            {/* <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
               <strong className={Styles.titleInputRent}>Data de lançamento: </strong>
               <SimpleInput
                 className={Styles.inputDate}
@@ -327,7 +342,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                 onChange={handleCheckDate}
                 maxLength={2}
               />
-            </div> */}
+            </div>
 
             <div className={Styles.divRetornos}>
               <strong className={Styles.titleInputRent}>Tipo de retorno: </strong>
@@ -378,6 +393,29 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                 decimalSeparator=','
                 thousandSeparator='.'
                 onChange={(e: any) => setQtdTokens(e.target.value)}
+              />
+            </div>
+
+            <div className={Styles.divRetornos}>
+              <strong className={Styles.titleInputRent}>Valor do token: </strong>
+              <NumericFormat
+                className={Styles.inputDate}
+                thousandSeparator='.'
+                fixedDecimalScale={true}
+                decimalScale={2}
+                decimalSeparator=','
+                onChange={(e: any) => setTokenValue(e.target.value)}
+                prefix='R$'
+              />
+            </div>
+
+            <div className={Styles.divRetornos}>
+              <strong className={Styles.titleInputRent}>Número do lote: </strong>
+              <NumericFormat
+                className={Styles.inputDate}
+                decimalSeparator=','
+                thousandSeparator='.'
+                onChange={(e: any) => setNumberLote(e.target.value)}
               />
             </div>
 
@@ -444,25 +482,37 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
               </section>
             </div>
           </section>
-          <Link
-            href={'/preview/ideia'}
-            locale={locale}
-            className={Styles.linkStyle}
-          >
-            <Button
-              hidden={false}
-              id='previaButton'
-              label='Clique para ver a prévia'
-              onClick={() => { }}
-              text={'Confira a prévia antes de salvar'}
-              className={Styles.buttonPrevia}
-            />
-          </Link>
+          <Button
+            hidden={false}
+            id='previaButton'
+            label='Clique para ver a prévia'
+            onClick={(e: any) => {
+              e.preventDefault();
+              handleSaveInfoPreview({
+                nome: projectName,
+                acronimo: siglaName,
+                tipoToken: typeToken,
+                descricaoBreve: descriptionBreve,
+                descricaoLonga: descriptionLonga,
+                dataLancamento: launchDate,
+                backgroundURL: fileInputBackgroundURL,
+                rentabilidade: valueInputRentability,
+                qtdTokens: qtdTokens,
+                tokenValue,
+                numberLote,
+              })
+              // setInfoProject()
+              redirectPreview()
+            }}
+            text={'Confira a prévia antes de salvar'}
+            className={Styles.buttonPrevia}
+            disabled={!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue}
+          />
 
           <div className={Styles.saveInfoSection}>
             <Button
               hidden={false}
-              type='submit'
+              type='button'
               id='saveInfoForm'
               label='Clique para salvar informações'
               onClick={() => {
@@ -473,48 +523,17 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                   resumo: descriptionBreve,
                   contratoToken: 'exemplo',
                   rentabilidade: valueInputRentability,
-
                 })
               }}
               text={'Salvar informações até o momento'}
               // || !dateBenefit || !benefitName || !parcela || !returnBenefit || !dateVenc || !typeToken
               className={Styles.buttonSaveInfo}
-              disabled={!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens}
+              disabled={!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue}
             />
           </div>
         </section>
 
-        <form className={Styles.formLotes}>
-          <h2 style={{ margin: '2% 0', textAlign: 'center' }}>Lotes do projeto</h2>
-          <div className={Styles.formLotes__divInputOneLote}>
-            <label className={Styles.formLotes__labelCheckbox}>
-              <input onChange={handleChangeInputRadio} id='radioUniqueToken' name='typeLote' type='radio' />
-              <span className={Styles.formLotes__textCheckboxLabel}>Marque esta opção caso o projeto tenha apenas um lote</span>
-            </label>
-            {radioSelected === 'radioUniqueToken' && (
-              <div>
-                <strong className={Styles.titleInputRent}>Valor do token (R$) </strong>
-                <SimpleInput
-                  className={Styles.formLotes__inputText}
-                  id='valorDoLote'
-                  type='text'
-                />
-              </div>
-            )}
-          </div>
-
-          <div className={Styles.formLotes__divInputOneLote}>
-            <label className={Styles.formLotes__labelCheckbox}>
-              <input onChange={handleChangeInputRadio} id='radioMoreToken' name='typeLote' type='radio' />
-              <span className={Styles.formLotes__textCheckboxLabel}>Marque esta opção caso o projeto tenha mais de um lote</span>
-            </label>
-            {radioSelected === 'radioMoreToken' && (
-              <div className={Styles.overflowStyle}>
-                <TableRegister />
-              </div>
-            )}
-          </div>
-        </form>
+        {/* <FormLotes /> */}
 
         <UploadFiles />
       </form>

@@ -2,23 +2,16 @@
 
 .main {
     background: white;
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
     overflow-x: auto;
 
-    &__header {
-        padding: 25px 3%;
+    &::-webkit-scrollbar {
+        height: 6px;
     }
 
-    &__menuHeader {
-        display: flex;
-        align-items: center;
-    }
-
-    &__menuInputs {
-        display: flex;
-        flex: 1;
-        justify-content: flex-end;
-        flex-wrap: wrap;
+    &::-webkit-scrollbar-thumb {
+        background-color: $primary;
+        border-radius: 3px;
     }
 
     &__btnProject {
@@ -55,14 +48,17 @@
         // flex-direction: column;
         width: 100%;
 
-        & td, th {
+        & td,
+        th {
             color: $gray;
-        }      
+        }
+
         & td {
             // background-color: white;
             padding: 10px;
 
         }
+
         & th {
             background-color: #F5F5F5;
             padding: 10px;
@@ -72,4 +68,34 @@
     }
 }
 
+.header {
 
+    &__btnProject {
+        margin: 10px 0;
+    }
+
+    &__menuHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        background-color: white;
+        border-radius: 10px 10px 0 0;
+        padding: 10px;
+
+        @media (max-width: 750px) {
+            justify-content: center;
+        }
+    }
+
+    &__menuInputs {
+        display: flex;
+        flex: 1;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+
+        @media (max-width: 750px) {
+            justify-content: center;
+        }
+    }
+}
