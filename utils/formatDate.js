@@ -14,6 +14,14 @@ export const formatOnlyDate = (date) => {
     }
 }
 
+export const formatOnlyDateTimeStamp = (date) => {
+    if (dayjs(date).isValid()) {
+        const formated = dayjs(date).unix()
+        console.log(formated)
+        return formated
+    }
+}
+
 export const formatDateProjecard = (date) => {
     if (dayjs(date).isValid()) {
         const formated = dayjs(date).format('DD/MM/YYYY - HH:mm:ss')

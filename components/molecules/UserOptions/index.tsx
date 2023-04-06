@@ -90,7 +90,7 @@ const UserOptions = ({
               {t.profile}
             </li>
           </Link>
-          {!isAdmin && (
+          {isAdmin && (
             <Link href={!admin ? "/admin" : "/notfound"} locale={locale}>
               <li className={Styles.user__item}>
                 Controle Admin

@@ -7,6 +7,8 @@ import InputMask from 'react-input-mask';
 import Input from '@/components/atoms/Input';
 import SimpleInput from '../SimpleInput';
 import Filter from '@/components/molecules/Filter';
+import { fetchDataAxios } from '@/utils/fetchDataAxios';
+import { formatOnlyDate } from '@/utils/formatDate';
 
 interface Props {
   modalRegisterProject: boolean;
@@ -23,6 +25,7 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
   const [showDateFilter, setShowDateFilter] = React.useState(false)
   const [showEmissorFilter, setShowEmissorFilter] = React.useState(false)
 
+  const [projects, setProjects] = React.useState<any>([])
 
   const handleOnChangeInputAll = () => {
     setItemsSelecteds([])
@@ -53,6 +56,15 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
   const handleShowEmissorFilter = (e: any) => {
     setShowEmissorFilter(!showEmissorFilter)
   }
+
+  const handleGetProjects = async () => {
+    const response = await fetchDataAxios(4, setProjects)
+    return response
+  }
+
+  React.useEffect(() => {
+    handleGetProjects()
+  }, [])
 
   return (
     <>
@@ -110,45 +122,21 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><input
-                id='option-1'
-                onChange={handleOnChangeOnlyInput}
-                type='checkbox'
-                checked={inputAll || itemsSelecteds.includes('option-1')}
-              /></td>
-              <td>Dado 1A</td>
-              <td>Dado 1B</td>
-              <td>Dado 1C</td>
-              <td>Dado 1D</td>
-              <td>Dado 1E</td>
-            </tr>
-            <tr>
-              <td><input
-                id='option-2'
-                onChange={handleOnChangeOnlyInput}
-                type='checkbox'
-                checked={inputAll || itemsSelecteds.includes('option-2')}
-              /></td>
-              <td>Dado 2A</td>
-              <td>Dado 2B</td>
-              <td>Dado 2C</td>
-              <td>Dado 2D</td>
-              <td>Dado 2E</td>
-            </tr>
-            <tr>
-              <td><input
-                id='option-3'
-                onChange={handleOnChangeOnlyInput}
-                type='checkbox'
-                checked={inputAll || itemsSelecteds.includes('option-3')}
-              /></td>
-              <td>Dado 3A</td>
-              <td>Dado 3B</td>
-              <td>Dado 3C</td>
-              <td>Dado 3D</td>
-              <td>Dado 3E</td>
-            </tr>
+            {projects?.map((project: any, index: number) => (
+              <tr key={project.id}>
+                <td><input
+                  id={`option-${index+1}`}
+                  onChange={handleOnChangeOnlyInput}
+                  type='checkbox'
+                  checked={inputAll || itemsSelecteds.includes(`option-${index+1}`)}
+                /></td>
+                <td >{project.nome}</td>
+                <td>{project.faseDoProjeto}</td>
+                <td>{project.emissor.nomeEmissor}</td>
+                <td>Admin {index + 1}</td>
+                <td>{formatOnlyDate(project.dataLancamento)}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </main>

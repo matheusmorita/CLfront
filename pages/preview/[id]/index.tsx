@@ -41,6 +41,7 @@ import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 import ProjectContext from '@/context/ProjectContext'
 import { formatOnlyDate } from '@/utils/formatDate'
+import QuotaShowPreview from './QuotaPreview'
 
 const ProjectPagePreview = () => {
   const router = useRouter()
@@ -241,7 +242,7 @@ const ProjectPagePreview = () => {
                   {project.rentabilidade ? (
                     <DataShow
                       title={t.profitability}
-                      value={project.rentabilidade} // alterar essa parte
+                      value={`${infoPreview?.rentabilidade}% a.a. do CDI ${infoPreview?.benefit ? 'e benefícios' : ''}`} // alterar essa parte
                       badge={{ type: "success", message: t.NEW }}
                       contractLink={project.contratoToken}
                     />) : (
@@ -255,7 +256,7 @@ const ProjectPagePreview = () => {
                   {project.lotes.length > 0 ? (
                     <DataShow
                       title={t.batch}
-                      value={project.lotes[project.lotes.length - 1].idLote}
+                      value={infoPreview?.numberLote}
                       badge={{ type: "success", message: t.NEW }}
                       contractLink={project.contratoToken}
                     />) : (
@@ -280,7 +281,7 @@ const ProjectPagePreview = () => {
                   {project.lotes.length > 0 ? (
                     <DataShow
                       title={t.batchExpiration}
-                      value={infoPreview?.dateVenc}
+                      value={formatOnlyDate(infoPreview?.prazoDoLote)}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
@@ -405,52 +406,14 @@ const ProjectPagePreview = () => {
                     />
                   </div>
                   <div className={Styles.gradbox__body}>
-                    {/*
-                      Esse QuotaShow abaixo é só provisório pra quando os dados necessários
-                      estiverem sendo retornados remover e colocar os dados corretos
-                    */} 
-                    <QuotaShow
+                    <QuotaShowPreview
                       key={'item.id'}
-                      project={project}
+                      project={infoPreview}
                       juros={'item.porcentagemPagaNoMes'}
                       parcela={1}
                       valor={'0,00'}
                       vencimento={'item.vencimento'}
-                    // badge={{
-                    //   type: "success",
-                    //   message: "Paga"
-                    // }}
                     />
-                    {/* {project.Remuneracao.length > 0 ? (
-                      project.Remuneracao.map((item: {
-                        id: string
-                        porcentagemPagaNoMes: string,
-                        vencimento: string,
-                        idRemuneracao: number,
-                      }) => (
-                        <QuotaShow
-                          key={item.id}
-                          project={project}
-                          juros={item.porcentagemPagaNoMes}
-                          parcela={item.idRemuneracao}
-                          valor={'0,00'}
-                          vencimento={item.vencimento}
-                          // badge={{
-                          //   type: "success",
-                          //   message: "Paga"
-                          // }}
-                        />
-                      ))
-                    ) : (
-                      <QuotaShow
-                        key={'item.id'}
-                        project={project}
-                        juros={'item.porcentagemPagaNoMes'}
-                        parcela={25}
-                        valor={'0,00'}
-                        vencimento={'item.vencimento'}
-                      />
-                    )} */}
                   </div>
                 </div>
               </Column>

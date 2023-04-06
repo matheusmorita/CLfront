@@ -16,7 +16,7 @@ type Badge = {
 
 type Props = {
   title: string,
-  value: string | number,
+  value: string | any,
   badge?: Badge,
   highlight?: boolean,
   className?: string,

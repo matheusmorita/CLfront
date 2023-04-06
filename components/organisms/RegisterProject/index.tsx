@@ -21,10 +21,11 @@ import { dispatchErrorNotification, dispatchSuccessNotification } from '@/utils/
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Document from '../UploadFiles/Document';
-import { uploadBackgroundPhoto, uploadDataFormCreateProject, uploadPhotoBackgroundProject } from '@/utils/fetchDataAxios';
+import { uploadDataFormCreateProject } from '@/utils/fetchDataAxios';
 import FormLotes from '../FormLotes';
 import { toast } from 'react-toastify';
 import Loader from '@/components/atoms/Loader';
+import { formatOnlyDateTimeStamp } from '@/utils/formatDate';
 
 
 //contexts
@@ -49,7 +50,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   const [fileInputBackground, setFileInputBackground] = React.useState();
   const [fileInputBackgroundURL, setFileInputBackgroundURL] = React.useState<string>();
   const [launchDate, setLaunchDate] = React.useState();
-  const [valueInputRentability, setValueInputRentability] = React.useState<number>(0);
+  const [valueInputRentability, setValueInputRentability] = React.useState<string>();
   const [qtdTokens, setQtdTokens] = React.useState();
   const [dateBenefit, setDateBenefit] = React.useState();
   const [benefitName, setBenefitName] = React.useState();
@@ -63,6 +64,9 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
 
   const [statusCodeFormData, setStatusCodeFormData] = React.useState<number>();
   const [waiting, setWaiting] = React.useState<boolean>(false)
+
+  const [allowSendFiles, setAllowSendFiles] = React.useState<boolean>(true);
+  const [files, setFiles] = React.useState<any[]>([]);
 
 
 
@@ -87,14 +91,15 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   const handleOnChangeInputFile = (e: any) => {
     const file = e.target.files[0]
 
+
     setFileInputBackground(file)
     setNameInputBackground(file?.name)
     setFileInputBackgroundURL(URL.createObjectURL(file))
   }
 
   const notAllowNegativeNumber = (e: any) => {
-    if (e.target.value < 0) {
-      setValueInputRentability(0)
+    if (parseFloat((e.target.value).replace(',', '.')) < 0) {
+      setValueInputRentability('0')
     } else {
       setValueInputRentability(e.target.value)
     }
@@ -113,6 +118,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
     if (e.target.checked) {
       setCheckboxRentabilidade(true)
     } else {
+      setValueInputRentability('')
       setCheckboxRentabilidade(false)
     }
 
@@ -156,14 +162,16 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
     setOptionPhaseProject(e.target.value)
   }
 
-  const handleSendInfoForm = async (photo: any, data: any) => {
+  const handleSendInfoForm = async (data: any) => {
     const accessToken = localStorage.getItem('accessToken');
 
-    // uploadPhotoBackgroundProject(photo, accessToken)
-    const response = await uploadDataFormCreateProject(data, setWaiting)
+    const response = await uploadDataFormCreateProject(data, accessToken, setWaiting)
     if (response === 201) {
-      dispatchSuccessNotification(toast, 'O projeto foi criado com sucesso! Esta página irá recarregar.', true)
+      dispatchSuccessNotification(toast, 'O projeto foi criado com sucesso! Esta página irá recarregar.', false)
+      setAllowSendFiles(false)
     }
+
+    
   }
 
   const handleSaveInfoPreview = (data: any) => {
@@ -390,6 +398,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                 min={0}
                 onChange={notAllowNegativeNumber}
                 disabled={!checkboxRentabilidade}
+                value={valueInputRentability}
               />
             </div>
 
@@ -488,7 +497,21 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                 />
               </section>
             </div>
+            <DivisionBar
+              className={Styles.divisionBar}
+            />
           </section>
+          <section style={{width: '100%', padding: '0 10%'}}>
+            <UploadFiles
+              allowSendFiles={allowSendFiles}
+              files={files}
+              setFiles={setFiles}
+            />
+            <DivisionBar
+              className={Styles.divisionBar}
+            />
+          </section>
+
           <Button
             hidden={false}
             id='previaButton'
@@ -502,18 +525,23 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                 descricaoBreve: descriptionBreve,
                 descricaoLonga: descriptionLonga,
                 dataLancamento: launchDate,
+                prazoDoLote: dateVenc,
                 backgroundURL: fileInputBackgroundURL,
                 rentabilidade: valueInputRentability,
                 qtdTokens: qtdTokens,
                 tokenValue,
                 numberLote,
+                benefit: checkboxBenefit,
+                dateBenefit,
+                benefitName,
+                benefitStatus,
               })
               // setInfoProject()
               redirectPreview()
             }}
             text={'Confira a prévia antes de salvar'}
             className={Styles.buttonPrevia}
-            disabled={!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || !valueInputRentability}
+            disabled={!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || (checkboxRentabilidade && !valueInputRentability)}
           />
 
           <div className={Styles.saveInfoSection}>
@@ -523,29 +551,38 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
               id='saveInfoForm'
               label='Clique para salvar informações'
               onClick={() => {
-                handleSendInfoForm(fileInputBackground, {
+                handleSendInfoForm({
                   nome: projectName,
                   tipoToken: typeToken,
                   faseDoProjeto: optionPhaseProject,
                   descricao: descriptionLonga,
+                  // background: fileInputBackground,
+                  // logo: fileInputBackground,
                   resumo: descriptionBreve,
-                  contratoToken: 'exemplo',
                   rentabilidade: valueInputRentability,
                   nomeToken: projectName,
-                  acronimo: siglaName
+                  emissorId: '48822baa-3d4f-4c84-b059-02e1542f64ce',
+                  acronimo: siglaName,
+                  // files,
+                  lotes: [{
+                    qtdeDeTokens: qtdTokens,
+                    valorDoToken: tokenValue,
+                    dataLancamento: formatOnlyDateTimeStamp(launchDate),
+                    prazoDoLote: formatOnlyDateTimeStamp(dateVenc),
+                  }]
                 })
               }}
               text={'Salvar informações até o momento'}
               // || !dateBenefit || !benefitName || !parcela || !returnBenefit || !dateVenc || !typeToken
               className={Styles.buttonSaveInfo}
-              disabled={!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || !valueInputRentability}
+              disabled={!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || (checkboxRentabilidade && !valueInputRentability)}
             />
           </div>
         </section>
 
         {/* <FormLotes /> */}
 
-        <UploadFiles />
+
       </form>
     </>
   )

@@ -17,12 +17,17 @@ interface CardProps {
 }
 
 export function CardAdmin({ title, background, href }: CardProps) {
+  const [backgroundIMG, setBackgroundIMG] = React.useState<any>();
+
   const router = useRouter();
   const { locale } = router;
 
   return (
     <main
       className={`${Styles.main}`}
+      // style={{
+      //   backgroundImage: `url(${background})`
+      // }}
     >
       <Link
         href={href}
@@ -31,7 +36,8 @@ export function CardAdmin({ title, background, href }: CardProps) {
       >
         <Image
           alt="Imagem respectiva do card"
-          width={400}
+          width={380}
+          height={100}
           src={background}
           className={Styles.backgroundImage}
         />
