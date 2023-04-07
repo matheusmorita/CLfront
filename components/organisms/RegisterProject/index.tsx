@@ -21,7 +21,7 @@ import { dispatchErrorNotification, dispatchSuccessNotification } from '@/utils/
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Document from '../UploadFiles/Document';
-import { uploadBackgroundProject, uploadDataFormCreateProject } from '@/utils/fetchDataAxios';
+import { uploadBackgroundProject, uploadDataFormCreateProject, uploadDocumentsProject } from '@/utils/fetchDataAxios';
 import FormLotes from '../FormLotes';
 import { toast } from 'react-toastify';
 import Loader from '@/components/atoms/Loader';
@@ -166,7 +166,8 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
     const accessToken = localStorage.getItem('accessToken');
 
 
-    await uploadBackgroundProject(fileInputBackground, accessToken)
+    // await uploadBackgroundProject(fileInputBackground, accessToken)
+    // await uploadDocumentsProject(files, accessToken)
     const response = await uploadDataFormCreateProject(data, accessToken, setWaiting)
     if (response === 201) {
       dispatchSuccessNotification(toast, 'O projeto foi criado com sucesso! Esta página irá recarregar.', true)
@@ -543,7 +544,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
             }}
             text={'Confira a prévia antes de salvar'}
             className={Styles.buttonPrevia}
-            disabled={!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || (checkboxRentabilidade && !valueInputRentability)}
+            disabled={waiting || (!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || (checkboxRentabilidade && !valueInputRentability))}
           />
 
           <div className={Styles.saveInfoSection}>
@@ -577,7 +578,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
               text={'Salvar informações até o momento'}
               // || !dateBenefit || !benefitName || !parcela || !returnBenefit || !dateVenc || !typeToken
               className={Styles.buttonSaveInfo}
-              disabled={!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || (checkboxRentabilidade && !valueInputRentability)}
+              disabled={waiting || (!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || (checkboxRentabilidade && !valueInputRentability))}
             />
           </div>
         </section>

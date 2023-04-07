@@ -372,3 +372,18 @@ export const uploadBackgroundProject = async (backgroundFile, accessToken) => {
     },
   })
 }
+
+export const uploadDocumentsProject = async (files, accessToken) => {
+  const formData = new FormData()
+
+  for (const key in files) {
+    formData.append('files', files[key])
+  }
+
+  await axios.post(process.env.NEXT_PUBLIC_UPLOAD_DOCUMENTS_PROJETO, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      "Authorization": `Bearer ${accessToken}`
+    },
+  })
+}
