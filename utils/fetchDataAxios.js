@@ -327,24 +327,48 @@ const handleGetUserCadastro = async (router) => {
 }
 
 export const uploadDataFormCreateProject = async (data, accessToken, setWaiting) => {
-  let formData = new FormData();
+  // let formData = new FormData();
 
-  for (let key in data) {
-    if (key == 'lotes') {
-      data[key] = JSON.stringify(data[key])
-    }
-    console.log(data[key])
-    formData.append(key, data[key]);
-  }
-  
+  // for (let key in data) {
+  //   if (key == 'lotes') {
+  //     data[key] = JSON.stringify(data[key])
+  //   }
+  //   console.log(data[key])
+  //   formData.append(key, data[key]);
+  // }
+
+  // const config = {
+  //   method: 'post',
+  //   headers: {
+  //     "Content-Type": "Content-Type': 'application/json",
+  //     "Authorization": `Bearer ${accessToken}`
+  //   },
+  //   body: JSON.stringify(data)
+  // }
+
+  const dataJson = JSON.stringify(data)
+
   setWaiting(true)
-  const response = await axios.post(process.env.NEXT_PUBLIC_CRIAR_PROJETO, formData, {
+  const response = await axios.post(process.env.NEXT_PUBLIC_CRIAR_PROJETO, dataJson, {
     headers: {
-      "Content-Type": "multipart/form-data",
+      "Content-Type": "application/json",
       "Authorization": `Bearer ${accessToken}`
     },
   })
   setWaiting(false)
 
   return response.status
+}
+
+export const uploadBackgroundProject = async (backgroundFile, accessToken) => {
+  const formData = new FormData()
+
+  formData.append('file', backgroundFile)
+
+  await axios.post(process.env.NEXT_PUBLIC_UPLOAD_BACKGROUND_PROJETO, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      "Authorization": `Bearer ${accessToken}`
+    },
+  })
 }

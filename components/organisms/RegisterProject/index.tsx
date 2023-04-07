@@ -21,7 +21,7 @@ import { dispatchErrorNotification, dispatchSuccessNotification } from '@/utils/
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Document from '../UploadFiles/Document';
-import { uploadDataFormCreateProject } from '@/utils/fetchDataAxios';
+import { uploadBackgroundProject, uploadDataFormCreateProject } from '@/utils/fetchDataAxios';
 import FormLotes from '../FormLotes';
 import { toast } from 'react-toastify';
 import Loader from '@/components/atoms/Loader';
@@ -165,9 +165,11 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   const handleSendInfoForm = async (data: any) => {
     const accessToken = localStorage.getItem('accessToken');
 
+
+    await uploadBackgroundProject(fileInputBackground, accessToken)
     const response = await uploadDataFormCreateProject(data, accessToken, setWaiting)
     if (response === 201) {
-      dispatchSuccessNotification(toast, 'O projeto foi criado com sucesso! Esta página irá recarregar.', false)
+      dispatchSuccessNotification(toast, 'O projeto foi criado com sucesso! Esta página irá recarregar.', true)
       setAllowSendFiles(false)
     }
 
@@ -556,20 +558,20 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                   tipoToken: typeToken,
                   faseDoProjeto: optionPhaseProject,
                   descricao: descriptionLonga,
-                  // background: fileInputBackground,
-                  // logo: fileInputBackground,
                   resumo: descriptionBreve,
                   rentabilidade: valueInputRentability,
                   nomeToken: projectName,
                   emissorId: '48822baa-3d4f-4c84-b059-02e1542f64ce',
                   acronimo: siglaName,
+                  // background: fileInputBackground,
+                  // logo: fileInputBackground,
                   // files,
-                  lotes: [{
-                    qtdeDeTokens: qtdTokens,
-                    valorDoToken: tokenValue,
-                    dataLancamento: formatOnlyDateTimeStamp(launchDate),
-                    prazoDoLote: formatOnlyDateTimeStamp(dateVenc),
-                  }]
+                  // lotes: [{
+                  //   qtdeDeTokens: qtdTokens,
+                  //   valorDoToken: tokenValue,
+                  //   dataLancamento: formatOnlyDateTimeStamp(launchDate),
+                  //   prazoDoLote: formatOnlyDateTimeStamp(dateVenc),
+                  // }]
                 })
               }}
               text={'Salvar informações até o momento'}
