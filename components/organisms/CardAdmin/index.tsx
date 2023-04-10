@@ -25,9 +25,9 @@ export function CardAdmin({ title, background, href }: CardProps) {
   return (
     <main
       className={`${Styles.main}`}
-      // style={{
-      //   backgroundImage: `url(${background})`
-      // }}
+      style={{
+        backgroundImage: `url(${background})`
+      }}
     >
       <Link
         href={href}
@@ -40,6 +40,9 @@ export function CardAdmin({ title, background, href }: CardProps) {
           height={100}
           src={background}
           className={Styles.backgroundImage}
+          style={{
+            backgroundImage: `url(${background})`
+          }}
         />
         <h3 className={Styles.main__h3}>{title}</h3>
       </Link>

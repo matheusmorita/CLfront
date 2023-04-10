@@ -43,6 +43,9 @@ function Admin() {
 
         <div className={`${Styles.background} ${Styles.intro}`} />
         <section className={Styles.sectionAdmin}>
+
+        
+
           <div className={Styles.sectionAdmin__userAdminSection}>
             <Image
               alt='Imagem do usuário Admin'

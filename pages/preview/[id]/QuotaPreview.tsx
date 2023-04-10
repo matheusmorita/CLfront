@@ -51,7 +51,7 @@ const QuotaShowPreview = ({
       <div className={Styles.quotashow__content}>
         <div className={Styles.quotashow__data}>
           <h1 className={Styles.quotashow__title}>
-          {project.acronimo !== 'CLGT' ?  t.installment : t.date }
+          {project?.acronimo !== 'CLGT' ?  t.installment : t.date }
           </h1>
           <span className={Styles.quotashow__value}>
             {formatOnlyDate(project?.dateBenefit) || t.commingSoon}
@@ -59,7 +59,7 @@ const QuotaShowPreview = ({
         </div>
         <div className={Styles.quotashow__data}>
           <h1 className={Styles.quotashow__title}>
-          {project.acronimo !== 'CLGT' ? t.return : t.benefit}
+          {project?.acronimo !== 'CLGT' ? t.return : t.benefit}
           </h1>
           <span className={Styles.quotashow__value}>
           {project?.benefitName || t.commingSoon }
