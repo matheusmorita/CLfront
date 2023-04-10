@@ -26,7 +26,8 @@ export function CardAdmin({ title, background, href }: CardProps) {
     <main
       className={`${Styles.main}`}
       style={{
-        backgroundImage: `url(${background})`
+        backgroundImage: `url(${background})`,
+        backgroundSize: 'cover',
       }}
     >
       <Link
@@ -34,7 +35,7 @@ export function CardAdmin({ title, background, href }: CardProps) {
         locale={locale}
         style={{display: 'flex'}}
       >
-        <Image
+        {/* <Image
           alt="Imagem respectiva do card"
           width={380}
           height={100}
@@ -43,7 +44,7 @@ export function CardAdmin({ title, background, href }: CardProps) {
           style={{
             backgroundImage: `url(${background})`
           }}
-        />
+        /> */}
         <h3 className={Styles.main__h3}>{title}</h3>
       </Link>
     </main>

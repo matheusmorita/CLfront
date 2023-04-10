@@ -66,17 +66,17 @@ function Admin() {
             <CardAdmin
               href='#'
               title='Emissor'
-              background={bgEmissor}
+              background={'/images/backgroundEmissor.png'}
             />
             <CardAdmin
               href='/admin/projetos'
               title='Projetos'
-              background={bgProjetos}
+              background={'/images/backgroundProjetos.png'}
             />
             <CardAdmin
               href='#'
               title='Investidores'
-              background={bgInvestidor}
+              background={'/images/backgroundInvestidor.png'}
             />
           </section>
         </section>
