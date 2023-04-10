@@ -33,7 +33,7 @@ const UserOptions = ({
   setOpenOverlay
 }: Props) => {
   const [dataUser, setDataUser] = React.useState<any>();
-  const [admin, setAdmin] = React.useState<boolean>(false);
+  // const [admin, setAdmin] = React.useState<boolean>(false);
   // const [openMenu, setopenMenu] = React.useState<boolean>(false)
 
   const router = useRouter();
@@ -91,7 +91,7 @@ const UserOptions = ({
             </li>
           </Link>
           {isAdmin && (
-            <Link href={!admin ? "/admin" : "/notfound"} locale={locale}>
+            <Link href={dataUser?.isAdmin ? "/admin" : "/notfound"} locale={locale}>
               <li className={Styles.user__item}>
                 Controle Admin
               </li>

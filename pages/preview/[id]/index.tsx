@@ -52,6 +52,7 @@ const ProjectPagePreview = () => {
   const [showMobileModal, setShowMobileModal] = React.useState<boolean>(false)
   const [lengthWindow, setLengthWindow] = React.useState<number>(0)
   const [infoPreview, setInfoPreview] = React.useState<any>();
+  const [documentsName, setDocumentsName] = React.useState<any>();
 
   const [projectSelected, setProjectSelected] = React.useState<any>([]);
 
@@ -68,8 +69,10 @@ const ProjectPagePreview = () => {
 
   const handleGetInfoPreview = () => {
     const infos = sessionStorage.getItem('infoPreview')
-    const infoParsed = JSON.parse(infos!)
-    setInfoPreview(infoParsed)
+    const documents = sessionStorage.getItem('documentsName')
+
+    setInfoPreview(JSON.parse(infos!))
+    setDocumentsName(JSON.parse(documents!))
   }
 
 
@@ -366,9 +369,11 @@ const ProjectPagePreview = () => {
                   height={22}
                   color="#6C6C6C"
                 />
-                <DataShow
+                {documentsName?.map((nameFile: any, i: number) => (
+                  <DataShow
+                  key={`file${i}`}
                   title={t.docTitle}
-                  value={"NOME_DO_ARQUIVO.PDF"}
+                  value={nameFile}
                   className="mb-3"
                   badge={{
                     type: "success",
@@ -376,15 +381,7 @@ const ProjectPagePreview = () => {
                   }}
                   contractLink={project.contratoToken}
                 />
-                <DataShow
-                  title={t.docTitle}
-                  value={"NOME_DO_ARQUIVO.PDF"}
-                  badge={{
-                    type: "success",
-                    message: t.DOCUMENT
-                  }}
-                  contractLink={project.contratoToken}
-                />
+                ))}
               </Column>
               <Column
                 media='lg'
@@ -464,8 +461,8 @@ const ProjectPagePreview = () => {
                       label={Data.emissor.button.label}
                       hidden={false}
                       disabled={false}
-                      onClick={() => {
-                        window.open(project.emissor.linkEmissor)
+                      onClick={(e: any) => {
+                        e.preventDefault();
                       }}
                     />
                   )

@@ -68,6 +68,8 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   const [allowSendFiles, setAllowSendFiles] = React.useState<boolean>(true);
   const [files, setFiles] = React.useState<any[]>([]);
 
+  let filesNameArray: any = [];
+
 
 
   //router Next
@@ -165,16 +167,17 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   const handleSendInfoForm = async (data: any) => {
     const accessToken = localStorage.getItem('accessToken');
 
+    
+    const { responseID } = await uploadDataFormCreateProject(data, accessToken, setWaiting)
+    await uploadBackgroundProject(responseID, fileInputBackground, accessToken)
+    const responseStatusCode = await uploadDocumentsProject(responseID, files, accessToken)
 
-    // await uploadBackgroundProject(fileInputBackground, accessToken)
-    // await uploadDocumentsProject(files, accessToken)
-    const response = await uploadDataFormCreateProject(data, accessToken, setWaiting)
-    if (response === 201) {
+    if (responseStatusCode === 201) {
       dispatchSuccessNotification(toast, 'O projeto foi criado com sucesso! Esta página irá recarregar.', true)
       setAllowSendFiles(false)
     }
 
-    
+
   }
 
   const handleSaveInfoPreview = (data: any) => {
@@ -504,7 +507,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
               className={Styles.divisionBar}
             />
           </section>
-          <section style={{width: '100%', padding: '0 10%'}}>
+          <section style={{ width: '100%', padding: '0 10%' }}>
             <UploadFiles
               allowSendFiles={allowSendFiles}
               files={files}
@@ -521,6 +524,10 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
             label='Clique para ver a prévia'
             onClick={(e: any) => {
               e.preventDefault();
+              files.forEach(file => {
+                filesNameArray.push(file[0].name)
+              })
+              sessionStorage.setItem('documentsName', JSON.stringify(filesNameArray))
               handleSaveInfoPreview({
                 nome: projectName,
                 acronimo: siglaName,
@@ -554,6 +561,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
               id='saveInfoForm'
               label='Clique para salvar informações'
               onClick={() => {
+                dispatchSuccessNotification(toast, 'Aguarde alguns instantes, o envio do formulário pode levar até 1 min.', true)
                 handleSendInfoForm({
                   nome: projectName,
                   tipoToken: typeToken,
