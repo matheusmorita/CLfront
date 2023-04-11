@@ -13,10 +13,9 @@ import { useRouter } from "next/router";
 interface CardProps {
   title: string;
   background: any;
-  href: string;
 }
 
-export function CardAdmin({ title, background, href }: CardProps) {
+export function CardAdmin({ title, background }: CardProps) {
   const [backgroundIMG, setBackgroundIMG] = React.useState<any>();
 
   const router = useRouter();
@@ -30,9 +29,7 @@ export function CardAdmin({ title, background, href }: CardProps) {
         backgroundSize: 'cover',
       }}
     >
-      <Link
-        href={href}
-        locale={locale}
+      <div
         style={{display: 'flex'}}
       >
         {/* <Image
@@ -46,7 +43,7 @@ export function CardAdmin({ title, background, href }: CardProps) {
           }}
         /> */}
         <h3 className={Styles.main__h3}>{title}</h3>
-      </Link>
+      </div>
     </main>
   )
 }

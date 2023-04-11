@@ -63,10 +63,10 @@ const ProjectPage = () => {
 
   const { loggedIn } = React.useContext(UserContext)
 
-
   React.useEffect(() => {
     if (!id) return
     const idProject = localStorage.getItem('idProject')
+    
     fetchDataIdAxios(idProject, setProject)
 
     const largura = window.innerWidth
@@ -131,7 +131,7 @@ const ProjectPage = () => {
               justify='center'
               hidden={false}
               className={`${Styles.background} ${Styles.intro} pt-5 pt-lg-0 d-flex align-items-center pb-5`}
-              bgImage={project.imgFundo}
+              bgImage={project.imgFundoUrl}
             >
               <Column
                 media='lg'

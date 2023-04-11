@@ -21,7 +21,7 @@ export async function fetchDataIdAxios(id, setProject) {
     }
   })
 
-  // console.log(response.data)
+  console.log(response.data)
   setProject(response.data)
 }
 

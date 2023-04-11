@@ -15,6 +15,7 @@ import bgProjetos from '@/assets/img/backgroundProjetos.png'
 import bgInvestidor from '@/assets/img/backgroundInvestidor.png'
 import Image from 'next/image';
 import defaultImage from '@/assets/img/placeholder.webp'
+import Link from 'next/link';
 
 function Admin() {
   const [dataUser, setDataUser] = React.useState<any>();
@@ -28,6 +29,7 @@ function Admin() {
   };
 
   const router = useRouter();
+  const { locale } = router
 
 
   React.useEffect(() => {
@@ -44,7 +46,7 @@ function Admin() {
         <div className={`${Styles.background} ${Styles.intro}`} />
         <section className={Styles.sectionAdmin}>
 
-        
+
 
           <div className={Styles.sectionAdmin__userAdminSection}>
             <Image
@@ -53,7 +55,7 @@ function Admin() {
               className={Styles.sectionAdmin__profileImage}
               width={250}
               height={250}
-              />
+            />
             <div>
               <h2 className={Styles.sectionAdmin__title}>{dataUser?.nome || 'Admin'}, bem-vindo(a).</h2>
               <p className={Styles.sectionAdmin__description}>
@@ -63,21 +65,33 @@ function Admin() {
             </div>
           </div>
           <section className={Styles.sectionAdmin__cardSection}>
-            <CardAdmin
+            <Link
               href='#'
-              title='Emissor'
-              background={'/images/backgroundEmissor.png'}
-            />
-            <CardAdmin
+              locale={locale}
+            >
+              <CardAdmin
+                title='Emissor'
+                background={'/images/backgroundEmissor.png'}
+              />
+            </Link>
+            <Link
               href='/admin/projetos'
-              title='Projetos'
-              background={'/images/backgroundProjetos.png'}
-            />
-            <CardAdmin
+              locale={locale}
+            >
+              <CardAdmin
+                title='Projetos'
+                background={'/images/backgroundProjetos.png'}
+              />
+            </Link>
+            <Link
               href='#'
-              title='Investidores'
-              background={'/images/backgroundInvestidor.png'}
-            />
+              locale={locale}
+            >
+              <CardAdmin
+                title='Investidores'
+                background={'/images/backgroundInvestidor.png'}
+              />
+            </Link>
           </section>
         </section>
       </>
