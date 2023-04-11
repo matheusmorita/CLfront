@@ -60,13 +60,22 @@ const ProjectPage = () => {
   const { locale } = router;
   const t = locale === 'en' ? en : pt
 
+  const checkBackgroundPRoject = (project: any) => {
+    if (project.nome.toLowerCase().includes('energia')) {
+      return '/images/energiaLimpa.jpg'
+    } else if (project.nome.toLowerCase().includes('tbk')) {
+      return '/images/tbkSports.jpeg'
+    }
+    return project.imgFundoUrl
+  }
+
 
   const { loggedIn } = React.useContext(UserContext)
 
   React.useEffect(() => {
     if (!id) return
     const idProject = localStorage.getItem('idProject')
-    
+
     fetchDataIdAxios(idProject, setProject)
 
     const largura = window.innerWidth
@@ -131,7 +140,7 @@ const ProjectPage = () => {
               justify='center'
               hidden={false}
               className={`${Styles.background} ${Styles.intro} pt-5 pt-lg-0 d-flex align-items-center pb-5`}
-              bgImage={project.imgFundoUrl}
+              bgImage={checkBackgroundPRoject(project)}
             >
               <Column
                 media='lg'
@@ -421,7 +430,7 @@ const ProjectPage = () => {
                     {/*
                       Esse QuotaShow abaixo é só provisório pra quando os dados necessários
                       estiverem sendo retornados remover e colocar os dados corretos
-                    */} 
+                    */}
                     <QuotaShow
                       key={'item.id'}
                       project={project}
