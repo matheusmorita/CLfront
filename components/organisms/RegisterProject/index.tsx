@@ -167,7 +167,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   const handleSendInfoForm = async (data: any) => {
     const accessToken = localStorage.getItem('accessToken');
 
-    
+
     const { responseID } = await uploadDataFormCreateProject(data, accessToken, setWaiting)
     await uploadBackgroundProject(responseID, fileInputBackground, accessToken)
     const responseStatusCode = await uploadDocumentsProject(responseID, files, accessToken)
@@ -551,10 +551,13 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
             }}
             text={'Confira a prévia antes de salvar'}
             className={Styles.buttonPrevia}
-            disabled={waiting || (!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || (checkboxRentabilidade && !valueInputRentability))}
+            disabled={(files.length > 9) || waiting || (!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || (checkboxRentabilidade && !valueInputRentability))}
           />
 
           <div className={Styles.saveInfoSection}>
+            {files.length > 9 && (
+              <span style={{ color: 'red' }}>Você não pode enviar mais de 9 documentos</span>
+            )}
             <Button
               hidden={false}
               type='button'
@@ -583,10 +586,10 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                   // }]
                 })
               }}
-              text={'Salvar informações até o momento'}
+              text={'Salvar informações do projeto'}
               // || !dateBenefit || !benefitName || !parcela || !returnBenefit || !dateVenc || !typeToken
               className={Styles.buttonSaveInfo}
-              disabled={waiting || (!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || (checkboxRentabilidade && !valueInputRentability))}
+              disabled={(files.length > 9) || waiting || (!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || (checkboxRentabilidade && !valueInputRentability))}
             />
           </div>
         </section>

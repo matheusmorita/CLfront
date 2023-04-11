@@ -22,17 +22,29 @@ export default function UploadFiles({ onClick, allowSendFiles, setFiles, files }
   const [waiting, setWaiting] = React.useState<boolean>(false);
 
   const handleChangeInputFile = (e: any) => {
-    setFiles((prevState: any) => {
-      if (prevState[0] == '') {
-        setFiles([])
-      }
-      return [...prevState, e.target.files]
-    });
+    const fileList = e.target.files
+
+    console.log(e.target.files)
+
+    let newSelectedFiles: any[] = [...files]
+    
+    for (let i = 0; i < fileList.length; i++) {
+      newSelectedFiles.push(fileList[i]);
+    }
+
+    setFiles(newSelectedFiles)
+
+    // setFiles((prevState: any) => {
+    //   if (prevState[0] == '') {
+    //     setFiles([])
+    //   }
+    //   return [...prevState, e.target.files]
+    // });
   }
 
   const handleOnClickDocument = (e: any) => {
     e.preventDefault()
-    const newArray = files.filter((file) => file[0]?.name != e.target.id)
+    const newArray = files.filter((file) => file?.name != e.target.id)
     setFiles(newArray)
 
     
@@ -88,15 +100,17 @@ export default function UploadFiles({ onClick, allowSendFiles, setFiles, files }
 
           <section className={Styles.mainFormDoc__sectionDocs}>
             {/* <button type='button' onClick={() => {console.log(files)}}>Clique aqui</button> */}
-            {files.map((file: any, i: number) => (
-              <Document
+            {files.map((file: any, i: number) => {
+              return (
+                <Document
                 key={`file-${i}`}
-                text={file[0]?.name}
+                text={file?.name}
                 allowClose={true}
                 onClick={handleOnClickDocument}
-                id={file[0]?.name}
+                id={file?.name}
               />
-            ))}
+              )
+            })}
           </section>
         </div>
 
