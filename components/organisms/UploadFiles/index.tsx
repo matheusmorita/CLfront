@@ -67,6 +67,7 @@ export default function UploadFiles({ onClick, allowSendFiles, setFiles, files }
                 accept='.jpg, .jpeg, .png, .pdf'
                 onChange={handleChangeInputFile}
                 max={10240}
+                multiple
               />
               {/* <SimpleInput
               type='file'
