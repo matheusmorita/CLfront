@@ -409,7 +409,9 @@ export const deleteProject = async (id) => {
     }
   }
 
-  axios.delete(process.env.NEXT_PUBLIC_DELETE_PROJETO+id, config).then(response => console.log(response))
+  const response = await axios.delete(process.env.NEXT_PUBLIC_DELETE_PROJETO+id, config)
+
+  return response.status
 }
 
 export const updateProject = async (id, data) => {
@@ -420,5 +422,7 @@ export const updateProject = async (id, data) => {
     }
   }
 
-  axios.patch(process.env.NEXT_PUBLIC_UPDATE_PROJETO+id, config).then(response => console.log(response))
+  const response = await axios.patch(process.env.NEXT_PUBLIC_UPDATE_PROJETO+id, config)
+
+  return response.status
 }

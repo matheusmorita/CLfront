@@ -18,7 +18,7 @@ export default function Projetos() {
   const [dataUser, setDataUser] = React.useState<any>();
   const [modalRegisterProject, setModalRegisterProject] = React.useState<boolean>(false);
   const [isOpenOverlay, setIsOpenOverlay] = React.useState<boolean>(false);
-
+  const [editRegister, setEditRegister] = React.useState<string>('');
 
   const router = useRouter();
 
@@ -48,6 +48,7 @@ export default function Projetos() {
         <RegisterProject
           modalRegisterProject={modalRegisterProject}
           setModalRegisterProject={setModalRegisterProject}
+          editRegister={editRegister}
         />
       )}
       {!modalRegisterProject && (
@@ -58,6 +59,7 @@ export default function Projetos() {
           <TableProjects
             modalRegisterProject={modalRegisterProject}
             setModalRegisterProject={setModalRegisterProject}
+            setEditRegister={setEditRegister}
           />
             {/* <h1>paginação</h1> */}
 

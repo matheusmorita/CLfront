@@ -21,7 +21,7 @@ import { dispatchErrorNotification, dispatchSuccessNotification } from '@/utils/
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Document from '../UploadFiles/Document';
-import { uploadBackgroundProject, uploadDataFormCreateProject, uploadDocumentsProject } from '@/utils/fetchDataAxios';
+import { updateProject, uploadBackgroundProject, uploadDataFormCreateProject, uploadDocumentsProject } from '@/utils/fetchDataAxios';
 import FormLotes from '../FormLotes';
 import { toast } from 'react-toastify';
 import Loader from '@/components/atoms/Loader';
@@ -33,10 +33,11 @@ import { formatOnlyDateTimeStamp } from '@/utils/formatDate';
 interface Props {
   modalRegisterProject: boolean;
   setModalRegisterProject: any;
+  editRegister: string;
 }
 
 
-export default function RegisterProject({ modalRegisterProject, setModalRegisterProject }: Props) {
+export default function RegisterProject({ modalRegisterProject, setModalRegisterProject, editRegister }: Props) {
 
   //Estados de dados Input
   const [projectName, setProjectName] = React.useState();
@@ -176,8 +177,20 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
       dispatchSuccessNotification(toast, 'O projeto foi criado com sucesso! Esta página irá recarregar.', true)
       setAllowSendFiles(false)
     }
+  }
 
+  const handleSendInfoUpdate = async (data: any) => {
+    const accessToken = localStorage.getItem('accessToken');
 
+    const id = 'id'
+    await updateProject(id, data)
+    // await uploadBackgroundProject(responseID, fileInputBackground, accessToken)
+    // const responseStatusCode = await uploadDocumentsProject(responseID, files, accessToken)
+
+    // if (responseStatusCode === 201) {
+    //   dispatchSuccessNotification(toast, 'O projeto foi criado com sucesso! Esta página irá recarregar.', true)
+    //   setAllowSendFiles(false)
+    // }
   }
 
   const handleSaveInfoPreview = (data: any) => {
@@ -203,7 +216,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
               onClick={handleCloseModalRegister}
             />
           </span>
-          <h2>Cadastro de projeto</h2>
+          <h2>{editRegister ? 'Cadastro de projeto' : 'Editar projeto'} </h2>
 
           <section className={Styles.mainProjectModal__spaceItemsRegister}>
             <div className={Styles.mainProjectModal__divItem}>
@@ -570,26 +583,26 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
               label='Clique para salvar informações'
               onClick={() => {
                 dispatchSuccessNotification(toast, 'Aguarde alguns instantes, o envio do formulário pode levar até 1 min.', true)
-                handleSendInfoForm({
-                  nome: projectName,
-                  tipoToken: typeToken,
-                  faseDoProjeto: optionPhaseProject,
-                  descricao: descriptionLonga,
-                  resumo: descriptionBreve,
-                  rentabilidade: valueInputRentability,
-                  nomeToken: projectName,
-                  emissorId: '48822baa-3d4f-4c84-b059-02e1542f64ce',
-                  acronimo: siglaName,
-                  // background: fileInputBackground,
-                  // logo: fileInputBackground,
-                  // files,
-                  // lotes: [{
-                  //   qtdeDeTokens: qtdTokens,
-                  //   valorDoToken: tokenValue,
-                  //   dataLancamento: formatOnlyDateTimeStamp(launchDate),
-                  //   prazoDoLote: formatOnlyDateTimeStamp(dateVenc),
-                  // }]
-                })
+                  handleSendInfoForm({
+                    nome: projectName,
+                    tipoToken: typeToken,
+                    faseDoProjeto: optionPhaseProject,
+                    descricao: descriptionLonga,
+                    resumo: descriptionBreve,
+                    rentabilidade: valueInputRentability,
+                    nomeToken: projectName,
+                    emissorId: '48822baa-3d4f-4c84-b059-02e1542f64ce',
+                    acronimo: siglaName,
+                    // background: fileInputBackground,
+                    // logo: fileInputBackground,
+                    // files,
+                    // lotes: [{
+                    //   qtdeDeTokens: qtdTokens,
+                    //   valorDoToken: tokenValue,
+                    //   dataLancamento: formatOnlyDateTimeStamp(launchDate),
+                    //   prazoDoLote: formatOnlyDateTimeStamp(dateVenc),
+                    // }]
+                  })
               }}
               text={'Salvar informações do projeto'}
               // || !dateBenefit || !benefitName || !parcela || !returnBenefit || !dateVenc || !typeToken

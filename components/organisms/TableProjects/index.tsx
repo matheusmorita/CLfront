@@ -1,5 +1,5 @@
 import Button from '@/components/atoms/Button';
-import React, { MouseEvent } from 'react';
+import React, { Dispatch, MouseEvent, SetStateAction } from 'react';
 
 import Styles from './styles.module.scss';
 
@@ -14,15 +14,18 @@ import { formatOnlyDate } from '@/utils/formatDate';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
+import { toast } from 'react-toastify';
+import { dispatchSuccessNotification } from '@/utils/dispatchNotifications';
 
 
 
 interface Props {
   modalRegisterProject: boolean;
   setModalRegisterProject: any;
+  setEditRegister: any;
 }
 
-export default function TableProjects({ modalRegisterProject, setModalRegisterProject }: Props) {
+export default function TableProjects({ modalRegisterProject, setModalRegisterProject, setEditRegister }: Props) {
   const [inputAll, setInputAll] = React.useState<boolean>(false)
   const [itemsSelecteds, setItemsSelecteds] = React.useState<string[]>([])
   // const [itemClicked, setItemClicked] = React.useState<string>('')
@@ -82,7 +85,10 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
             id='addProject'
             text='+ Novo projeto'
             label='Clique para adicionar novo projeto'
-            onClick={() => setModalRegisterProject(!modalRegisterProject)}
+            onClick={() => {
+              setEditRegister(true)
+              setModalRegisterProject(!modalRegisterProject)
+            }}
             className={Styles.header__btnProject}
           />
           <div className={Styles.header__menuInputs}>
@@ -134,10 +140,10 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
             {projects?.map((project: any, index: number) => (
               <tr key={project.id}>
                 <td><input
-                  id={`option-${index+1}`}
+                  id={`option-${index + 1}`}
                   onChange={handleOnChangeOnlyInput}
                   type='checkbox'
-                  checked={inputAll || itemsSelecteds.includes(`option-${index+1}`)}
+                  checked={inputAll || itemsSelecteds.includes(`option-${index + 1}`)}
                 /></td>
                 <td >{project.nome}</td>
                 <td>{project.faseDoProjeto}</td>
@@ -145,11 +151,13 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
                 <td>Admin {index + 1}</td>
                 <td>{formatOnlyDate(project.dataLancamento)}</td>
                 <td>
-                  <button 
+                  <button
                     className={Styles.main__editButton}
                     id={project.id}
                     onClick={(e: any) => {
                       e.preventDefault()
+                      setEditRegister(false)
+                      setModalRegisterProject(!modalRegisterProject)
                       // console.log(e.currentTarget.id)
                     }}
                   >
@@ -159,30 +167,42 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
                       size={25}
                       onClick={(e: any) => {
                         e.preventDefault()
+                        setEditRegister(false)
+                        setModalRegisterProject(!modalRegisterProject)
                         // console.log(e.currentTarget.id)
                       }}
                     />
                   </button>
                 </td>
                 <td>
-                  <button 
+                  <button
                     className={Styles.main__deleteButton}
                     id={project.id}
-                    onClick={(e: any): void => {
+                    onClick={async (e: any) => {
                       e.preventDefault()
-                      deleteProject(e.currentTarget.id)
-                      setTimeout(() => {
-                        location.reload()
-                      }, 3000);
+                      const status = await deleteProject(e.currentTarget.id)
+                        if (status === 200) {
+                          dispatchSuccessNotification(toast, 'Projeto deletado com sucesso!', true)
+                        }
+                        setTimeout(() => {
+                          location.reload()
+                        }, 3000);
                       // console.log(e.currentTarget.id)
                     }}
                   >
-                    <AiFillDelete 
+                    <AiFillDelete
                       className={Styles.main__deleteIcon}
                       size={25}
                       id={project.id}
-                      onClick={(e: any) => {
+                      onClick={async (e: any) => {
                         e.preventDefault()
+                        const status = await deleteProject(e.currentTarget.id)
+                        if (status === 200) {
+                          dispatchSuccessNotification(toast, 'Projeto deletado com sucesso!', true)
+                        }
+                        setTimeout(() => {
+                          location.reload()
+                        }, 3000);
                         // deleteProject(e.currentTarget.id)
                       }}
                     />
