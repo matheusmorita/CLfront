@@ -113,6 +113,8 @@ export async function requestBuyToken(accessToken, quantity, loteId, setWaiting,
     loteId
   })
 
+  console.log(Number(quantity).toFixed(2).toString())
+
   const config = {
     method: "post",
     headers: {

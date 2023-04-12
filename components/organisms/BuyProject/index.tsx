@@ -70,9 +70,11 @@ function BuyProject({
 
 
   const checkSaldo = (balance: string, valorToken: string, realValue: string): boolean => {
-    const balanceNumber = parseFloat(balance.replace(',', '.'))
-    const multiplyValues = Number(realValue) * Number(valorToken)
-    if (balanceNumber >= multiplyValues) {
+    let balanceNumber = balance.replaceAll('.', '')
+    const balanceFloat = parseFloat(balanceNumber.replaceAll(',', '.'))
+
+    const multiplyValues = parseFloat(realValue) * parseFloat(valorToken)
+    if (balanceFloat >= multiplyValues) {
       return true
     }
     return false
