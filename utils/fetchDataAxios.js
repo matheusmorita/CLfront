@@ -21,7 +21,7 @@ export async function fetchDataIdAxios(id, setProject) {
     }
   })
 
-  console.log(response.data)
+  // console.log(response.data)
   setProject(response.data)
 }
 
@@ -38,7 +38,7 @@ export async function fetchDataUserInfo(accessToken, setDataUser, router) {
   const response = await fetch(process.env.NEXT_PUBLIC_GET_USER_INFO, config)
 
   const data = await response.json()
-  console.log(data)
+  // console.log(data)
   setDataUser(data)
 
   if (!data?.isAdmin && router.asPath.includes('admin')) {
@@ -58,13 +58,13 @@ export async function fetchUserHistoryinfo(accessToken, setHistoryUser, historyU
   const response = await fetch(process.env.NEXT_PUBLIC_GET_TRANSACTIONS, config)
 
   const data = await response.json()
-  console.log(data)
+  // console.log(data)
   setHistoryUser(data)
 }
 
 export async function fetchRequestPix(accessToken, quantity, setWaiting) {
   let newQuantity = quantity
-  if (quantity.includes(',')) {
+  if (newQuantity.includes(',')) {
     const replaceDot = quantity.replace(',', '.')
     newQuantity = Number(replaceDot).toFixed(2).toString()
   }
@@ -86,8 +86,8 @@ export async function fetchRequestPix(accessToken, quantity, setWaiting) {
   const dataResponse = await response.json()
   setWaiting(false)
   return {
-    itemId: dataResponse.data.items[0].itemId,
-    textContent: dataResponse.data.items[0].data.textContent
+    itemId: dataResponse?.data?.items[0]?.itemId,
+    textContent: dataResponse?.data?.items[0]?.data.textContent
   }
 }
 
@@ -357,7 +357,7 @@ export const uploadDataFormCreateProject = async (data, accessToken, setWaiting)
       "Authorization": `Bearer ${accessToken}`
     },
   })
-  console.log('id response: ', id)
+  // console.log('id response: ', id)
   setWaiting(false)
 
   return {
@@ -379,7 +379,7 @@ export const uploadBackgroundProject = async (id, backgroundFile, accessToken) =
     },
   }).then((response => {
     if (response.status === 200 ){
-      console.log('background Uploaded')
+      // console.log('background Uploaded')
     }
   }))
 }
