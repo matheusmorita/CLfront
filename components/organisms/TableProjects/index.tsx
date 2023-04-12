@@ -170,7 +170,10 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
                     id={project.id}
                     onClick={(e: any): void => {
                       e.preventDefault()
-                      // deleteProject(e.currentTarget.id)
+                      deleteProject(e.currentTarget.id)
+                      setTimeout(() => {
+                        location.reload()
+                      }, 3000);
                       // console.log(e.currentTarget.id)
                     }}
                   >

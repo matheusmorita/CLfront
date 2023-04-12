@@ -407,8 +407,6 @@ export const deleteProject = async (id) => {
     }
   }
 
-  console.log('endpoint: ' + process.env.NEXT_PUBLIC_DELETE_PROJETO+id)
-
   axios.delete(process.env.NEXT_PUBLIC_DELETE_PROJETO+id, config).then(response => console.log(response))
 }
 
