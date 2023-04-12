@@ -396,8 +396,8 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
               <NumericFormat
                 thousandSeparator='.'
                 decimalSeparator=','
-                decimalScale={2}
-                fixedDecimalScale={true}
+                // decimalScale={2}
+                // fixedDecimalScale={true}
                 className={Styles.inputDate}
                 id='inputRentabilidade'
                 placeholder='X% a. a. do CDI'
@@ -524,10 +524,15 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
             label='Clique para ver a prévia'
             onClick={(e: any) => {
               e.preventDefault();
-              files.forEach(file => {
-                filesNameArray.push(file[0].name)
-              })
-              sessionStorage.setItem('documentsName', JSON.stringify(filesNameArray))
+              // files.forEach(file => {
+              //   filesNameArray.push(file[0].name)
+              // })
+              // sessionStorage.setItem('documentsName', JSON.stringify(filesNameArray))
+              let arrayNameFiles = []
+              for (let i = 0; i < files.length; i++) {
+                arrayNameFiles.push(files[i].name) 
+              }
+              sessionStorage.setItem('documentsName', JSON.stringify(arrayNameFiles))
               handleSaveInfoPreview({
                 nome: projectName,
                 acronimo: siglaName,

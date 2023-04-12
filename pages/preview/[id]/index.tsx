@@ -311,7 +311,14 @@ const ProjectPagePreview = () => {
                   linkTrue={true}
                   contractLink={project?.contratoToken}
                 />
-                {project?.lotes.length > 0 ? (
+                <DataShow
+                  title={t.amountInvest}
+                  value={'0%'}
+                  highlight={true}
+                  badge={{ type: "success", message: t.emphasis }}
+                  contractLink={project?.contratoToken}
+                />
+                {/* {project?.lotes.length > 0 ? (
                   <DataShow
                     title={t.amountInvest}
                     value={'0%'}
@@ -326,7 +333,7 @@ const ProjectPagePreview = () => {
                     badge={{ type: "success", message: t.emphasis }}
                     contractLink={project?.contratoToken}
                   />
-                )}
+                )} */}
               </div>
             </Column>
           </Section>
@@ -370,16 +377,16 @@ const ProjectPagePreview = () => {
               />
               {documentsName?.map((nameFile: any, i: number) => (
                 <DataShow
-                key={`file${i}`}
-                title={t.docTitle}
-                value={nameFile}
-                className="mb-3"
-                badge={{
-                  type: "success",
-                  message: t.DOCUMENT
-                }}
-                contractLink={project?.contratoToken}
-              />
+                  key={`file${i}`}
+                  title={t.docTitle}
+                  value={nameFile}
+                  className="mb-3"
+                  badge={{
+                    type: "success",
+                    message: t.DOCUMENT
+                  }}
+                  contractLink={project?.contratoToken}
+                />
               ))}
             </Column>
             <Column

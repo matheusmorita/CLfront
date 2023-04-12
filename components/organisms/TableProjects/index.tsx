@@ -1,5 +1,5 @@
 import Button from '@/components/atoms/Button';
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
 import Styles from './styles.module.scss';
 
@@ -7,8 +7,15 @@ import InputMask from 'react-input-mask';
 import Input from '@/components/atoms/Input';
 import SimpleInput from '../SimpleInput';
 import Filter from '@/components/molecules/Filter';
-import { fetchDataAxios } from '@/utils/fetchDataAxios';
+import { deleteProject, fetchDataAxios, getProjectsUnlimited } from '@/utils/fetchDataAxios';
 import { formatOnlyDate } from '@/utils/formatDate';
+
+//Icons
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
+
+
 
 interface Props {
   modalRegisterProject: boolean;
@@ -58,7 +65,7 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
   }
 
   const handleGetProjects = async () => {
-    const response = await fetchDataAxios(4, setProjects)
+    const response = await getProjectsUnlimited(setProjects)
     return response
   }
 
@@ -119,6 +126,8 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
               <th>Emissor</th>
               <th>Admin</th>
               <th>Cadastro</th>
+              <th>Editar</th>
+              <th>Deletar</th>
             </tr>
           </thead>
           <tbody>
@@ -135,6 +144,55 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
                 <td>{project.emissor.nomeEmissor}</td>
                 <td>Admin {index + 1}</td>
                 <td>{formatOnlyDate(project.dataLancamento)}</td>
+                <td>
+                  <button 
+                    className={Styles.main__editButton}
+                    id={project.id}
+                    onClick={(e: any) => {
+                      e.preventDefault()
+                      // console.log(e.currentTarget.id)
+                    }}
+                  >
+                    <AiFillEdit
+                      id={project.id}
+                      className={Styles.main__editIcon}
+                      size={25}
+                      onClick={(e: any) => {
+                        e.preventDefault()
+                        // console.log(e.currentTarget.id)
+                      }}
+                    />
+                  </button>
+                </td>
+                <td>
+                  <button 
+                    className={Styles.main__deleteButton}
+                    id={project.id}
+                    onClick={(e: any): void => {
+                      e.preventDefault()
+                      // deleteProject(e.currentTarget.id)
+                      // console.log(e.currentTarget.id)
+                    }}
+                  >
+                    <AiFillDelete 
+                      className={Styles.main__deleteIcon}
+                      size={25}
+                      id={project.id}
+                      onClick={(e: any) => {
+                        e.preventDefault()
+                        // deleteProject(e.currentTarget.id)
+                      }}
+                    />
+                    {/* <DeleteIcon
+                      id={project.id}
+                      className={Styles.main__deleteIcon}
+                      onClick={(e: any) => {
+                        const iconId = e.target.getAttribute('id');
+                        console.log(iconId)
+                      }}
+                    /> */}
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

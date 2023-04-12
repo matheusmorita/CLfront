@@ -14,6 +14,20 @@ export async function fetchDataAxios(limit, setProjects) {
   return response.data
 }
 
+export async function getProjectsUnlimited(setProjects) {
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_PROJETO_URL}`,
+    {
+      headers: {
+        "Content-Type": "application/json"
+      },
+    }
+  )
+
+  
+  setProjects(response.data)
+  return response.data
+}
+
 export async function fetchDataIdAxios(id, setProject) {
   const response = await axios.get(`${process.env.NEXT_PUBLIC_PROJETO_ID_URL}${id}`, {
     headers: {
@@ -68,6 +82,8 @@ export async function fetchRequestPix(accessToken, quantity, setWaiting) {
     const replaceDot = quantity.replace(',', '.')
     newQuantity = Number(replaceDot).toFixed(2).toString()
   }
+
+  console.log(newQuantity)
 
   var dataBody = JSON.stringify({
     quantity: newQuantity,
@@ -384,3 +400,25 @@ export const uploadBackgroundProject = async (id, backgroundFile, accessToken) =
   }))
 }
 
+export const deleteProject = async (id) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+
+  console.log('endpoint: ' + process.env.NEXT_PUBLIC_DELETE_PROJETO+id)
+
+  axios.delete(process.env.NEXT_PUBLIC_DELETE_PROJETO+id, config).then(response => console.log(response))
+}
+
+export const updateProject = async (id, data) => {
+  const config = {
+    data,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+
+  axios.patch(process.env.NEXT_PUBLIC_UPDATE_PROJETO+id, config).then(response => console.log(response))
+}

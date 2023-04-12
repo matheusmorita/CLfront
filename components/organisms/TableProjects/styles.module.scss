@@ -4,6 +4,7 @@
     background: white;
     border-radius: 0 0 10px 10px;
     overflow-x: auto;
+    margin-bottom: 5%;
 
     &::-webkit-scrollbar {
         height: 6px;
@@ -12,6 +13,28 @@
     &::-webkit-scrollbar-thumb {
         background-color: $primary;
         border-radius: 3px;
+    }
+
+    &__editButton {
+        border: none;
+        box-shadow: 1.8px 3.5px 3.5px hsl(0deg 0% 0% / 0.25);
+        border-radius: 50px;
+        padding: 10px;
+    }
+
+    &__editIcon {
+        fill: $primary !important;
+    }
+
+    &__deleteButton {
+        border: none;
+        box-shadow: 1.8px 3.5px 3.5px hsl(0deg 0% 0% / 0.25);
+        border-radius: 50px;
+        padding: 10px;
+    }
+
+    &__deleteIcon {
+        fill: $error !important;
     }
 
     &__btnProject {

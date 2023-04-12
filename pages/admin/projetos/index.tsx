@@ -59,9 +59,10 @@ export default function Projetos() {
             modalRegisterProject={modalRegisterProject}
             setModalRegisterProject={setModalRegisterProject}
           />
+            {/* <h1>paginação</h1> */}
+
         </main>
       )}
-
 
     </>
   )
