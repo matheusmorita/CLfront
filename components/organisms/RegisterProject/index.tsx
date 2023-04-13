@@ -14,6 +14,7 @@ import Button from '@/components/atoms/Button';
 import TableRegister from '../TableRegister';
 import UploadFiles from '../UploadFiles';
 import CloseIcon from '@mui/icons-material/Close';
+import InputMask from 'react-input-mask';
 
 //utils
 import { verifyBeforeDate } from '@/utils/verifyBeforeDate';
@@ -21,11 +22,11 @@ import { dispatchErrorNotification, dispatchSuccessNotification } from '@/utils/
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Document from '../UploadFiles/Document';
-import { updateProject, uploadBackgroundProject, uploadDataFormCreateProject, uploadDocumentsProject } from '@/utils/fetchDataAxios';
+import { fetchDataIdAxios, updateProject, uploadBackgroundProject, uploadDataFormCreateProject, uploadDocumentsProject } from '@/utils/fetchDataAxios';
 import FormLotes from '../FormLotes';
 import { toast } from 'react-toastify';
 import Loader from '@/components/atoms/Loader';
-import { formatOnlyDateTimeStamp } from '@/utils/formatDate';
+import { formatOnlyDate, formatOnlyDateTimeStamp } from '@/utils/formatDate';
 
 
 //contexts
@@ -62,6 +63,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   const [optionPhaseProject, setOptionPhaseProject] = React.useState();
   const [tokenValue, setTokenValue] = React.useState();
   const [numberLote, setNumberLote] = React.useState();
+  const [onlyProject, setOnlyProject] = React.useState<any>();
 
   const [statusCodeFormData, setStatusCodeFormData] = React.useState<number>();
   const [waiting, setWaiting] = React.useState<boolean>(false)
@@ -174,23 +176,25 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
     const responseStatusCode = await uploadDocumentsProject(responseID, files, accessToken)
 
     if (responseStatusCode === 201) {
-      dispatchSuccessNotification(toast, 'O projeto foi criado com sucesso! Esta página irá recarregar.', true)
+      dispatchSuccessNotification(toast, 'O projeto foi criado com sucesso! Esta página irá recarregar em instantes.', true)
       setAllowSendFiles(false)
     }
   }
 
   const handleSendInfoUpdate = async (data: any) => {
-    const accessToken = localStorage.getItem('accessToken');
+    // const accessToken = localStorage.getItem('accessToken');
 
-    const id = 'id'
-    await updateProject(id, data)
+    const projectIdUpdate = sessionStorage.getItem('projectUpdateId')
+    const projectIdParsed = JSON.parse(projectIdUpdate!)
+
+    const responseStatus = await updateProject(projectIdParsed, data)
     // await uploadBackgroundProject(responseID, fileInputBackground, accessToken)
     // const responseStatusCode = await uploadDocumentsProject(responseID, files, accessToken)
 
-    // if (responseStatusCode === 201) {
-    //   dispatchSuccessNotification(toast, 'O projeto foi criado com sucesso! Esta página irá recarregar.', true)
-    //   setAllowSendFiles(false)
-    // }
+    if (responseStatus === 200) {
+      dispatchSuccessNotification(toast, 'O projeto foi atualizado com sucesso! Esta página irá recarregar em instantes.', true)
+      setAllowSendFiles(false)
+    }
   }
 
   const handleSaveInfoPreview = (data: any) => {
@@ -203,7 +207,31 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
     window.open('/preview/project', '_blank')
   }
 
+  const handleSetValueEdit = (
+    nome: any,
+    acronimo: any,
+    tipoToken: any,
+    dataLancamento: any,
+    descricaoBreve: any,
+    descricaoLonga: any,
+    rentabilidade: any
+  ) => {
+    setProjectName(nome)
+    setSiglaName(acronimo)
+    setTypeToken(tipoToken)
+    setLaunchDate(dataLancamento)
+    setDescriptionBreve(descricaoBreve)
+    setDescriptionLonga(descricaoLonga)
+    setValueInputRentability(rentabilidade)
+  }
 
+  React.useEffect(() => {
+    if (!editRegister) {
+      const projectIdUpdate = sessionStorage.getItem('projectUpdateId')
+      const projectIdParsed = JSON.parse(projectIdUpdate!)
+      fetchDataIdAxios(projectIdParsed, setOnlyProject, handleSetValueEdit)
+    }
+  }, [editRegister])
 
   return (
     <>
@@ -229,6 +257,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                 required={true}
                 placeholder='Nome do projeto'
                 onChange={(e: any) => setProjectName(e.target.value)}
+                value={projectName}
               />
               <p className={projectName === '' ? Styles.caracteresLengthError : Styles.mainProjectModal__caracteresLength}>25 caracteres</p>
             </div>
@@ -243,6 +272,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                 required={true}
                 placeholder='Energia'
                 onChange={(e: any) => setTypeToken(e.target.value)}
+                value={typeToken}
               />
               <p className={projectName === '' ? Styles.caracteresLengthError : Styles.mainProjectModal__caracteresLength}>10 caracteres</p>
             </div>
@@ -257,6 +287,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                 onChange={(e: any) => setSiglaName(e.target.value)}
                 required={true}
                 placeholder='Digite somente a SIGLA sem o "#"'
+                value={siglaName}
               />
               <p className={siglaName === '' ? Styles.caracteresLengthError : Styles.mainProjectModal__caracteresLength}>6 caracteres</p>
             </div>
@@ -277,6 +308,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                   style={{ minHeight: '100px' }}
                   className={descriptionBreve === '' ? Styles.textareaStyleError : Styles.textareaStyle}
                   onChange={(e: any) => setDescriptionBreve(e.target.value)}
+                  value={descriptionBreve}
                 ></textarea>
                 <p className={descriptionBreve === '' ? Styles.caracteresLengthError : Styles.mainProjectModal__caracteresLength}>300 caracteres</p>
               </div>
@@ -299,6 +331,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                   style={{ minHeight: '150px' }}
                   className={descriptionLonga === '' ? Styles.textareaStyleError : Styles.textareaStyle}
                   onChange={(e: any) => setDescriptionLonga(e.target.value)}
+                  value={descriptionLonga}
                 ></textarea>
                 <p className={descriptionLonga === '' ? Styles.caracteresLengthError : Styles.mainProjectModal__caracteresLength}>1.190 caracteres</p>
               </div>
@@ -369,12 +402,19 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
           <section className={Styles.mainProjectModal__spaceItemsRegister}>
             <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
               <strong className={Styles.titleInputRent}>Data de lançamento: </strong>
-              <SimpleInput
-                className={Styles.inputDate}
+              {/* <SimpleInput
                 id='inputDate'
                 type='date'
                 onChange={handleCheckDate}
                 maxLength={2}
+                value={'2024-25-02'}
+              /> */}
+              <InputMask
+                className={Styles.inputDate}
+                mask={'99/99/9999'}
+                maskChar=''
+                onChange={handleCheckDate}
+                value={formatOnlyDate(launchDate)}
               />
             </div>
 
@@ -543,7 +583,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
               // sessionStorage.setItem('documentsName', JSON.stringify(filesNameArray))
               let arrayNameFiles = []
               for (let i = 0; i < files.length; i++) {
-                arrayNameFiles.push(files[i].name) 
+                arrayNameFiles.push(files[i].name)
               }
               sessionStorage.setItem('documentsName', JSON.stringify(arrayNameFiles))
               handleSaveInfoPreview({
@@ -582,8 +622,9 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
               id='saveInfoForm'
               label='Clique para salvar informações'
               onClick={() => {
-                dispatchSuccessNotification(toast, 'Aguarde alguns instantes, o envio do formulário pode levar até 1 min.', true)
-                  handleSendInfoForm({
+                dispatchSuccessNotification(toast, 'Aguarde alguns instantes, o envio do formulário pode levar até 1 min.', false)
+                if (editRegister) {
+                  return handleSendInfoForm({
                     nome: projectName,
                     tipoToken: typeToken,
                     faseDoProjeto: optionPhaseProject,
@@ -603,6 +644,21 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                     //   prazoDoLote: formatOnlyDateTimeStamp(dateVenc),
                     // }]
                   })
+                } else {
+                  return handleSendInfoUpdate({
+                    nome: projectName,
+                    imgTipo: "string",
+                    logo: "string",
+                    descricao: descriptionLonga,
+                    resumo: descriptionBreve,
+                    rentabilidade: valueInputRentability,
+                    nomeToken: projectName,
+                    contratoToken: "string",
+                    acronimo: siglaName
+                  })
+                }
+
+
               }}
               text={'Salvar informações do projeto'}
               // || !dateBenefit || !benefitName || !parcela || !returnBenefit || !dateVenc || !typeToken

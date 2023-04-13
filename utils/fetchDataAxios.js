@@ -28,15 +28,26 @@ export async function getProjectsUnlimited(setProjects) {
   return response.data
 }
 
-export async function fetchDataIdAxios(id, setProject) {
+export async function fetchDataIdAxios(id, setProject, handleSetInfoUpdate) {
   const response = await axios.get(`${process.env.NEXT_PUBLIC_PROJETO_ID_URL}${id}`, {
     headers: {
       "Content-Type": "application/json"
     }
   })
 
-  // console.log(response.data)
-  setProject(response.data)
+  const data = response.data
+  const {
+    nome, 
+    rentabilidade, 
+    acronimo, 
+    dataLancamento, 
+    descricao, 
+    resumo,
+    tipoToken,
+  } = data;
+
+  handleSetInfoUpdate(nome, acronimo, tipoToken, dataLancamento, resumo, descricao, rentabilidade)
+  setProject(data)
 }
 
 
@@ -416,7 +427,7 @@ export const deleteProject = async (id) => {
 
 export const updateProject = async (id, data) => {
   const config = {
-    data,
+    data: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json"
     }

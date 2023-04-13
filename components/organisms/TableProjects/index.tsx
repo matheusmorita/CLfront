@@ -16,6 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 import { toast } from 'react-toastify';
 import { dispatchSuccessNotification } from '@/utils/dispatchNotifications';
+import { fetchDataIdAxios } from '@/utils/fetchDataAxios';
 
 
 
@@ -23,12 +24,14 @@ interface Props {
   modalRegisterProject: boolean;
   setModalRegisterProject: any;
   setEditRegister: any;
+  setOnlyProject: any;
 }
 
-export default function TableProjects({ modalRegisterProject, setModalRegisterProject, setEditRegister }: Props) {
+export default function TableProjects({ modalRegisterProject, setModalRegisterProject, setEditRegister, setOnlyProject }: Props) {
   const [inputAll, setInputAll] = React.useState<boolean>(false)
   const [itemsSelecteds, setItemsSelecteds] = React.useState<string[]>([])
-  // const [itemClicked, setItemClicked] = React.useState<string>('')
+  const [itemClicked, setItemClicked] = React.useState<string>('')
+  // const [clickedButton, setClickedButton] = React.useState<string>()
 
   const [showOrderFilter, setShowOrderFilter] = React.useState(false)
   const [showStatusFilter, setShowStatusFilter] = React.useState(false)
@@ -70,6 +73,15 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
   const handleGetProjects = async () => {
     const response = await getProjectsUnlimited(setProjects)
     return response
+  }
+
+  const handleGetElementById = (id: string) => {
+    const deleteButton = document.getElementById(id)
+    setItemClicked(deleteButton!.id)
+  }
+
+  const handleSetIdUpdate = (id: string) => {
+    sessionStorage.setItem('projectUpdateId', JSON.stringify(id))
   }
 
   React.useEffect(() => {
@@ -158,7 +170,7 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
                       e.preventDefault()
                       setEditRegister(false)
                       setModalRegisterProject(!modalRegisterProject)
-                      // console.log(e.currentTarget.id)
+                      handleSetIdUpdate(e.currentTarget.id)
                     }}
                   >
                     <AiFillEdit
@@ -169,52 +181,59 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
                         e.preventDefault()
                         setEditRegister(false)
                         setModalRegisterProject(!modalRegisterProject)
-                        // console.log(e.currentTarget.id)
+                        handleSetIdUpdate(e.currentTarget.id)
                       }}
                     />
                   </button>
                 </td>
                 <td>
                   <button
-                    className={Styles.main__deleteButton}
+                    className={project.id === itemClicked ? Styles.main__deleteButtonClicked : Styles.main__deleteButton}
                     id={project.id}
                     onClick={async (e: any) => {
                       e.preventDefault()
-                      const status = await deleteProject(e.currentTarget.id)
-                        if (status === 200) {
-                          dispatchSuccessNotification(toast, 'Projeto deletado com sucesso!', true)
-                        }
-                        setTimeout(() => {
-                          location.reload()
-                        }, 3000);
-                      // console.log(e.currentTarget.id)
+                      handleGetElementById(e.currentTarget.id)
                     }}
                   >
-                    <AiFillDelete
-                      className={Styles.main__deleteIcon}
-                      size={25}
-                      id={project.id}
-                      onClick={async (e: any) => {
-                        e.preventDefault()
-                        const status = await deleteProject(e.currentTarget.id)
-                        if (status === 200) {
-                          dispatchSuccessNotification(toast, 'Projeto deletado com sucesso!', true)
-                        }
-                        setTimeout(() => {
-                          location.reload()
-                        }, 3000);
-                        // deleteProject(e.currentTarget.id)
-                      }}
-                    />
-                    {/* <DeleteIcon
-                      id={project.id}
-                      className={Styles.main__deleteIcon}
-                      onClick={(e: any) => {
-                        const iconId = e.target.getAttribute('id');
-                        console.log(iconId)
-                      }}
-                    /> */}
+                    {project.id === itemClicked ? (
+                      <>
+                        <span
+                          style={{ fontWeight: '500' }}
+                          onClick={async (e: any) => {
+                            e.preventDefault()
+                            setItemClicked('')
+                            const status = await deleteProject(itemClicked)
+                            if (status === 200) {
+                              dispatchSuccessNotification(toast, 'Projeto deletado com sucesso!', true)
+                            }
+                            setTimeout(() => {
+                              location.reload()
+                            }, 3000);
+                          }}
+                        >Confirmar?</span>
+                      </>
+                    ) : (
+                      <AiFillDelete
+                        className={Styles.main__deleteIcon}
+                        size={25}
+                        id={project.id}
+                        onClick={async (e: any) => {
+                          e.preventDefault()
+                          handleGetElementById(e.currentTarget.id)
+                        }}
+                      />
+                    )}
                   </button>
+                  {project.id === itemClicked && (
+                    <span
+                      className={Styles.main__deleteButtonClicked}
+                      style={{ background: '#00EE8D', fontWeight: '500' }}
+                      onClick={() => setItemClicked('')}
+                    >
+                      X
+                    </span>
+                  )}
+
                 </td>
               </tr>
             ))}

@@ -19,6 +19,7 @@ export default function Projetos() {
   const [modalRegisterProject, setModalRegisterProject] = React.useState<boolean>(false);
   const [isOpenOverlay, setIsOpenOverlay] = React.useState<boolean>(false);
   const [editRegister, setEditRegister] = React.useState<string>('');
+  const [onlyProject, setOnlyProject] = React.useState();
 
   const router = useRouter();
 
@@ -60,6 +61,7 @@ export default function Projetos() {
             modalRegisterProject={modalRegisterProject}
             setModalRegisterProject={setModalRegisterProject}
             setEditRegister={setEditRegister}
+            setOnlyProject={setOnlyProject}
           />
             {/* <h1>paginação</h1> */}
 
