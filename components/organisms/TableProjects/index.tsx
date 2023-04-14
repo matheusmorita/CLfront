@@ -227,7 +227,7 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
                   {project.id === itemClicked && (
                     <span
                       className={Styles.main__deleteButtonClicked}
-                      style={{ background: '#00EE8D', fontWeight: '500' }}
+                      style={{ background: '#00EE8D', fontWeight: '500', cursor: 'pointer' }}
                       onClick={() => setItemClicked('')}
                     >
                       X

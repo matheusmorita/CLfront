@@ -22,7 +22,7 @@ import { dispatchErrorNotification, dispatchSuccessNotification } from '@/utils/
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Document from '../UploadFiles/Document';
-import { fetchDataIdAxios, updateProject, uploadBackgroundProject, uploadDataFormCreateProject, uploadDocumentsProject } from '@/utils/fetchDataAxios';
+import { fetchDataIdAxios, fetchDataIdAxiosWithFunction, updateProject, uploadBackgroundProject, uploadDataFormCreateProject, uploadDocumentsProject } from '@/utils/fetchDataAxios';
 import FormLotes from '../FormLotes';
 import { toast } from 'react-toastify';
 import Loader from '@/components/atoms/Loader';
@@ -246,7 +246,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
       const projectIdParsed = JSON.parse(projectIdUpdate!)
       
       const handleFetchProjectId = async (id: string, setProject: any, handleSetValue: any) => {
-        const faseDoProjeto = await fetchDataIdAxios(id, setProject, handleSetValue)
+        const faseDoProjeto = await fetchDataIdAxiosWithFunction(id, setProject, handleSetValue)
         handleSetValueStatus(faseDoProjeto)
       }
       handleFetchProjectId(projectIdParsed, setOnlyProject, handleSetValueEdit)

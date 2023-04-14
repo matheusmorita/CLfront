@@ -29,7 +29,18 @@ export async function getProjectsUnlimited(setProjects) {
   return response.data
 }
 
-export async function fetchDataIdAxios(id, setProject, handleSetInfoUpdate) {
+export async function fetchDataIdAxios(id, setProject) {
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_PROJETO_ID_URL}${id}`, {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+
+  
+  setProject(response.data)
+}
+
+export async function fetchDataIdAxiosWithFunction(id, setProject, handleSetInfoUpdate) {
   const response = await axios.get(`${process.env.NEXT_PUBLIC_PROJETO_ID_URL}${id}`, {
     headers: {
       "Content-Type": "application/json"
@@ -195,6 +206,7 @@ export const handleGetUserInfo = async (setSuccess, setPreloaded, router) => {
 
   await fetch(process.env.NEXT_PUBLIC_GET_USER_CADASTRO, config)
     .then(resp => {
+      console.log(resp)
       if (resp.ok) {
         setSuccess(true)
         setPreloaded(true)

@@ -63,8 +63,9 @@ export default function Projetos() {
             setEditRegister={setEditRegister}
             setOnlyProject={setOnlyProject}
           />
-            {/* <h1>paginação</h1> */}
-
+            {/* <section className={Styles.main__pagination}>
+              <h1 style={{color: 'black'}}>Paginação</h1>
+            </section> */}
         </main>
       )}
 
