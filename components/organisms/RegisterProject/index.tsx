@@ -182,16 +182,16 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   }
 
   const handleSendInfoUpdate = async (data: any) => {
-    // const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('accessToken');
 
     const projectIdUpdate = sessionStorage.getItem('projectUpdateId')
     const projectIdParsed = JSON.parse(projectIdUpdate!)
 
-    const responseStatus = await updateProject(projectIdParsed, data)
-    // await uploadBackgroundProject(responseID, fileInputBackground, accessToken)
-    // const responseStatusCode = await uploadDocumentsProject(responseID, files, accessToken)
+    await updateProject(projectIdParsed, data)
+    await uploadBackgroundProject(projectIdParsed, fileInputBackground, accessToken)
+    const responseStatusCode = await uploadDocumentsProject(projectIdParsed, files, accessToken)
 
-    if (responseStatus === 200) {
+    if (responseStatusCode === 200) {
       dispatchSuccessNotification(toast, 'O projeto foi atualizado com sucesso! Esta página irá recarregar em instantes.', true)
       setAllowSendFiles(false)
     }
@@ -214,7 +214,8 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
     dataLancamento: any,
     descricaoBreve: any,
     descricaoLonga: any,
-    rentabilidade: any
+    rentabilidade: any,
+    faseDoProjeto: any
   ) => {
     setProjectName(nome)
     setSiglaName(acronimo)
@@ -223,13 +224,32 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
     setDescriptionBreve(descricaoBreve)
     setDescriptionLonga(descricaoLonga)
     setValueInputRentability(rentabilidade)
+    setOptionPhaseProject(faseDoProjeto)
   }
+
+  const handleSetValueStatus = (faseDoProjeto: any) => {
+    const select: any = document.getElementById('statusOptions')
+
+    for (let i = 0; i < select.length; i++) {
+      if (faseDoProjeto === select[i].value) {
+        select[i].selected = true
+        setOptionPhaseProject(faseDoProjeto)
+      } 
+    }
+  }
+
+  
 
   React.useEffect(() => {
     if (!editRegister) {
       const projectIdUpdate = sessionStorage.getItem('projectUpdateId')
       const projectIdParsed = JSON.parse(projectIdUpdate!)
-      fetchDataIdAxios(projectIdParsed, setOnlyProject, handleSetValueEdit)
+      
+      const handleFetchProjectId = async (id: string, setProject: any, handleSetValue: any) => {
+        const faseDoProjeto = await fetchDataIdAxios(id, setProject, handleSetValue)
+        handleSetValueStatus(faseDoProjeto)
+      }
+      handleFetchProjectId(projectIdParsed, setOnlyProject, handleSetValueEdit)
     }
   }, [editRegister])
 
@@ -348,13 +368,13 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
 
             <div className={Styles.mainProjectModal__divItem}>
               <p className={Styles.mainProjectModal__titleInput}>Fase do projeto*: </p>
-              <select onChange={handleChangeValueOptionSelected} className={Styles.projectNameInput}>
-                <option value='' style={{ color: 'black', }} selected>Selecione a fase do projeto</option>
-                <option value={'Em breve'} style={{ color: 'black' }} >Em breve</option>
-                <option value={'Rodada vip'} style={{ color: 'black' }} >Rodada vip</option>
-                <option value={'Em captação'} style={{ color: 'black' }} >Em captação</option>
-                <option value={'Em implementação'} style={{ color: 'black' }} >Em implementação</option>
-                <option value={'Ativo'} style={{ color: 'black' }} >Ativo</option>
+              <select id='statusOptions' onChange={handleChangeValueOptionSelected} className={Styles.projectNameInput}>
+                <option value='' style={{ color: '#404040', }} selected>Selecione a fase do projeto</option>
+                <option value={'Em breve'} style={{ color: '#404040' }} >Em breve</option>
+                <option value={'Rodada vip'} style={{ color: '#404040' }} >Rodada vip</option>
+                <option value={'Em captação'} style={{ color: '#404040' }} >Em captação</option>
+                <option value={'Em implementação'} style={{ color: '#404040' }} >Em implementação</option>
+                <option value={'Ativo'} style={{ color: '#404040' }} >Ativo</option>
 
               </select>
             </div>
@@ -413,8 +433,8 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                 className={Styles.inputDate}
                 mask={'99/99/9999'}
                 maskChar=''
-                onChange={handleCheckDate}
-                value={formatOnlyDate(launchDate)}
+                onChange={(e: any) => setLaunchDate(e.currentTarget.value)}
+                value={launchDate}
               />
             </div>
 
@@ -609,7 +629,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
             }}
             text={'Confira a prévia antes de salvar'}
             className={Styles.buttonPrevia}
-            disabled={(files.length > 9) || waiting || (!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || (checkboxRentabilidade && !valueInputRentability))}
+            disabled={(files.length > 9 || files.length === 0) || waiting || (!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || (checkboxRentabilidade && !valueInputRentability))}
           />
 
           <div className={Styles.saveInfoSection}>
@@ -647,8 +667,6 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                 } else {
                   return handleSendInfoUpdate({
                     nome: projectName,
-                    imgTipo: "string",
-                    logo: "string",
                     descricao: descriptionLonga,
                     resumo: descriptionBreve,
                     rentabilidade: valueInputRentability,
@@ -663,7 +681,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
               text={'Salvar informações do projeto'}
               // || !dateBenefit || !benefitName || !parcela || !returnBenefit || !dateVenc || !typeToken
               className={Styles.buttonSaveInfo}
-              disabled={(files.length > 9) || waiting || (!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || (checkboxRentabilidade && !valueInputRentability))}
+              disabled={(files.length > 9 || files.length === 0) || waiting || (!projectName || !siglaName || !typeToken || !descriptionBreve || !descriptionLonga || !nameInputBackground || !optionPhaseProject || !qtdTokens || (!checkboxBenefit && !checkboxRentabilidade) || !numberLote || !tokenValue || (checkboxRentabilidade && !valueInputRentability))}
             />
           </div>
         </section>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { formatOnlyDate } from "./formatDate";
 
 export async function fetchDataAxios(limit, setProjects) {
   const response = await axios.get(`${process.env.NEXT_PUBLIC_PROJETO_URL}limit=${limit}`,
@@ -44,10 +45,14 @@ export async function fetchDataIdAxios(id, setProject, handleSetInfoUpdate) {
     descricao, 
     resumo,
     tipoToken,
+    faseDoProjeto
   } = data;
 
-  handleSetInfoUpdate(nome, acronimo, tipoToken, dataLancamento, resumo, descricao, rentabilidade)
+  const dateFormated = formatOnlyDate(dataLancamento)
+
+  handleSetInfoUpdate(nome, acronimo, tipoToken, dateFormated, resumo, descricao, rentabilidade, faseDoProjeto)
   setProject(data)
+  return faseDoProjeto
 }
 
 
@@ -365,12 +370,25 @@ export const uploadDocumentsProject = async (id, files, accessToken) => {
     formData.append(`file${key}`, files[key])
   }
 
-  const response = await axios.post(process.env.NEXT_PUBLIC_UPLOAD_DOCUMENTS_PROJETO, formData, {
+  const config = {
+    method: 'post',
     headers: {
       'Content-Type': 'multipart/form-data',
       "Authorization": `Bearer ${accessToken}`
     },
-  })
+    body: formData
+  }
+
+  const response = await fetch(process.env.NEXT_PUBLIC_UPLOAD_DOCUMENTS_PROJETO, config)
+
+  console.log(response)
+
+  // const response = await axios.post(process.env.NEXT_PUBLIC_UPLOAD_DOCUMENTS_PROJETO, formData, {
+  //   headers: {
+  //     'Content-Type': 'multipart/form-data',
+  //     "Authorization": `Bearer ${accessToken}`
+  //   },
+  // })
 
   return response.status
 }
@@ -427,13 +445,16 @@ export const deleteProject = async (id) => {
 
 export const updateProject = async (id, data) => {
   const config = {
-    data: JSON.stringify(data),
+    method: 'patch',
     headers: {
       "Content-Type": "application/json"
-    }
+    },
+    body: JSON.stringify(data),
   }
 
-  const response = await axios.patch(process.env.NEXT_PUBLIC_UPDATE_PROJETO+id, config)
+  const response = await fetch(process.env.NEXT_PUBLIC_UPDATE_PROJETO+id, config)
+
+  console.log(response)
 
   return response.status
 }

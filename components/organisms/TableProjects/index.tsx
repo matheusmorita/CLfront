@@ -204,7 +204,7 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
                             setItemClicked('')
                             const status = await deleteProject(itemClicked)
                             if (status === 200) {
-                              dispatchSuccessNotification(toast, 'Projeto deletado com sucesso!', true)
+                              dispatchSuccessNotification(toast, 'Projeto deletado com sucesso! A página irá recarregar.', true)
                             }
                             setTimeout(() => {
                               location.reload()
