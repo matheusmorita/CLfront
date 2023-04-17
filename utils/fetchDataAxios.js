@@ -10,7 +10,7 @@ export async function fetchDataAxios(limit, setProjects) {
     }
   )
 
-  
+
   setProjects(response.data)
   return response.data
 }
@@ -24,7 +24,7 @@ export async function getProjectsUnlimited(setProjects) {
     }
   )
 
-  
+
   setProjects(response.data)
   return response.data
 }
@@ -36,7 +36,7 @@ export async function fetchDataIdAxios(id, setProject) {
     }
   })
 
-  
+
   setProject(response.data)
 }
 
@@ -49,11 +49,11 @@ export async function fetchDataIdAxiosWithFunction(id, setProject, handleSetInfo
 
   const data = response.data
   const {
-    nome, 
-    rentabilidade, 
-    acronimo, 
-    dataLancamento, 
-    descricao, 
+    nome,
+    rentabilidade,
+    acronimo,
+    dataLancamento,
+    descricao,
     resumo,
     tipoToken,
     faseDoProjeto
@@ -376,31 +376,37 @@ const handleGetUserCadastro = async (router) => {
 export const uploadDocumentsProject = async (id, files, accessToken) => {
   const formData = new FormData()
 
+
+  // for (const key in files) {
+  //   formData.append(`file${key}`, files[key])
+  // }
+
   formData.append('id', id)
 
-  for (const key in files) {
-    formData.append(`file${key}`, files[key])
+  for (let i = 0; i < files.length; i++) {
+    formData.append(`file${i + 1}`, files[i][0])
   }
 
-  const config = {
-    method: 'post',
-    headers: {
-      'Content-Type': 'multipart/form-data',
-      "Authorization": `Bearer ${accessToken}`
-    },
-    body: formData
-  }
-
-  const response = await fetch(process.env.NEXT_PUBLIC_UPLOAD_DOCUMENTS_PROJETO, config)
-
-  console.log(response)
-
-  // const response = await axios.post(process.env.NEXT_PUBLIC_UPLOAD_DOCUMENTS_PROJETO, formData, {
+  // const config = {
+  //   method: 'patch',
   //   headers: {
   //     'Content-Type': 'multipart/form-data',
   //     "Authorization": `Bearer ${accessToken}`
   //   },
-  // })
+  //   body: formData
+  // }
+
+  // const response = await fetch(process.env.NEXT_PUBLIC_UPLOAD_DOCUMENTS_PROJETO, config)
+
+  
+  const response = await axios.patch(process.env.NEXT_PUBLIC_UPLOAD_DOCUMENTS_PROJETO, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      "Authorization": `Bearer ${accessToken}`
+    },
+  })
+  
+  console.log(response)
 
   return response.status
 }
@@ -437,8 +443,8 @@ export const uploadBackgroundProject = async (id, backgroundFile, accessToken) =
       "Authorization": `Bearer ${accessToken}`
     },
   }).then((response => {
-    if (response.status === 200 ){
-      // console.log('background Uploaded')
+    if (response.status === 200) {
+      console.log('background Uploaded')
     }
   }))
 }
@@ -450,23 +456,39 @@ export const deleteProject = async (id) => {
     }
   }
 
-  const response = await axios.delete(process.env.NEXT_PUBLIC_DELETE_PROJETO+id, config)
+  const response = await axios.delete(process.env.NEXT_PUBLIC_DELETE_PROJETO + id, config)
 
   return response.status
 }
 
 export const updateProject = async (id, data) => {
-  const config = {
-    method: 'patch',
+  // const config = {
+  //   method: 'patch',
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   },
+  //   body: JSON.stringify(data),
+  // }
+
+  const bodyStringfy = JSON.stringify(data)
+
+  // const response = await fetch(process.env.NEXT_PUBLIC_UPDATE_PROJETO + id, config)
+
+  const response = await axios.patch(process.env.NEXT_PUBLIC_UPDATE_PROJETO + id, bodyStringfy, {
     headers: {
       "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data),
-  }
-
-  const response = await fetch(process.env.NEXT_PUBLIC_UPDATE_PROJETO+id, config)
+    }
+  })
 
   console.log(response)
 
   return response.status
+}
+
+export const getEmissor = async (limit) => {
+  const response = await fetch(process.env.NEXT_PUBLIC_GET_EMISSOR + limit)
+
+  const data = await response.json()
+
+  return data
 }

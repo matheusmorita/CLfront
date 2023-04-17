@@ -22,7 +22,7 @@ import { dispatchErrorNotification, dispatchSuccessNotification } from '@/utils/
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Document from '../UploadFiles/Document';
-import { fetchDataIdAxios, fetchDataIdAxiosWithFunction, updateProject, uploadBackgroundProject, uploadDataFormCreateProject, uploadDocumentsProject } from '@/utils/fetchDataAxios';
+import { fetchDataIdAxios, fetchDataIdAxiosWithFunction, getEmissor, updateProject, uploadBackgroundProject, uploadDataFormCreateProject, uploadDocumentsProject } from '@/utils/fetchDataAxios';
 import FormLotes from '../FormLotes';
 import { toast } from 'react-toastify';
 import Loader from '@/components/atoms/Loader';
@@ -64,6 +64,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   const [tokenValue, setTokenValue] = React.useState();
   const [numberLote, setNumberLote] = React.useState();
   const [onlyProject, setOnlyProject] = React.useState<any>();
+  const [emissores, setEmissores] = React.useState<any[]>();
 
   const [statusCodeFormData, setStatusCodeFormData] = React.useState<number>();
   const [waiting, setWaiting] = React.useState<boolean>(false)
@@ -175,7 +176,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
     await uploadBackgroundProject(responseID, fileInputBackground, accessToken)
     const responseStatusCode = await uploadDocumentsProject(responseID, files, accessToken)
 
-    if (responseStatusCode === 201) {
+    if (responseStatusCode === 200) {
       dispatchSuccessNotification(toast, 'O projeto foi criado com sucesso! Esta página irá recarregar em instantes.', true)
       setAllowSendFiles(false)
     }
@@ -191,6 +192,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
     await uploadBackgroundProject(projectIdParsed, fileInputBackground, accessToken)
     const responseStatusCode = await uploadDocumentsProject(projectIdParsed, files, accessToken)
 
+    console.log('statusCodeDocuments ' + responseStatusCode)
     if (responseStatusCode === 200) {
       dispatchSuccessNotification(toast, 'O projeto foi atualizado com sucesso! Esta página irá recarregar em instantes.', true)
       setAllowSendFiles(false)
@@ -241,23 +243,27 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
       if (faseDoProjeto === select[i].value) {
         select[i].selected = true
         setOptionPhaseProject(faseDoProjeto)
-      } 
+      }
     }
   }
 
-  
+  const handleGetEmissores = async () => {
+    setEmissores(await getEmissor(4))
+  }
+
 
   React.useEffect(() => {
     if (!editRegister) {
       const projectIdUpdate = sessionStorage.getItem('projectUpdateId')
       const projectIdParsed = JSON.parse(projectIdUpdate!)
-      
+
       const handleFetchProjectId = async (id: string, setProject: any, handleSetValue: any) => {
         const faseDoProjeto = await fetchDataIdAxiosWithFunction(id, setProject, handleSetValue)
         handleSetValueStatus(faseDoProjeto)
       }
       handleFetchProjectId(projectIdParsed, setOnlyProject, handleSetValueEdit)
     }
+    handleGetEmissores()
   }, [editRegister])
 
   return (
@@ -366,10 +372,14 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
 
             <div className={Styles.mainProjectModal__divItem}>
               <p className={Styles.mainProjectModal__titleInput}>Nome do Emissor*: </p>
+
+
+
               <select className={Styles.projectNameInput}>
-                <option style={{ color: 'black', }} selected>Nome do emissor já cadastrado</option>
-                <option style={{ color: 'black' }} >Opção 2</option>
-                <option style={{ color: 'black' }} >Opção 3</option>
+                <option style={{ color: '#404040', }} selected>Nome do emissor já cadastrado</option>
+                {emissores?.map((emissor: any, i: any) => (
+                  <option key={emissor.nomeEmissor + i} style={{ color: '#404040' }} >{emissor.nomeEmissor}</option>
+                ))}
               </select>
             </div>
 
@@ -661,6 +671,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                     nomeToken: projectName,
                     emissorId: '48822baa-3d4f-4c84-b059-02e1542f64ce',
                     acronimo: siglaName,
+                    // numeroLote: numberLote
                     // background: fileInputBackground,
                     // logo: fileInputBackground,
                     // files,

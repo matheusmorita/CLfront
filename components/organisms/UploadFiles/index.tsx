@@ -24,15 +24,16 @@ export default function UploadFiles({ onClick, allowSendFiles, setFiles, files }
   const handleChangeInputFile = (e: any) => {
     const fileList = e.target.files
 
-    console.log(e.target.files)
-
     let newSelectedFiles: any[] = [...files]
-    
-    for (let i = 0; i < fileList.length; i++) {
-      newSelectedFiles.push(fileList[i]);
-    }
 
-    setFiles(newSelectedFiles)
+
+    setFiles((prevState: any[]) => [...prevState, fileList])
+    
+    
+    // for (let i = 0; i < fileList.length; i++) {
+    //   newSelectedFiles.push(fileList[i]);
+    // }
+
 
     // setFiles((prevState: any) => {
     //   if (prevState[0] == '') {
@@ -44,7 +45,7 @@ export default function UploadFiles({ onClick, allowSendFiles, setFiles, files }
 
   const handleOnClickDocument = (e: any) => {
     e.preventDefault()
-    const newArray = files.filter((file) => file?.name != e.target.id)
+    const newArray = files.filter((file) => file[0]?.name != e.target.id)
     setFiles(newArray)
 
     
@@ -104,10 +105,10 @@ export default function UploadFiles({ onClick, allowSendFiles, setFiles, files }
               return (
                 <Document
                 key={`file-${i}`}
-                text={file?.name}
+                text={file[0]?.name}
                 allowClose={true}
                 onClick={handleOnClickDocument}
-                id={file?.name}
+                id={file[0]?.name}
               />
               )
             })}

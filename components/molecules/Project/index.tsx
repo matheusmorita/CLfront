@@ -67,6 +67,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
         aria-describedby={`project-description-${id}`}
         style={{ height: '100%' }}
       >
+        <span className={Styles.spanStatus}>Status</span>
         <div
           className={Styles.project__header}
         >
