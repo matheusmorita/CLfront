@@ -13,6 +13,7 @@ import bgInvestidor from '@/assets/img/backgroundInvestidor.png'
 import TableProjects from '@/components/organisms/TableProjects';
 import RegisterProject from '@/components/organisms/RegisterProject';
 import Overlay from '@/components/molecules/Overlay';
+import Pagination from '@/components/organisms/Pagination';
 
 export default function Projetos() {
   const [dataUser, setDataUser] = React.useState<any>();
@@ -63,9 +64,11 @@ export default function Projetos() {
             setEditRegister={setEditRegister}
             setOnlyProject={setOnlyProject}
           />
-            {/* <section className={Styles.main__pagination}>
-              <h1 style={{color: 'black'}}>Paginação</h1>
-            </section> */}
+        <Pagination
+          limit={5}
+          offSet={240}
+          total={1200}
+        />
         </main>
       )}
 

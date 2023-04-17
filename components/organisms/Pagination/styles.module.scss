@@ -1,0 +1,24 @@
+@import '@/styles/variables.scss';
+
+.main {
+    display: flex;
+    justify-content: center;
+    background: white;
+    width: 250px;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+
+    &__buttonPage {
+        background: none;
+        width: 35px;
+        box-shadow: none;
+        padding: 8px;
+        margin: 0 6px;
+        margin-top: 5%;
+
+        &:hover {
+            background: $primary;
+            color: white;
+        }
+    }
+}

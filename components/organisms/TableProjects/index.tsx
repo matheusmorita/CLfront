@@ -56,23 +56,34 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
 
   const handleShowAZFilter = (e: any) => {
     setShowOrderFilter(!showOrderFilter)
+    setShowStatusFilter(false)
+    setShowDateFilter(false)
+    setShowEmissorFilter(false)
   }
 
   const handleShowStatusFilter = (e: any) => {
     setShowStatusFilter(!showStatusFilter)
+    setShowOrderFilter(false)
+    setShowDateFilter(false)
+    setShowEmissorFilter(false)
   }
 
   const handleShowDateFilter = (e: any) => {
     setShowDateFilter(!showDateFilter)
+    setShowOrderFilter(false)
+    setShowStatusFilter(false)
+    setShowEmissorFilter(false)
   }
 
   const handleShowEmissorFilter = (e: any) => {
     setShowEmissorFilter(!showEmissorFilter)
+    setShowOrderFilter(false)
+    setShowStatusFilter(false)
+    setShowDateFilter(false)
   }
 
   const handleGetProjects = async () => {
-    const response = await getProjectsUnlimited(setProjects)
-    return response
+    return await getProjectsUnlimited(setProjects)
   }
 
   const handleGetElementById = (id: string) => {
@@ -105,21 +116,25 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
           />
           <div className={Styles.header__menuInputs}>
             <Filter
+              id='projeto'
               label='Projeto'
               onClick={handleShowAZFilter}
               showOrderFilter={showOrderFilter}
             />
             <Filter
+              id='fase'
               label='Fase do Projeto'
               onClick={handleShowStatusFilter}
               showStatusFilter={showStatusFilter}
             />
             <Filter
+              id='data'
               label='Data cadastro'
               onClick={handleShowDateFilter}
               showDateFilter={showDateFilter}
             />
             <Filter
+              id='emissor'
               label='Emissor'
               onClick={handleShowEmissorFilter}
               showEmissorFilter={showEmissorFilter}

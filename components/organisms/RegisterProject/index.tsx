@@ -44,8 +44,8 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
   const [projectName, setProjectName] = React.useState();
   const [typeToken, setTypeToken] = React.useState();
   const [siglaName, setSiglaName] = React.useState();
-  const [descriptionBreve, setDescriptionBreve] = React.useState();
-  const [descriptionLonga, setDescriptionLonga] = React.useState();
+  const [descriptionBreve, setDescriptionBreve] = React.useState<string>();
+  const [descriptionLonga, setDescriptionLonga] = React.useState<string>();
   const [checkboxRentabilidade, setCheckboxRentabilidade] = React.useState(false);
   const [checkboxBenefit, setCheckboxBenefit] = React.useState(false);
   const [nameInputBackground, setNameInputBackground] = React.useState<string>('');
@@ -197,6 +197,13 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
     }
   }
 
+  const handleShowCaracters = (length: number, description: string) => {
+    if (description) {
+      return length - description!?.length
+    }
+    return length
+  }
+
   const handleSaveInfoPreview = (data: any) => {
     const infoPreview = JSON.stringify(data)
 
@@ -330,7 +337,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                   onChange={(e: any) => setDescriptionBreve(e.target.value)}
                   value={descriptionBreve}
                 ></textarea>
-                <p className={descriptionBreve === '' ? Styles.caracteresLengthError : Styles.mainProjectModal__caracteresLength}>300 caracteres</p>
+                <p className={descriptionBreve === '' ? Styles.caracteresLengthError : Styles.mainProjectModal__caracteresLength}>{handleShowCaracters(300, descriptionBreve!)} caracteres</p>
               </div>
             </div>
 
@@ -353,7 +360,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                   onChange={(e: any) => setDescriptionLonga(e.target.value)}
                   value={descriptionLonga}
                 ></textarea>
-                <p className={descriptionLonga === '' ? Styles.caracteresLengthError : Styles.mainProjectModal__caracteresLength}>1.190 caracteres</p>
+                <p className={descriptionLonga === '' ? Styles.caracteresLengthError : Styles.mainProjectModal__caracteresLength}>{handleShowCaracters(1190, descriptionLonga!)} caracteres</p>
               </div>
             </div>
 

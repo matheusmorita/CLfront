@@ -17,6 +17,7 @@ interface Props {
   showStatusFilter?: boolean;
   showDateFilter?: boolean;
   showEmissorFilter?: boolean;
+  id?: string;
 }
 
 
@@ -26,12 +27,14 @@ export default function Filter({
   showStatusFilter,
   showDateFilter,
   showEmissorFilter,
-  label
+  label,
+  id
 }: Props) {
 
   return (
     <main className={Styles.main}>
       <button
+        id={id}
         type='button'
         className={Styles.main__button}
         onClick={onClick}
