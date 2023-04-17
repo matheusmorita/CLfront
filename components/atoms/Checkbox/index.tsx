@@ -8,6 +8,7 @@ interface CheckboxInterface {
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Checkbox = ({onClick}: CheckboxInterface) => {
   const router = useRouter();
@@ -28,7 +29,8 @@ const Checkbox = ({onClick}: CheckboxInterface) => {
         className="form-check-label text-start"
         htmlFor="flexCheckDefault"
       >
-        {t.policyPrivacy}
+        Eu li e concordo com os termos de uso de dados, <Link target='_blank' download={true} locale={locale} href='POLITICA_DE_PRIVACIDADE.pdf'>política de privacidade</Link> e cookies.
+        {/* {t.policyPrivacy} */}
       </label>
     </div>
   )
