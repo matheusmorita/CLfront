@@ -671,7 +671,7 @@ export default function RegisterProject({ modalRegisterProject, setModalRegister
                     nomeToken: projectName,
                     emissorId: '48822baa-3d4f-4c84-b059-02e1542f64ce',
                     acronimo: siglaName,
-                    // numeroLote: numberLote
+                    numeroLote: numberLote
                     // background: fileInputBackground,
                     // logo: fileInputBackground,
                     // files,
