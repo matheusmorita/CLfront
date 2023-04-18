@@ -205,7 +205,7 @@ const Register = () => {
                       id='cpf'
                       label={t.insertCpf}
                       type='text'
-                      onInput={setCpf}
+                      onInput={() => setCpf}
                       validation={setErrorCPF}
                       error={errorCPF}
                       required={true}
@@ -221,7 +221,7 @@ const Register = () => {
                       className="w-100 py-2 mt-3 fs-5"
                       disabled={!validation || !checked || ((valueCpf === '') || (valueCpf.length < 14)) || (valueBirth === '')}
                       hidden={false}
-                      onClick={() => { handleUserRequestRegister(setWaiting, setSuccess, name, cpf, date, validation, router) }}
+                      onClick={() => { handleUserRequestRegister(setWaiting, setSuccess, name, valueCpf, date, validation, router) }}
                     />
                   </>
                 )}
