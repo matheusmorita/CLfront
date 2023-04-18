@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function Pagination({ limit, total, offSet }: Props) {
-  const maxItems = 9;
+  const maxItems = 7;
   const maxLeft = (maxItems - 1) / 2;
   const current = offSet ? (offSet / limit) + 1 : 1
   const pages = Math.ceil(total / limit)

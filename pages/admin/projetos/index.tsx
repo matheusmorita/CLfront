@@ -66,8 +66,8 @@ export default function Projetos() {
           />
         <Pagination
           limit={5}
-          offSet={240}
-          total={1200}
+          offSet={10}
+          total={120}
         />
         </main>
       )}

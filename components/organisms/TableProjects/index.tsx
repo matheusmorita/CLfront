@@ -201,7 +201,7 @@ export default function TableProjects({ modalRegisterProject, setModalRegisterPr
                     />
                   </button>
                 </td>
-                <td>
+                <td style={{display: 'flex'}}>
                   <button
                     className={project.id === itemClicked ? Styles.main__deleteButtonClicked : Styles.main__deleteButton}
                     id={project.id}

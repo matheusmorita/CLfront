@@ -35,61 +35,6 @@ function HeaderModal({ balance }: HeaderModalInterface) {
     <>
       <div className={Styles.items}>
         <div className={Styles.buttons}>
-          {/* {checkedButton === 'comprar' ? (
-            <>
-              <Button
-                id="buy"
-                hidden={false}
-                className={Styles.buttonSelected}
-                onClick={(e: React.FormEvent<EventTarget>) => {
-                  e.preventDefault();
-                  SetCheckedButton('comprar')
-                }}
-                label="buy button"
-                text={t.buy} 
-                size={18}
-              />
-              <Button
-                id="sell"
-                hidden={false}
-                className={Styles.buttonUnselected}
-                onClick={(e: React.FormEvent<EventTarget>) => {
-                  e.preventDefault();
-                  SetCheckedButton('vender')
-                }}
-                label="sell button"
-                text={t.sell} 
-                size={18}
-              />
-            </>
-          ) : (
-            <>
-              <Button
-                id="buy"
-                hidden={false}
-                className={Styles.buttonUnselected}
-                onClick={(e: React.FormEvent<EventTarget>) => {
-                  e.preventDefault();
-                  SetCheckedButton('comprar')
-                }}
-                label="buy button"
-                text={t.buy} 
-                size={18}
-              />
-              <Button
-                id="sell"
-                hidden={false}
-                className={Styles.buttonSelected}
-                onClick={(e: React.FormEvent<EventTarget>) => {
-                  e.preventDefault();
-                  SetCheckedButton('vender')
-                }}
-                label="sell button"
-                text={t.sell} 
-                size={18}
-              />
-            </>
-          )} */}
           <b style={{color: '#00EE8D'}}>Disponível somente para compras atualmente</b>
         </div>
         <div className={Styles.balanceValue}>
