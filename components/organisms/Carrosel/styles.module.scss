@@ -1,5 +1,9 @@
 @import '@/styles/variables.scss';
 
 .carousel {
-    background-color: red;
+    background-color: purple;
+    display: flex;
+    gap: 20px;
+    // max-width: 1000px;
+    padding: 10px;
 }
