@@ -2,14 +2,19 @@
 import React from 'react'
 import Row from '@/molecules/Row'
 import Project from '@/molecules/Project'
+import Slider from "react-slick";
 
 import { fetchDataAxios } from '@/utils/fetchDataAxios';
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // languages
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 import { useRouter } from 'next/router';
 import ProjectContext from '@/context/ProjectContext';
+import Carrossel from '../Carrosel';
 
 const Projects = () => {
   const [projects, setProjects] = React.useState<any>([])
@@ -24,33 +29,41 @@ const Projects = () => {
     fetchDataAxios("4", setProjects)
   }, [])
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
   return (
-    <Row
-      justifyContent='center'
-    >
-      {
-        projects &&
-        projects.map((item: any, index: number) => {
-          return (
-            <Project
-            id={item.acronimo}
-            idProject={item.id}
-            text={(item.acronimo.includes('CLDG') || item.acronimo.includes('CLMT')) ? 'EM BREVE' : 'SAIBA MAIS'}
-            name={item.nome}
-            src={item.logoUrl}
-            dataLanc={(item.acronimo.includes('CLDG') || item.acronimo.includes('CLMT')) ? 'EM BREVE' : item.dataLancamento}
-            emissor={item.emissor?.nomeEmissor}
-            rent={item.rentabilidade ? item.rentabilidade : null}
-            path={item.idProjeto}
-            key={index}
-            showOrNot={
-              (item.rentabilidade).toLowerCase() === 'sem rentabilidade' ? false : true }
-            project={item}
-          />
-          )
-            })
-      }
-    </Row>
+      <Row
+        justifyContent='center'
+      >
+        {
+          projects &&
+          projects.map((item: any, index: number) => {
+            return (
+              <Project
+                id={item.acronimo}
+                idProject={item.id}
+                text={(item.acronimo.includes('CLDG') || item.acronimo.includes('CLMT')) ? 'EM BREVE' : 'SAIBA MAIS'}
+                name={item.nome}
+                src={item.logoUrl}
+                dataLanc={(item.acronimo.includes('CLDG') || item.acronimo.includes('CLMT')) ? 'EM BREVE' : item.dataLancamento}
+                emissor={item.emissor?.nomeEmissor}
+                rent={item.rentabilidade ? item.rentabilidade : null}
+                path={item.idProjeto}
+                key={index}
+                showOrNot={
+                  (item.rentabilidade).toLowerCase() === 'sem rentabilidade' ? false : true}
+                project={item}
+              />
+            )
+          })
+        }
+      </Row>
   )
 }
 
