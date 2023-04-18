@@ -178,7 +178,7 @@ const ProjectPage = () => {
                     text={`${project.tipoToken}`}
                     className="mt-5 mb-5"
                   />
-                  <Status className={Styles.spanStatus} text={(project?.lotes[project?.lotes.length - 1]?.status === null || project?.lotes[project?.lotes.length - 1]?.status === undefined) ? 'Default' : project?.lotes[project?.lotes.length - 1]?.status} />
+                  <Status position='relative' className={Styles.spanStatus} text={(project?.lotes[project?.lotes.length - 1]?.status === null || project?.lotes[project?.lotes.length - 1]?.status === undefined) ? 'Default' : project?.lotes[project?.lotes.length - 1]?.status} />
                 </div>
                 <Button
                   id="introducao-cta"

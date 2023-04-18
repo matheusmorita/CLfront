@@ -42,6 +42,7 @@ import pt from '@/public/locales/pt/common.json';
 import ProjectContext from '@/context/ProjectContext'
 import { formatOnlyDate } from '@/utils/formatDate'
 import QuotaShowPreview from './QuotaPreview'
+import Status from '@/components/atoms/Status'
 
 const ProjectPagePreview = () => {
   const router = useRouter()
@@ -160,11 +161,14 @@ const ProjectPagePreview = () => {
                 height={22}
                 color="#D3D3D3"
               />
+              <div style={{display: 'flex', alignItems: 'center', flexWrap: 'wrap'}}>
               <Category
                 iconName={"flash-sharp"}
                 text={`${infoPreview?.tipoToken}`}
                 className="mt-5 mb-5"
               />
+              <Status position='relative' className={Styles.spanStatus} text={infoPreview?.benefitStatus} />
+              </div>
               <Button
                 id="introducao-cta"
                 text={t.invest}
@@ -233,7 +237,7 @@ const ProjectPagePreview = () => {
                 {infoPreview?.dataLancamento && (
                   <DataShow
                     title={t.launchDate}
-                    value={formatOnlyDate(infoPreview?.dataLancamento)!}
+                    value={infoPreview?.dataLancamento}
                     badge={{
                       type: "success",
                       message: t.NEW

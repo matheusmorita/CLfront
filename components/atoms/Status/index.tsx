@@ -5,10 +5,11 @@ import Styles from './styles.module.scss';
 interface Props {
     text: string;
     className?: string;
+    position?: any;
 }
 
-export default function Status ({text, className} : Props) {
+export default function Status ({text, className, position='absolute'} : Props) {
     return (
-        <span className={`${Styles.spanStatus} ${className}`}>{text}</span>
+        <span style={{position}} className={`${Styles.spanStatus} ${className}`}>{text}</span>
     )
 }
