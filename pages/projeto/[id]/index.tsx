@@ -41,6 +41,7 @@ import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 import ProjectContext from '@/context/ProjectContext'
 import { formatOnlyDate } from '@/utils/formatDate'
+import Status from '@/components/atoms/Status'
 
 const ProjectPage = () => {
   const router = useRouter()
@@ -161,6 +162,7 @@ const ProjectPage = () => {
                   weight="normal"
                   className={`${Styles.intro__title} mb-4`}
                 />
+
                 <Paragrah
                   id='introducao-description'
                   text={project.resumo}
@@ -170,11 +172,14 @@ const ProjectPage = () => {
                   height={22}
                   color="#D3D3D3"
                 />
-                <Category
-                  iconName={"flash-sharp"}
-                  text={`${project.tipoToken}`}
-                  className="mt-5 mb-5"
-                />
+                <div style={{display: 'flex', alignItems: 'center', flexWrap: 'wrap'}}>
+                  <Category
+                    iconName={"flash-sharp"}
+                    text={`${project.tipoToken}`}
+                    className="mt-5 mb-5"
+                  />
+                  <Status className={Styles.spanStatus} text={(project?.lotes[project?.lotes.length - 1]?.status === null || project?.lotes[project?.lotes.length - 1]?.status === undefined) ? 'Default' : project?.lotes[project?.lotes.length - 1]?.status} />
+                </div>
                 <Button
                   id="introducao-cta"
                   text={t.invest}

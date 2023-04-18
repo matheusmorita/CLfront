@@ -14,6 +14,7 @@ import pt from '@/public/locales/pt/common.json';
 import ProjectContext from '@/context/ProjectContext'
 import Loader from '@/components/atoms/Loader'
 import Link from 'next/link'
+import Status from '@/components/atoms/Status'
 
 type Props = {
   id: string,
@@ -67,7 +68,7 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
         aria-describedby={`project-description-${id}`}
         style={{ height: '100%' }}
       >
-        <span className={Styles.spanStatus}>Status</span>
+        <Status text={(project?.lotes[project?.lotes.length - 1]?.status === null || project?.lotes[project?.lotes.length - 1]?.status === undefined) ? 'Default' : project?.lotes[project?.lotes.length - 1]?.status} />
         <div
           className={Styles.project__header}
         >

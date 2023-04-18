@@ -376,29 +376,12 @@ const handleGetUserCadastro = async (router) => {
 export const uploadDocumentsProject = async (id, files, accessToken) => {
   const formData = new FormData()
 
-
-  // for (const key in files) {
-  //   formData.append(`file${key}`, files[key])
-  // }
-
   formData.append('id', id)
 
   for (let i = 0; i < files.length; i++) {
     formData.append(`file${i + 1}`, files[i][0])
   }
 
-  // const config = {
-  //   method: 'patch',
-  //   headers: {
-  //     'Content-Type': 'multipart/form-data',
-  //     "Authorization": `Bearer ${accessToken}`
-  //   },
-  //   body: formData
-  // }
-
-  // const response = await fetch(process.env.NEXT_PUBLIC_UPLOAD_DOCUMENTS_PROJETO, config)
-
-  
   const response = await axios.patch(process.env.NEXT_PUBLIC_UPLOAD_DOCUMENTS_PROJETO, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -462,17 +445,8 @@ export const deleteProject = async (id) => {
 }
 
 export const updateProject = async (id, data) => {
-  // const config = {
-  //   method: 'patch',
-  //   headers: {
-  //     "Content-Type": "application/json"
-  //   },
-  //   body: JSON.stringify(data),
-  // }
 
   const bodyStringfy = JSON.stringify(data)
-
-  // const response = await fetch(process.env.NEXT_PUBLIC_UPDATE_PROJETO + id, config)
 
   const response = await axios.patch(process.env.NEXT_PUBLIC_UPDATE_PROJETO + id, bodyStringfy, {
     headers: {

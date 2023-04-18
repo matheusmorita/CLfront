@@ -1,0 +1,12 @@
+@import '@/styles/variables.scss';
+
+.spanStatus {
+    position: absolute;
+    margin: 10px;
+    background: $primary;
+    color: $darker;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0 15px;
+    border-radius: 50px;
+}
