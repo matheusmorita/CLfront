@@ -163,8 +163,8 @@ function BuyProjectMobile({ setRealValue,
             <>
               <p className={Styles.descriptionText}>
                 Ao comprar <b style={{color: '#00EE8D'}}>Tokens Coinlivre#CNLT</b>, você receberá o equivalente
-                em Tokens da quantia escolhida, deduzida da taxa da
-                CoinLivre de 1,5% de acordo com os seus benefícios
+                em Tokens da quantia escolhida.
+                {/* deduzida da taxa da CoinLivre de 1,5% de acordo com os seus benefícios */}
               </p>
               {conditionalBuy !== 'CNLT-0' ? (
                 <InputModal
@@ -219,7 +219,8 @@ function BuyProjectMobile({ setRealValue,
                     placeholder='CNLT 0,00'
                     className={Styles.inputValue}
                     disabled={true}
-                    value={conditionalBuy === 'CNLT-0' ? calcCoinlivreTax(realValue) : calcValueResponse(realValue, valorToken)}
+                    value={realValue}
+                    // value={conditionalBuy === 'CNLT-0' ? calcCoinlivreTax(realValue) : calcValueResponse(realValue, valorToken)}
                   />
                 </div>
               )}
@@ -425,8 +426,8 @@ function BuyProjectMobile({ setRealValue,
               ) : (
                 <p className={Styles.descriptionText}>
                   Ao comprar <b style={{color: '#00EE8D'}}>Tokens Coinlivre#CNLT</b>, você receberá o equivalente
-                  em Tokens da quantia escolhida, deduzida da taxa da CoinLivre de 1,5%
-                  de acordo com os seus benefícios
+                  em Tokens da quantia escolhida.
+                  {/* deduzida da taxa da CoinLivre de 1,5% de acordo com os seus benefícios */}
                 </p>
               )}
 
@@ -469,7 +470,8 @@ function BuyProjectMobile({ setRealValue,
                   placeholder='CNLT 0,00'
                   className={Styles.inputValue}
                   disabled={true}
-                  value={conditionalBuy === 'CNLT-0' ? calcCoinlivreTax(realValue) : calcValueResponse(realValue, valorToken)}
+                  value={realValue}
+                  // value={conditionalBuy === 'CNLT-0' ? calcCoinlivreTax(realValue) : calcValueResponse(realValue, valorToken)}
                 />
               </div>
 
