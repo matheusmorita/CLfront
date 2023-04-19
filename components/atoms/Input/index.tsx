@@ -56,7 +56,7 @@ const Input = ({
       className={Styles.group}
       data-error={error}
     >
-      {id !== 'name' ? (
+      {id === 'birth' || id === 'cpf' ? (
         <InputMask
           mask={mask}
           maskChar=''
