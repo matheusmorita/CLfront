@@ -18,6 +18,8 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { captureName } from '@/assets/js/util/validations'
 
+// Subindo atualização pra Develop
+
 import InputMask from 'react-input-mask'
 
 import { handleGetUserInfo, handleUserRequestRegister } from '@/utils/fetchDataAxios'
@@ -202,7 +204,6 @@ const Register = () => {
                       required={true}
                       onChange={(e: any) => setValueBirth(e.target.value)}
                     />
-
                     <Input
                       id='cpf'
                       mask='999.999.999-99'
