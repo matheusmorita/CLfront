@@ -27,6 +27,7 @@ import { handleGetUserInfo, handleUserRequestRegister } from '@/utils/fetchDataA
 // languages
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
+import dayjs from 'dayjs'
 
 const Register = () => {
   const router = useRouter()
@@ -37,6 +38,8 @@ const Register = () => {
   const [name, setName] = React.useState()
   const [date, setDate] = React.useState()
   const [cpf, setCpf] = React.useState()
+
+  const [cpfValid, setCpfValid] = React.useState<boolean>(false)
 
   const [waiting, setWaiting] = React.useState<boolean>(false)
   const [success, setSuccess] = React.useState<boolean>(false)
@@ -215,6 +218,7 @@ const Register = () => {
                       required={true}
                       onChange={(e: any) => setValueCpf(e.target.value)}
                     />
+                    {cpfValid && <span style={{color: 'red'}}>CPF ou data de nascimento inválidos, por favor, digite novamente.</span>}
                     <Checkbox
                       onClick={() => setChecked(!checked)}
                     />
@@ -223,9 +227,9 @@ const Register = () => {
                       text={t.next}
                       label="Clique continue para seu cadastro"
                       className="w-100 py-2 mt-3 fs-5"
-                      disabled={!validation || !checked || ((valueCpf === '') || (valueCpf.length < 14)) || (valueBirth === '')}
+                      disabled={!checked || ((valueCpf === '') || (valueCpf.length < 14)) || (valueBirth === '')}
                       hidden={false}
-                      onClick={() => { handleUserRequestRegister(setWaiting, setSuccess, name, valueCpf, valueBirth, validation, router) }}
+                      onClick={() => { handleUserRequestRegister(setWaiting, setSuccess, name, valueCpf, valueBirth, validation, router, setCpfValid) }}
                     />
                   </>
                 )}

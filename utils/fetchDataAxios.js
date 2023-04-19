@@ -219,7 +219,8 @@ export const handleGetUserInfo = async (setSuccess, setPreloaded, router) => {
     })
 }
 
-export const handleUserRequestRegister = async (setWaiting, setSuccess, name, cpf, date, validation, router) => {
+export const handleUserRequestRegister = async (setWaiting, setSuccess, name, cpf, date, validation, router, setCpfValid) => {
+ 
   if (validation) {
     setWaiting(true)
     const token = localStorage.getItem('accessToken')
@@ -242,6 +243,10 @@ export const handleUserRequestRegister = async (setWaiting, setSuccess, name, cp
 
       await fetch(process.env.NEXT_PUBLIC_CADASTRAR_USER, config)
         .then(resp => {
+          if (resp.status === 400) {
+            setCpfValid(true)
+            setWaiting(false)
+          }
           if (resp.ok) {
             setWaiting(false)
             setSuccess(true)
@@ -251,6 +256,7 @@ export const handleUserRequestRegister = async (setWaiting, setSuccess, name, cp
           }
         })
     }
+    
   }
 }
 
@@ -267,8 +273,8 @@ export const handleGetUserInfoCadastro = async (token, router) => {
   await fetch(process.env.NEXT_PUBLIC_GET_USER_CADASTRO, config)
     .then(resp => {
       if (resp.ok) {
-        return
-        router.push('/perfil')
+        return router.push('/perfil')
+        
       } else {
         router.push('/registrar-se')
       }
@@ -388,7 +394,7 @@ export const uploadDocumentsProject = async (id, files, accessToken) => {
       "Authorization": `Bearer ${accessToken}`
     },
   })
-  
+
   console.log(response)
 
   return response.status
