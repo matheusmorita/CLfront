@@ -201,6 +201,10 @@ const Register = () => {
                       required={true}
                       onChange={(e: any) => setValueBirth(e.target.value)}
                     />
+                    <InputMask 
+                      mask='99/99/9999'
+                      maskChar=''
+                    />
                     <Input
                       id='cpf'
                       label={t.insertCpf}
