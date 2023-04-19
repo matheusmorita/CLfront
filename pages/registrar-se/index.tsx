@@ -193,20 +193,19 @@ const Register = () => {
                     />
                     <Input
                       id='birth'
+                      mask='99/99/9999'
                       label={t.birthday}
-                      type='date'
+                      type='text'
                       onInput={setDate}
                       validation={setErrorDate}
                       error={errorDate}
                       required={true}
                       onChange={(e: any) => setValueBirth(e.target.value)}
                     />
-                    <InputMask 
-                      mask='99/99/9999'
-                      maskChar=''
-                    />
+
                     <Input
                       id='cpf'
+                      mask='999.999.999-99'
                       label={t.insertCpf}
                       type='text'
                       onInput={() => setCpf}
@@ -225,7 +224,7 @@ const Register = () => {
                       className="w-100 py-2 mt-3 fs-5"
                       disabled={!validation || !checked || ((valueCpf === '') || (valueCpf.length < 14)) || (valueBirth === '')}
                       hidden={false}
-                      onClick={() => { handleUserRequestRegister(setWaiting, setSuccess, name, valueCpf, date, validation, router) }}
+                      onClick={() => { handleUserRequestRegister(setWaiting, setSuccess, name, valueCpf, valueBirth, validation, router) }}
                     />
                   </>
                 )}

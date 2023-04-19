@@ -18,6 +18,7 @@ type Props = {
   validator?: any,
   onChange?: any,
   pattern?: string
+  mask?: any;
 }
 
 const Input = ({
@@ -34,7 +35,8 @@ const Input = ({
   validation,
   validator,
   onChange,
-  pattern
+  pattern,
+  mask
 }: Props) => {
   const InputRef = React.useRef<any>(null)
 
@@ -54,9 +56,9 @@ const Input = ({
       className={Styles.group}
       data-error={error}
     >
-      {id === 'cpf' ? (
+      {id !== 'name' ? (
         <InputMask
-          mask="999.999.999-99"
+          mask={mask}
           maskChar=''
           alwaysShowMask={false}
           id={id}
