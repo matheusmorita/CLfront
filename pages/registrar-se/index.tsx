@@ -51,6 +51,8 @@ const Register = () => {
   const [errorCPF, setErrorCPF] = React.useState()
   const [errorDate, setErrorDate] = React.useState()
 
+  const [dateCpfDisabled, setDateCpfDisabled] = React.useState<boolean>(false)
+
   const [valueCpf, setValueCpf] = React.useState<string>('')
   const [valueBirth, setValueBirth] = React.useState<any>('')
 
@@ -123,6 +125,19 @@ const Register = () => {
 
   const handleWaitState = () => {
     return waiting ? Styles.waiting : null
+  }
+
+  const handleCheckDate = (dateArray: string[]) => {
+    if (Number(dateArray[0]) > 31 || Number(dateArray[0]) < 1) {
+      setDateCpfDisabled(true)
+      return setCpfValid(true)
+    }
+    if (Number(dateArray[1]) > 12 || Number(dateArray[1]) < 1) {
+      setDateCpfDisabled(true)
+      return setCpfValid(true)
+    }
+    setDateCpfDisabled(false)
+    return setCpfValid(false)
   }
 
   React.useEffect(() => {
@@ -205,7 +220,12 @@ const Register = () => {
                       validation={setErrorDate}
                       error={errorDate}
                       required={true}
-                      onChange={(e: any) => setValueBirth(e.target.value)}
+                      onChange={(e: any) => {
+                        const value = e.target.value
+                        console.log(value.length)
+                        handleCheckDate(value.split('/'))
+                        return setValueBirth(e.target.value)
+                      }}
                     />
                     <Input
                       id='cpf'
@@ -227,7 +247,7 @@ const Register = () => {
                       text={t.next}
                       label="Clique continue para seu cadastro"
                       className="w-100 py-2 mt-3 fs-5"
-                      disabled={!checked || ((valueCpf === '') || (valueCpf.length < 14)) || (valueBirth === '')}
+                      disabled={(!checked || ((valueCpf === '') || (valueCpf.length < 14)) || (valueBirth === '') || (valueBirth.length < 10)) || dateCpfDisabled}
                       hidden={false}
                       onClick={() => { handleUserRequestRegister(setWaiting, setSuccess, name, valueCpf, valueBirth, validation, router, setCpfValid) }}
                     />
