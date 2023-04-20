@@ -44,7 +44,7 @@ const DataShow = ({ title, value, badge, className, highlight = false, contractL
           {linkTrue && (
             <Link
             target="_blank"
-            href={`https://etherscan.io/address/${contractLink}`}
+            href={`https://polygonscan.com/address/${contractLink}`}
           >
             <OpenInNewIcon className={Styles.datashow__iconStyle} />
           </Link>
