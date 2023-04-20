@@ -42,6 +42,7 @@ import pt from '@/public/locales/pt/common.json';
 import ProjectContext from '@/context/ProjectContext'
 import { formatOnlyDate } from '@/utils/formatDate'
 import Status from '@/components/atoms/Status'
+import Link from 'next/link'
 
 const ProjectPage = () => {
   const router = useRouter()
@@ -172,7 +173,7 @@ const ProjectPage = () => {
                   height={22}
                   color="#D3D3D3"
                 />
-                <div style={{display: 'flex', alignItems: 'center', flexWrap: 'wrap'}}>
+                <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
                   <Category
                     iconName={"flash-sharp"}
                     text={`${project.tipoToken}`}
@@ -392,25 +393,36 @@ const ProjectPage = () => {
                   height={22}
                   color="#6C6C6C"
                 />
-                <DataShow
+                {project.acronimo === 'CLGT' && (
+                  <Link
+                  href='/'
+                  as='/TBK_Fan_Token_Gaming.pdf'
+                  target='_blank'
+                  locale='pt'
+                  download
+                  style={{textDecoration: 'none'}}
+                >
+                  <DataShow
+                    title={t.docTitle}
+                    value={"TBK_Fan_Token_Gaming.pdf"}
+                    className="mb-3"
+                    badge={{
+                      type: "success",
+                      message: t.DOCUMENT
+                    }}
+                    contractLink={project.contratoToken}
+                  />
+                </Link>
+                )}
+                {/* <DataShow
                   title={t.docTitle}
                   value={"NOME_DO_ARQUIVO.PDF"}
-                  className="mb-3"
                   badge={{
                     type: "success",
                     message: t.DOCUMENT
                   }}
                   contractLink={project.contratoToken}
-                />
-                <DataShow
-                  title={t.docTitle}
-                  value={"NOME_DO_ARQUIVO.PDF"}
-                  badge={{
-                    type: "success",
-                    message: t.DOCUMENT
-                  }}
-                  contractLink={project.contratoToken}
-                />
+                /> */}
               </Column>
               <Column
                 media='lg'
