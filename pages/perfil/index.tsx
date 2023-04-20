@@ -37,6 +37,8 @@ import MobileModal from '@/components/organisms/MobileModal'
 
 import defaultImage from '@/assets/img/placeholder.webp'
 import bgDefaultImage from '@/assets/img/BG.webp';
+import { dispatchErrorNotification, dispatchSuccessNotification } from '@/utils/dispatchNotifications'
+import { toast } from 'react-toastify'
 
 const Perfil = () => {
   const [walletState, setWalletState] = React.useState(0)
@@ -113,10 +115,14 @@ const Perfil = () => {
                 <label style={{position: 'absolute', right: '1%', bottom: '22%'}}  htmlFor='backgroundInputImage'>
                   <FlipCameraIosIcon className={Styles.profile__icon} />
                   <input id="backgroundInputImage" name='image' type="file" onChange={(e: any) => {
-                    uploadBackgroundPhoto(e.target.files[0], accessToken)
-                    setTimeout(() => {
-                      router.reload()
-                    }, 1500);
+                    const fileSize = e.target.files[0]?.size / (1024 * 1024)
+                    if (fileSize > 10) {
+                      dispatchErrorNotification(toast, 'A imagem ultrapassa o tamanho máximo de 10mb', false)
+                    } else {
+                      uploadBackgroundPhoto(e.target.files[0], accessToken)
+                      dispatchSuccessNotification(toast, 'Background atualizado com sucesso! A página irá recarregar.', true)
+                    }
+                    
                   }}></input>
                 </label>
                 {dataUser?.imgBackgroundUrl ? (
@@ -141,9 +147,7 @@ const Perfil = () => {
                     <FlipCameraIosIcon className={Styles.profile__icon} />
                     <input id="profileImageInput" name='image' type="file" onChange={(e: any) => {
                       uploadProfilePhoto(e.target.files[0], accessToken)
-                      setTimeout(() => {
-                        router.reload()
-                      }, 1500);
+                      dispatchSuccessNotification(toast, 'Imagem de perfil atualizada com sucesso! A página irá recarregar.', true)
                     }}></input>
                   </label>
 
