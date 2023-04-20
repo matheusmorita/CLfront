@@ -104,13 +104,12 @@ export async function fetchUserHistoryinfo(accessToken, setHistoryUser, historyU
 }
 
 export async function fetchRequestPix(accessToken, quantity, setWaiting) {
+  console.log('Criando PIX')
   let newQuantity = quantity
   if (newQuantity.includes(',')) {
     const replaceDot = quantity.replace(',', '.')
     newQuantity = Number(replaceDot).toFixed(2).toString()
   }
-
-  console.log(newQuantity)
 
   var dataBody = JSON.stringify({
     quantity: newQuantity,
@@ -273,7 +272,8 @@ export const handleGetUserInfoCadastro = async (token, router) => {
   await fetch(process.env.NEXT_PUBLIC_GET_USER_CADASTRO, config)
     .then(resp => {
       if (resp.ok) {
-        return router.push('/perfil')
+        return 
+        router.push('/perfil')
         
       } else {
         router.push('/registrar-se')

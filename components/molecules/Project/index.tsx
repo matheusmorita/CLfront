@@ -68,7 +68,8 @@ const Project = ({ id, src, name, dataLanc, emissor, rent, path, showOrNot, idPr
         aria-describedby={`project-description-${id}`}
         style={{ height: '100%' }}
       >
-        <Status text={(project?.lotes[project?.lotes.length - 1]?.status === null || project?.lotes[project?.lotes.length - 1]?.status === undefined) ? 'Default' : project?.lotes[project?.lotes.length - 1]?.status} />
+        <Status text={(id !== 'CLMT' && id !== 'CLDG') ? 'Ativo' : 'Em Breve'} />
+        {/* <Status text={(project?.lotes[project?.lotes.length - 1]?.status === null || project?.lotes[project?.lotes.length - 1]?.status === undefined) ? 'Ativo' : project?.lotes[project?.lotes.length - 1]?.status} /> */}
         <div
           className={Styles.project__header}
         >
