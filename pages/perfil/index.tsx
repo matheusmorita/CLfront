@@ -45,6 +45,7 @@ const Perfil = () => {
   const [dataUser, setDataUser] = React.useState<any>();
   const [historyUser, setHistoryUser] = React.useState<any[]>([])
   const [accessToken, setAccessToken] = React.useState<string | null>()
+  const [balanceCL, setBalanceCL] = React.useState<number>();
 
   // const [profileImage, setProfileImage] = React.useState<any>();
 

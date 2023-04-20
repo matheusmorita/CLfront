@@ -79,9 +79,9 @@ export async function fetchDataUserInfo(accessToken, setDataUser, router) {
   const response = await fetch(process.env.NEXT_PUBLIC_GET_USER_INFO, config)
 
   const data = await response.json()
-  // console.log(data)
-  setDataUser(data)
 
+  setDataUser(data)
+  
   if (!data?.isAdmin && router.asPath.includes('admin')) {
     router.push('/notfound')
   }

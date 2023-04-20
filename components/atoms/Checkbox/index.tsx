@@ -29,7 +29,7 @@ const Checkbox = ({onClick}: CheckboxInterface) => {
         className="form-check-label text-start"
         htmlFor="flexCheckDefault"
       >
-        Eu li e concordo com os termos de uso de dados, <Link target='_blank' download={true} locale={locale} href='POLITICA_DE_PRIVACIDADE.pdf'>política de privacidade</Link> e cookies.
+        Eu li e concordo com os <Link download locale={'pt'} target='_blank' href='TERMO_DE_USO.pdf'>termos de uso</Link> de dados, <Link download target='_blank' locale={'pt'} href='POLITICA_DE_PRIVACIDADE.pdf'>política de privacidade</Link> e cookies.
         {/* {t.policyPrivacy} */}
       </label>
     </div>

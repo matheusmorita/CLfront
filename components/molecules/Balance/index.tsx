@@ -14,7 +14,7 @@ type Props = {
   type: string
 }
 
-const Balance = ({ value = '0', type }: Props) => {
+const Balance = ({ value = '0,00', type }: Props) => {
   const [hidden, setHidden] = React.useState<boolean>(true)
 
   const handleIcon = () => {
