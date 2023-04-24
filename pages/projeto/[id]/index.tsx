@@ -43,6 +43,7 @@ import ProjectContext from '@/context/ProjectContext'
 import { formatOnlyDate } from '@/utils/formatDate'
 import Status from '@/components/atoms/Status'
 import Link from 'next/link'
+import { formatValueBalance, formatValueWithoutComma } from '@/utils/formatBalance'
 
 const ProjectPage = () => {
   const router = useRouter()
@@ -318,7 +319,7 @@ const ProjectPage = () => {
                   {project.lotes.length > 0 ? (
                     <DataShow
                       title={t.totalTokens}
-                      value={masks.getQuantityMask(project.lotes[project.lotes.length - 1].qtdeDeTokens)}
+                      value={formatValueWithoutComma(project.lotes[project.lotes.length - 1].qtdeDeTokens)}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
