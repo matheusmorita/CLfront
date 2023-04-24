@@ -23,7 +23,7 @@ import bg2 from '@/assets/img/BG2.webp';
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-import { formatValueBalance } from '@/utils/formatBalance'
+import { formatValueBalance, formatValueWithComma } from '@/utils/formatBalance'
 import { changePosition } from '@/utils/changeOrderArray';
 
 // languages
@@ -215,7 +215,7 @@ const Perfil = () => {
               >
                 <Balance
                   type='CoinLivre'
-                  value={`CNLT ${dataUser?.balanceCL}`}
+                  value={`CNLT ${formatValueWithComma(dataUser?.balanceCL)}`}
                 />
               </Column>
               <Column
@@ -227,7 +227,7 @@ const Perfil = () => {
               >
                 <Balance
                   type='R$'
-                  value={`R$ ${dataUser?.saldoReais}`}
+                  value={`R$ ${formatValueWithComma(dataUser?.saldoReais)}`}
                 />
               </Column>
             </div>

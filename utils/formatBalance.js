@@ -14,3 +14,11 @@ export const formatValueWithoutComma = (balance) => {
 
   return balanceString
 }
+
+export const formatValueWithComma = (balance) => {
+  const localeStringNumber = parseFloat(balance.replace(/\./g, '').replace(',', '.'))
+  // const balanceNumber = Number(balance)
+  const balanceString = localeStringNumber.toLocaleString('pt-BR', {maximumFractionDigits: 2, minimumFractionDigits: 2})
+
+  return balanceString
+}
