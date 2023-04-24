@@ -9,8 +9,14 @@ export const formatDate = (date) => {
 
 export const formatOnlyDate = (date) => {
     if (dayjs(date).isValid()) {
-        const formated = dayjs(date).subtract(-3, 'hour').format('DD/MM/YYYY')
-        return formated
+        return dayjs(date).format('DD/MM/YYYY')
+    }
+}
+
+export const formatOnlyDateUnix = (date) => {
+    const unixDate = dayjs.unix(Number(date))
+    if (dayjs(unixDate).isValid()) {
+        return unixDate.format('DD/MM/YYYY')
     }
 }
 

@@ -40,7 +40,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import en from '@/public/locales/en/common.json';
 import pt from '@/public/locales/pt/common.json';
 import ProjectContext from '@/context/ProjectContext'
-import { formatOnlyDate } from '@/utils/formatDate'
+import { formatOnlyDate, formatOnlyDateUnix } from '@/utils/formatDate'
 import Status from '@/components/atoms/Status'
 import Link from 'next/link'
 import { formatValueBalance, formatValueWithoutComma } from '@/utils/formatBalance'
@@ -257,7 +257,7 @@ const ProjectPage = () => {
                   {project.criadoEm && (
                     <DataShow
                       title={t.launchDate}
-                      value={formatOnlyDate(project.dataLancamento)!}
+                      value={formatOnlyDateUnix(project.dataLancamento)}
                       badge={{
                         type: "success",
                         message: t.NEW
@@ -282,7 +282,7 @@ const ProjectPage = () => {
                   {project.lotes.length > 0 ? (
                     <DataShow
                       title={t.batch}
-                      value={project.lotes[project.lotes.length - 1].idLote}
+                      value={project.lotes[project.lotes.length - 1].numeroLote}
                       badge={{ type: "success", message: t.NEW }}
                       contractLink={project.contratoToken}
                     />) : (
@@ -307,7 +307,7 @@ const ProjectPage = () => {
                   {project.lotes.length > 0 ? (
                     <DataShow
                       title={t.batchExpiration}
-                      value={project.lotes[project.lotes.length - 1].prazoDoLote}
+                      value={formatOnlyDateUnix(project.lotes[project.lotes.length - 1].prazoDoLote)}
                       contractLink={project.contratoToken}
                     />) : (
                     <DataShow
