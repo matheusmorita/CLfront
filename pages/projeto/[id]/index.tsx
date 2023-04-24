@@ -44,6 +44,7 @@ import { formatOnlyDate, formatOnlyDateUnix } from '@/utils/formatDate'
 import Status from '@/components/atoms/Status'
 import Link from 'next/link'
 import { formatValueBalance, formatValueWithoutComma } from '@/utils/formatBalance'
+import dayjs from 'dayjs'
 
 const ProjectPage = () => {
   const router = useRouter()
@@ -258,6 +259,7 @@ const ProjectPage = () => {
                     <DataShow
                       title={t.launchDate}
                       value={formatOnlyDateUnix(project.dataLancamento)}
+                      // value={formatOnlyDateUnix(1682708481)}
                       badge={{
                         type: "success",
                         message: t.NEW
